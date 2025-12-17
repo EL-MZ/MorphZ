@@ -1,0 +1,894 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Gaussian Shell &#8212; MorphZ Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/gaussian_shell';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Peak Sampling New" href="peak_sampling_new.html" />
+    <link rel="prev" title="Eggbox" href="eggbox.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MorphZ Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    MorphZ
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eggbox.html">Eggbox notebook</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Gaussian shell notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peak_sampling_new.html">Peak sampling notebook</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ApokryphaV1/MorphZ" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_auto/examples/gaussian_shell.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Gaussian Shell</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gaussian-shell">
+<h1>Gaussian Shell<a class="headerlink" href="#gaussian-shell" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dynesty</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedSampler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">dyfunc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">corner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynamicNestedSampler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
+
+<span class="c1"># Prior cube: [-L, L]^D </span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">6.0</span>
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">prior_volume</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="n">ndim</span>
+
+<span class="c1"># Parameters of the twin shells (from paper)</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="n">w2</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># thickness of both shells</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># radius of both shells</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.5</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># center of first shell</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.5</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>   <span class="c1"># center of second shell</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">logprior</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uniform prior over [-L, L]^D.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">L</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">prior_volume</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Twin Gaussian shell log-likelihood from equation (38) in the paper.</span>
+<span class="sd">    L(θ) = (1/√(2πw₁)) * exp[-(|θ-c₁|-r₁)²/(2w₁²)] + (1/√(2πw₂)) * exp[-(|θ-c₂|-r₂)²/(2w₂²)]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Distance from centers</span>
+    <span class="n">r_c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">c1</span><span class="p">)</span>
+    <span class="n">r_c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">c2</span><span class="p">)</span>
+    
+    <span class="c1"># Log-likelihood components for each shell</span>
+    <span class="c1"># Note: We work in log space for numerical stability</span>
+    <span class="n">log_norm1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">w1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">log_norm2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">w2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">log_exp1</span> <span class="o">=</span> <span class="n">log_norm1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">r_c1</span> <span class="o">-</span> <span class="n">r1</span><span class="p">)</span> <span class="o">/</span> <span class="n">w1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">log_exp2</span> <span class="o">=</span> <span class="n">log_norm2</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">r_c2</span> <span class="o">-</span> <span class="n">r2</span><span class="p">)</span> <span class="o">/</span> <span class="n">w2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="c1"># Use logsumexp for numerical stability when adding exponentials</span>
+    <span class="k">return</span> <span class="n">logsumexp</span><span class="p">([</span><span class="n">log_exp1</span><span class="p">,</span> <span class="n">log_exp2</span><span class="p">])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">prior_transform</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Map unit cube [0,1]^D to [-L, L]^D.</span>
+<span class="sd">    u: array in [0,1]^D</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">L</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">L</span><span class="o">*</span><span class="n">u</span>
+
+<span class="c1"># Optional: Visualization function for 2D case</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_twin_shells_2d</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the twin Gaussian shells for visualization (2D only).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visualization only available for 2D case&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="c1"># Create grid</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    
+    <span class="c1"># Evaluate likelihood on grid</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]])</span>
+            <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+    
+    <span class="c1"># Plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Likelihood&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;θ₁&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;θ₂&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Twin Gaussian Shells&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Mark centers</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r*&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Center 1&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r*&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Center 2&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Draw circles showing the shell radii</span>
+    <span class="n">circle1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">c1</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">r1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">circle2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">c2</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">r2</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle2</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Example usage with dynesty</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_dynesty_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of how to use this with dynesty.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">dynesty</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">plotting</span> <span class="k">as</span> <span class="n">dyplot</span>
+        
+        <span class="c1"># Run nested sampling</span>
+        <span class="n">sampler</span> <span class="o">=</span> <span class="n">dynesty</span><span class="o">.</span><span class="n">NestedSampler</span><span class="p">(</span><span class="n">loglikelihood</span><span class="p">,</span> <span class="n">prior_transform</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+        <span class="n">sampler</span><span class="o">.</span><span class="n">run_nested</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">results</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Log evidence: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">logzerr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Plot results</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">dyplot</span><span class="o">.</span><span class="n">runplot</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">results</span>
+        
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dynesty not installed. Install with: pip install dynesty&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># Analytical log-evidence values from the paper (for reference)</span>
+<span class="n">analytical_logz</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">20</span><span class="p">:</span> <span class="o">-</span><span class="mf">36.09</span><span class="p">,</span> <span class="c1"># 20D case from paper</span>
+    <span class="mi">30</span><span class="p">:</span> <span class="o">-</span><span class="mf">60.13</span>  <span class="c1"># 30D case from paper</span>
+<span class="p">}</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Twin Gaussian Shell Problem Setup:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dimensions: </span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prior bounds: [</span><span class="si">{</span><span class="o">-</span><span class="n">L</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">L</span><span class="si">}</span><span class="s2">]^</span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shell centers: c1=</span><span class="si">{</span><span class="n">c1</span><span class="si">}</span><span class="s2">, c2=</span><span class="si">{</span><span class="n">c2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shell radii: r1=</span><span class="si">{</span><span class="n">r1</span><span class="si">}</span><span class="s2">, r2=</span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shell widths: w1=</span><span class="si">{</span><span class="n">w1</span><span class="si">}</span><span class="s2">, w2=</span><span class="si">{</span><span class="n">w2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Generating 2D visualization...&quot;</span><span class="p">)</span>
+        <span class="n">plot_twin_shells_2d</span><span class="p">()</span>
+    
+    <span class="c1"># Uncomment to run dynesty example</span>
+    <span class="c1"># results = run_dynesty_example()</span>
+
+
+<span class="c1"># -------------------------------</span>
+<span class="c1"># Run dynesty Nested Sampling</span>
+<span class="c1"># -------------------------------</span>
+<span class="n">NN</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">log_z_NS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">)</span>
+<span class="n">log_z_NS_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NN</span><span class="p">):</span>
+<span class="c1"># Set up the sampler</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">NestedSampler</span><span class="p">(</span>
+        <span class="n">loglikelihood</span><span class="p">,</span>
+        <span class="n">prior_transform</span><span class="p">,</span>
+        <span class="n">ndim</span><span class="p">,</span>
+        <span class="n">nlive</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>      <span class="c1"># number of live points; increase for accuracy</span>
+        <span class="n">sample</span><span class="o">=</span><span class="s2">&quot;rwalk&quot;</span><span class="p">,</span>  <span class="c1"># random-walk proposals; can try &quot;unif&quot;, &quot;slice&quot;</span>
+        <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;multi&quot;</span><span class="p">,</span>   <span class="c1"># bounding method (&quot;multi&quot; good for multimodal)</span>
+    <span class="p">)</span>
+    <span class="c1"># sampler = DynamicNestedSampler(</span>
+    <span class="c1">#     loglikelihood,</span>
+    <span class="c1">#     prior_transform,</span>
+    <span class="c1">#     ndim,</span>
+    <span class="c1">#     nlive=4000,</span>
+    <span class="c1">#     )</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running dynesty Nested Sampling on Gaussian shell...&quot;</span><span class="p">)</span>
+    <span class="n">sampler</span><span class="o">.</span><span class="n">run_nested</span><span class="p">(</span><span class="n">dlogz</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">print_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># sampler.run_nested(dlogz_init=0.1,print_progress=True)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">results</span>
+    <span class="n">samples</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">logwt</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">posterior_samples</span> <span class="o">=</span> <span class="n">dyfunc</span><span class="o">.</span><span class="n">resample_equal</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="c1"># -------------------------------</span>
+    <span class="c1"># Report results</span>
+    <span class="c1"># -------------------------------</span>
+    <span class="n">log_z_NS</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">log_z_NS_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">logzerr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">true_logz</span> <span class="o">=</span> <span class="o">-</span><span class="mf">36.09</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== RESULTS ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dynesty estimated logZ = </span><span class="si">{</span><span class="n">log_z_NS</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">log_z_NS_err</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True logZ (literature) = </span><span class="si">{</span><span class="n">true_logz</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error = </span><span class="si">{</span><span class="n">log_z_NS</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="w"> </span><span class="n">true_logz</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Twin Gaussian Shell Problem Setup:
+Dimensions: 30
+Prior bounds: [-6.0, 6.0]^30
+Shell centers: c1=[-3.5  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
+  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
+  0.   0. ], c2=[3.5 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
+ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. ]
+Shell radii: r1=2.0, r2=2.0
+Shell widths: w1=0.1, w2=0.1
+Running dynesty Nested Sampling on Gaussian shell...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11803it [00:26, 437.65it/s, +200 | bound: 394 | nc: 1 | ncall: 563261 | eff(%):  2.132 | loglstar:   -inf &lt;  1.384 &lt;    inf | logz: -55.129 +/-  0.525 | dlogz:  0.000 &gt;  0.100]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RESULTS ====
+dynesty estimated logZ = -55.129 ± 0.625
+True logZ (literature) = -36.090
+Error = -19.039
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">morphZ</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">morphZ</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_logging</span> <span class="p">;</span> <span class="n">setup_logging</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">g_shell</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gs</span>
+    
+<span class="c1"># def lnprobfn(theta):</span>
+<span class="c1">#     &quot;&quot;&quot;Log-probability combining prior and likelihood.&quot;&quot;&quot;</span>
+<span class="c1">#     return logprior(theta) + loglikelihood(theta)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">5</span><span class="p">,:]</span>  <span class="c1"># total_samples[::20,:]</span>
+<span class="n">tot_len</span> <span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total samples:&#39;</span><span class="p">,</span> <span class="n">tot_len</span><span class="p">,</span> <span class="s1">&#39;Dimensions:&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+<span class="n">log_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tot_len</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">log_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">lnprobfn</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+
+<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span>
+<span class="n">samples</span><span class="p">,</span>
+<span class="n">log_prob</span><span class="p">,</span>
+<span class="n">gs</span><span class="o">.</span><span class="n">lnprobfn</span><span class="p">,</span>
+<span class="n">n_resamples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span><span class="n">kde_bw</span><span class="o">=</span><span class="s2">&quot;silverman&quot;</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./morphZ_gaussian_shell_group/&#39;</span><span class="p">,</span><span class="n">pool</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;True:&#39;</span><span class="p">,</span> <span class="n">true_logz</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.morph:Using Morph_Group for proposal distribution.
+INFO:morphZ.morph:Using multiprocessing with 6 workers for bridge sampling.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 2401 Dimensions: 30
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:Filtered proposal samples: 9892 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filtered proposal samples: 9892 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:iteration: 1 log(z) old: -60.15122964279204 log(z) New: -60.558865261848965
+INFO:morphZ.bridge_multiprocess:iteration: 2 log(z) old: -60.558865261848965 log(z) New: -60.62895919337263
+INFO:morphZ.bridge_multiprocess:iteration: 3 log(z) old: -60.62895919337263 log(z) New: -60.64142231745201
+INFO:morphZ.bridge_multiprocess:iteration: 4 log(z) old: -60.64142231745201 log(z) New: -60.64364930059958
+INFO:morphZ.bridge_multiprocess:Converged in 4 iterations. log(z): -60.6414 +/-: 0.0207
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimation 1/5
+iteration: 4 log(z) old: -60.64142231745201 log(z) New: -60.64364930059958
+Converged in 4 iterations. log(z): -60.6414 +/-: 0.0207
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:Filtered proposal samples: 9886 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filtered proposal samples: 9886 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:iteration: 1 log(z) old: -60.16811634825051 log(z) New: -60.55936260439591
+INFO:morphZ.bridge_multiprocess:iteration: 2 log(z) old: -60.55936260439591 log(z) New: -60.626861513004556
+INFO:morphZ.bridge_multiprocess:iteration: 3 log(z) old: -60.626861513004556 log(z) New: -60.63887484889846
+INFO:morphZ.bridge_multiprocess:iteration: 4 log(z) old: -60.63887484889846 log(z) New: -60.641022900052164
+INFO:morphZ.bridge_multiprocess:Converged in 4 iterations. log(z): -60.6389 +/-: 0.0207
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimation 2/5
+iteration: 4 log(z) old: -60.63887484889846 log(z) New: -60.641022900052164
+Converged in 4 iterations. log(z): -60.6389 +/-: 0.0207
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:Filtered proposal samples: 9890 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filtered proposal samples: 9890 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:iteration: 1 log(z) old: -59.93196880291696 log(z) New: -60.51689197466937
+INFO:morphZ.bridge_multiprocess:iteration: 2 log(z) old: -60.51689197466937 log(z) New: -60.62329054221572
+INFO:morphZ.bridge_multiprocess:iteration: 3 log(z) old: -60.62329054221572 log(z) New: -60.64341056148471
+INFO:morphZ.bridge_multiprocess:iteration: 4 log(z) old: -60.64341056148471 log(z) New: -60.64723559751507
+INFO:morphZ.bridge_multiprocess:Converged in 4 iterations. log(z): -60.6434 +/-: 0.0210
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimation 3/5
+iteration: 4 log(z) old: -60.64341056148471 log(z) New: -60.64723559751507
+Converged in 4 iterations. log(z): -60.6434 +/-: 0.0210
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:Filtered proposal samples: 9884 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filtered proposal samples: 9884 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:iteration: 1 log(z) old: -60.169359518609845 log(z) New: -60.5671203985069
+INFO:morphZ.bridge_multiprocess:iteration: 2 log(z) old: -60.5671203985069 log(z) New: -60.63844933680139
+INFO:morphZ.bridge_multiprocess:iteration: 3 log(z) old: -60.63844933680139 log(z) New: -60.65170684819988
+INFO:morphZ.bridge_multiprocess:iteration: 4 log(z) old: -60.65170684819988 log(z) New: -60.65418468235432
+INFO:morphZ.bridge_multiprocess:Converged in 4 iterations. log(z): -60.6517 +/-: 0.0210
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimation 4/5
+iteration: 4 log(z) old: -60.65170684819988 log(z) New: -60.65418468235432
+Converged in 4 iterations. log(z): -60.6517 +/-: 0.0210
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:Filtered proposal samples: 9871 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filtered proposal samples: 9871 valid samples out of 10000 total samples.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:iteration: 1 log(z) old: -60.17210586426401 log(z) New: -60.57901706041223
+INFO:morphZ.bridge_multiprocess:iteration: 2 log(z) old: -60.57901706041223 log(z) New: -60.64786350989249
+INFO:morphZ.bridge_multiprocess:iteration: 3 log(z) old: -60.64786350989249 log(z) New: -60.659912686557576
+INFO:morphZ.bridge_multiprocess:iteration: 4 log(z) old: -60.659912686557576 log(z) New: -60.662031828652204
+INFO:morphZ.bridge_multiprocess:Converged in 4 iterations. log(z): -60.6599 +/-: 0.0207
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimation 5/5
+iteration: 4 log(z) old: -60.659912686557576 log(z) New: -60.662031828652204
+Converged in 4 iterations. log(z): -60.6599 +/-: 0.0207
+
+Saved log(z) to ./morphZ_gaussian_shell_group//logz_morph_z_2_group_silverman.txt
+True: -36.09
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pair_kde</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">PairwiseKDE</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="s1">&#39;/home/apokrypha/Local NT/paper_tests_morph/morphZ_gaussian_shell/params_MI.json&#39;</span><span class="p">,</span><span class="n">bw</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pair_samples</span> <span class="o">=</span> <span class="n">pair_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">indep_kde</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">KDE_approx</span><span class="p">(</span><span class="n">posterior_samples</span><span class="p">,</span><span class="n">bw</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="n">indep_samples</span> <span class="o">=</span> <span class="n">indep_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+    <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">10</span><span class="p">,:</span><span class="mi">5</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">label_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span><span class="n">truth_color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span><span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span><span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+    <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fontzise</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+    <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>         
+    <span class="n">smooth</span><span class="o">=</span><span class="mf">1.0</span>  
+<span class="p">)</span>
+<span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+    <span class="n">pair_samples</span><span class="p">[:,:</span><span class="mi">5</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">label_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span><span class="n">truth_color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span><span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span><span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+    <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+    <span class="n">fontzise</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+    <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>         
+    <span class="n">smooth</span><span class="o">=</span><span class="mf">1.0</span>  
+<span class="p">)</span>
+<span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+    <span class="n">indep_samples</span><span class="p">[:,:</span><span class="mi">5</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">label_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span><span class="n">truth_color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span><span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span><span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+    <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+    <span class="n">fontzise</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+    <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>         
+    <span class="n">smooth</span><span class="o">=</span><span class="mf">1.0</span>  
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pair_kde</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">PairwiseKDE</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="s1">&#39;/home/apokrypha/Local NT/paper_tests_morph/morphZ_gaussian_shell/params_MI.json&#39;</span><span class="p">,</span><span class="n">bw</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">pair_samples</span> <span class="o">=</span> <span class="n">pair_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">indep_kde</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">KDE_approx</span><span class="p">(</span><span class="n">posterior_samples</span><span class="p">,</span><span class="n">bw</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: Morph_Pairwise.__init__() got an unexpected keyword argument &#39;bw&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">true_logz</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mf">5.5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;True log(z)&#39;</span><span class="p">)</span>
+
+<span class="n">x1</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="c1">#median = [np.mean(z_GSS_mcmc),res.logz[-1],np.mean(log_p_estimate)]</span>
+<span class="c1">#error = [np.std(z_GSS_mcmc),res.logzerr[-1],np.std(log_p_estimate)]</span>
+<span class="n">median</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_z_NS</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_z_NS</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])]</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_z_NS_err</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;NS$_</span><span class="si">{Emp}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;NS$_</span><span class="si">{Theo}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;Morph$_</span><span class="si">{Emp}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;Morph$_</span><span class="si">{RMSE}</span><span class="s1">$&#39;</span><span class="p">],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;log(z)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2943c5f60&gt;
+</pre></div>
+</div>
+<img alt="../../_images/77eb183e9130090adb8238795294fbd26f066d3cf262140c345801196ae3d652.png" src="../../_images/77eb183e9130090adb8238795294fbd26f066d3cf262140c345801196ae3d652.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_auto/examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="eggbox.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Eggbox</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="peak_sampling_new.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Peak Sampling New</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MorphZ Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

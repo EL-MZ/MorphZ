@@ -1,0 +1,1155 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Eggbox &#8212; MorphZ Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/eggbox';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Gaussian Shell" href="gaussian_shell.html" />
+    <link rel="prev" title="Examples" href="../../examples.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MorphZ Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    MorphZ
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Eggbox notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaussian_shell.html">Gaussian shell notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peak_sampling_new.html">Peak sampling notebook</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ApokryphaV1/MorphZ" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_auto/examples/eggbox.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Eggbox</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eggbox">
+<h1>Eggbox<a class="headerlink" href="#eggbox" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">NestedSampler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">dyfunc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">corner</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -------------------------------</span>
+<span class="c1"># Eggbox definition</span>
+<span class="c1"># -------------------------------</span>
+
+<span class="c1"># Prior bounds</span>
+<span class="n">prior_min</span><span class="p">,</span> <span class="n">prior_max</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">prior_volume</span> <span class="o">=</span> <span class="p">(</span><span class="n">prior_max</span> <span class="o">-</span> <span class="n">prior_min</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># for reference</span>
+
+<span class="c1"># True evidence from the literature</span>
+<span class="n">true_logz</span> <span class="o">=</span> <span class="mf">235.856</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Eggbox log-likelihood.</span>
+<span class="sd">    theta: array of shape (2,)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">theta</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">))</span> <span class="o">**</span> <span class="mi">5</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">prior_transform</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transform from unit cube [0,1]^2 to parameter space [0, 10π]^2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">prior_min</span> <span class="o">+</span> <span class="p">(</span><span class="n">prior_max</span> <span class="o">-</span> <span class="n">prior_min</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">prior_min</span> <span class="o">+</span> <span class="p">(</span><span class="n">prior_max</span> <span class="o">-</span> <span class="n">prior_min</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+
+
+<span class="c1"># -------------------------------</span>
+<span class="c1"># Run dynesty Nested Sampling</span>
+<span class="c1"># -------------------------------</span>
+
+<span class="c1"># 2 parameters</span>
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Set up the sampler</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">NestedSampler</span><span class="p">(</span>
+    <span class="n">loglikelihood</span><span class="p">,</span>
+    <span class="n">prior_transform</span><span class="p">,</span>
+    <span class="n">ndim</span><span class="p">,</span>
+    <span class="n">nlive</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>       <span class="c1"># number of live points; increase for accuracy</span>
+    <span class="n">sample</span><span class="o">=</span><span class="s2">&quot;rwalk&quot;</span><span class="p">,</span>  <span class="c1"># random-walk proposals; can try &quot;unif&quot;, &quot;slice&quot;</span>
+    <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;multi&quot;</span><span class="p">,</span>   <span class="c1"># bounding method (&quot;multi&quot; good for multimodal)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running dynesty Nested Sampling on Eggbox...&quot;</span><span class="p">)</span>
+<span class="n">sampler</span><span class="o">.</span><span class="n">run_nested</span><span class="p">(</span><span class="n">print_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">results</span>
+<span class="n">samples</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">logwt</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">posterior_samples</span> <span class="o">=</span> <span class="n">dyfunc</span><span class="o">.</span><span class="n">resample_equal</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<span class="c1"># -------------------------------</span>
+<span class="c1"># Report results</span>
+<span class="c1"># -------------------------------</span>
+<span class="n">logZ</span><span class="p">,</span> <span class="n">logZerr</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">res</span><span class="o">.</span><span class="n">logzerr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== RESULTS ====&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dynesty estimated logZ = </span><span class="si">{</span><span class="n">logZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">logZerr</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True logZ (literature) = </span><span class="si">{</span><span class="n">true_logz</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error = </span><span class="si">{</span><span class="n">logZ</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_logz</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running dynesty Nested Sampling on Eggbox...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3941it [00:02, 1677.19it/s, +500 | bound: 32 | nc: 1 | ncall: 65990 | eff(%):  6.781 | loglstar:   -inf &lt; 243.000 &lt;    inf | logz: 235.963 +/-  0.110 | dlogz:  0.001 &gt;  0.509]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RESULTS ====
+dynesty estimated logZ = 235.963 ± 0.206
+True logZ (literature) = 235.856
+Error = 0.107
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">morphZ</span>
+<span class="c1"># import logging</span>
+<span class="c1"># from morphZ import setup_logging ; setup_logging(level=logging.INFO)</span>
+<span class="c1"># Prior bounds</span>
+<span class="n">prior_min</span><span class="p">,</span> <span class="n">prior_max</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">prior_volume</span> <span class="o">=</span> <span class="p">(</span><span class="n">prior_max</span> <span class="o">-</span> <span class="n">prior_min</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># 2-D uniform cube</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">logprior</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uniform prior over [0, 10π]^2.&quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">theta</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">prior_min</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">prior_max</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">prior_min</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">prior_max</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">prior_volume</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    
+<span class="k">def</span><span class="w"> </span><span class="nf">lnprobfn</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Log-probability combining prior and likelihood.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">logprior</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">1</span><span class="p">,:]</span>  <span class="c1"># total_samples[::20,:]</span>
+<span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4441, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">2</span><span class="p">,:]</span>  <span class="c1"># total_samples[::20,:]</span>
+<span class="n">tot_len</span> <span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total samples:&#39;</span><span class="p">,</span> <span class="n">tot_len</span><span class="p">,</span> <span class="s1">&#39;Dimensions:&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+<span class="n">log_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tot_len</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">log_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lnprobfn</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+
+<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span>
+<span class="n">samples</span><span class="p">,</span>
+<span class="n">log_prob</span><span class="p">,</span>
+<span class="n">lnprobfn</span><span class="p">,</span>
+<span class="n">n_resamples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;pair&quot;</span><span class="p">,</span><span class="n">kde_bw</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./morphZ_eggbox/&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;True:&#39;</span><span class="p">,</span> <span class="n">true_logz</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 2221 Dimensions: 2
+Filtered proposal samples: 4455 valid samples out of 5000 total samples.
+Estimation 1/100
+iteration: 2 log(z) old: 235.8907521557108 log(z) New: 235.8896825595861
+Converged in 2 iterations. log(z): 235.8908 +/-: 0.0105
+
+Filtered proposal samples: 4432 valid samples out of 5000 total samples.
+Estimation 2/100
+iteration: 2 log(z) old: 235.89127211200875 log(z) New: 235.8899149210024
+Converged in 2 iterations. log(z): 235.8913 +/-: 0.0107
+
+Filtered proposal samples: 4369 valid samples out of 5000 total samples.
+Estimation 3/100
+iteration: 2 log(z) old: 235.89014575268936 log(z) New: 235.88928486199015
+Converged in 2 iterations. log(z): 235.8901 +/-: 0.0105
+
+Filtered proposal samples: 4448 valid samples out of 5000 total samples.
+Estimation 4/100
+iteration: 2 log(z) old: 235.87988296108858 log(z) New: 235.87895559396966
+Converged in 2 iterations. log(z): 235.8799 +/-: 0.0106
+
+Filtered proposal samples: 4423 valid samples out of 5000 total samples.
+Estimation 5/100
+iteration: 2 log(z) old: 235.88908951539977 log(z) New: 235.88783797206304
+Converged in 2 iterations. log(z): 235.8891 +/-: 0.0106
+
+Filtered proposal samples: 4418 valid samples out of 5000 total samples.
+Estimation 6/100
+iteration: 2 log(z) old: 235.88122487677515 log(z) New: 235.88036985525338
+Converged in 2 iterations. log(z): 235.8812 +/-: 0.0106
+
+Filtered proposal samples: 4422 valid samples out of 5000 total samples.
+Estimation 7/100
+iteration: 2 log(z) old: 235.89898873014323 log(z) New: 235.89785843335028
+Converged in 2 iterations. log(z): 235.8990 +/-: 0.0105
+
+Filtered proposal samples: 4422 valid samples out of 5000 total samples.
+Estimation 8/100
+iteration: 2 log(z) old: 235.87908658767034 log(z) New: 235.87811873309983
+Converged in 2 iterations. log(z): 235.8791 +/-: 0.0107
+
+Filtered proposal samples: 4446 valid samples out of 5000 total samples.
+Estimation 9/100
+iteration: 2 log(z) old: 235.88810165526806 log(z) New: 235.8871559695485
+Converged in 2 iterations. log(z): 235.8881 +/-: 0.0105
+
+Filtered proposal samples: 4417 valid samples out of 5000 total samples.
+Estimation 10/100
+iteration: 2 log(z) old: 235.87396870314316 log(z) New: 235.8731281270905
+Converged in 2 iterations. log(z): 235.8740 +/-: 0.0106
+
+Filtered proposal samples: 4422 valid samples out of 5000 total samples.
+Estimation 11/100
+iteration: 2 log(z) old: 235.89486490021497 log(z) New: 235.8935393512462
+Converged in 2 iterations. log(z): 235.8949 +/-: 0.0106
+
+Filtered proposal samples: 4406 valid samples out of 5000 total samples.
+Estimation 12/100
+iteration: 2 log(z) old: 235.89394963255756 log(z) New: 235.89283577472895
+Converged in 2 iterations. log(z): 235.8939 +/-: 0.0105
+
+Filtered proposal samples: 4445 valid samples out of 5000 total samples.
+Estimation 13/100
+iteration: 2 log(z) old: 235.9031208449092 log(z) New: 235.90172781672408
+Converged in 2 iterations. log(z): 235.9031 +/-: 0.0106
+
+Filtered proposal samples: 4426 valid samples out of 5000 total samples.
+Estimation 14/100
+iteration: 2 log(z) old: 235.8717852219991 log(z) New: 235.87095234611417
+Converged in 2 iterations. log(z): 235.8718 +/-: 0.0106
+
+Filtered proposal samples: 4431 valid samples out of 5000 total samples.
+Estimation 15/100
+iteration: 2 log(z) old: 235.88611148552246 log(z) New: 235.8849781446102
+Converged in 2 iterations. log(z): 235.8861 +/-: 0.0106
+
+Filtered proposal samples: 4466 valid samples out of 5000 total samples.
+Estimation 16/100
+iteration: 2 log(z) old: 235.89414413308987 log(z) New: 235.8929003592063
+Converged in 2 iterations. log(z): 235.8941 +/-: 0.0105
+
+Filtered proposal samples: 4416 valid samples out of 5000 total samples.
+Estimation 17/100
+iteration: 2 log(z) old: 235.8879839379478 log(z) New: 235.88693568684047
+Converged in 2 iterations. log(z): 235.8880 +/-: 0.0106
+
+Filtered proposal samples: 4445 valid samples out of 5000 total samples.
+Estimation 18/100
+iteration: 2 log(z) old: 235.88641590487197 log(z) New: 235.8856090216493
+Converged in 2 iterations. log(z): 235.8864 +/-: 0.0104
+
+Filtered proposal samples: 4415 valid samples out of 5000 total samples.
+Estimation 19/100
+iteration: 2 log(z) old: 235.89857522259825 log(z) New: 235.8973036228959
+Converged in 2 iterations. log(z): 235.8986 +/-: 0.0106
+
+Filtered proposal samples: 4440 valid samples out of 5000 total samples.
+Estimation 20/100
+iteration: 2 log(z) old: 235.88339015537875 log(z) New: 235.88262029523332
+Converged in 2 iterations. log(z): 235.8834 +/-: 0.0104
+
+Filtered proposal samples: 4446 valid samples out of 5000 total samples.
+Estimation 21/100
+iteration: 2 log(z) old: 235.88883069760922 log(z) New: 235.8877616446842
+Converged in 2 iterations. log(z): 235.8888 +/-: 0.0105
+
+Filtered proposal samples: 4447 valid samples out of 5000 total samples.
+Estimation 22/100
+iteration: 2 log(z) old: 235.89797832249025 log(z) New: 235.8967240027289
+Converged in 2 iterations. log(z): 235.8980 +/-: 0.0106
+
+Filtered proposal samples: 4439 valid samples out of 5000 total samples.
+Estimation 23/100
+iteration: 2 log(z) old: 235.88884261390317 log(z) New: 235.8878115838216
+Converged in 2 iterations. log(z): 235.8888 +/-: 0.0106
+
+Filtered proposal samples: 4385 valid samples out of 5000 total samples.
+Estimation 24/100
+iteration: 2 log(z) old: 235.87904890596113 log(z) New: 235.87807662226982
+Converged in 2 iterations. log(z): 235.8790 +/-: 0.0107
+
+Filtered proposal samples: 4402 valid samples out of 5000 total samples.
+Estimation 25/100
+iteration: 2 log(z) old: 235.89550842692597 log(z) New: 235.89433264644526
+Converged in 2 iterations. log(z): 235.8955 +/-: 0.0106
+
+Filtered proposal samples: 4452 valid samples out of 5000 total samples.
+Estimation 26/100
+iteration: 2 log(z) old: 235.89057543989907 log(z) New: 235.88965726127452
+Converged in 2 iterations. log(z): 235.8906 +/-: 0.0104
+
+Filtered proposal samples: 4453 valid samples out of 5000 total samples.
+Estimation 27/100
+iteration: 2 log(z) old: 235.86759163308705 log(z) New: 235.86662485422895
+Converged in 2 iterations. log(z): 235.8676 +/-: 0.0107
+
+Filtered proposal samples: 4419 valid samples out of 5000 total samples.
+Estimation 28/100
+iteration: 2 log(z) old: 235.8910487130457 log(z) New: 235.89000586067954
+Converged in 2 iterations. log(z): 235.8910 +/-: 0.0105
+
+Filtered proposal samples: 4451 valid samples out of 5000 total samples.
+Estimation 29/100
+iteration: 2 log(z) old: 235.90820127339978 log(z) New: 235.90676979075968
+Converged in 2 iterations. log(z): 235.9082 +/-: 0.0105
+
+Filtered proposal samples: 4425 valid samples out of 5000 total samples.
+Estimation 30/100
+iteration: 2 log(z) old: 235.89347001796625 log(z) New: 235.8924577578833
+Converged in 2 iterations. log(z): 235.8935 +/-: 0.0105
+
+Filtered proposal samples: 4436 valid samples out of 5000 total samples.
+Estimation 31/100
+iteration: 2 log(z) old: 235.90565556837362 log(z) New: 235.90434947743145
+Converged in 2 iterations. log(z): 235.9057 +/-: 0.0105
+
+Filtered proposal samples: 4461 valid samples out of 5000 total samples.
+Estimation 32/100
+iteration: 2 log(z) old: 235.89972881770484 log(z) New: 235.89858712488265
+Converged in 2 iterations. log(z): 235.8997 +/-: 0.0105
+
+Filtered proposal samples: 4410 valid samples out of 5000 total samples.
+Estimation 33/100
+iteration: 2 log(z) old: 235.88192665669402 log(z) New: 235.88101091755422
+Converged in 2 iterations. log(z): 235.8819 +/-: 0.0106
+
+Filtered proposal samples: 4452 valid samples out of 5000 total samples.
+Estimation 34/100
+iteration: 2 log(z) old: 235.90404527855208 log(z) New: 235.90288956111982
+Converged in 2 iterations. log(z): 235.9040 +/-: 0.0104
+
+Filtered proposal samples: 4471 valid samples out of 5000 total samples.
+Estimation 35/100
+iteration: 2 log(z) old: 235.90439597122145 log(z) New: 235.90256877136488
+Converged in 2 iterations. log(z): 235.9044 +/-: 0.0107
+
+Filtered proposal samples: 4430 valid samples out of 5000 total samples.
+Estimation 36/100
+iteration: 2 log(z) old: 235.8913546444054 log(z) New: 235.89027963576206
+Converged in 2 iterations. log(z): 235.8914 +/-: 0.0105
+
+Filtered proposal samples: 4449 valid samples out of 5000 total samples.
+Estimation 37/100
+iteration: 2 log(z) old: 235.8926271882115 log(z) New: 235.89118103557135
+Converged in 2 iterations. log(z): 235.8926 +/-: 0.0107
+
+Filtered proposal samples: 4386 valid samples out of 5000 total samples.
+Estimation 38/100
+iteration: 2 log(z) old: 235.88114926906024 log(z) New: 235.88043008193796
+Converged in 2 iterations. log(z): 235.8811 +/-: 0.0105
+
+Filtered proposal samples: 4448 valid samples out of 5000 total samples.
+Estimation 39/100
+iteration: 2 log(z) old: 235.90020430469477 log(z) New: 235.89893540243256
+Converged in 2 iterations. log(z): 235.9002 +/-: 0.0105
+
+Filtered proposal samples: 4411 valid samples out of 5000 total samples.
+Estimation 40/100
+iteration: 2 log(z) old: 235.88312073494797 log(z) New: 235.88208205311767
+Converged in 2 iterations. log(z): 235.8831 +/-: 0.0106
+
+Filtered proposal samples: 4418 valid samples out of 5000 total samples.
+Estimation 41/100
+iteration: 2 log(z) old: 235.89813200527027 log(z) New: 235.896930613856
+Converged in 2 iterations. log(z): 235.8981 +/-: 0.0105
+
+Filtered proposal samples: 4446 valid samples out of 5000 total samples.
+Estimation 42/100
+iteration: 2 log(z) old: 235.8989545163027 log(z) New: 235.89750217970345
+Converged in 2 iterations. log(z): 235.8990 +/-: 0.0106
+
+Filtered proposal samples: 4423 valid samples out of 5000 total samples.
+Estimation 43/100
+iteration: 2 log(z) old: 235.89319505782697 log(z) New: 235.89218880367943
+Converged in 2 iterations. log(z): 235.8932 +/-: 0.0105
+
+Filtered proposal samples: 4454 valid samples out of 5000 total samples.
+Estimation 44/100
+iteration: 2 log(z) old: 235.898992066077 log(z) New: 235.89780304144136
+Converged in 2 iterations. log(z): 235.8990 +/-: 0.0105
+
+Filtered proposal samples: 4431 valid samples out of 5000 total samples.
+Estimation 45/100
+iteration: 2 log(z) old: 235.89487499428895 log(z) New: 235.8936965734725
+Converged in 2 iterations. log(z): 235.8949 +/-: 0.0105
+
+Filtered proposal samples: 4442 valid samples out of 5000 total samples.
+Estimation 46/100
+iteration: 2 log(z) old: 235.87839733031453 log(z) New: 235.87770515617922
+Converged in 2 iterations. log(z): 235.8784 +/-: 0.0104
+
+Filtered proposal samples: 4409 valid samples out of 5000 total samples.
+Estimation 47/100
+iteration: 2 log(z) old: 235.89779395846554 log(z) New: 235.89652662262583
+Converged in 2 iterations. log(z): 235.8978 +/-: 0.0106
+
+Filtered proposal samples: 4435 valid samples out of 5000 total samples.
+Estimation 48/100
+iteration: 2 log(z) old: 235.8740579641727 log(z) New: 235.8732135171405
+Converged in 2 iterations. log(z): 235.8741 +/-: 0.0106
+
+Filtered proposal samples: 4449 valid samples out of 5000 total samples.
+Estimation 49/100
+iteration: 2 log(z) old: 235.8749066985371 log(z) New: 235.87416785099978
+Converged in 2 iterations. log(z): 235.8749 +/-: 0.0105
+
+Filtered proposal samples: 4425 valid samples out of 5000 total samples.
+Estimation 50/100
+iteration: 2 log(z) old: 235.88464898897567 log(z) New: 235.883737007515
+Converged in 2 iterations. log(z): 235.8846 +/-: 0.0105
+
+Filtered proposal samples: 4438 valid samples out of 5000 total samples.
+Estimation 51/100
+iteration: 2 log(z) old: 235.88794279250845 log(z) New: 235.8867092767335
+Converged in 2 iterations. log(z): 235.8879 +/-: 0.0106
+
+Filtered proposal samples: 4425 valid samples out of 5000 total samples.
+Estimation 52/100
+iteration: 2 log(z) old: 235.89251541172837 log(z) New: 235.89120378518425
+Converged in 2 iterations. log(z): 235.8925 +/-: 0.0106
+
+Filtered proposal samples: 4400 valid samples out of 5000 total samples.
+Estimation 53/100
+iteration: 2 log(z) old: 235.89153687002673 log(z) New: 235.8905155149716
+Converged in 2 iterations. log(z): 235.8915 +/-: 0.0105
+
+Filtered proposal samples: 4414 valid samples out of 5000 total samples.
+Estimation 54/100
+iteration: 2 log(z) old: 235.89884713459065 log(z) New: 235.89750029736317
+Converged in 2 iterations. log(z): 235.8988 +/-: 0.0106
+
+Filtered proposal samples: 4410 valid samples out of 5000 total samples.
+Estimation 55/100
+iteration: 2 log(z) old: 235.9152839972093 log(z) New: 235.91381102466406
+Converged in 2 iterations. log(z): 235.9153 +/-: 0.0105
+
+Filtered proposal samples: 4447 valid samples out of 5000 total samples.
+Estimation 56/100
+iteration: 2 log(z) old: 235.88416527752963 log(z) New: 235.88318463962656
+Converged in 2 iterations. log(z): 235.8842 +/-: 0.0106
+
+Filtered proposal samples: 4419 valid samples out of 5000 total samples.
+Estimation 57/100
+iteration: 2 log(z) old: 235.89589188876815 log(z) New: 235.89481483937408
+Converged in 2 iterations. log(z): 235.8959 +/-: 0.0105
+
+Filtered proposal samples: 4428 valid samples out of 5000 total samples.
+Estimation 58/100
+iteration: 2 log(z) old: 235.88733410752553 log(z) New: 235.8863811221752
+Converged in 2 iterations. log(z): 235.8873 +/-: 0.0105
+
+Filtered proposal samples: 4421 valid samples out of 5000 total samples.
+Estimation 59/100
+iteration: 2 log(z) old: 235.90610574109652 log(z) New: 235.9046004382416
+Converged in 2 iterations. log(z): 235.9061 +/-: 0.0106
+
+Filtered proposal samples: 4450 valid samples out of 5000 total samples.
+Estimation 60/100
+iteration: 2 log(z) old: 235.8979411320837 log(z) New: 235.89641909098415
+Converged in 2 iterations. log(z): 235.8979 +/-: 0.0107
+
+Filtered proposal samples: 4437 valid samples out of 5000 total samples.
+Estimation 61/100
+iteration: 2 log(z) old: 235.89557184894227 log(z) New: 235.89423414719417
+Converged in 2 iterations. log(z): 235.8956 +/-: 0.0106
+
+Filtered proposal samples: 4434 valid samples out of 5000 total samples.
+Estimation 62/100
+iteration: 2 log(z) old: 235.91695130026932 log(z) New: 235.91558816697145
+Converged in 2 iterations. log(z): 235.9170 +/-: 0.0104
+
+Filtered proposal samples: 4440 valid samples out of 5000 total samples.
+Estimation 63/100
+iteration: 2 log(z) old: 235.90945553631445 log(z) New: 235.90791311223037
+Converged in 2 iterations. log(z): 235.9095 +/-: 0.0106
+
+Filtered proposal samples: 4427 valid samples out of 5000 total samples.
+Estimation 64/100
+iteration: 2 log(z) old: 235.89536596777836 log(z) New: 235.89424495190622
+Converged in 2 iterations. log(z): 235.8954 +/-: 0.0105
+
+Filtered proposal samples: 4451 valid samples out of 5000 total samples.
+Estimation 65/100
+iteration: 2 log(z) old: 235.8961919676104 log(z) New: 235.89492628756975
+Converged in 2 iterations. log(z): 235.8962 +/-: 0.0106
+
+Filtered proposal samples: 4444 valid samples out of 5000 total samples.
+Estimation 66/100
+iteration: 2 log(z) old: 235.89751162505195 log(z) New: 235.8960704929941
+Converged in 2 iterations. log(z): 235.8975 +/-: 0.0106
+
+Filtered proposal samples: 4442 valid samples out of 5000 total samples.
+Estimation 67/100
+iteration: 2 log(z) old: 235.88981341434027 log(z) New: 235.88855162744298
+Converged in 2 iterations. log(z): 235.8898 +/-: 0.0106
+
+Filtered proposal samples: 4438 valid samples out of 5000 total samples.
+Estimation 68/100
+iteration: 2 log(z) old: 235.90029419915066 log(z) New: 235.89909197601042
+Converged in 2 iterations. log(z): 235.9003 +/-: 0.0105
+
+Filtered proposal samples: 4469 valid samples out of 5000 total samples.
+Estimation 69/100
+iteration: 2 log(z) old: 235.88834969209114 log(z) New: 235.8874183513645
+Converged in 2 iterations. log(z): 235.8883 +/-: 0.0105
+
+Filtered proposal samples: 4422 valid samples out of 5000 total samples.
+Estimation 70/100
+iteration: 2 log(z) old: 235.87758854354533 log(z) New: 235.87679208683412
+Converged in 2 iterations. log(z): 235.8776 +/-: 0.0106
+
+Filtered proposal samples: 4378 valid samples out of 5000 total samples.
+Estimation 71/100
+iteration: 2 log(z) old: 235.89566305827663 log(z) New: 235.89410254765386
+Converged in 2 iterations. log(z): 235.8957 +/-: 0.0108
+
+Filtered proposal samples: 4421 valid samples out of 5000 total samples.
+Estimation 72/100
+iteration: 2 log(z) old: 235.88209804612313 log(z) New: 235.88100832661098
+Converged in 2 iterations. log(z): 235.8821 +/-: 0.0107
+
+Filtered proposal samples: 4423 valid samples out of 5000 total samples.
+Estimation 73/100
+iteration: 2 log(z) old: 235.88633091527007 log(z) New: 235.88546606735306
+Converged in 2 iterations. log(z): 235.8863 +/-: 0.0105
+
+Filtered proposal samples: 4423 valid samples out of 5000 total samples.
+Estimation 74/100
+iteration: 2 log(z) old: 235.89596111980114 log(z) New: 235.89524708171774
+Converged in 2 iterations. log(z): 235.8960 +/-: 0.0103
+
+Filtered proposal samples: 4416 valid samples out of 5000 total samples.
+Estimation 75/100
+iteration: 2 log(z) old: 235.86270349592888 log(z) New: 235.86217817625024
+Converged in 2 iterations. log(z): 235.8627 +/-: 0.0105
+
+Filtered proposal samples: 4398 valid samples out of 5000 total samples.
+Estimation 76/100
+iteration: 2 log(z) old: 235.90239047151854 log(z) New: 235.90107739098926
+Converged in 2 iterations. log(z): 235.9024 +/-: 0.0106
+
+Filtered proposal samples: 4460 valid samples out of 5000 total samples.
+Estimation 77/100
+iteration: 2 log(z) old: 235.88987231810123 log(z) New: 235.88893403849113
+Converged in 2 iterations. log(z): 235.8899 +/-: 0.0105
+
+Filtered proposal samples: 4437 valid samples out of 5000 total samples.
+Estimation 78/100
+iteration: 2 log(z) old: 235.88985297362117 log(z) New: 235.88877740251206
+Converged in 2 iterations. log(z): 235.8899 +/-: 0.0106
+
+Filtered proposal samples: 4446 valid samples out of 5000 total samples.
+Estimation 79/100
+iteration: 2 log(z) old: 235.87732733805703 log(z) New: 235.87638775686185
+Converged in 2 iterations. log(z): 235.8773 +/-: 0.0106
+
+Filtered proposal samples: 4442 valid samples out of 5000 total samples.
+Estimation 80/100
+iteration: 2 log(z) old: 235.88388500180736 log(z) New: 235.88296369148725
+Converged in 2 iterations. log(z): 235.8839 +/-: 0.0105
+
+Filtered proposal samples: 4424 valid samples out of 5000 total samples.
+Estimation 81/100
+iteration: 2 log(z) old: 235.88922550861744 log(z) New: 235.8879874216328
+Converged in 2 iterations. log(z): 235.8892 +/-: 0.0107
+
+Filtered proposal samples: 4435 valid samples out of 5000 total samples.
+Estimation 82/100
+iteration: 2 log(z) old: 235.89929753949198 log(z) New: 235.8981586214277
+Converged in 2 iterations. log(z): 235.8993 +/-: 0.0105
+
+Filtered proposal samples: 4406 valid samples out of 5000 total samples.
+Estimation 83/100
+iteration: 2 log(z) old: 235.9058859144445 log(z) New: 235.90438022525305
+Converged in 2 iterations. log(z): 235.9059 +/-: 0.0106
+
+Filtered proposal samples: 4422 valid samples out of 5000 total samples.
+Estimation 84/100
+iteration: 2 log(z) old: 235.89280549810556 log(z) New: 235.8916796452067
+Converged in 2 iterations. log(z): 235.8928 +/-: 0.0106
+
+Filtered proposal samples: 4463 valid samples out of 5000 total samples.
+Estimation 85/100
+iteration: 2 log(z) old: 235.89907011905004 log(z) New: 235.89783915443135
+Converged in 2 iterations. log(z): 235.8991 +/-: 0.0105
+
+Filtered proposal samples: 4435 valid samples out of 5000 total samples.
+Estimation 86/100
+iteration: 2 log(z) old: 235.88056159932427 log(z) New: 235.87951690498105
+Converged in 2 iterations. log(z): 235.8806 +/-: 0.0106
+
+Filtered proposal samples: 4459 valid samples out of 5000 total samples.
+Estimation 87/100
+iteration: 2 log(z) old: 235.87932218228624 log(z) New: 235.87844020660617
+Converged in 2 iterations. log(z): 235.8793 +/-: 0.0106
+
+Filtered proposal samples: 4417 valid samples out of 5000 total samples.
+Estimation 88/100
+iteration: 2 log(z) old: 235.88901303364705 log(z) New: 235.88823895808787
+Converged in 2 iterations. log(z): 235.8890 +/-: 0.0104
+
+Filtered proposal samples: 4427 valid samples out of 5000 total samples.
+Estimation 89/100
+iteration: 2 log(z) old: 235.88500350911983 log(z) New: 235.88419135200255
+Converged in 2 iterations. log(z): 235.8850 +/-: 0.0105
+
+Filtered proposal samples: 4452 valid samples out of 5000 total samples.
+Estimation 90/100
+iteration: 2 log(z) old: 235.89328484242458 log(z) New: 235.89234601258175
+Converged in 2 iterations. log(z): 235.8933 +/-: 0.0104
+
+Filtered proposal samples: 4468 valid samples out of 5000 total samples.
+Estimation 91/100
+iteration: 2 log(z) old: 235.9005695869977 log(z) New: 235.89939477671464
+Converged in 2 iterations. log(z): 235.9006 +/-: 0.0105
+
+Filtered proposal samples: 4405 valid samples out of 5000 total samples.
+Estimation 92/100
+iteration: 2 log(z) old: 235.9014257004157 log(z) New: 235.90053744320687
+Converged in 2 iterations. log(z): 235.9014 +/-: 0.0103
+
+Filtered proposal samples: 4408 valid samples out of 5000 total samples.
+Estimation 93/100
+iteration: 2 log(z) old: 235.88844586529785 log(z) New: 235.8874955711728
+Converged in 2 iterations. log(z): 235.8884 +/-: 0.0106
+
+Filtered proposal samples: 4422 valid samples out of 5000 total samples.
+Estimation 94/100
+iteration: 2 log(z) old: 235.8823986113043 log(z) New: 235.88137793423195
+Converged in 2 iterations. log(z): 235.8824 +/-: 0.0106
+
+Filtered proposal samples: 4397 valid samples out of 5000 total samples.
+Estimation 95/100
+iteration: 2 log(z) old: 235.88602685733244 log(z) New: 235.88517238097532
+Converged in 2 iterations. log(z): 235.8860 +/-: 0.0105
+
+Filtered proposal samples: 4412 valid samples out of 5000 total samples.
+Estimation 96/100
+iteration: 2 log(z) old: 235.89500532348595 log(z) New: 235.89384891303035
+Converged in 2 iterations. log(z): 235.8950 +/-: 0.0106
+
+Filtered proposal samples: 4423 valid samples out of 5000 total samples.
+Estimation 97/100
+iteration: 2 log(z) old: 235.89476002793884 log(z) New: 235.89340658051344
+Converged in 2 iterations. log(z): 235.8948 +/-: 0.0107
+
+Filtered proposal samples: 4451 valid samples out of 5000 total samples.
+Estimation 98/100
+iteration: 2 log(z) old: 235.8971722306235 log(z) New: 235.89600706986752
+Converged in 2 iterations. log(z): 235.8972 +/-: 0.0105
+
+Filtered proposal samples: 4452 valid samples out of 5000 total samples.
+Estimation 99/100
+iteration: 2 log(z) old: 235.89124358581276 log(z) New: 235.8905104131865
+Converged in 2 iterations. log(z): 235.8912 +/-: 0.0103
+
+Filtered proposal samples: 4439 valid samples out of 5000 total samples.
+Estimation 100/100
+iteration: 2 log(z) old: 235.89776057421935 log(z) New: 235.89673631938737
+Converged in 2 iterations. log(z): 235.8978 +/-: 0.0105
+
+Saved log(z) to ./morphZ_eggbox//logz_morph_z_pair_0.01.txt
+True: 235.856
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="n">true_logz</span> <span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.035411338439757856, 0.009628963397303266)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pair_kde</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">PairwiseKDE</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="s1">&#39;./morphZ_eggbox/params_MI.json&#39;</span><span class="p">,</span><span class="n">kde_bw</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">pair_samples</span> <span class="o">=</span> <span class="n">pair_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+    <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">label_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span><span class="n">truth_color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span><span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span><span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+    <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fontzise</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+    <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>         
+    <span class="n">smooth</span><span class="o">=</span><span class="mf">1.0</span>  
+<span class="p">)</span>
+<span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+    <span class="n">pair_samples</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">label_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span><span class="n">truth_color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span><span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span><span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+    <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+    <span class="n">fontzise</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+    <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>         
+    <span class="n">smooth</span><span class="o">=</span><span class="mf">1.0</span>  
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dbd7e2dca99852b8f090c2783d57a56630c0d25658ba50c8fec30ac1b1924582.png" src="../../_images/dbd7e2dca99852b8f090c2783d57a56630c0d25658ba50c8fec30ac1b1924582.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_auto/examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../examples.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Examples</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gaussian_shell.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gaussian Shell</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MorphZ Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

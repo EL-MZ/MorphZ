@@ -1,0 +1,748 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Peak Sampling New &#8212; MorphZ Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/peak_sampling_new';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Gaussian Shell" href="gaussian_shell.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MorphZ Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    MorphZ
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="eggbox.html">Eggbox notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gaussian_shell.html">Gaussian shell notebook</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Peak sampling notebook</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ApokryphaV1/MorphZ" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_auto/examples/peak_sampling_new.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Peak Sampling New</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="peak-sampling-new">
+<h1>Peak Sampling New<a class="headerlink" href="#peak-sampling-new" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">beta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">correlate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.tsa.stattools</span><span class="w"> </span><span class="kn">import</span> <span class="n">acf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">morphZ</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">corner</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_plus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">:</span>
+      <span class="n">summ</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">summ</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">summ</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_sum</span><span class="p">(</span><span class="n">vec</span><span class="p">):</span> 
+    <span class="n">r</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">Inf</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vec</span><span class="p">)):</span>
+       <span class="c1">#print(&#39;element:&#39;,vec[i])</span>
+       <span class="n">r</span> <span class="o">=</span><span class="n">log_plus</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+       <span class="c1">#print(r)</span>
+    <span class="k">return</span> <span class="n">r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">lnlikefn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="mf">0.01</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
+        <span class="c1">#print(x1)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="mi">0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="p">)</span><span class="c1">#+np.log(100)</span>
+        <span class="c1">#print(x2)</span>
+        <span class="k">return</span> <span class="n">log_plus</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">lnpriorfn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">((</span><span class="n">x</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)):</span>  <span class="c1"># Check if x is outside the cube</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> 
+
+    <span class="k">return</span> <span class="mf">0.0</span> 
+
+<span class="k">def</span><span class="w"> </span><span class="nf">lnprobfn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">lnlikefn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">lnpriorfn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dynesty</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">dyfunc</span>
+
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># number of parameters/dimensions</span>
+<span class="c1"># nlive = 20 * ndim  # number of live points (analogous to nwalkers)</span>
+<span class="n">nlive</span> <span class="o">=</span> <span class="mi">25</span> <span class="o">*</span> <span class="n">ndim</span>  <span class="c1"># number of live points (analogous to nwalkers)</span>
+
+
+
+<span class="c1"># Define the prior transform: maps a unit cube (0,1) to the prior volume.</span>
+<span class="c1"># For a uniform prior between -0.5 and 0.5 for each parameter:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">prior_transform</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="c1"># u is a 1D array of ndim values in [0, 1]</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">u</span>  <span class="c1"># scales u to [-0.5, 0.5]</span>
+
+<span class="c1"># Create the nested sampler instance.</span>
+
+<span class="c1"># Run the nested sampling.</span>
+<span class="c1"># Note: print_progress=True shows the progress.</span>
+<span class="n">NN</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">log_z_NS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">)</span>
+<span class="n">log_z_NS_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NN</span><span class="p">):</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">dynesty</span><span class="o">.</span><span class="n">NestedSampler</span><span class="p">(</span><span class="n">lnlikefn</span><span class="p">,</span> <span class="n">prior_transform</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">nlive</span><span class="o">=</span><span class="n">nlive</span><span class="p">)</span>
+    <span class="n">sampler</span><span class="o">.</span><span class="n">run_nested</span><span class="p">(</span><span class="n">dlogz</span><span class="o">=</span><span class="mf">0.00000001</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">2000000</span><span class="p">,</span><span class="n">print_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">results</span>
+    <span class="n">log_z_NS</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">log_z_NS_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">logzerr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="c1"># Get posterior samples.</span>
+<span class="c1"># dynesty provides weighted samples; here we compute equal-weight samples.</span>
+<span class="n">samples_ns</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">logwt</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">posterior_samples</span> <span class="o">=</span> <span class="n">dyfunc</span><span class="o">.</span><span class="n">resample_equal</span><span class="p">(</span><span class="n">samples_ns</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45372it [01:40, 452.83it/s, +500 | bound: 585 | nc: 1 | ncall: 1762567 | eff(%):  2.603 | loglstar:   -inf &lt; 73.275 &lt;    inf | logz:  1.044 +/-  0.307 | dlogz:  0.000 &gt;  0.000]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Posterior samples shape:&quot;</span><span class="p">,</span> <span class="n">posterior_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">posterior_samples</span><span class="p">[:,</span><span class="mi">4</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span> <span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;NS samples&#39;</span><span class="p">)</span>
+<span class="c1"># plt.hist(samples[:,4],color=&#39;red&#39;,density=True ,bins=100,alpha=0.5,label=&#39;thinned samples&#39;)</span>
+<span class="c1"># plt.hist(tree_samples[:,2],color=&#39;blue&#39;,density=True ,bins=100,alpha=0.5,label=&#39;tree samples&#39;)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NS log(z): </span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">logzerr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Posterior samples shape: (45872, 20)
+NS log(z): 1.044125637626962 +/- 0.3067044054689819
+</pre></div>
+</div>
+<img alt="../../_images/91f6ab8779b82bb4a913871ee0502e910ee618215781fb802095b51798c9443a.png" src="../../_images/91f6ab8779b82bb4a913871ee0502e910ee618215781fb802095b51798c9443a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+    <span class="n">posterior_samples</span><span class="p">[:,:</span><span class="mi">2</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$X_</span><span class="si">{1}</span><span class="s2">$&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;$X_</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">],</span><span class="n">label_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">},</span><span class="n">truth_color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span><span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span><span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+    <span class="n">show_titles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fontzise</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+    <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+    <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>         
+    <span class="n">smooth</span><span class="o">=</span><span class="mf">1.0</span>  
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a957f3114c071981e8409f89341fbd2405a55b5ed97b674254d2f765232b174d.png" src="../../_images/a957f3114c071981e8409f89341fbd2405a55b5ed97b674254d2f765232b174d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import logging</span>
+<span class="c1"># from morphZ import setup_logging; setup_logging(level=logging.INFO)</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">50</span><span class="p">,:]</span>  <span class="c1"># total_samples[::20,:]</span>
+<span class="n">tot_len</span> <span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total samples:&#39;</span><span class="p">,</span> <span class="n">tot_len</span><span class="p">,</span> <span class="s1">&#39;Dimensions:&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+<span class="n">log_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tot_len</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">log_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lnprobfn</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+
+<span class="c1"># log_p_estimate = morphZ.evidence(</span>
+<span class="c1"># samples,</span>
+<span class="c1"># log_prob,</span>
+<span class="c1"># lnprobfn,</span>
+<span class="c1"># n_resamples=2000,</span>
+<span class="c1"># thin=1,n_estimations=2,morph_type=&quot;pair&quot;,kde_bw=&quot;scott&quot;,plot=True,output_path=&#39;./morphZ_peak_sampling_new&#39;)</span>
+<span class="c1"># #print(&#39;True:&#39;, np.log(2))</span>
+<span class="c1"># print(&#39;True for 1 amp peak:&#39;, np.log(2))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 918 Dimensions: 20
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">harmonic</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hm</span>
+
+<span class="c1"># Instantiate harmonic&#39;s chains class</span>
+<span class="n">chains</span> <span class="o">=</span> <span class="n">hm</span><span class="o">.</span><span class="n">Chains</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
+<span class="n">chains</span><span class="o">.</span><span class="n">add_chains_2d</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">log_prob</span><span class="p">,</span><span class="n">nchains_in</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+
+<span class="n">chains_train</span><span class="p">,</span> <span class="n">chains_infer</span> <span class="o">=</span> <span class="n">hm</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">split_data</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">training_proportion</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">hm</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">RQSplineModel</span><span class="p">(</span><span class="n">ndim</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">epochs_num</span> <span class="o">=</span> <span class="mi">35</span>
+<span class="c1"># Train model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">chains_train</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs_num</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Instantiate harmonic&#39;s evidence class</span>
+<span class="n">ev</span> <span class="o">=</span> <span class="n">hm</span><span class="o">.</span><span class="n">Evidence</span><span class="p">(</span><span class="n">chains_infer</span><span class="o">.</span><span class="n">nchains</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Pass the evidence class the inference chains and compute the evidence!</span>
+<span class="n">ev</span><span class="o">.</span><span class="n">add_chains</span><span class="p">(</span><span class="n">chains_infer</span><span class="p">)</span>
+<span class="c1"># after ev.add_chains(chains_infer)</span>
+<span class="n">lnZ</span><span class="p">,</span> <span class="n">lnZ_std</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">compute_ln_evidence</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ln Z =&quot;</span><span class="p">,</span> <span class="n">lnZ</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ln (std(Z)) =&quot;</span><span class="p">,</span> <span class="n">lnZ_std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([ 0.17253399,  0.34506799,  0.17253399,  0.17253399,  1.03520396,
+         0.69013598,  1.38027195,  0.        ,  0.51760198,  1.03520396,
+         1.89787393,  1.55280595,  7.41896174, 21.22168127, 14.14778751,
+         2.9330779 ,  1.38027195,  2.24294192,  1.20773796,  0.86266997,
+         1.03520396,  0.86266997,  0.69013598,  0.17253399,  0.69013598,
+         0.        ,  0.34506799,  0.51760198,  0.17253399,  0.34506799]),
+ array([-0.20955052, -0.19421729, -0.17888407, -0.16355084, -0.14821762,
+        -0.13288439, -0.11755117, -0.10221794, -0.08688471, -0.07155149,
+        -0.05621826, -0.04088504, -0.02555181, -0.01021859,  0.00511464,
+         0.02044786,  0.03578109,  0.05111432,  0.06644754,  0.08178077,
+         0.09711399,  0.11244722,  0.12778044,  0.14311367,  0.15844689,
+         0.17378012,  0.18911335,  0.20444657,  0.2197798 ,  0.23511302,
+         0.25044625]),
+ &lt;BarContainer object of 30 artists&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">)</span>
+<span class="n">true_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">true_z</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mf">5.5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;True log(z)&#39;</span><span class="p">)</span>
+
+<span class="n">x1</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="c1">#median = [np.mean(z_GSS_mcmc),res.logz[-1],np.mean(log_p_estimate)]</span>
+<span class="c1">#error = [np.std(z_GSS_mcmc),res.logzerr[-1],np.std(log_p_estimate)]</span>
+<span class="n">median</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_z_NS</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_z_NS</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])]</span>
+<span class="n">error</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_z_NS</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_z_NS_err</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">log_p_estimate</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">error</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;NS$_</span><span class="si">{Emp}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;NS$_</span><span class="si">{Theo}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;Morph$_</span><span class="si">{Emp}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;Morph$_</span><span class="si">{RMSE}</span><span class="s1">$&#39;</span><span class="p">],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;log(z)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x70a4105dac60&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for row in total_samples: </span>
+<span class="c1">#     np.random.shuffle(row)</span>
+    
+<span class="n">samples</span> <span class="o">=</span> <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">5</span><span class="p">,:]</span>  <span class="c1"># total_samples[::20,:]</span>
+<span class="n">tot_len</span> <span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">log_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tot_len</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">log_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lnprobfn</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ncal </span><span class="si">{</span><span class="n">tot_len</span><span class="si">}</span><span class="s1"> Ndim </span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1">, log prob </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">log_prob</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">N_new</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">target_kde</span> <span class="o">=</span> <span class="n">KDE_approx</span><span class="p">(</span><span class="n">samples</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">tot_len</span><span class="o">/</span><span class="mi">2</span><span class="p">),:])</span>
+
+<span class="n">NN</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NN</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">samples_mor</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">tot_len</span><span class="o">/</span><span class="mi">2</span><span class="p">):,:]</span>
+<span class="n">log_post</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">tot_len</span><span class="o">/</span><span class="mi">2</span><span class="p">):]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">samples_mor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">gg</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NN</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration : </span><span class="si">{</span><span class="n">gg</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">samples_prop</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">N_new</span><span class="p">)</span>
+    <span class="n">log_prop</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">logpdf_kde</span><span class="p">(</span><span class="n">samples_prop</span><span class="p">)</span>
+
+    <span class="n">log_p_estimate</span><span class="p">[</span><span class="n">gg</span><span class="p">,:]</span> <span class="p">,</span> <span class="n">log_z</span> <span class="o">=</span> <span class="n">bridge_sampling_ln</span><span class="p">(</span><span class="n">lnprobfn</span><span class="p">,</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">logpdf_kde</span><span class="p">,</span> <span class="n">samples_mor</span><span class="p">,</span><span class="n">log_post</span><span class="p">,</span> <span class="n">samples_prop</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> true:</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ncal 7554 Ndim 20, log prob 7554
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ncal </span><span class="si">{</span><span class="n">tot_len</span><span class="si">}</span><span class="s1"> Ndim </span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1">, log prob </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">log_prob</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">N_new</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">target_kde</span> <span class="o">=</span> <span class="n">KDE_approx</span><span class="p">(</span><span class="n">samples</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">tot_len</span><span class="o">/</span><span class="mi">2</span><span class="p">),:])</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">NN</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">NN</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="ne">NameError</span>: name &#39;KDE_approx&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_auto/examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="gaussian_shell.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Gaussian Shell</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MorphZ Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
