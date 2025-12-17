@@ -156,12 +156,13 @@ def evidence(
     param_names: Optional[List[str]] = None,
     output_path: Optional[str] = None,
     n_estimations: int = 1,
-    kde_bw: Optional[Union[BandwidthMethod, float, Dict[str, float]]] = None,
+    kde_bw: Optional[Union[BandwidthMethod, float, Dict[str, float]]] = "silverman",
     verbose: bool = False,
     top_k_greedy: int = None,
     plot: bool = False,
     prefer_corner: bool = True,
     pool: Optional[Union[int, str]] = None,
+    show_progress: bool = True,
 ) -> List[List[float]]:
     """
     Compute log evidence using morphological bridge sampling with KDE proposals.
@@ -202,7 +203,7 @@ def evidence(
         n_estimations (int): Number of independent bridge estimates to run. Use
             >1 to gauge variability; results are saved as a 2‑column text file
             with ``logz`` and ``err`` per row.
-        kde_bw (BandwidthMethod | float | dict | None): Bandwidth selector/factor.
+        kde_bw (BandwidthMethod | float | dict | silverman): Bandwidth selector/factor.
             Supported selectors from ``bw_method.py``: ``'scott'``, ``'silverman'``,
             ``'isj'`` (Botev’s ISJ), ``'cv_iso'`` (isotropic CV), ``'cv_diag'``
             (diagonal CV → scalar factor). You can also pass a number (e.g., 0.9)
@@ -226,6 +227,8 @@ def evidence(
             samples during bridge sampling. Use ``"max"`` to match
             ``os.cpu_count()``. When ``None`` or ``<=1`` evaluations run
             serially.
+        show_progress (bool): If True and tqdm is available, show a progress bar
+            while evaluating proposal samples (expensive likelihood calls).
 
     Returns:
         list[[float, float]]: A list of ``[logz, err]`` for each estimation.
@@ -388,9 +391,17 @@ def evidence(
         group_file = f"{output_path}/params_{n_order}-order_TC.json"
         if param_names is None:
             param_names = [f"param_{i}" for i in range(ndim)]
+        tc_workers = os.cpu_count() or 1
         if not os.path.exists(group_file):
             logger.info("Group file not found at %s. Running total correlation computation...", group_file)
-            Nth_TC.compute_and_save_tc(samples, names=param_names, n_order=n_order, out_path=output_path)
+            logger.info("Computing TC with %s worker%s.", tc_workers, "" if tc_workers == 1 else "s")
+            Nth_TC.compute_and_save_tc(
+                samples,
+                names=param_names,
+                n_order=n_order,
+                out_path=output_path,
+                n_workers=tc_workers,
+            )
 
         if bw_is_numeric:
             if verbose:
@@ -560,6 +571,7 @@ def evidence(
             max_iter=max_iter,
             estimation_label=estimation_label,
             verbose=verbose,
+            show_progress=show_progress,
             **bridge_kwargs,
         )
         all_log_z_results.append(log_z_results)

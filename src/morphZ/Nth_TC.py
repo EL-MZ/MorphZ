@@ -9,16 +9,23 @@ Dependencies: numpy, scipy, matplotlib, pandas (optional).
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
 import warnings
 from itertools import combinations
 from pathlib import Path
 from typing import Iterable, Optional, Sequence
+from concurrent.futures import ThreadPoolExecutor
 
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import gaussian_kde
+
+try:
+    from tqdm.auto import tqdm
+except Exception:  # pragma: no cover
+    tqdm = None  # type: ignore
 
 try:
     import pandas as pd  # optional, only for CSV labels
@@ -77,6 +84,62 @@ def _eval_log_pdf_at_samples(
     return np.log(np.clip(pdf_vals, eps, None))
 
 
+def stable_seed_for_indices(base_seed: int, indices: tuple[int, ...]) -> int:
+    """Derive a deterministic 32‑bit seed from a base seed and an index tuple."""
+    data = f"{base_seed}|" + ",".join(map(str, indices))
+    digest = hashlib.md5(data.encode("utf-8")).digest()
+    return int.from_bytes(digest[:4], "little")
+
+
+def compute_marginal_log_p(
+    samples: np.ndarray,
+    bw_method: str | float | None,
+    loo: bool,
+    seed: int,
+    eps: float,
+) -> tuple[np.ndarray, np.random.Generator]:
+    """
+    Compute 1‑D marginal log‑densities at the provided sample points.
+
+    Returns the log densities (shape ``(n_dims, n_samples)``) and the RNG used.
+    """
+    samples = np.ascontiguousarray(samples, dtype=float)
+    samples_T = samples.T
+    n_dims, n_samples = samples_T.shape
+    rng = np.random.default_rng(seed)
+
+    log_p = np.empty((n_dims, n_samples))
+    for i in range(n_dims):
+        xi = samples_T[i:i + 1, :]
+        kde_i = _safe_gaussian_kde(xi, bw_method, rng)
+        log_p[i] = _eval_log_pdf_at_samples(kde_i, xi, loo, eps)
+    return log_p, rng
+
+
+def compute_tc_for_indices(
+    indices: tuple[int, ...],
+    samples_T: np.ndarray,
+    log_p: np.ndarray,
+    bw_method: str | float,
+    loo: bool,
+    eps: float,
+    rng: np.random.Generator,
+) -> float:
+    """Compute TC/MI for a single index group."""
+    subset_samples = samples_T[list(indices), :]
+    kde_n = _safe_gaussian_kde(subset_samples, bw_method, rng)
+    log_p_joint = _eval_log_pdf_at_samples(kde_n, subset_samples, loo, eps)
+
+    idx = list(indices)
+    log_p_marginals_sum = log_p[idx[0]].copy()
+    for k in idx[1:]:
+        log_p_marginals_sum += log_p[k]
+
+    diff = log_p_joint - log_p_marginals_sum
+    tc_value = float(np.mean(diff))
+    return max(0.0, tc_value)
+
+
 def compute_total_correlation(
     samples: np.ndarray,
     n_order: int = 2,
@@ -84,6 +147,9 @@ def compute_total_correlation(
     loo: bool = True,
     seed: int = 0,
     eps: float = 1e-300,
+    n_workers: int = 0,
+    show_progress: bool = True,
+    auto_thin: bool = True,
 ) -> np.ndarray | list[tuple[tuple[int, ...], float]]:
     """
     Compute a symmetric matrix of pairwise mutual informations (n_order=2)
@@ -96,51 +162,105 @@ def compute_total_correlation(
         loo (bool, optional): If True, use leave-one-out correction. Defaults to True.
         seed (int, optional): Random seed. Defaults to 0.
         eps (float, optional): Small value to clip PDF values to avoid log(0). Defaults to 1e-300.
+        n_workers (int, optional): >1 enables threaded parallelism; 0/1 uses serial path.
+        show_progress (bool, optional): If True and tqdm is available, show progress over groups. Defaults to True.
+        auto_thin (bool, optional): If True, downsample large, high-order problems for speed. Defaults to True.
 
     Returns:
         np.ndarray | list: For n_order=2, a symmetric matrix of pairwise MIs.
                            For n_order>2, a list of (indices, tc_value) tuples.
     """
-    rng = np.random.default_rng(seed)
-    samples = np.asarray(samples)
+    samples = np.ascontiguousarray(np.asarray(samples), dtype=float)
     if samples.ndim != 2:
         raise ValueError("`samples` must be a 2‑D array (n_samples, n_dims).")
     n_samples, n_dims = samples.shape
 
+    if auto_thin and n_order >= 3 and n_dims >= 50:
+        target_n = 300
+        if n_dims >= 75:
+            target_n = 200
+        if n_dims >= 100:
+            target_n = 100
+        if n_samples > target_n:
+            rng_thin = np.random.default_rng(seed)
+            idx = rng_thin.choice(n_samples, size=target_n, replace=False)
+            samples = np.ascontiguousarray(samples[idx], dtype=float)
+            n_samples = target_n
+            logger.info("Auto-thinning samples to %s for faster TC computation (n_dims=%s, n_order=%s).", target_n, n_dims, n_order)
+
     if not 2 <= n_order <= n_dims:
         raise ValueError(f"`n_order` must be between 2 and {n_dims}.")
 
-    # 1‑D marginal densities
-    log_p = np.empty((n_dims, n_samples))
-    for i in range(n_dims):
-        kde_i = _safe_gaussian_kde(samples[:, i][None, :], bw_method, rng)
-        log_p[i] = _eval_log_pdf_at_samples(kde_i, samples[:, i][None, :], loo, eps)
+    samples_T = samples.T
+    log_p, rng = compute_marginal_log_p(samples, bw_method, loo, seed, eps)
 
-    # N‑D densities & TC
     if n_order == 2:
-        mi = np.zeros((n_dims, n_dims))
-        for i in range(n_dims):
-            for j in range(i + 1, n_dims):
-                kde_ij = _safe_gaussian_kde(samples[:, [i, j]].T, bw_method, rng)
-                log_pxy = _eval_log_pdf_at_samples(kde_ij, samples[:, [i, j]].T, loo, eps)
-                mi_ij = float(np.mean(log_pxy - log_p[i] - log_p[j]))
-                mi[i, j] = mi[j, i] = max(0.0, mi_ij)  # ensure non‑negativity
-        return mi
+        groups = list(combinations(range(n_dims), 2))
     else:
-        results = []
-        n_combin = 0
-        for indices in combinations(range(n_dims), n_order):
-            subset_samples = samples[:, list(indices)].T
-            kde_n = _safe_gaussian_kde(subset_samples, bw_method, rng)
-            log_p_joint = _eval_log_pdf_at_samples(kde_n, subset_samples, loo, eps)
-            
-            log_p_marginals_sum = np.sum(log_p[list(indices), :], axis=0)
-            
-            tc_value = float(np.mean(log_p_joint - log_p_marginals_sum))
-            results.append((indices, max(0.0, tc_value)))
-            n_combin += 1
-        logger.info("The number of estimated Total correlations: %s", n_combin)
-        return results
+        groups = list(combinations(range(n_dims), n_order))
+
+    progress = None
+    if show_progress and tqdm is not None:
+        desc = "TC groups" if n_order > 2 else "MI pairs"
+        progress = tqdm(total=len(groups), desc=desc)
+
+    try:
+        # N‑D densities & TC (serial path)
+        if n_workers <= 1:
+            if n_order == 2:
+                mi = np.zeros((n_dims, n_dims))
+                for i, j in groups:
+                    tc_val = compute_tc_for_indices((i, j), samples_T, log_p, bw_method, loo, eps, rng)
+                    mi[i, j] = mi[j, i] = tc_val
+                    if progress is not None:
+                        progress.update(1)
+                return mi
+
+            results = []
+            for indices in groups:
+                tc_val = compute_tc_for_indices(indices, samples_T, log_p, bw_method, loo, eps, rng)
+                results.append((indices, tc_val))
+                if progress is not None:
+                    progress.update(1)
+            logger.info("The number of estimated Total correlations: %s", len(results))
+            return results
+
+        # Parallel execution
+        def worker(indices: tuple[int, ...]) -> tuple[tuple[int, ...], float]:
+            local_rng = np.random.default_rng(stable_seed_for_indices(seed, indices))
+            value = compute_tc_for_indices(
+                indices=indices,
+                samples_T=samples_T,
+                log_p=log_p,
+                bw_method=bw_method,
+                loo=loo,
+                eps=eps,
+                rng=local_rng,
+            )
+            return indices, value
+
+        with ThreadPoolExecutor(max_workers=n_workers) as executor:
+            results_iter = executor.map(worker, groups)
+
+            if n_order == 2:
+                mi = np.zeros((n_dims, n_dims))
+                for indices, value in results_iter:
+                    i, j = indices
+                    mi[i, j] = mi[j, i] = value
+                    if progress is not None:
+                        progress.update(1)
+                return mi
+
+            results = []
+            for indices, value in results_iter:
+                results.append((indices, value))
+                if progress is not None:
+                    progress.update(1)
+            logger.info("The number of estimated Total correlations: %s", len(results))
+            return results
+    finally:
+        if progress is not None:
+            progress.close()
 
 
 ###############################################################################
@@ -207,6 +327,9 @@ def compute_and_save_tc(
     loo: bool = True,
     seed: int = 0,
     out_path: Optional[str] = None,
+    n_workers: int = 0,
+    show_progress: bool = True,
+    auto_thin: bool = True,
 ) -> np.ndarray | list:
     """
     Compute TC, visualise (for n=2), and save all TC values.
@@ -219,6 +342,9 @@ def compute_and_save_tc(
         loo (bool, optional): If True, use leave-one-out correction. Defaults to True.
         seed (int, optional): Random seed. Defaults to 0.
         out_path (Optional[str], optional): The output directory path. Defaults to None.
+        n_workers (int, optional): >1 enables threaded parallelism; 0/1 uses serial path.
+        show_progress (bool, optional): If True and tqdm is available, show progress over groups. Defaults to True.
+        auto_thin (bool, optional): If True, downsample large, high-order problems for speed. Defaults to True.
 
     Returns:
         np.ndarray | list: The total correlation results.
@@ -233,7 +359,14 @@ def compute_and_save_tc(
         raise ValueError("Length of `names` must match number of dimensions.")
 
     results = compute_total_correlation(
-        samples, n_order=n_order, bw_method=bw_method, loo=loo, seed=seed
+        samples,
+        n_order=n_order,
+        bw_method=bw_method,
+        loo=loo,
+        seed=seed,
+        n_workers=n_workers,
+        show_progress=show_progress,
+        auto_thin=auto_thin,
     )
     
     if out_path:

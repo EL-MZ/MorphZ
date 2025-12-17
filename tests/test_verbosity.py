@@ -24,6 +24,7 @@ def test_verbosity(capsys, verbose, expect_output):
             param_names=["p"],
             output_path=temp_dir,
             verbose=verbose,
+            show_progress=False,
         )
 
     out, err = capsys.readouterr()

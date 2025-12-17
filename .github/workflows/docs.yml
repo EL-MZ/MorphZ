@@ -2,7 +2,7 @@ name: docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   workflow_dispatch:
 
 permissions:
@@ -12,25 +12,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout (fetch full history for SCM)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
-        # install package deps plus jupyter-book for docs
+      - name: Install docs dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install . jupyter-book
+          python -m pip install jupyter-book
 
       - name: Build documentation
         run: |
           chmod +x docs/build_docs.sh
-          docs/build_docs.sh
+          PYTHON=python JUPYTER_BOOK=jupyter-book docs/build_docs.sh
+          test -f docs/_build/html/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/_build/html
+          publish_branch: gh-pages
+          enable_jekyll: false

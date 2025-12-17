@@ -1,4 +1,5 @@
 import logging
+import sys
 from typing import Optional
 
 import numpy as np
@@ -7,6 +8,12 @@ from scipy.special import logsumexp
 from . import utils
 
 logger = logging.getLogger(__name__)
+
+try:
+    from tqdm.auto import tqdm, trange
+except Exception:  # pragma: no cover
+    tqdm = None  # type: ignore
+    trange = None  # type: ignore
 
 
 def _maybe_print(message: str = "", *, verbose: bool = False, **kwargs) -> None:
@@ -25,6 +32,7 @@ def bridge_sampling_ln(
     max_iter=5000,
     estimation_label: Optional[str] = None,
     verbose: bool = False,
+    show_progress: bool = True,
 ):
     """
     Estimate log marginal likelihood log p(y) using bridge sampling in log space.
@@ -44,6 +52,8 @@ def bridge_sampling_ln(
         tol (float): Convergence tolerance on successive log‑evidence updates.
             Smaller values increase accuracy but may require more iterations.
         max_iter (int): Maximum number of bridge iterations.
+        show_progress (bool): If True and tqdm is available, show a progress bar
+            while evaluating proposal samples (expensive likelihood calls).
 
     Returns:
         list[float, float]: ``[log_evidence, rmse_estimate]`` where the second
@@ -65,17 +75,30 @@ def bridge_sampling_ln(
     log_f_prop_results = []
     failure_count = 0
     num_samples = len(samples_prop)
-    for i, theta in enumerate(samples_prop):
+    iterator = range(num_samples)
+    if show_progress and trange is not None:
+        iterator = trange(num_samples, desc="Evaluating proposal samples")
+    for i in iterator:
+        theta = samples_prop[i]
         try:
             result = f(theta)
             # Only append if the evaluation is successful
             successful_samples.append(theta)
             log_f_prop_results.append(result)
-            _maybe_print(
-                f"Number of evaluated proposed samples: {i + 1}/{num_samples}",
-                verbose=verbose,
-                end="\r",
-            )
+            if show_progress:
+                if trange is None:
+                    print(
+                        f"Number of evaluated proposed samples: {i + 1}/{num_samples}",
+                        end="\r",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+            else:
+                _maybe_print(
+                    f"Number of evaluated proposed samples: {i + 1}/{num_samples}",
+                    verbose=verbose,
+                    end="\r",
+                )
         except Exception:
             # If f(theta) fails, increment counter and skip this sample
             failure_count += 1
@@ -83,6 +106,9 @@ def bridge_sampling_ln(
         finally:
             # Ensure progress is always updated
             logger.debug("Evaluating target distribution: %s/%s", i + 1, num_samples)
+
+    if show_progress and trange is None and num_samples > 0:
+        print(file=sys.stderr, flush=True)
 
     # Rebuild arrays from the lists of successful evaluations
     samples_prop = np.array(successful_samples)

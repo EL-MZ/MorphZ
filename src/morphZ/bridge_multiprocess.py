@@ -2,6 +2,7 @@ import logging
 import multiprocessing as mp
 import os
 import pickle
+import sys
 from functools import partial
 from typing import Optional
 
@@ -11,6 +12,12 @@ from scipy.special import logsumexp
 from . import utils
 
 logger = logging.getLogger(__name__)
+
+try:
+    from tqdm.auto import tqdm, trange
+except Exception:  # pragma: no cover
+    tqdm = None  # type: ignore
+    trange = None  # type: ignore
 
 
 def _maybe_print(message: str = "", *, verbose: bool = False, **kwargs) -> None:
@@ -43,24 +50,40 @@ def _resolve_worker_count(requested_workers, num_samples, ctx):
     return max(1, min(worker_count, num_samples))
 
 
-def _evaluate_samples_serial(f, samples_prop, logger, verbose: bool = False):
+def _evaluate_samples_serial(f, samples_prop, logger, verbose: bool = False, show_progress: bool = True):
     success_pairs = []
     failure_count = 0
     num_samples = len(samples_prop)
-    for i, theta in enumerate(samples_prop):
+    iterator = range(num_samples)
+    if show_progress and trange is not None:
+        iterator = trange(num_samples, desc="Evaluating proposal samples")
+    for i in iterator:
+        theta = samples_prop[i]
         try:
             result = f(theta)
             success_pairs.append((i, result))
-            _maybe_print(
-                f"Number of evaluated proposed samples: {i + 1}/{num_samples}",
-                verbose=verbose,
-                end="\r",
-            )
+            if show_progress:
+                if trange is None:
+                    print(
+                        f"Number of evaluated proposed samples: {i + 1}/{num_samples}",
+                        end="\r",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+            else:
+                _maybe_print(
+                    f"Number of evaluated proposed samples: {i + 1}/{num_samples}",
+                    verbose=verbose,
+                    end="\r",
+                )
         except Exception:
             failure_count += 1
             continue
         finally:
             logger.debug("Evaluating target distribution: %s/%s", i + 1, num_samples)
+
+    if show_progress and trange is None and num_samples > 0:
+        print(file=sys.stderr, flush=True)
 
     success_pairs.sort(key=lambda pair: pair[0])
     successful_samples = [samples_prop[idx] for idx, _ in success_pairs]
@@ -68,12 +91,14 @@ def _evaluate_samples_serial(f, samples_prop, logger, verbose: bool = False):
     return successful_samples, log_f_prop_results, failure_count
 
 
-def _evaluate_samples_parallel(f, samples_prop, pool_spec, logger, verbose: bool = False):
+def _evaluate_samples_parallel(
+    f, samples_prop, pool_spec, logger, verbose: bool = False, show_progress: bool = True
+):
     num_samples = len(samples_prop)
     if num_samples == 0:
         return [], [], 0
     if pool_spec is None or (isinstance(pool_spec, int) and pool_spec <= 1):
-        return _evaluate_samples_serial(f, samples_prop, logger, verbose=verbose)
+        return _evaluate_samples_serial(f, samples_prop, logger, verbose=verbose, show_progress=show_progress)
 
     ctx = mp.get_context("spawn")
     owns_pool = False
@@ -113,8 +138,11 @@ def _evaluate_samples_parallel(f, samples_prop, pool_spec, logger, verbose: bool
     processed = 0
     eval_func = partial(_pool_eval_callable, func=f)
     tasks = enumerate(samples_prop)
+    progress = None
 
     try:
+        if show_progress and tqdm is not None:
+            progress = tqdm(total=num_samples, desc="Evaluating proposal samples")
         mapper = getattr(pool, "imap_unordered", None)
         if callable(mapper):
             if owns_pool and chunk:
@@ -132,17 +160,32 @@ def _evaluate_samples_parallel(f, samples_prop, pool_spec, logger, verbose: bool
 
         for idx, value, error_msg in results_iter:
             processed += 1
-            _maybe_print(
-                f"Number of evaluated proposed samples: {processed}/{num_samples}",
-                verbose=verbose,
-                end="\r",
-            )
+            if progress is not None:
+                progress.update(1)
+            else:
+                if show_progress:
+                    print(
+                        f"Number of evaluated proposed samples: {processed}/{num_samples}",
+                        end="\r",
+                        file=sys.stderr,
+                        flush=True,
+                    )
+                else:
+                    _maybe_print(
+                        f"Number of evaluated proposed samples: {processed}/{num_samples}",
+                        verbose=verbose,
+                        end="\r",
+                    )
             logger.debug("Evaluating target distribution: %s/%s", processed, num_samples)
             if error_msg is None:
                 success_pairs.append((idx, value))
             else:
                 failure_count += 1
     finally:
+        if progress is not None:
+            progress.close()
+        elif show_progress and num_samples > 0:
+            print(file=sys.stderr, flush=True)
         if owns_pool:
             pool.close()
             pool.join()
@@ -166,6 +209,7 @@ def bridge_sampling_ln(
     verbose: bool = False,
     pool=None,
     num_workers: Optional[int] = None,
+    show_progress: bool = True,
 ):
     """
     Estimate log marginal likelihood log p(y) using bridge sampling in log space.
@@ -191,6 +235,8 @@ def bridge_sampling_ln(
             - any object with a ``map`` method: treated as an external pool.
         num_workers (Optional[int]): Deprecated alias for ``pool`` kept for
             backward compatibility.
+        show_progress (bool): If True and tqdm is available, show a progress bar
+            while evaluating proposal samples (expensive likelihood calls).
 
     Returns:
         list[float, float]: ``[log_evidence, rmse_estimate]`` where the second
@@ -213,7 +259,12 @@ def bridge_sampling_ln(
     num_samples = len(samples_prop)
     pool_spec = pool if pool is not None else num_workers
     successful_samples, log_f_prop_results, failure_count = _evaluate_samples_parallel(
-        f, samples_prop, pool_spec, logger, verbose=verbose
+        f,
+        samples_prop,
+        pool_spec,
+        logger,
+        verbose=verbose,
+        show_progress=show_progress,
     )
 
     # Rebuild arrays from the lists of successful evaluations
