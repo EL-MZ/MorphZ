@@ -24,7 +24,9 @@ jobs:
       - name: Install docs dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install jupyter-book
+          # Jupyter Book v2 uses a different configuration format (myst.yml).
+          # This repository uses the classic v0.x Jupyter Book with _config.yml/_toc.yml.
+          python -m pip install 'jupyter-book<2'
 
       - name: Build documentation
         run: |

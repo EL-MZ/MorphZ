@@ -28,5 +28,18 @@ if [[ -z "$JUPYTER_BOOK_BIN" ]]; then
   fi
 fi
 
+JUPYTER_BOOK_VERSION="$(
+  "$PYTHON_BIN" -c 'import importlib.metadata as m; print(m.version("jupyter-book"))' 2>/dev/null || true
+)"
+if [[ "$JUPYTER_BOOK_VERSION" =~ ^2(\.|$) ]]; then
+  cat >&2 <<'EOF'
+Detected Jupyter Book v2, but this repository uses the classic Jupyter Book
+configuration (_config.yml/_toc.yml). Install a v0.x release instead:
+
+  python -m pip install 'jupyter-book<2'
+EOF
+  exit 1
+fi
+
 "$PYTHON_BIN" "$REPO_ROOT/docs/prepare_docs_assets.py"
 "$JUPYTER_BOOK_BIN" build "$REPO_ROOT/docs"

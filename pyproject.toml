@@ -36,6 +36,14 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+docs = [
+  "jupyter-book<2",
+]
+test = [
+  "pytest",
+]
+
 [project.urls]
 Repository = "https://github.com/ApokryphaV1/MorphZ.git"
 Homepage = "https://github.com/ApokryphaV1/MorphZ"

@@ -2,6 +2,7 @@
 
 [![Python versions](https://img.shields.io/pypi/pyversions/morphZ.svg)](https://pypi.org/project/morphZ/)
 [![PyPI version](https://img.shields.io/pypi/v/morphZ.svg)](https://pypi.org/project/morphZ/)
+[![GitHub](https://img.shields.io/badge/GitHub-EL--MZ%2FMorphZ-181717?logo=github)](https://github.com/EL-MZ/MorphZ)
 [![arXiv](https://img.shields.io/badge/arXiv-2512.10283-B31B1B.svg)](https://arxiv.org/abs/2512.10283)
 
 MorphZ for high accuracy marginal likelihood estimation and morphological density approximation toolkit for scientific workflows, with utilities for dependency analysis.
@@ -134,7 +135,7 @@ Jupyter Book powers the project docs. During each build the helper script copies
 always reflects the latest files without committing the generated copies.
 
 ```bash
-python -m pip install jupyter-book
+python -m pip install 'jupyter-book<2'
 ./docs/build_docs.sh
 ```
 
