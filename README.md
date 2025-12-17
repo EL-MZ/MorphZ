@@ -14,7 +14,7 @@ MorphZ for high accuracy marginal likelihood estimation and morphological densit
 
 ## Installation
 
-Python 3.8+ is recommended.
+Python 3.11+ is recommended.
 
 ```bash
 pip install morphz

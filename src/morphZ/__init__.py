@@ -58,7 +58,7 @@ try:  # prefer file written by setuptools_scm at build time
     from ._version import version as __version__  # type: ignore
 except Exception:
     try:
-        from importlib.metadata import version as _pkg_version  # Python 3.8+
+        from importlib.metadata import version as _pkg_version  # Python 3.11+
         __version__ = _pkg_version("morphZ")
     except Exception:  # fallback for source tree without tags/metadata
         __version__ = "0.0.0"

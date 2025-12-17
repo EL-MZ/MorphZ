@@ -6,7 +6,7 @@ from typing import Callable, Dict, List, Optional, Union
 
 import numpy as np
 try:
-    # Literal is available in Python 3.8+
+    # Literal is available in Python 3.11+
     from typing import Literal
 except Exception:  # pragma: no cover
     Literal = lambda *args, **kwargs: str  # type: ignore
