@@ -13,12 +13,13 @@ local_scheme = "no-local-version"
 name = "morphZ"
 description = "Morph-Z for high accuracy marginal likelihood estimation package."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = { text = "BSD-3-Clause" }
 classifiers = [
   "License :: OSI Approved :: BSD License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Intended Audience :: Science/Research",
