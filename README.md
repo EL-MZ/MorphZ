@@ -3,6 +3,7 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/morphZ.svg)](https://pypi.org/project/morphZ/)
 [![PyPI version](https://img.shields.io/pypi/v/morphZ.svg)](https://pypi.org/project/morphZ/)
 [![CI](https://github.com/EL-MZ/MorphZ/actions/workflows/ci.yml/badge.svg)](https://github.com/EL-MZ/MorphZ/actions/workflows/ci.yml)
+[![Docs](https://github.com/EL-MZ/MorphZ/actions/workflows/docs.yml/badge.svg)](https://github.com/EL-MZ/MorphZ/actions/workflows/docs.yml)
 [![GitHub](https://img.shields.io/badge/GitHub-EL-MZ%2FMorphZ-181717?logo=github)](https://github.com/EL-MZ/MorphZ)
 [![arXiv](https://img.shields.io/badge/arXiv-2512.10283-B31B1B.svg)](https://arxiv.org/abs/2512.10283)
 
