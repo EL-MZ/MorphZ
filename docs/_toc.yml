@@ -10,3 +10,5 @@ chapters:
         title: Gaussian shell notebook
       - file: _auto/examples/peak_sampling_new
         title: Peak sampling notebook
+      - file: _auto/examples/numpyro_morphz_lnz
+        title: NumPyro + MorphZ ln(Z) notebook
