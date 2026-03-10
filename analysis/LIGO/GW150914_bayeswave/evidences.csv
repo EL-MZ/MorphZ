@@ -1,0 +1,5 @@
+method,lnz,lnz_err
+dynesty,-7268.390785,0.107751
+mcmc,-7272.397495,0.122107
+dynesty_morphz,-7268.569071,0.365606
+mcmc_morphz,-7268.636397,0.414514
