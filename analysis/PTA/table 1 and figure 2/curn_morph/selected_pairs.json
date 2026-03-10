@@ -1,0 +1,481 @@
+{
+  "pairs": [
+    {
+      "names": [
+        "B1953+29_red_noise_gamma",
+        "B1953+29_red_noise_log10_A"
+      ],
+      "mi": 0.8039333173253709
+    },
+    {
+      "names": [
+        "gamma_gw",
+        "log10_A_gw"
+      ],
+      "mi": 0.7668516457654203
+    },
+    {
+      "names": [
+        "J1747-4036_red_noise_gamma",
+        "J1747-4036_red_noise_log10_A"
+      ],
+      "mi": 0.5413207264431598
+    },
+    {
+      "names": [
+        "J0610-2100_red_noise_gamma",
+        "J0610-2100_red_noise_log10_A"
+      ],
+      "mi": 0.5273317216045255
+    },
+    {
+      "names": [
+        "B1937+21_red_noise_gamma",
+        "B1937+21_red_noise_log10_A"
+      ],
+      "mi": 0.3679661964854093
+    },
+    {
+      "names": [
+        "B1855+09_red_noise_gamma",
+        "B1855+09_red_noise_log10_A"
+      ],
+      "mi": 0.2681583190423457
+    },
+    {
+      "names": [
+        "J1802-2124_red_noise_gamma",
+        "J1802-2124_red_noise_log10_A"
+      ],
+      "mi": 0.2580965303733941
+    },
+    {
+      "names": [
+        "J1944+0907_red_noise_gamma",
+        "J1944+0907_red_noise_log10_A"
+      ],
+      "mi": 0.23723957050701713
+    },
+    {
+      "names": [
+        "J0645+5158_red_noise_gamma",
+        "J0645+5158_red_noise_log10_A"
+      ],
+      "mi": 0.22368302076632285
+    },
+    {
+      "names": [
+        "J2145-0750_red_noise_gamma",
+        "J2145-0750_red_noise_log10_A"
+      ],
+      "mi": 0.20100968036079
+    },
+    {
+      "names": [
+        "J1853+1303_red_noise_gamma",
+        "J1853+1303_red_noise_log10_A"
+      ],
+      "mi": 0.19804213038378568
+    },
+    {
+      "names": [
+        "J1745+1017_red_noise_gamma",
+        "J1745+1017_red_noise_log10_A"
+      ],
+      "mi": 0.18894014354238842
+    },
+    {
+      "names": [
+        "J0030+0451_red_noise_gamma",
+        "J0030+0451_red_noise_log10_A"
+      ],
+      "mi": 0.18313382103679185
+    },
+    {
+      "names": [
+        "J1903+0327_red_noise_gamma",
+        "J1903+0327_red_noise_log10_A"
+      ],
+      "mi": 0.18291274035172106
+    },
+    {
+      "names": [
+        "J1713+0747_red_noise_gamma",
+        "J1713+0747_red_noise_log10_A"
+      ],
+      "mi": 0.1707079637844453
+    },
+    {
+      "names": [
+        "J0613-0200_red_noise_gamma",
+        "J0613-0200_red_noise_log10_A"
+      ],
+      "mi": 0.1591590415568723
+    },
+    {
+      "names": [
+        "J1022+1001_red_noise_gamma",
+        "J1022+1001_red_noise_log10_A"
+      ],
+      "mi": 0.13885634439142153
+    },
+    {
+      "names": [
+        "J1643-1224_red_noise_gamma",
+        "J1643-1224_red_noise_log10_A"
+      ],
+      "mi": 0.11738367348351526
+    },
+    {
+      "names": [
+        "J1600-3053_red_noise_gamma",
+        "J1600-3053_red_noise_log10_A"
+      ],
+      "mi": 0.09944296360544998
+    },
+    {
+      "names": [
+        "J1738+0333_red_noise_gamma",
+        "J1738+0333_red_noise_log10_A"
+      ],
+      "mi": 0.07786923944696326
+    },
+    {
+      "names": [
+        "J1012+5307_red_noise_gamma",
+        "J1012+5307_red_noise_log10_A"
+      ],
+      "mi": 0.07660125017234266
+    },
+    {
+      "names": [
+        "J1730-2304_red_noise_gamma",
+        "J1730-2304_red_noise_log10_A"
+      ],
+      "mi": 0.07625002886494463
+    },
+    {
+      "names": [
+        "J0023+0923_red_noise_gamma",
+        "J0023+0923_red_noise_log10_A"
+      ],
+      "mi": 0.07134142290644743
+    },
+    {
+      "names": [
+        "J2010-1323_red_noise_gamma",
+        "J2010-1323_red_noise_log10_A"
+      ],
+      "mi": 0.06452887384323622
+    },
+    {
+      "names": [
+        "J1024-0719_red_noise_gamma",
+        "J1024-0719_red_noise_log10_A"
+      ],
+      "mi": 0.06423210793274263
+    },
+    {
+      "names": [
+        "J1946+3417_red_noise_gamma",
+        "J1946+3417_red_noise_log10_A"
+      ],
+      "mi": 0.06171449468195182
+    },
+    {
+      "names": [
+        "J2214+3000_red_noise_gamma",
+        "J2214+3000_red_noise_log10_A"
+      ],
+      "mi": 0.059634536760775514
+    },
+    {
+      "names": [
+        "J1741+1351_red_noise_gamma",
+        "J1741+1351_red_noise_log10_A"
+      ],
+      "mi": 0.059630428788964865
+    },
+    {
+      "names": [
+        "J1918-0642_red_noise_gamma",
+        "J1918-0642_red_noise_log10_A"
+      ],
+      "mi": 0.05829859314227895
+    },
+    {
+      "names": [
+        "J1640+2224_red_noise_gamma",
+        "J1640+2224_red_noise_log10_A"
+      ],
+      "mi": 0.05665144029565769
+    },
+    {
+      "names": [
+        "J1909-3744_red_noise_gamma",
+        "J1909-3744_red_noise_log10_A"
+      ],
+      "mi": 0.05391223941361893
+    },
+    {
+      "names": [
+        "J1455-3330_red_noise_gamma",
+        "J1455-3330_red_noise_log10_A"
+      ],
+      "mi": 0.052179936198279764
+    },
+    {
+      "names": [
+        "J0740+6620_red_noise_gamma",
+        "J0740+6620_red_noise_log10_A"
+      ],
+      "mi": 0.05106903208373293
+    },
+    {
+      "names": [
+        "J2234+0611_red_noise_gamma",
+        "J2234+0611_red_noise_log10_A"
+      ],
+      "mi": 0.05059325244583902
+    },
+    {
+      "names": [
+        "J1744-1134_red_noise_gamma",
+        "J1744-1134_red_noise_log10_A"
+      ],
+      "mi": 0.04407377413192403
+    },
+    {
+      "names": [
+        "J0340+4130_red_noise_gamma",
+        "J0340+4130_red_noise_log10_A"
+      ],
+      "mi": 0.042876781099673876
+    },
+    {
+      "names": [
+        "J0931-1902_red_noise_gamma",
+        "J0931-1902_red_noise_log10_A"
+      ],
+      "mi": 0.04256298267891482
+    },
+    {
+      "names": [
+        "J2043+1711_red_noise_gamma",
+        "J2043+1711_red_noise_log10_A"
+      ],
+      "mi": 0.04044807319898168
+    },
+    {
+      "names": [
+        "J1614-2230_red_noise_gamma",
+        "J1614-2230_red_noise_log10_A"
+      ],
+      "mi": 0.038052630238791706
+    },
+    {
+      "names": [
+        "J1911+1347_red_noise_gamma",
+        "J1911+1347_red_noise_log10_A"
+      ],
+      "mi": 0.0376342769915211
+    },
+    {
+      "names": [
+        "J2317+1439_red_noise_gamma",
+        "J2317+1439_red_noise_log10_A"
+      ],
+      "mi": 0.0370261303540886
+    },
+    {
+      "names": [
+        "J2229+2643_red_noise_gamma",
+        "J2229+2643_red_noise_log10_A"
+      ],
+      "mi": 0.03676533871208867
+    },
+    {
+      "names": [
+        "J1125+7819_red_noise_gamma",
+        "J1125+7819_red_noise_log10_A"
+      ],
+      "mi": 0.036689259303365
+    },
+    {
+      "names": [
+        "J0636+5128_red_noise_gamma",
+        "J0636+5128_red_noise_log10_A"
+      ],
+      "mi": 0.03474546050727477
+    },
+    {
+      "names": [
+        "J1453+1902_red_noise_gamma",
+        "J1453+1902_red_noise_log10_A"
+      ],
+      "mi": 0.03415451551199164
+    },
+    {
+      "names": [
+        "J0437-4715_red_noise_gamma",
+        "J0437-4715_red_noise_log10_A"
+      ],
+      "mi": 0.03316027722926752
+    },
+    {
+      "names": [
+        "J2322+2057_red_noise_gamma",
+        "J2322+2057_red_noise_log10_A"
+      ],
+      "mi": 0.031163965859840617
+    },
+    {
+      "names": [
+        "J1910+1256_red_noise_gamma",
+        "J1910+1256_red_noise_log10_A"
+      ],
+      "mi": 0.031049959771400494
+    },
+    {
+      "names": [
+        "J2033+1734_red_noise_gamma",
+        "J2033+1734_red_noise_log10_A"
+      ],
+      "mi": 0.028782248214180926
+    },
+    {
+      "names": [
+        "J1832-0836_red_noise_gamma",
+        "J1832-0836_red_noise_log10_A"
+      ],
+      "mi": 0.02756256601891129
+    },
+    {
+      "names": [
+        "J2302+4442_red_noise_gamma",
+        "J2302+4442_red_noise_log10_A"
+      ],
+      "mi": 0.019878964745345225
+    },
+    {
+      "names": [
+        "J1923+2515_red_noise_gamma",
+        "J1923+2515_red_noise_log10_A"
+      ],
+      "mi": 0.01954358448213625
+    },
+    {
+      "names": [
+        "J0709+0458_red_noise_gamma",
+        "J0709+0458_red_noise_log10_A"
+      ],
+      "mi": 0.019383465376971706
+    },
+    {
+      "names": [
+        "J1705-1903_red_noise_log10_A",
+        "J2017+0603_red_noise_log10_A"
+      ],
+      "mi": 0.014197701772290005
+    },
+    {
+      "names": [
+        "J0605+3757_red_noise_gamma",
+        "J0605+3757_red_noise_log10_A"
+      ],
+      "mi": 0.01071688213093893
+    },
+    {
+      "names": [
+        "J0557+1551_red_noise_gamma",
+        "J0557+1551_red_noise_log10_A"
+      ],
+      "mi": 0.00973175580754459
+    },
+    {
+      "names": [
+        "J1312+0051_red_noise_gamma",
+        "J1312+0051_red_noise_log10_A"
+      ],
+      "mi": 0.008171394124884029
+    },
+    {
+      "names": [
+        "J2234+0944_red_noise_gamma",
+        "J2234+0944_red_noise_log10_A"
+      ],
+      "mi": 0.00813145918346704
+    },
+    {
+      "names": [
+        "J0509+0856_red_noise_gamma",
+        "J0509+0856_red_noise_log10_A"
+      ],
+      "mi": 0.007447172877241843
+    },
+    {
+      "names": [
+        "J1811-2405_red_noise_gamma",
+        "J1811-2405_red_noise_log10_A"
+      ],
+      "mi": 0.006803249844431288
+    },
+    {
+      "names": [
+        "J1843-1113_red_noise_gamma",
+        "J1843-1113_red_noise_log10_A"
+      ],
+      "mi": 0.006100904227927212
+    },
+    {
+      "names": [
+        "J0406+3039_red_noise_gamma",
+        "J0406+3039_red_noise_log10_A"
+      ],
+      "mi": 0.004727920763158305
+    },
+    {
+      "names": [
+        "J1012-4235_red_noise_gamma",
+        "J1012-4235_red_noise_log10_A"
+      ],
+      "mi": 0.002729012493469359
+    },
+    {
+      "names": [
+        "J1719-1438_red_noise_gamma",
+        "J1719-1438_red_noise_log10_A"
+      ],
+      "mi": 0.0025013619297354463
+    },
+    {
+      "names": [
+        "J1751-2857_red_noise_gamma",
+        "J1751-2857_red_noise_log10_A"
+      ],
+      "mi": 0.0005545936264415533
+    },
+    {
+      "names": [
+        "J1630+3734_red_noise_gamma",
+        "J1630+3734_red_noise_log10_A"
+      ],
+      "mi": 0.0
+    },
+    {
+      "names": [
+        "J1705-1903_red_noise_gamma",
+        "J2017+0603_red_noise_gamma"
+      ],
+      "mi": 0.0
+    },
+    {
+      "names": [
+        "J2124-3358_red_noise_gamma",
+        "J2124-3358_red_noise_log10_A"
+      ],
+      "mi": 0.0
+    }
+  ],
+  "singles": []
+}

@@ -1,0 +1,5 @@
+# these KL diveregence are computed available posterior samples 
+D_kl group 1: 2.435213381399387
+D_kl group 2: 0.9064217619310089
+D_kl group 3: 0.9418362632724426
+D_kl group 4: 1.0660862406415839

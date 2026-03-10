@@ -1,0 +1,201 @@
+{
+  "groups": [
+    {
+      "names": [
+        "J0900-3144_dm_gp_gamma",
+        "J0900-3144_dm_gp_log10_A",
+        "J0900-3144_red_noise_log10_A"
+      ],
+      "tc": 1.492685578041591
+    },
+    {
+      "names": [
+        "J1600-3053_chrom_gp_log10_A",
+        "J1600-3053_dm_gp_gamma",
+        "J1600-3053_dm_gp_log10_A"
+      ],
+      "tc": 1.3774756465880442
+    },
+    {
+      "names": [
+        "J1713+0747_dm_gp_gamma",
+        "J1918-0642_dm_gp_gamma",
+        "J1918-0642_dm_gp_log10_A"
+      ],
+      "tc": 1.3290382232486508
+    },
+    {
+      "names": [
+        "J1012+5307_dm_gp_log10_A",
+        "J1857+0943_dm_gp_gamma",
+        "J1857+0943_dm_gp_log10_A"
+      ],
+      "tc": 1.318923569789863
+    },
+    {
+      "names": [
+        "J1909-3744_dm_gp_log10_A",
+        "J1910+1256_dm_gp_gamma",
+        "J1910+1256_dm_gp_log10_A"
+      ],
+      "tc": 1.3185787717850825
+    },
+    {
+      "names": [
+        "J1713+0747_dmexp_1_log10_tau",
+        "J1911+1347_dm_gp_gamma",
+        "J1911+1347_dm_gp_log10_A"
+      ],
+      "tc": 1.311438935521628
+    },
+    {
+      "names": [
+        "J0613-0200_dm_gp_gamma",
+        "J0613-0200_dm_gp_log10_A",
+        "J1713+0747_dmexp_1_log10_Amp"
+      ],
+      "tc": 1.2967821165732327
+    },
+    {
+      "names": [
+        "J1744-1134_dm_gp_log10_A",
+        "gw_crn_gamma",
+        "gw_crn_log10_A"
+      ],
+      "tc": 1.2024594988514874
+    },
+    {
+      "names": [
+        "J1738+0333_red_noise_gamma",
+        "J1738+0333_red_noise_log10_A",
+        "J1843-1113_dm_gp_log10_A"
+      ],
+      "tc": 1.0693408974482312
+    },
+    {
+      "names": [
+        "J0751+1807_dm_gp_gamma",
+        "J0751+1807_dm_gp_log10_A",
+        "J1713+0747_dm_gp_log10_A"
+      ],
+      "tc": 0.9728008926052732
+    },
+    {
+      "names": [
+        "J1024-0719_dm_gp_gamma",
+        "J1801-1417_dm_gp_gamma",
+        "J1801-1417_dm_gp_log10_A"
+      ],
+      "tc": 0.8168372580594064
+    },
+    {
+      "names": [
+        "J1713+0747_dmexp_2_log10_Amp",
+        "J1713+0747_dmexp_2_log10_tau",
+        "J1713+0747_dmexp_2_t0"
+      ],
+      "tc": 0.7186249275111605
+    },
+    {
+      "names": [
+        "J1012+5307_red_noise_log10_A",
+        "J1751-2857_dm_gp_gamma",
+        "J1751-2857_dm_gp_log10_A"
+      ],
+      "tc": 0.624472575966372
+    },
+    {
+      "names": [
+        "J1730-2304_dm_gp_gamma",
+        "J1730-2304_dm_gp_log10_A",
+        "J1843-1113_dm_gp_gamma"
+      ],
+      "tc": 0.44250188895009657
+    },
+    {
+      "names": [
+        "J0030+0451_red_noise_log10_A",
+        "J1804-2717_dm_gp_gamma",
+        "J1804-2717_dm_gp_log10_A"
+      ],
+      "tc": 0.34787039408805687
+    },
+    {
+      "names": [
+        "J1744-1134_dm_gp_gamma",
+        "J2124-3358_dm_gp_gamma",
+        "J2124-3358_dm_gp_log10_A"
+      ],
+      "tc": 0.31787189257547643
+    },
+    {
+      "names": [
+        "J0900-3144_red_noise_gamma",
+        "J1022+1001_dm_gp_gamma",
+        "J1022+1001_dm_gp_log10_A"
+      ],
+      "tc": 0.2623094879235332
+    },
+    {
+      "names": [
+        "J1012+5307_dm_gp_gamma",
+        "J1640+2224_dm_gp_gamma",
+        "J1640+2224_dm_gp_log10_A"
+      ],
+      "tc": 0.2478004828300526
+    },
+    {
+      "names": [
+        "J1455-3330_red_noise_gamma",
+        "J1713+0747_red_noise_gamma",
+        "J1713+0747_red_noise_log10_A"
+      ],
+      "tc": 0.23888962547108178
+    },
+    {
+      "names": [
+        "J1600-3053_chrom_gp_gamma",
+        "J1744-1134_red_noise_gamma",
+        "J1744-1134_red_noise_log10_A"
+      ],
+      "tc": 0.17633460425275588
+    },
+    {
+      "names": [
+        "J1022+1001_red_noise_gamma",
+        "J1022+1001_red_noise_log10_A",
+        "J1909-3744_dm_gp_gamma"
+      ],
+      "tc": 0.1701959807258592
+    },
+    {
+      "names": [
+        "J1012+5307_red_noise_gamma",
+        "J1909-3744_red_noise_gamma",
+        "J1909-3744_red_noise_log10_A"
+      ],
+      "tc": 0.1482978959691209
+    },
+    {
+      "names": [
+        "J0613-0200_red_noise_gamma",
+        "J0613-0200_red_noise_log10_A",
+        "J1024-0719_dm_gp_log10_A"
+      ],
+      "tc": 0.1333627483866212
+    },
+    {
+      "names": [
+        "J0030+0451_red_noise_gamma",
+        "J2322+2057_red_noise_gamma",
+        "J2322+2057_red_noise_log10_A"
+      ],
+      "tc": 0.0876445365351792
+    }
+  ],
+  "singles": [
+    "J1455-3330_red_noise_log10_A",
+    "J1713+0747_dmexp_1_t0"
+  ],
+  "n_order": 3
+}

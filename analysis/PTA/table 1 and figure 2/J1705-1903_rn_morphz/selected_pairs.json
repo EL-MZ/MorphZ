@@ -1,0 +1,33 @@
+{
+  "pairs": [
+    {
+      "names": [
+        "J1705-1903_Rcvr1_2_GUPPI_efac",
+        "J1705-1903_Rcvr1_2_GUPPI_log10_t2equad"
+      ],
+      "mi": 0.43431775541415685
+    },
+    {
+      "names": [
+        "J1705-1903_Rcvr1_2_GUPPI_log10_ecorr",
+        "J1705-1903_red_noise_log10_A"
+      ],
+      "mi": 0.4185419245798246
+    },
+    {
+      "names": [
+        "J1705-1903_Rcvr_800_GUPPI_efac",
+        "J1705-1903_Rcvr_800_GUPPI_log10_t2equad"
+      ],
+      "mi": 0.03424117384957345
+    },
+    {
+      "names": [
+        "J1705-1903_Rcvr_800_GUPPI_log10_ecorr",
+        "J1705-1903_red_noise_gamma"
+      ],
+      "mi": 0.0
+    }
+  ],
+  "singles": []
+}

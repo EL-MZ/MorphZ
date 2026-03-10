@@ -1,0 +1,61 @@
+{
+  "pairs": [
+    {
+      "names": [
+        "J1012+5307_red_noise_gamma",
+        "J1012+5307_red_noise_log10_A"
+      ],
+      "mi": 0.5535732623012597
+    },
+    {
+      "names": [
+        "J1012+5307_dm_gp_gamma",
+        "J1012+5307_dm_gp_log10_A"
+      ],
+      "mi": 0.27085916688465456
+    },
+    {
+      "names": [
+        "J1012+5307_Rcvr_800_GASP_efac",
+        "J1012+5307_Rcvr_800_GASP_log10_t2equad"
+      ],
+      "mi": 0.26999128016617785
+    },
+    {
+      "names": [
+        "J1012+5307_Rcvr_800_GUPPI_efac",
+        "J1012+5307_Rcvr_800_GUPPI_log10_t2equad"
+      ],
+      "mi": 0.11483531859860886
+    },
+    {
+      "names": [
+        "J1012+5307_Rcvr1_2_GASP_log10_t2equad",
+        "J1012+5307_Rcvr1_2_GUPPI_log10_t2equad"
+      ],
+      "mi": 0.07767435707767391
+    },
+    {
+      "names": [
+        "J1012+5307_Rcvr1_2_GASP_efac",
+        "J1012+5307_Rcvr1_2_GUPPI_log10_ecorr"
+      ],
+      "mi": 0.02640615998481051
+    },
+    {
+      "names": [
+        "J1012+5307_Rcvr1_2_GUPPI_efac",
+        "J1012+5307_Rcvr_800_GUPPI_log10_ecorr"
+      ],
+      "mi": 0.009981872317127799
+    },
+    {
+      "names": [
+        "J1012+5307_Rcvr1_2_GASP_log10_ecorr",
+        "J1012+5307_Rcvr_800_GASP_log10_ecorr"
+      ],
+      "mi": 0.0
+    }
+  ],
+  "singles": []
+}
