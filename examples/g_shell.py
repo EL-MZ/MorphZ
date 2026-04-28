@@ -13,7 +13,7 @@ from morphZ import setup_logging
 setup_logging(level=logging.INFO)
 # Prior cube: [-L, L]^D 
 L = 6.0
-ndim = 30
+ndim = 10
 prior_volume = (2*L)**ndim
 
 # Parameters of the twin shells (from paper)

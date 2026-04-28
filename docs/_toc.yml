@@ -5,10 +5,12 @@ chapters:
   - file: examples
     sections:
       - file: _auto/examples/eggbox
-        title: Eggbox notebook
+        title: Eggbox
       - file: _auto/examples/gaussian_shell
-        title: Gaussian shell notebook
-      - file: _auto/examples/peak_sampling_new
-        title: Peak sampling notebook
+        title: Gaussian shell
+      - file: _auto/examples/peak_sampling
+        title: Peak sampling
+      - file: _auto/examples/numpyro_gaussian_shell
+        title: NumPyro Gaussian shell
       - file: _auto/examples/numpyro_morphz_lnz
-        title: NumPyro + MorphZ ln(Z) notebook
+        title: NumPyro MorphZ ln(Z)

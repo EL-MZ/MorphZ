@@ -150,9 +150,9 @@ def evidence(
     thin: int = 1,
     kde_fraction: float = 0.5,
     bridge_start_fraction: float = 0.5,
-    max_iter: int = 5000,
+    max_iter: int = 2000,
     tol: float = 1e-2,
-    morph_type: MorphType = "indep",
+    morph_type: MorphType = "2_group",
     param_names: Optional[List[str]] = None,
     output_path: Optional[str] = None,
     n_estimations: int = 1,
@@ -163,6 +163,7 @@ def evidence(
     prefer_corner: bool = True,
     pool: Optional[Union[int, str]] = None,
     show_progress: bool = True,
+    shuffle: bool = True,
 ) -> List[List[float]]:
     """
     Compute log evidence using morphological bridge sampling with KDE proposals.
@@ -229,6 +230,10 @@ def evidence(
             serially.
         show_progress (bool): If True and tqdm is available, show a progress bar
             while evaluating proposal samples (expensive likelihood calls).
+        shuffle (bool): If True (default), randomly permute the thinned posterior
+            samples and their corresponding log-posterior values before KDE fitting
+            and bridge sampling. The same permutation is applied to both arrays so
+            sample–log-prob correspondence is preserved.
 
     Returns:
         list[[float, float]]: A list of ``[logz, err]`` for each estimation.
@@ -245,6 +250,33 @@ def evidence(
     kde_bw_name = kde_bw
     samples = post_samples[::thin, :]
     log_prob = log_posterior_values[::thin]
+
+    if shuffle:
+        perm = np.random.permutation(len(samples))
+        samples = samples[perm]
+        log_prob = log_prob[perm]
+
+    # Sanity-check: callable must agree with the pre-computed log-posterior values.
+    _n_check = min(3, len(samples))
+    _mismatches = []
+    for _i in range(_n_check):
+        _lp_callable = log_posterior_function(samples[_i])
+        _lp_stored   = log_prob[_i]
+        logger.debug("sanity i=%d  stored=%.6f  callable=%.6f", _i, _lp_stored, _lp_callable)
+        if not np.isclose(_lp_callable, _lp_stored, rtol=1e-3, atol=1e-3):
+            _mismatches.append((_i, _lp_stored, _lp_callable))
+    if _mismatches:
+        _msg = (
+            "log_posterior_function does not match log_posterior_values for "
+            f"{len(_mismatches)}/{_n_check} checked samples. "
+            "Bridge sampling results may be unreliable.\n"
+            + "\n".join(
+                f"  i={i}  stored={s:.6f}  callable={c:.6f}  diff={c-s:.2e}"
+                for i, s, c in _mismatches
+            )
+        )
+        warnings.warn(_msg, UserWarning, stacklevel=2)
+        logger.warning(_msg)
 
     tot_len, ndim = samples.shape
 
