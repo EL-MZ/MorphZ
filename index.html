@@ -53,7 +53,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -168,10 +168,11 @@
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="_auto/examples/eggbox.html">Eggbox notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_auto/examples/gaussian_shell.html">Gaussian shell notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_auto/examples/peak_sampling_new.html">Peak sampling notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_auto/examples/numpyro_morphz_lnz.html">NumPyro + MorphZ ln(Z) notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/eggbox.html">Eggbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/gaussian_shell.html">Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/peak_sampling.html">Peak sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/numpyro_gaussian_shell.html">NumPyro Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/numpyro_morphz_lnz.html">NumPyro MorphZ ln(Z)</a></li>
 </ul>
 </details></li>
 </ul>
@@ -345,6 +346,14 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning-release">Versioning &amp; Release</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-morphz-computes">What MorphZ Computes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-morph-approximation">The Morph Approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-bridge-sampling">Optimal Bridge Sampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-morphz-returns">What MorphZ Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
 </li>
 </ul>
@@ -537,8 +546,127 @@ GitHub Pages automatically on pushes to <code class="docutils literal notranslat
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The README content above is copied automatically from the project root each
-time the documentation is built. To refresh it locally, run
+time the documentation is built.  To refresh it locally, run
 <code class="docutils literal notranslate"><span class="pre">./docs/build_docs.sh</span></code>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section id="what-morphz-computes">
+<h2>What MorphZ Computes<a class="headerlink" href="#what-morphz-computes" title="Link to this heading">#</a></h2>
+<p>MorphZ estimates the Bayesian marginal likelihood (evidence) <span class="math notranslate nohighlight">\(z\)</span> from posterior
+samples.  It is a post-processing tool: it does not run its own sampler, and
+places no requirements on which sampler produced the posterior draws — nested
+sampling, parallel-tempered MCMC, HMC, NUTS, or anything else.</p>
+<p>Given posterior samples, the prior, and the likelihood, MorphZ returns
+<span class="math notranslate nohighlight">\(\log \hat z\)</span> together with a relative-error diagnostic.</p>
+<p>MorphZ targets the integral</p>
+<div class="math notranslate nohighlight">
+\[
+z(X \mid \mathcal{M}) = \int_{\Theta}
+  L(X \mid \boldsymbol{\theta}, \mathcal{M})\,
+  \pi(\boldsymbol{\theta} \mid \mathcal{M})\,
+  d\boldsymbol{\theta},
+\]</div>
+<p>which underpins Bayesian model comparison through the Bayes factor</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{BF}(\mathcal{M}_0 / \mathcal{M}_1) =
+\frac{z(X \mid \mathcal{M}_0)}{z(X \mid \mathcal{M}_1)}.
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<p>MorphZ has two components.</p>
+<section id="the-morph-approximation">
+<h3>The Morph Approximation<a class="headerlink" href="#the-morph-approximation" title="Link to this heading">#</a></h3>
+<p>MorphZ first builds a tractable approximation to the posterior, called the
+<strong>Morph approximation</strong>, by factorising the <span class="math notranslate nohighlight">\(d\)</span>-dimensional posterior into a
+product of low-dimensional joint factors over <strong>disjoint blocks</strong> of
+parameters, plus marginals over leftover singleton parameters:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{M}_{B_L}(\boldsymbol{\theta}) =
+  \prod_{b \in B_L} P_b(\boldsymbol{\theta}_b)
+  \;\prod_{s \in S(B_L)} P_s(\theta_s).
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(L\)</span> is the block length, <span class="math notranslate nohighlight">\(B_L\)</span> is a partition of the parameter indices
+<span class="math notranslate nohighlight">\(\Gamma = \{1,\ldots,d\}\)</span> into disjoint blocks of length <span class="math notranslate nohighlight">\(L\)</span>, and <span class="math notranslate nohighlight">\(S(B_L)\)</span>
+collects any leftover (singleton) indices.</p>
+<p>Block membership is chosen by maximising the sum of <strong>block total correlations</strong></p>
+<div class="math notranslate nohighlight">
+\[
+C(\boldsymbol{\theta}_b) =
+  \sum_{k \in b} H(\theta_k) - H(\boldsymbol{\theta}_b),
+\]</div>
+<p>an information-theoretic measure of joint dependence (linear and non-linear)
+inside the block.  This is principled: maximising
+<span class="math notranslate nohighlight">\(\sum_b C(\boldsymbol{\theta}_b)\)</span> is equivalent to minimising
+<span class="math notranslate nohighlight">\(D_{\mathrm{KL}}(P\,\|\,\mathcal{M}_{B_L})\)</span>, so the Morph approximation is
+the closest product-of-blocks approximation to the true posterior at order <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<p>The optimisation is solved with the <strong>Seeded Greedy Maximisation (SGM)</strong>
+algorithm.  Block and singleton densities are fit with multivariate
+Gaussian-kernel KDEs.</p>
+</section>
+<section id="optimal-bridge-sampling">
+<h3>Optimal Bridge Sampling<a class="headerlink" href="#optimal-bridge-sampling" title="Link to this heading">#</a></h3>
+<p>MorphZ then uses <span class="math notranslate nohighlight">\(\mathcal{M}_{B_L}\)</span> as the proposal <span class="math notranslate nohighlight">\(g(\boldsymbol{\theta})\)</span>
+inside an <strong>optimal bridge sampling</strong> estimator,</p>
+<div class="math notranslate nohighlight">
+\[
+z =
+\frac{\mathbb{E}_{g(\boldsymbol{\theta})}\!\left[
+  L(X\mid\boldsymbol{\theta})\,\pi(\boldsymbol{\theta})\,h(\boldsymbol{\theta})
+\right]}
+{\mathbb{E}_{\mathrm{post}}\!\left[
+  h(\boldsymbol{\theta})\,g(\boldsymbol{\theta})
+\right]},
+\]</div>
+<p>with the minimum-variance bridge function</p>
+<div class="math notranslate nohighlight">
+\[
+h(\boldsymbol{\theta}) = C \cdot
+\frac{1}{f_1\,L(X\mid\boldsymbol{\theta})\,\pi(\boldsymbol{\theta})
+\;+\; f_2\,z\,g(\boldsymbol{\theta})},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_1 = N_1/(N_1+N_2)\)</span> and <span class="math notranslate nohighlight">\(f_2 = N_2/(N_1+N_2)\)</span> are the posterior and
+proposal sample fractions.  Because <span class="math notranslate nohighlight">\(h\)</span> depends on <span class="math notranslate nohighlight">\(z\)</span>, MorphZ solves for
+<span class="math notranslate nohighlight">\(\hat z\)</span> iteratively from an initial guess.</p>
+<p>To avoid reuse bias, MorphZ splits the supplied posterior samples into one
+batch for fitting <span class="math notranslate nohighlight">\(\mathcal{M}_{B_L}\)</span> and a separate batch for bridge
+sampling.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="what-morphz-returns">
+<h2>What MorphZ Returns<a class="headerlink" href="#what-morphz-returns" title="Link to this heading">#</a></h2>
+<p>For each call, MorphZ produces:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\log\hat z\)</span>, the log-evidence estimate.</p></li>
+<li><p>A bridge-sampling <strong>relative mean-squared error</strong> diagnostic on <span class="math notranslate nohighlight">\(\hat z\)</span>,
+computed from the same posterior and proposal samples, so no additional
+likelihood evaluations are needed.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
+<p>If you use MorphZ, please cite:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">1554-y6ns</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Enhancing evidence estimation through informed probability density approximation}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Zahraoui, El Mehdi and Maturana-Russel, Patricio and Vajpeyi, Avi</span>
+<span class="s">             and van Straten, Willem and Meyer, Renate and Gulyaev, Sergei}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Phys. Rev. D}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{113}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">issue</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{8}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{083014}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">month</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Apr}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{American Physical Society}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1103/1554-y6ns}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{https://link.aps.org/doi/10.1103/1554-y6ns}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 </section>
 <div class="toctree-wrapper compound">
@@ -613,6 +741,14 @@ time the documentation is built. To refresh it locally, run
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning-release">Versioning &amp; Release</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-morphz-computes">What MorphZ Computes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-morph-approximation">The Morph Approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-bridge-sampling">Optimal Bridge Sampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-morphz-returns">What MorphZ Returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
 </li>
 </ul>
