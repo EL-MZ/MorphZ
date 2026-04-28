@@ -1,24 +1,12 @@
 # MorphZ
 
-```{include} _auto/README.md
-:relative-docs: .
-:relative-images:
-```
-
-```{note}
-The README content above is copied automatically from the project root each
-time the documentation is built.  To refresh it locally, run
-`./docs/build_docs.sh`.
-```
-
----
-
 ## What MorphZ Computes
 
 MorphZ estimates the Bayesian marginal likelihood (evidence) $z$ from posterior
 samples.  It is a post-processing tool: it does not run its own sampler, and
 places no requirements on which sampler produced the posterior draws — nested
-sampling, parallel-tempered MCMC, HMC, NUTS, or anything else.
+sampling (e.g. dynesty), parallel-tempered MCMC, HMC, NUTS (e.g. NumPyro), or
+anything else.
 
 Given posterior samples, the prior, and the likelihood, MorphZ returns
 $\log \hat z$ together with a relative-error diagnostic.
@@ -142,4 +130,17 @@ If you use MorphZ, please cite:
   doi     = {10.1103/1554-y6ns},
   url     = {https://link.aps.org/doi/10.1103/1554-y6ns}
 }
+```
+
+---
+
+```{include} _auto/README.md
+:relative-docs: .
+:relative-images:
+```
+
+```{note}
+The README content above is copied automatically from the project root each
+time the documentation is built.  To refresh it locally, run
+`./docs/build_docs.sh`.
 ```
