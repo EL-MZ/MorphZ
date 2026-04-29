@@ -164,6 +164,7 @@ def evidence(
     pool: Optional[Union[int, str]] = None,
     show_progress: bool = True,
     shuffle: bool = True,
+    overwrite_path: bool = False,
 ) -> List[List[float]]:
     """
     Compute log evidence using morphological bridge sampling with KDE proposals.
@@ -234,6 +235,9 @@ def evidence(
             samples and their corresponding log-posterior values before KDE fitting
             and bridge sampling. The same permutation is applied to both arrays so
             sample–log-prob correspondence is preserved.
+        overwrite_path (bool): If True, recompute and overwrite all cached files
+            (bandwidth JSONs, MI/TC/tree dependency files) even if they already
+            exist on disk. Default is False (skip recomputation when files exist).
 
     Returns:
         list[[float, float]]: A list of ``[logz, err]`` for each estimation.
@@ -321,7 +325,7 @@ def evidence(
             method_name = kde_bw  # Store original method name
             bw_json_path = f"{output_path}/bw_{method_name}_1D.json"
 
-            if not os.path.exists(bw_json_path):
+            if not os.path.exists(bw_json_path) or overwrite_path:
                 logger.info("BW file not found at %s. Running Bw with %s...", bw_json_path, method_name)
 
                 kde_bw = compute_and_save_bandwidths(
@@ -346,7 +350,7 @@ def evidence(
         if param_names is None:
             param_names = [f"param_{i}" for i in range(ndim)]
 
-        if not os.path.exists(mi_file):
+        if not os.path.exists(mi_file) or overwrite_path:
             logger.info("MI file not found at %s. Running dependency tree computation...", mi_file)
             dependency_tree.compute_and_plot_mi_tree(samples, names=param_names, out_path=output_path, morph_type="pair")
 
@@ -380,7 +384,7 @@ def evidence(
 
             bw_json_path = f"{output_path}/bw_{method_name}_2D.json"
             
-            if not os.path.exists(bw_json_path):
+            if not os.path.exists(bw_json_path) or overwrite_path:
                 logger.info("BW file not found at %s. Running Bw with %s...", bw_json_path, method_name)
                 kde_bw = compute_and_save_bandwidths(
                     kde_samples,
@@ -424,7 +428,7 @@ def evidence(
         if param_names is None:
             param_names = [f"param_{i}" for i in range(ndim)]
         tc_workers = os.cpu_count() or 1
-        if not os.path.exists(group_file):
+        if not os.path.exists(group_file) or overwrite_path:
             logger.info("Group file not found at %s. Running total correlation computation...", group_file)
             logger.info("Computing TC with %s worker%s.", tc_workers, "" if tc_workers == 1 else "s")
             Nth_TC.compute_and_save_tc(
@@ -465,7 +469,7 @@ def evidence(
             method_name = kde_bw  # Store original method name
             bw_json_path = f"{output_path}/bw_{method_name}_{n_order}D.json"
 
-            if not os.path.exists(bw_json_path):
+            if not os.path.exists(bw_json_path) or overwrite_path:
                 logger.info("BW file not found at %s. Running Bw with %s...", bw_json_path, method_name)
                 kde_bw = compute_and_save_bandwidths(
                     kde_samples,
@@ -508,7 +512,7 @@ def evidence(
         tree_file = f"{output_path}/tree.json"
         if param_names is None:
             param_names = [f"param_{i}" for i in range(ndim)]
-        if not os.path.exists(tree_file):
+        if not os.path.exists(tree_file) or overwrite_path:
             logger.info(
                 "Tree file not found at %s. Running dependency tree computation... might take a while for higher dimensions. for faster results, use fewer samples per param.",
                 tree_file,
@@ -606,6 +610,17 @@ def evidence(
             show_progress=show_progress,
             **bridge_kwargs,
         )
+        if np.any(np.isnan(log_z_results)):
+            _nan_msg = (
+                f"Estimation {i+1}/{n_estimations}: log(z) estimate contains NaN "
+                f"(logz={log_z_results[0]}, err={log_z_results[1]}). "
+                "This may indicate numerical issues in the provided samples (e.g., poor proposal overlap, "
+                "extreme log-posterior values, or degenerate KDE). "
+                "Consider adjusting checking your samples or the log-proposal PDF."
+            )
+            warnings.warn(_nan_msg, RuntimeWarning, stacklevel=2)
+            logger.warning(_nan_msg)
+
         all_log_z_results.append(log_z_results)
 
         # Persist partial results every iteration so progress survives interruptions.
