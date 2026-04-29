@@ -175,7 +175,7 @@ def compute_total_correlation(
         raise ValueError("`samples` must be a 2‑D array (n_samples, n_dims).")
     n_samples, n_dims = samples.shape
 
-    if auto_thin and n_order >= 3 and n_dims >= 50:
+    if auto_thin and n_order >= 2 and n_dims >= 20:
         target_n = 300
         if n_dims >= 75:
             target_n = 200
