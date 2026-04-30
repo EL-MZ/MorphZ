@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Estimating ln(Z) with NumPyro + MorphZ &#8212; MorphZ Documentation</title>
+    <title>Simple Gaussian Example: Estimating ln(Z) with NumPyro + MorphZ &#8212; MorphZ Documentation</title>
   
   
   
@@ -65,7 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/numpyro_morphz_lnz';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Twin Gaussian Shell Evidence with NumPyro + MorphZ" href="numpyro_gaussian_shell.html" />
+    <link rel="prev" title="Twin Gaussian Shell Evidence with JAXNS + MorphZ" href="jaxns_gaussian_shell.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,6 +170,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gaussian_shell.html">Gaussian shell</a></li>
 <li class="toctree-l2"><a class="reference internal" href="peak_sampling.html">Peak sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="numpyro_gaussian_shell.html">NumPyro Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jaxns_gaussian_shell.html">JAXNS Gaussian shell</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">NumPyro MorphZ ln(Z)</a></li>
 </ul>
 </details></li>
@@ -323,7 +324,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Estimating ln(Z) with NumPyro + MorphZ</h1>
+    <h1>Simple Gaussian Example: Estimating ln(Z) with NumPyro + MorphZ</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -335,7 +336,7 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-are-computing">1. What We Are Computing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colab-setup">2. Colab Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-toy-model-gaussian-mean-inference">3. Minimal Toy Model: Gaussian Mean Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-gaussian-model-mean-inference">3. Simple Gaussian Model: Mean Inference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-nuts-and-collect-posterior-samples">4. Run NUTS and Collect Posterior Samples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-log-posterior-callable">5. Build a Log Posterior Callable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pack-samples-into-a-2d-array">6. Pack Samples into a 2D Array</a></li>
@@ -354,9 +355,9 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="estimating-ln-z-with-numpyro-morphz">
-<h1>Estimating ln(Z) with NumPyro + MorphZ<a class="headerlink" href="#estimating-ln-z-with-numpyro-morphz" title="Link to this heading">#</a></h1>
-<p>This notebook demonstrates how to compute the Bayesian evidence (log marginal likelihood, <strong>ln Z</strong>) using:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="simple-gaussian-example-estimating-ln-z-with-numpyro-morphz">
+<h1>Simple Gaussian Example: Estimating ln(Z) with NumPyro + MorphZ<a class="headerlink" href="#simple-gaussian-example-estimating-ln-z-with-numpyro-morphz" title="Link to this heading">#</a></h1>
+<p>This simple Gaussian example demonstrates how to compute the Bayesian evidence (log marginal likelihood, <strong>ln Z</strong>) using:</p>
 <ul class="simple">
 <li><p><strong>NumPyro</strong> for posterior sampling (via NUTS)</p></li>
 <li><p><strong>MorphZ</strong> for evidence estimation from posterior samples</p></li>
@@ -403,8 +404,8 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 </div>
 </div>
 </section>
-<section id="minimal-toy-model-gaussian-mean-inference">
-<h2>3. Minimal Toy Model: Gaussian Mean Inference<a class="headerlink" href="#minimal-toy-model-gaussian-mean-inference" title="Link to this heading">#</a></h2>
+<section id="simple-gaussian-model-mean-inference">
+<h2>3. Simple Gaussian Model: Mean Inference<a class="headerlink" href="#simple-gaussian-model-mean-inference" title="Link to this heading">#</a></h2>
 <p>We infer an unknown mean <span class="math notranslate nohighlight">\(\mu\)</span> with known noise <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <ul class="simple">
 <li><p>Prior: <span class="math notranslate nohighlight">\(\mu \sim \mathcal{N}(0, \tau_0^2)\)</span></p></li>
@@ -536,7 +537,7 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="n">morph_type</span><span class="o">=</span><span class="s1">&#39;indep&#39;</span><span class="p">,</span>
     <span class="n">kde_bw</span><span class="o">=</span><span class="s1">&#39;silverman&#39;</span><span class="p">,</span>
     <span class="n">param_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">],</span>
-    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;morphz_numpyro_demo&#39;</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;simple_gaussian_example&#39;</span><span class="p">,</span>
     <span class="n">n_estimations</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -621,12 +622,12 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="numpyro_gaussian_shell.html"
+       href="jaxns_gaussian_shell.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Twin Gaussian Shell Evidence with NumPyro + MorphZ</p>
+        <p class="prev-next-title">Twin Gaussian Shell Evidence with JAXNS + MorphZ</p>
       </div>
     </a>
 </div>
@@ -649,7 +650,7 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-are-computing">1. What We Are Computing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colab-setup">2. Colab Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-toy-model-gaussian-mean-inference">3. Minimal Toy Model: Gaussian Mean Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-gaussian-model-mean-inference">3. Simple Gaussian Model: Mean Inference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-nuts-and-collect-posterior-samples">4. Run NUTS and Collect Posterior Samples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-log-posterior-callable">5. Build a Log Posterior Callable</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pack-samples-into-a-2d-array">6. Pack Samples into a 2D Array</a></li>

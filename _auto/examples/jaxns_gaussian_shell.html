@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Twin Gaussian Shell Evidence with NumPyro + MorphZ &#8212; MorphZ Documentation</title>
+    <title>Twin Gaussian Shell Evidence with JAXNS + MorphZ &#8212; MorphZ Documentation</title>
   
   
   
@@ -62,11 +62,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/numpyro_gaussian_shell';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/jaxns_gaussian_shell';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Twin Gaussian Shell Evidence with JAXNS + MorphZ" href="jaxns_gaussian_shell.html" />
-    <link rel="prev" title="Peak Sampling: Evidence for a Bimodal-Scale Gaussian" href="peak_sampling.html" />
+    <link rel="next" title="Simple Gaussian Example: Estimating ln(Z) with NumPyro + MorphZ" href="numpyro_morphz_lnz.html" />
+    <link rel="prev" title="Twin Gaussian Shell Evidence with NumPyro + MorphZ" href="numpyro_gaussian_shell.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,8 +170,8 @@
 <li class="toctree-l2"><a class="reference internal" href="eggbox.html">Eggbox</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gaussian_shell.html">Gaussian shell</a></li>
 <li class="toctree-l2"><a class="reference internal" href="peak_sampling.html">Peak sampling</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">NumPyro Gaussian shell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="jaxns_gaussian_shell.html">JAXNS Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numpyro_gaussian_shell.html">NumPyro Gaussian shell</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">JAXNS Gaussian shell</a></li>
 <li class="toctree-l2"><a class="reference internal" href="numpyro_morphz_lnz.html">NumPyro MorphZ ln(Z)</a></li>
 </ul>
 </details></li>
@@ -249,7 +249,7 @@
       
       
       
-      <li><a href="../../_sources/_auto/examples/numpyro_gaussian_shell.ipynb" target="_blank"
+      <li><a href="../../_sources/_auto/examples/jaxns_gaussian_shell.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -325,7 +325,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Twin Gaussian Shell Evidence with NumPyro + MorphZ</h1>
+    <h1>Twin Gaussian Shell Evidence with JAXNS + MorphZ</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -338,11 +338,12 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-are-computing">1. What We Are Computing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colab-setup">2. Colab Setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-setup">3. Problem Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpyro-model">4. NumPyro Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-nuts-with-multi-chain-initialisation">5. Run NUTS with Multi-Chain Initialisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-log-posterior-callable">6. Build a Log-Posterior Callable</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pack-samples-into-a-2d-array">7. Pack Samples into a 2D Array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-corner-plot">8. Posterior Corner Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaxns-model">4. JAXNS Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-jaxns-nested-sampling">5. Run JAXNS Nested Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#draw-uniformly-weighted-posterior-samples">6. Draw Uniformly Weighted Posterior Samples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-log-posterior-callable">7. Build a Log-Posterior Callable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pack-samples-into-a-2d-array">8. Pack Samples into a 2D Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-corner-plot">9. Posterior Corner Plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-ln-z-with-morphz">10. Estimate ln(Z) with MorphZ</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">11. Summary</a></li>
 </ul>
@@ -356,14 +357,14 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="twin-gaussian-shell-evidence-with-numpyro-morphz">
-<h1>Twin Gaussian Shell Evidence with NumPyro + MorphZ<a class="headerlink" href="#twin-gaussian-shell-evidence-with-numpyro-morphz" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="twin-gaussian-shell-evidence-with-jaxns-morphz">
+<h1>Twin Gaussian Shell Evidence with JAXNS + MorphZ<a class="headerlink" href="#twin-gaussian-shell-evidence-with-jaxns-morphz" title="Link to this heading">#</a></h1>
 <p>This notebook demonstrates how to estimate the Bayesian evidence (log marginal likelihood, <strong>ln Z</strong>) for the <strong>twin Gaussian shell</strong> benchmark problem using:</p>
 <ul class="simple">
-<li><p><strong>NumPyro</strong> for posterior sampling (via NUTS with multi-chain initialisation)</p></li>
-<li><p><strong>MorphZ</strong> for evidence estimation from posterior samples</p></li>
+<li><p><strong>JAXNS</strong> for nested-sampling posterior samples and an independent nested-sampling evidence estimate</p></li>
+<li><p><strong>MorphZ</strong> for evidence estimation from the JAXNS posterior samples</p></li>
 </ul>
-<p><a class="reference external" href="https://colab.research.google.com/github/EL-MZ/MorphZ/blob/main/examples/numpyro_gaussian_shell.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<p><a class="reference external" href="https://colab.research.google.com/github/EL-MZ/MorphZ/blob/main/examples/jaxns_gaussian_shell.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
 <section id="what-we-are-computing">
 <h2>1. What We Are Computing<a class="headerlink" href="#what-we-are-computing" title="Link to this heading">#</a></h2>
 <p>The <strong>twin Gaussian shell</strong> is a standard multimodal benchmark from nested-sampling literature.<br />
@@ -378,8 +379,7 @@ $<span class="math notranslate nohighlight">\(
               + \frac{1}{\sqrt{2\pi w^2}}\exp\!\left[-\frac{(|\theta - c_2| - r)^2}{2w^2}\right]
 \)</span>$</p>
 <p>with <span class="math notranslate nohighlight">\(c_1 = (-3.5, 0, \ldots)\)</span>, <span class="math notranslate nohighlight">\(c_2 = (3.5, 0, \ldots)\)</span>, <span class="math notranslate nohighlight">\(r = 2\)</span>, <span class="math notranslate nohighlight">\(w = 0.1\)</span>.</p>
-<p><strong>Challenge:</strong> The two shells are completely disconnected — a standard NUTS chain started in one shell will never jump to the other.<br />
-We handle this by running <strong>4 chains</strong> with 2 initialised near each shell center, then combining all samples before passing them to MorphZ.</p>
+<p>The NumPyro version of this example uses manually initialised NUTS chains so both disconnected shells are represented. Here we swap that sampler for <strong>JAXNS</strong>, which is designed for multimodal nested sampling and also returns its own <span class="math notranslate nohighlight">\(\ln Z\)</span> estimate.</p>
 <p><strong>Evidence:</strong>
 $<span class="math notranslate nohighlight">\(
 Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
@@ -387,18 +387,11 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 </section>
 <section id="colab-setup">
 <h2>2. Colab Setup<a class="headerlink" href="#colab-setup" title="Link to this heading">#</a></h2>
+<p>Run the install cell only in a fresh Colab runtime or a dedicated virtual environment. JAXNS depends on the JAX/TFP/NumPy stack, and installing the latest stack into an existing PyMC/PyTensor environment can upgrade NumPy past versions that PyTensor accepts.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> -q install &quot;jax[cpu]&quot; numpyro morphz corner
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/apokrypha/miniconda3/envs/pta/lib/python3.12/pty.py:95: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
-  pid, fd = os.forkpty()
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fresh Colab/runtime only. In an existing local environment, prefer a separate venv.</span>
+<span class="o">%</span><span class="k">pip</span> -q install jaxns morphz corner
 </pre></div>
 </div>
 </div>
@@ -406,27 +399,33 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 </section>
 <section id="problem-setup">
 <h2>3. Problem Setup<a class="headerlink" href="#problem-setup" title="Link to this heading">#</a></h2>
-<p>We define the twin-shell geometry and a JAX-compatible log-likelihood.</p>
+<p>We define the twin-shell geometry and a JAX-compatible log-likelihood. JAXNS examples enable x64 for thin-shell likelihoods, so this notebook does the same before importing JAX arrays.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpyro</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpyro.distributions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dist</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">corner</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_probability.substrates.jax</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfp</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">numpyro.infer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MCMC</span><span class="p">,</span> <span class="n">NUTS</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">numpyro.infer.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">log_density</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jaxns</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">NestedSampler</span><span class="p">,</span> <span class="n">Prior</span><span class="p">,</span> <span class="n">TerminationCondition</span><span class="p">,</span> <span class="n">resample</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">morphZ</span><span class="w"> </span><span class="kn">import</span> <span class="n">evidence</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;jax:&#39;</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpyro:&#39;</span><span class="p">,</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="n">tfpd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
 
-<span class="c1"># ── geometry ──────────────────────────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;jax:&#39;</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;jaxns:&#39;</span><span class="p">,</span> <span class="n">version</span><span class="p">(</span><span class="s1">&#39;jaxns&#39;</span><span class="p">))</span>
+
+<span class="c1"># -- geometry -----------------------------------------------------------------</span>
 <span class="n">L</span>    <span class="o">=</span> <span class="mf">6.0</span>
-<span class="n">ndim</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># ← change to 10 for the standard benchmark, 30 for the high-dim test</span>
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">10</span>   <span class="c1"># change to 30 for the high-dimensional benchmark</span>
 <span class="n">r</span>    <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">w</span>    <span class="o">=</span> <span class="mf">0.1</span>
 
@@ -436,140 +435,123 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ndim = </span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1">,  L = </span><span class="si">{</span><span class="n">L</span><span class="si">}</span><span class="s1">,  r = </span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s1">,  w = </span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;c1[0] = </span><span class="si">{</span><span class="n">c1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">,  c2[0] = </span><span class="si">{</span><span class="n">c2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="c1"># ── JAX log-likelihood ────────────────────────────────────────────────────────</span>
-<span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="c1"># -- JAX log-likelihood -------------------------------------------------------</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">jax_loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Twin Gaussian shell log-likelihood (JAX, works on a single parameter vector).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Twin Gaussian shell log-likelihood for a single parameter vector.&quot;&quot;&quot;</span>
     <span class="n">log_norm</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">w</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">log_exp1</span> <span class="o">=</span> <span class="n">log_norm</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">c1</span><span class="p">)</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="n">w</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="n">log_exp2</span> <span class="o">=</span> <span class="n">log_norm</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">c2</span><span class="p">)</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="n">w</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">scipy</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">logsumexp</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">log_exp1</span><span class="p">,</span> <span class="n">log_exp2</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jax: 0.5.0
-numpyro: 0.17.0
-ndim = 30,  L = 6.0,  r = 2.0,  w = 0.1
-c1[0] = -3.5,  c2[0] = 3.5
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="n">log_exp1</span><span class="p">,</span> <span class="n">log_exp2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="numpyro-model">
-<h2>4. NumPyro Model<a class="headerlink" href="#numpyro-model" title="Link to this heading">#</a></h2>
-<p>We use <code class="docutils literal notranslate"><span class="pre">numpyro.factor</span></code> to inject the twin-shell log-likelihood as an unnormalized factor, since the likelihood is not a standard distribution.</p>
+<section id="jaxns-model">
+<h2>4. JAXNS Model<a class="headerlink" href="#jaxns-model" title="Link to this heading">#</a></h2>
+<p>JAXNS separates the prior generator from the log-likelihood. The prior model yields a named <code class="docutils literal notranslate"><span class="pre">theta</span></code> variable from the same uniform box used in the NumPyro example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gaussian_shell_model</span><span class="p">():</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
-        <span class="s1">&#39;theta&#39;</span><span class="p">,</span>
-        <span class="n">dist</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="o">-</span><span class="n">L</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ndim</span><span class="p">),</span> <span class="n">L</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ndim</span><span class="p">)),</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prior_model</span><span class="p">():</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">Prior</span><span class="p">(</span>
+        <span class="n">tfpd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="n">L</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ndim</span><span class="p">),</span> <span class="n">high</span><span class="o">=</span><span class="n">L</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ndim</span><span class="p">)),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;theta&#39;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">numpyro</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="s1">&#39;log_lik&#39;</span><span class="p">,</span> <span class="n">jax_loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">theta</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">prior_model</span><span class="o">=</span><span class="n">prior_model</span><span class="p">,</span> <span class="n">log_likelihood</span><span class="o">=</span><span class="n">jax_loglikelihood</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">sanity_check</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">S</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="run-nuts-with-multi-chain-initialisation">
-<h2>5. Run NUTS with Multi-Chain Initialisation<a class="headerlink" href="#run-nuts-with-multi-chain-initialisation" title="Link to this heading">#</a></h2>
-<p>Because NUTS cannot cross between the two disconnected shells, we:</p>
-<ul class="simple">
-<li><p>Start 2 chains near <span class="math notranslate nohighlight">\(c_1\)</span> and 2 chains near <span class="math notranslate nohighlight">\(c_2\)</span></p></li>
-<li><p>Combine all 4 chains into a single sample matrix</p></li>
-</ul>
+<section id="run-jaxns-nested-sampling">
+<h2>5. Run JAXNS Nested Sampling<a class="headerlink" href="#run-jaxns-nested-sampling" title="Link to this heading">#</a></h2>
+<p>JAXNS explores the prior volume under likelihood constraints, so we do not need to initialise one chain per shell. The sampler returns weighted posterior samples plus its direct nested-sampling estimate of <span class="math notranslate nohighlight">\(\ln Z\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng_key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">key_init</span><span class="p">,</span> <span class="n">key_run</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng_key</span><span class="p">)</span>
-<span class="n">key1</span><span class="p">,</span> <span class="n">key2</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key_init</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng_key</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">key_run</span><span class="p">,</span> <span class="n">key_resample</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">rng_key</span><span class="p">)</span>
 
-<span class="c1"># Small random perturbation so chains don&#39;t start at identical points</span>
-<span class="n">noise1</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
-<span class="n">noise2</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key2</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+<span class="n">max_samples</span> <span class="o">=</span> <span class="mi">120_000</span> <span class="k">if</span> <span class="n">ndim</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">300_000</span>
+<span class="n">num_live_points</span> <span class="o">=</span> <span class="mi">1_000</span> <span class="k">if</span> <span class="n">ndim</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">3_000</span>
 
-<span class="n">init_near_c1</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">noise1</span>  <span class="c1"># (2, ndim)</span>
-<span class="n">init_near_c2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">noise2</span>  <span class="c1"># (2, ndim)</span>
-
-<span class="c1"># Stack along chain axis → shape (4, ndim)</span>
-<span class="n">init_theta</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">init_near_c1</span><span class="p">,</span> <span class="n">init_near_c2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">init_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;theta&#39;</span><span class="p">:</span> <span class="n">init_theta</span><span class="p">}</span>
-
-<span class="n">nuts</span> <span class="o">=</span> <span class="n">NUTS</span><span class="p">(</span><span class="n">gaussian_shell_model</span><span class="p">)</span>
-<span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span>
-    <span class="n">nuts</span><span class="p">,</span>
-    <span class="n">num_warmup</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>   <span class="c1"># increased for robustness in higher dimensions</span>
-    <span class="n">num_samples</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
-    <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">progress_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">ns</span> <span class="o">=</span> <span class="n">NestedSampler</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">max_samples</span><span class="o">=</span><span class="n">max_samples</span><span class="p">,</span>
+    <span class="n">num_live_points</span><span class="o">=</span><span class="n">num_live_points</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">U_ndims</span> <span class="o">*</span> <span class="mi">20</span><span class="p">),</span>
+    <span class="n">difficult_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">parameter_estimation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">mcmc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">key_run</span><span class="p">,</span> <span class="n">init_params</span><span class="o">=</span><span class="n">init_params</span><span class="p">)</span>
+<span class="n">term_cond</span> <span class="o">=</span> <span class="n">TerminationCondition</span><span class="p">(</span><span class="n">dlogZ</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">))</span>
+<span class="n">termination_reason</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ns</span><span class="p">(</span><span class="n">key_run</span><span class="p">,</span> <span class="n">term_cond</span><span class="o">=</span><span class="n">term_cond</span><span class="p">)</span>
+<span class="n">ns_results</span> <span class="o">=</span> <span class="n">ns</span><span class="o">.</span><span class="n">to_results</span><span class="p">(</span><span class="n">termination_reason</span><span class="o">=</span><span class="n">termination_reason</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
 
-<span class="c1"># group_by_chain=True → shape (num_chains, num_samples, ndim)</span>
-<span class="n">samples_by_chain</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">group_by_chain</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">theta_by_chain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples_by_chain</span><span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">])</span>  <span class="c1"># (4, 2000, ndim)</span>
+<span class="n">ns</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">ns_results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;JAXNS ln(Z): </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_mean</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_uncert</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="draw-uniformly-weighted-posterior-samples">
+<h2>6. Draw Uniformly Weighted Posterior Samples<a class="headerlink" href="#draw-uniformly-weighted-posterior-samples" title="Link to this heading">#</a></h2>
+<p>JAXNS stores weighted nested-sampling samples. MorphZ expects ordinary posterior draws, so we resample using the posterior log-weights <code class="docutils literal notranslate"><span class="pre">results.log_dp_mean</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_posterior_samples</span> <span class="o">=</span> <span class="mi">8_000</span>
+<span class="n">posterior_samples</span> <span class="o">=</span> <span class="n">resample</span><span class="p">(</span>
+    <span class="n">key_resample</span><span class="p">,</span>
+    <span class="n">ns_results</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span>
+    <span class="n">ns_results</span><span class="o">.</span><span class="n">log_dp_mean</span><span class="p">,</span>
+    <span class="n">S</span><span class="o">=</span><span class="n">n_posterior_samples</span><span class="p">,</span>
+<span class="p">)</span>
 
-<span class="c1"># Flatten chains</span>
-<span class="n">theta_all</span> <span class="o">=</span> <span class="n">theta_by_chain</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>  <span class="c1"># (8000, ndim)</span>
+<span class="n">theta_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">posterior_samples</span><span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;theta_all shape:&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;θ₁ range across all samples:&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Chains near c1 (θ₁ &lt; 0):&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s1">&#39;  near c2 (θ₁ &gt; 0):&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8307/4147836595.py:17: UserWarning: There are not enough devices to run parallel chains: expected 4 but got 1. Chains will be drawn sequentially. If you are running MCMC in CPU, consider using `numpyro.set_host_device_count(4)` at the beginning of your program. You can double-check how many devices are available in your system using `jax.local_device_count()`.
-  mcmc = MCMC(
-sample: 100%|██████████| 4000/4000 [00:02&lt;00:00, 1696.20it/s, 15 steps of size 2.72e-01. acc. prob=0.93]
-sample: 100%|██████████| 4000/4000 [00:01&lt;00:00, 2187.91it/s, 15 steps of size 2.35e-01. acc. prob=0.95]
-sample: 100%|██████████| 4000/4000 [00:01&lt;00:00, 2069.90it/s, 15 steps of size 2.38e-01. acc. prob=0.95]
-sample: 100%|██████████| 4000/4000 [00:01&lt;00:00, 2253.51it/s, 15 steps of size 2.61e-01. acc. prob=0.93]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta_all shape: (8000, 30)
-θ₁ range across all samples: -4.86 to 4.82
-Chains near c1 (θ₁ &lt; 0): 4000   near c2 (θ₁ &gt; 0): 4000
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;theta_1 range across resampled posterior:&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Samples near c1 (theta_1 &lt; 0):&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s1">&#39;  near c2 (theta_1 &gt; 0):&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="build-a-log-posterior-callable">
-<h2>6. Build a Log-Posterior Callable<a class="headerlink" href="#build-a-log-posterior-callable" title="Link to this heading">#</a></h2>
-<p>MorphZ requires a callable <code class="docutils literal notranslate"><span class="pre">lp_fn(sample_vector)</span> <span class="pre">→</span> <span class="pre">float</span></code> that returns the <strong>same</strong> log-posterior used during sampling.</p>
+<h2>7. Build a Log-Posterior Callable<a class="headerlink" href="#build-a-log-posterior-callable" title="Link to this heading">#</a></h2>
+<p>MorphZ requires a callable <code class="docutils literal notranslate"><span class="pre">lp_fn(sample_vector)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code> that returns the same unnormalised log-posterior used during sampling. For this model, that is the bounded uniform log-prior plus the shell log-likelihood.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">build_log_density_fn</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_logpost</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
-        <span class="n">log_prob</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">log_density</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{},</span> <span class="n">params</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">log_prob</span>
-    <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">_logpost</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">jax_logposterior</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">in_prior</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">all</span><span class="p">((</span><span class="n">theta</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">L</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">theta</span> <span class="o">&lt;=</span> <span class="n">L</span><span class="p">))</span>
+    <span class="n">log_prior</span> <span class="o">=</span> <span class="o">-</span><span class="n">ndim</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">in_prior</span><span class="p">,</span> <span class="n">log_prior</span> <span class="o">+</span> <span class="n">jax_loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
 
-<span class="n">logpost_fn</span> <span class="o">=</span> <span class="n">build_log_density_fn</span><span class="p">(</span><span class="n">gaussian_shell_model</span><span class="p">)</span>
+<span class="n">batched_logposterior</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">jax_logposterior</span><span class="p">))</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">lp_fn</span><span class="p">(</span><span class="n">sample_vec</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Single-sample wrapper expected by MorphZ.&quot;&quot;&quot;</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;theta&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sample_vec</span><span class="p">)}</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">logpost_fn</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">jax_logposterior</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sample_vec</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="pack-samples-into-a-2d-array">
-<h2>7. Pack Samples into a 2D Array<a class="headerlink" href="#pack-samples-into-a-2d-array" title="Link to this heading">#</a></h2>
+<h2>8. Pack Samples into a 2D Array<a class="headerlink" href="#pack-samples-into-a-2d-array" title="Link to this heading">#</a></h2>
 <p>MorphZ expects <code class="docutils literal notranslate"><span class="pre">post_samples</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(n_draws,</span> <span class="pre">n_parameters)</span></code> and a matching array of log-posterior values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">post_smp</span> <span class="o">=</span> <span class="n">theta_all</span>  <span class="c1"># (n_draws, ndim) — already numpy</span>
-<span class="n">lp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lp_fn</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">post_smp</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">post_smp</span> <span class="o">=</span> <span class="n">theta_all</span>
+<span class="n">lp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">batched_logposterior</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">post_smp</span><span class="p">)))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;post_smp shape:&#39;</span><span class="p">,</span> <span class="n">post_smp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lp shape:      &#39;</span><span class="p">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -577,17 +559,10 @@ Chains near c1 (θ₁ &lt; 0): 4000   near c2 (θ₁ &gt; 0): 4000
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>post_smp shape: (8000, 30)
-lp shape:       (8000,)
-lp range:       -87.89 to -73.16
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="posterior-corner-plot">
-<h2>8. Posterior Corner Plot<a class="headerlink" href="#posterior-corner-plot" title="Link to this heading">#</a></h2>
+<h2>9. Posterior Corner Plot<a class="headerlink" href="#posterior-corner-plot" title="Link to this heading">#</a></h2>
 <p>We plot the first 4 dimensions to verify that both shells are represented in the samples.<br />
 <span class="math notranslate nohighlight">\(\theta_1\)</span> should show two clusters around <span class="math notranslate nohighlight">\(-3.5\)</span> (shell 1) and <span class="math notranslate nohighlight">\(+3.5\)</span> (shell 2);<br />
 <span class="math notranslate nohighlight">\(\theta_2, \theta_3, \theta_4\)</span> should each be centred near zero.</p>
@@ -629,11 +604,11 @@ lp range:       -87.89 to -73.16
         <span class="n">max_n_ticks</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">ndim</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">ndim</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+    <span class="n">ndim_plot</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">ndim_plot</span><span class="p">,</span> <span class="n">ndim_plot</span><span class="p">))</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim_plot</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim_plot</span><span class="p">):</span>
             <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">facecolor</span><span class="p">)</span>
 
@@ -655,23 +630,17 @@ lp range:       -87.89 to -73.16
 
     <span class="k">return</span> <span class="n">fig</span>
 
-<span class="n">n_plot_dims</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">plot_labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">rf</span><span class="s1">&#39;$\theta_</span><span class="se">{{</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="se">}}</span><span class="s1">$&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_plot_dims</span><span class="p">)]</span>
+<span class="n">n_plot_dims</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+<span class="n">plot_labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">rf</span><span class="s1">&#39;$	heta_</span><span class="se">{{</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="se">}}</span><span class="s1">$&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_plot_dims</span><span class="p">)]</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">styled_corner</span><span class="p">(</span><span class="n">post_smp</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_plot_dims</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">plot_labels</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Posterior samples — first 4 dimensions&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2d5872&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;JAXNS posterior samples - first dimensions&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.01</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2d5872&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="n">mask_shell1</span> <span class="o">=</span> <span class="n">post_smp</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
 <span class="n">mask_shell2</span> <span class="o">=</span> <span class="o">~</span><span class="n">mask_shell1</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Shell 1 samples: </span><span class="si">{</span><span class="n">mask_shell1</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">  |  Shell 2 samples: </span><span class="si">{</span><span class="n">mask_shell2</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/8e13c3f7b79084b90dccd609c5807e42b3f728ae212280b4aa8fabc36d6b55d2.png" src="../../_images/8e13c3f7b79084b90dccd609c5807e42b3f728ae212280b4aa8fabc36d6b55d2.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shell 1 samples: 4000  |  Shell 2 samples: 4000
 </pre></div>
 </div>
 </div>
@@ -685,11 +654,11 @@ lp range:       -87.89 to -73.16
     <span class="n">post_samples</span><span class="o">=</span><span class="n">post_smp</span><span class="p">,</span>
     <span class="n">log_posterior_values</span><span class="o">=</span><span class="n">lp</span><span class="p">,</span>
     <span class="n">log_posterior_function</span><span class="o">=</span><span class="n">lp_fn</span><span class="p">,</span>
-    <span class="n">n_resamples</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span>
-    <span class="n">thin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">n_resamples</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">morph_type</span><span class="o">=</span><span class="s1">&#39;2_group&#39;</span><span class="p">,</span>
     <span class="n">kde_bw</span><span class="o">=</span><span class="s1">&#39;silverman&#39;</span><span class="p">,</span>
-    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;numpyro_gaussian_shell&#39;</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;jaxns_gaussian_shell&#39;</span><span class="p">,</span>
     <span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -701,18 +670,14 @@ lp range:       -87.89 to -73.16
 <span class="n">lnz_est</span> <span class="o">=</span> <span class="n">results</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">lnz_err</span> <span class="o">=</span> <span class="n">results</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 
-<span class="n">true_lnZ</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">:</span> <span class="o">-</span><span class="mf">14.59</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span> <span class="o">-</span><span class="mf">60.13</span><span class="p">}[</span><span class="n">ndim</span><span class="p">]</span>
+<span class="n">true_lnZ</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">:</span> <span class="o">-</span><span class="mf">14.59</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span> <span class="o">-</span><span class="mf">60.13</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ mean ln(Z): </span><span class="si">{</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> ± </span><span class="si">{</span><span class="n">lnz_err</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;True   ln(Z) D=</span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">true_lnZ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Residual: </span><span class="si">{</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">:</span><span class="s1">+.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b9e0654299af46689346a11de414d026", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -60.1540 ± 0.0303
-True   ln(Z) D=30: -60.13
-Residual: -0.0240
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ mean ln(Z): </span><span class="si">{</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">lnz_err</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;JAXNS  mean ln(Z): </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_mean</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_uncert</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">true_lnZ</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;True   ln(Z) D=</span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">true_lnZ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ residual: </span><span class="si">{</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">:</span><span class="s1">+.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;JAXNS  residual: </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_mean</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">:</span><span class="s1">+.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -720,7 +685,7 @@ Residual: -0.0240
 </section>
 <section id="summary">
 <h2>11. Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
-<p>The key steps for using NumPyro + MorphZ on a <strong>multimodal</strong> problem are:</p>
+<p>The key steps for using JAXNS + MorphZ on a <strong>multimodal</strong> problem are:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
@@ -729,19 +694,19 @@ Residual: -0.0240
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Model</p></td>
-<td><p>Use <code class="docutils literal notranslate"><span class="pre">numpyro.factor</span></code> to inject a custom log-likelihood</p></td>
+<td><p>Define a JAXNS <code class="docutils literal notranslate"><span class="pre">Prior</span></code> generator and <code class="docutils literal notranslate"><span class="pre">log_likelihood</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>Sampling</p></td>
-<td><p>Run multiple chains initialised near each mode</p></td>
+<td><p>Run <code class="docutils literal notranslate"><span class="pre">NestedSampler</span></code>; no manual per-mode chain initialisation is needed</p></td>
 </tr>
-<tr class="row-even"><td><p>Combine</p></td>
-<td><p>Concatenate chains into a single <code class="docutils literal notranslate"><span class="pre">(n_draws,</span> <span class="pre">ndim)</span></code> array</p></td>
+<tr class="row-even"><td><p>Resample</p></td>
+<td><p>Convert weighted nested-sampling samples to posterior draws with <code class="docutils literal notranslate"><span class="pre">jaxns.resample</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>Check</p></td>
-<td><p>Corner plot to confirm both modes are present in the samples</p></td>
+<td><p>Corner plot to confirm both modes are represented in the samples</p></td>
 </tr>
 <tr class="row-even"><td><p>Log-posterior</p></td>
-<td><p>Wrap <code class="docutils literal notranslate"><span class="pre">log_density</span></code> so <code class="docutils literal notranslate"><span class="pre">lp_fn(sample_vec)</span></code> returns a scalar</p></td>
+<td><p>Use the same unnormalised prior-plus-likelihood target for <code class="docutils literal notranslate"><span class="pre">lp_fn(sample_vec)</span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p>Evidence</p></td>
 <td><p>Pass <code class="docutils literal notranslate"><span class="pre">post_smp</span></code>, <code class="docutils literal notranslate"><span class="pre">lp</span></code>, and <code class="docutils literal notranslate"><span class="pre">lp_fn</span></code> to <code class="docutils literal notranslate"><span class="pre">morphZ.evidence()</span></code></p></td>
@@ -749,9 +714,7 @@ Residual: -0.0240
 </tbody>
 </table>
 </div>
-<blockquote>
-<div><p><strong>Note:</strong> For problems where you cannot initialise chains near every mode (unknown number of modes, high-dimensional, etc.), consider using a nested sampler (e.g., dynesty) or parallel tempering to generate the posterior samples instead of NUTS.</p>
-</div></blockquote>
+<p>This example keeps JAXNS’ direct nested-sampling <span class="math notranslate nohighlight">\(\ln Z\)</span> estimate in the output so it can be compared against MorphZ on the same posterior sample source.</p>
 </section>
 </section>
 
@@ -786,20 +749,20 @@ Residual: -0.0240
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="peak_sampling.html"
+       href="numpyro_gaussian_shell.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Peak Sampling: Evidence for a Bimodal-Scale Gaussian</p>
+        <p class="prev-next-title">Twin Gaussian Shell Evidence with NumPyro + MorphZ</p>
       </div>
     </a>
     <a class="right-next"
-       href="jaxns_gaussian_shell.html"
+       href="numpyro_morphz_lnz.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Twin Gaussian Shell Evidence with JAXNS + MorphZ</p>
+        <p class="prev-next-title">Simple Gaussian Example: Estimating ln(Z) with NumPyro + MorphZ</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -824,11 +787,12 @@ Residual: -0.0240
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-are-computing">1. What We Are Computing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colab-setup">2. Colab Setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-setup">3. Problem Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpyro-model">4. NumPyro Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-nuts-with-multi-chain-initialisation">5. Run NUTS with Multi-Chain Initialisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-log-posterior-callable">6. Build a Log-Posterior Callable</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pack-samples-into-a-2d-array">7. Pack Samples into a 2D Array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-corner-plot">8. Posterior Corner Plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaxns-model">4. JAXNS Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-jaxns-nested-sampling">5. Run JAXNS Nested Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#draw-uniformly-weighted-posterior-samples">6. Draw Uniformly Weighted Posterior Samples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-log-posterior-callable">7. Build a Log-Posterior Callable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pack-samples-into-a-2d-array">8. Pack Samples into a 2D Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-corner-plot">9. Posterior Corner Plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-ln-z-with-morphz">10. Estimate ln(Z) with MorphZ</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">11. Summary</a></li>
 </ul>
