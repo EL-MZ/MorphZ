@@ -12,5 +12,7 @@ chapters:
         title: Peak sampling
       - file: _auto/examples/numpyro_gaussian_shell
         title: NumPyro Gaussian shell
+      - file: _auto/examples/jaxns_gaussian_shell
+        title: JAXNS Gaussian shell
       - file: _auto/examples/numpyro_morphz_lnz
         title: NumPyro MorphZ ln(Z)

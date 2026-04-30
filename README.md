@@ -37,6 +37,7 @@ Interactive notebooks live in `examples/`:
 - `examples/gaussian shell.ipynb` — Gaussian shell (dynesty nested sampling)
 - `examples/peak_sampling.ipynb` — sharply peaked posterior
 - `examples/numpyro_gaussian_shell.ipynb` — Gaussian shell with NUTS via NumPyro
+- `examples/jaxns_gaussian_shell.ipynb` — Gaussian shell with nested sampling via JAXNS
 - `examples/numpyro_morphz_lnz.ipynb` — log-evidence comparison across morph types (NumPyro/NUTS)
 
 ## Documentation
