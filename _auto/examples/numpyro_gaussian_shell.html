@@ -63,6 +63,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/numpyro_gaussian_shell';</script>
+    <link rel="icon" href="../../_static/mz_final.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Twin Gaussian Shell Evidence with JAXNS + MorphZ" href="jaxns_gaussian_shell.html" />
@@ -449,6 +450,9 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:2026-05-05 11:43:31,864:jax._src.xla_bridge:794: An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jax: 0.6.2
 numpyro: 0.19.0
 ndim = 30,  L = 6.0,  r = 2.0,  w = 0.1
@@ -523,20 +527,17 @@ c1[0] = -3.5,  c2[0] = 3.5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_145272/1028723827.py:17: UserWarning: There are not enough devices to run parallel chains: expected 4 but got 1. Chains will be drawn sequentially. If you are running MCMC in CPU, consider using `numpyro.set_host_device_count(4)` at the beginning of your program. You can double-check how many devices are available in your system using `jax.local_device_count()`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_81508/1028723827.py:17: UserWarning: There are not enough devices to run parallel chains: expected 4 but got 1. Chains will be drawn sequentially. If you are running MCMC in CPU, consider using `numpyro.set_host_device_count(4)` at the beginning of your program. You can double-check how many devices are available in your system using `jax.local_device_count()`.
   mcmc = MCMC(
-sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 1527.48it/s, 15 steps of size 2.70e-01. acc. prob=0.93]
-sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 2356.17it/s, 15 steps of size 2.51e-01. acc. prob=0.94]
-sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 2488.54it/s, 15 steps of size 2.62e-01. acc. prob=0.93]
-sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 2245.67it/s, 15 steps of size 2.21e-01. acc. prob=0.95]
+sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 1510.76it/s, 15 steps of size 2.70e-01. acc. prob=0.93]
+sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 2353.82it/s, 15 steps of size 2.51e-01. acc. prob=0.94]
+sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 2666.81it/s, 15 steps of size 2.62e-01. acc. prob=0.93]
+sample: 100%|██████████| 3000/3000 [00:01&lt;00:00, 2714.94it/s, 15 steps of size 2.21e-01. acc. prob=0.95]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta_all shape: (8000, 30)
 θ₁ range across all samples: -5.0 to 4.8
 Chains near c1 (θ₁ &lt; 0): 4000   near c2 (θ₁ &gt; 0): 4000
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -684,13 +685,12 @@ lp range:       -84.13 to -73.16
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">evidence</span><span class="p">(</span>
     <span class="n">post_samples</span><span class="o">=</span><span class="n">post_smp</span><span class="p">,</span>
-    <span class="n">log_posterior_values</span><span class="o">=</span><span class="n">lp</span><span class="p">,</span>
     <span class="n">log_posterior_function</span><span class="o">=</span><span class="n">lp_fn</span><span class="p">,</span>
     <span class="n">n_resamples</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
     <span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">morph_type</span><span class="o">=</span><span class="s1">&#39;2_group&#39;</span><span class="p">,</span>
     <span class="n">kde_bw</span><span class="o">=</span><span class="s1">&#39;silverman&#39;</span><span class="p">,</span>
-    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;numpyro_gaussian_shell&#39;</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;/results/numpyro_gaussian_shell&#39;</span><span class="p">,</span>
     <span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -711,9 +711,12 @@ lp range:       -84.13 to -73.16
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b3eddf06f4b14c77842771ec84a5f909", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "32d442c095694a51a879c9fe86439196", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -60.1273 ± 0.0215
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "cde4289ecc3d46518d78453202a95f3f", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log_posterior_values was not provided; precomputing log_prob for bridge samples. Provide log_posterior_values to save time.
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f455d69b00644f1fa4a13eaeb55087f8", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0dac4ccd445b4f758c15ac0882de7fc4", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -60.1394 ± 0.0220
 True   ln(Z) D=30: -60.13
-Residual: +0.0027
+Residual: -0.0094
 </pre></div>
 </div>
 </div>

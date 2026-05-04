@@ -63,6 +63,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="icon" href="_static/mz_final.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Getting Started" href="getting_started.html" />
@@ -349,13 +350,21 @@
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">MorphZ</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">How It Works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morph-approximation">Morph Approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Optimal Bridge Sampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage">Core Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-examples">Run The Examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-highlights">API Highlights</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning-release">Versioning &amp; Release</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Citation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
 </li>
@@ -371,7 +380,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="morphz">
+  <p align="center">
+  <img src="_static/mz_final.png" alt="MorphZ logo" width="360">
+</p>
+<section class="tex2jax_ignore mathjax_ignore" id="morphz">
 <h1>MorphZ<a class="headerlink" href="#morphz" title="Link to this heading">#</a></h1>
 <section id="what-morphz-computes">
 <h2>What MorphZ Computes<a class="headerlink" href="#what-morphz-computes" title="Link to this heading">#</a></h2>
@@ -501,15 +513,66 @@ likelihood evaluations are needed.</p></li>
 <a class="reference external" href="https://github.com/EL-MZ/MorphZ/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/EL-MZ/MorphZ/actions/workflows/ci.yml/badge.svg" /></a>
 <a class="reference external" href="https://github.com/EL-MZ/MorphZ/actions/workflows/docs.yml"><img alt="Docs" src="https://github.com/EL-MZ/MorphZ/actions/workflows/docs.yml/badge.svg" /></a>
 <a class="reference external" href="https://github.com/EL-MZ/MorphZ"><img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-EL--MZ%2FMorphZ-181717?logo=github" /></a>
-<a class="reference external" href="https://arxiv.org/abs/2512.10283"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2512.10283-B31B1B.svg" /></a></p>
-<p>MorphZ for high accuracy marginal likelihood estimation and morphological density approximation toolkit for scientific workflows, with utilities for dependency analysis.</p>
+<a class="reference external" href="https://arxiv.org/abs/2512.10283"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2512.10283-B31B1B.svg" /></a>
+<a class="reference external" href="https://doi.org/10.1103/1554-y6ns"><img alt="Published paper" src="https://img.shields.io/badge/paper-Phys._Rev._D_113%2C_083014-006eb6.svg" /></a></p>
+<p>MorphZ estimates the Bayesian marginal likelihood, or evidence, from posterior
+samples. It is a post-processing tool: it does not run its own sampler, and it
+places no requirements on which sampler produced the posterior draws. The same
+workflow can be used with nested sampling, parallel-tempered MCMC, HMC, NUTS, or
+any other sampler that provides posterior samples.</p>
+<p>Given posterior samples, the prior, and the likelihood, MorphZ returns the
+log-evidence estimate together with a bridge-sampling relative-error diagnostic.
+The target integral is</p>
+<div class="highlight-math notranslate"><div class="highlight"><pre><span></span>z(X \mid \mathcal{M}) = \int_{\Theta}
+  L(X \mid \boldsymbol{\theta}, \mathcal{M})
+  \pi(\boldsymbol{\theta} \mid \mathcal{M})
+  d\boldsymbol{\theta}.
+</pre></div>
+</div>
+<section id="id2">
+<h2>How It Works<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>MorphZ has two main components.</p>
+<section id="morph-approximation">
+<h3>Morph Approximation<a class="headerlink" href="#morph-approximation" title="Link to this heading">#</a></h3>
+<p>MorphZ first builds a tractable approximation to the posterior, called the
+<strong>Morph approximation</strong>, by factorising the full posterior into a product of
+low-dimensional joint factors over disjoint blocks of parameters, plus
+marginals over leftover singleton parameters:</p>
+<div class="highlight-math notranslate"><div class="highlight"><pre><span></span>\mathcal{M}_{B_L}(\boldsymbol{\theta}) =
+  \prod_{b \in B_L} P_b(\boldsymbol{\theta}_b)
+  \prod_{s \in S(B_L)} P_s(\theta_s).
+</pre></div>
+</div>
+<p>Block membership is chosen by maximising the sum of block total correlations,
+an information-theoretic measure of joint dependence inside each block. This
+selects the product-of-blocks approximation that is closest to the posterior at
+the chosen order. The optimisation is solved with Seeded Greedy Maximisation
+(SGM), and block and singleton densities are fit with multivariate
+Gaussian-kernel KDEs.</p>
+</section>
+<section id="id3">
+<h3>Optimal Bridge Sampling<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>MorphZ then uses the Morph approximation as the proposal distribution inside an
+optimal bridge-sampling estimator. To avoid reuse bias, it splits the supplied
+posterior samples into one batch for fitting the Morph approximation and a
+separate batch for bridge sampling.</p>
+<p>For each call, MorphZ produces:</p>
 <ul class="simple">
-<li><p>Flexible Morph backends: independent, pairwise, grouped, and “tree-structured”.</p></li>
-<li><p>Bandwidth selection: Scott, Silverman, Botev ISJ, and cross-validation variants.</p></li>
-<li><p>Evidence estimation via bridge sampling with robust diagnostics.</p></li>
-<li><p>Mutual information and Total correlation estimation.</p></li>
-<li><p>Mutual information and Chow–Liu dependency tree visualisation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logz</span></code>, the log-evidence estimate.</p></li>
+<li><p>A bridge-sampling relative mean-squared error diagnostic, computed from the
+same posterior and proposal samples.</p></li>
 </ul>
+</section>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Morph approximation object.</p></li>
+<li><p>Total correlation computation for higher-order correlations.</p></li>
+<li><p>Multiprocessing support for non-vectorized likelihoods.</p></li>
+<li><p>Mutual information plot.</p></li>
+</ul>
+</section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
 <p>Python 3.10+ is recommended.</p>
@@ -518,6 +581,25 @@ likelihood evaluations are needed.</p></li>
 </div>
 <p>From source (editable):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="core-usage">
+<h2>Core Usage<a class="headerlink" href="#core-usage" title="Link to this heading">#</a></h2>
+<p>To estimate <code class="docutils literal notranslate"><span class="pre">log_z</span></code>, provide posterior samples and a log-posterior function. If
+you already have log-posterior values for those same samples, pass them as
+<code class="docutils literal notranslate"><span class="pre">log_posterior_values</span></code> to avoid recomputing them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">morphZ</span>
+
+<span class="n">log_z</span><span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span>
+    <span class="n">samples</span><span class="p">,</span>
+    <span class="n">log_posterior_function</span><span class="o">=</span><span class="n">lp_fn</span><span class="p">,</span>
+    <span class="n">log_posterior_values</span><span class="o">=</span><span class="n">log_prob</span><span class="p">,</span>
+    <span class="n">n_resamples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;./example/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -551,7 +633,6 @@ GitHub Pages automatically on pushes to <code class="docutils literal notranslat
 <li><p>Morphs: <code class="docutils literal notranslate"><span class="pre">Morph_Indep</span></code>, <code class="docutils literal notranslate"><span class="pre">Morph_Pairwise</span></code>, <code class="docutils literal notranslate"><span class="pre">Morph_Group</span></code>, <code class="docutils literal notranslate"><span class="pre">Morph_Tree</span></code>.</p></li>
 <li><p>Bandwidths: <code class="docutils literal notranslate"><span class="pre">select_bandwidth</span></code>, <code class="docutils literal notranslate"><span class="pre">compute_and_save_bandwidths</span></code>.</p></li>
 <li><p>Evidence: <code class="docutils literal notranslate"><span class="pre">evidence</span></code>, <code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln</span></code> (lower‑level), <code class="docutils literal notranslate"><span class="pre">compute_bridge_rmse</span></code>.</p></li>
-<li><p>Dependency analysis: <code class="docutils literal notranslate"><span class="pre">dependency_tree.compute_and_plot_mi_tree</span></code>.</p></li>
 <li><p>Total correlation: <code class="docutils literal notranslate"><span class="pre">Nth_TC.compute_and_save_tc</span></code>.</p></li>
 </ul>
 <p>Notes:</p>
@@ -583,6 +664,26 @@ GitHub Pages automatically on pushes to <code class="docutils literal notranslat
 <li><p>CI: publishes to TestPyPI on pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code>/<code class="docutils literal notranslate"><span class="pre">master</span></code>; to PyPI on <code class="docutils literal notranslate"><span class="pre">v*</span></code> tags.</p></li>
 <li><p>Uses PyPI/TestPyPI Trusted Publishing (OIDC). You can also use API tokens if preferred.</p></li>
 </ul>
+</section>
+<section id="id4">
+<h2>Citation<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>If you use MorphZ, please cite:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">1554-y6ns</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Enhancing evidence estimation through informed probability density approximation}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Zahraoui, El Mehdi and Maturana-Russel, Patricio and Vajpeyi, Avi</span>
+<span class="s">             and van Straten, Willem and Meyer, Renate and Gulyaev, Sergei}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Phys. Rev. D}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{113}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">issue</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{8}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{083014}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">month</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Apr}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{American Physical Society}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1103/1554-y6ns}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{https://link.aps.org/doi/10.1103/1554-y6ns}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
@@ -667,13 +768,21 @@ time the documentation is built.  To refresh it locally, run
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">MorphZ</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">How It Works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morph-approximation">Morph Approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Optimal Bridge Sampling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage">Core Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-examples">Run The Examples</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-highlights">API Highlights</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning-release">Versioning &amp; Release</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Citation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
 </li>

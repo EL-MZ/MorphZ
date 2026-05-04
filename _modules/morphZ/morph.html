@@ -60,6 +60,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/morphZ/morph';</script>
+    <link rel="icon" href="../../_static/mz_final.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -315,7 +316,6 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.morph_indep</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Indep</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.morph_tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Tree</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.morph_pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Pairwise</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">dependency_tree</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.morph_group</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Group</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">Nth_TC</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.bw_method</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_and_save_bandwidths</span>
@@ -323,6 +323,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">bridge_multiprocess</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.auto</span><span class="w"> </span><span class="kn">import</span> <span class="n">trange</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">trange</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: ignore</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_save_corner_plot</span><span class="p">(</span>
@@ -425,7 +430,7 @@
 <span class="n">BandwidthMethod</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;scott&quot;</span><span class="p">,</span> <span class="s2">&quot;silverman&quot;</span><span class="p">,</span> <span class="s2">&quot;isj&quot;</span><span class="p">,</span> <span class="s2">&quot;cv_iso&quot;</span><span class="p">,</span> <span class="s2">&quot;cv_diag&quot;</span><span class="p">]</span>
 
 <span class="c1"># Common proposal types</span>
-<span class="n">MorphTypeBase</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;indep&quot;</span><span class="p">,</span> <span class="s2">&quot;pair&quot;</span><span class="p">,</span> <span class="s2">&quot;tree&quot;</span><span class="p">]</span>
+<span class="n">MorphTypeBase</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;indep&quot;</span><span class="p">,</span> <span class="s2">&quot;pair&quot;</span><span class="p">]</span>
 <span class="c1"># Frequently used grouped variants (extend if you use others regularly)</span>
 <span class="n">MorphTypeGroup</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span> <span class="s2">&quot;3_group&quot;</span><span class="p">,</span> <span class="s2">&quot;4_group&quot;</span><span class="p">,</span> <span class="s2">&quot;5_group&quot;</span><span class="p">]</span>
 <span class="c1"># Final type shown to users in hovers; still accept arbitrary strings at runtime</span>
@@ -436,8 +441,8 @@
 <a class="viewcode-back" href="../../api.html#morphZ.evidence">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">evidence</span><span class="p">(</span>
     <span class="n">post_samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="n">log_posterior_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="n">log_posterior_function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">log_posterior_function</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">log_posterior_values</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_resamples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
     <span class="n">thin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">kde_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -461,20 +466,24 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute log evidence using morphological bridge sampling with KDE proposals.</span>
 
-<span class="sd">    This orchestrates proposal construction (independent, pairwise, grouped, or</span>
-<span class="sd">    tree‑structured KDE), draws proposal samples, and performs bridge sampling.</span>
+<span class="sd">    This orchestrates proposal construction (independent, pairwise, or grouped</span>
+<span class="sd">    KDE), draws proposal samples, and performs bridge sampling.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        post_samples (ndarray): Posterior samples of shape ``(N, d)``.</span>
-<span class="sd">        log_posterior_values (ndarray): Log posterior values for ``post_samples``;</span>
-<span class="sd">            shape ``(N,)``. Used to avoid re‑evaluating expensive log posteriors.</span>
 <span class="sd">        log_posterior_function (callable): Callable taking a single vector</span>
 <span class="sd">            ``theta`` with shape ``(d,)`` and returning the log target density.</span>
+<span class="sd">            Required even when ``log_posterior_values`` is provided because</span>
+<span class="sd">            proposal samples are evaluated during bridge sampling.</span>
+<span class="sd">        log_posterior_values (ndarray | None): Log posterior values for</span>
+<span class="sd">            ``post_samples``; shape ``(N,)``. Used to avoid re‑evaluating</span>
+<span class="sd">            expensive log posteriors. If None, values are precomputed for the</span>
+<span class="sd">            bridge subset before bridge sampling.</span>
 <span class="sd">        n_resamples (int): Number of proposal samples per estimation. Typical</span>
 <span class="sd">            range 500–5000 depending on dimensionality.</span>
-<span class="sd">        thin (int): Thinning stride applied to both ``post_samples`` and</span>
-<span class="sd">            ``log_posterior_values`` to reduce autocorrelation. Use ``thin&gt;1`` if</span>
-<span class="sd">            your MCMC is highly autocorrelated.</span>
+<span class="sd">        thin (int): Thinning stride applied to ``post_samples`` and, when</span>
+<span class="sd">            provided, ``log_posterior_values`` to reduce autocorrelation. Use</span>
+<span class="sd">            ``thin&gt;1`` if your MCMC is highly autocorrelated.</span>
 <span class="sd">        kde_fraction (float): Fraction of the (thinned) chain used to fit the</span>
 <span class="sd">            proposal KDE(s). Remaining samples are reserved for the bridge.</span>
 <span class="sd">            Values between 0.3 and 0.7 are common.</span>
@@ -485,14 +494,13 @@
 <span class="sd">        tol (float): Convergence tolerance for the bridge fixed‑point update.</span>
 <span class="sd">        morph_type (MorphType): Proposal family. Use ``&quot;indep&quot;`` for a product</span>
 <span class="sd">            of 1D KDEs, ``&quot;pair&quot;`` for greedy pairwise KDEs using MI ranking,</span>
-<span class="sd">            ``&quot;tree&quot;`` for a Chow-Liu tree KDE, or ``&quot;{k}_group&quot;`` for group</span>
-<span class="sd">            KDEs using k-order total correlation groups from ``Nth_TC``. Common</span>
-<span class="sd">            grouped values are ``&quot;2_group&quot;``, ``&quot;3_group&quot;``, ``&quot;4_group&quot;``,</span>
-<span class="sd">            and ``&quot;5_group&quot;``.</span>
+<span class="sd">            or ``&quot;{k}_group&quot;`` for group KDEs using k-order total correlation</span>
+<span class="sd">            groups from ``Nth_TC``. Common grouped values are ``&quot;2_group&quot;``,</span>
+<span class="sd">            ``&quot;3_group&quot;``, ``&quot;4_group&quot;``, and ``&quot;5_group&quot;``.</span>
 <span class="sd">        param_names (list[str] | None): Optional names for parameters; used for</span>
 <span class="sd">            bandwidth JSONs and reporting. Defaults to ``[&quot;param_i&quot;]``.</span>
 <span class="sd">        output_path (str | None): Directory for artifacts (bandwidth JSONs,</span>
-<span class="sd">            dependency files, and results). Defaults to ``&quot;log_MorphZ&quot;``.</span>
+<span class="sd">            MI/TC files, and results). Defaults to ``&quot;log_MorphZ&quot;``.</span>
 <span class="sd">        n_estimations (int): Number of independent bridge estimates to run. Use</span>
 <span class="sd">            &gt;1 to gauge variability; results are saved as a 2‑column text file</span>
 <span class="sd">            with ``logz`` and ``err`` per row.</span>
@@ -527,51 +535,59 @@
 <span class="sd">            and bridge sampling. The same permutation is applied to both arrays so</span>
 <span class="sd">            sample–log-prob correspondence is preserved.</span>
 <span class="sd">        overwrite_path (bool): If True, recompute and overwrite all cached files</span>
-<span class="sd">            (bandwidth JSONs, MI/TC/tree dependency files) even if they already</span>
-<span class="sd">            exist on disk. Default is False (skip recomputation when files exist).</span>
+<span class="sd">            (bandwidth JSONs and MI/TC files) even if they already exist on disk.</span>
+<span class="sd">            Default is False (skip recomputation when files exist).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list[[float, float]]: A list of ``[logz, err]`` for each estimation.</span>
 
 <span class="sd">    Suggestions:</span>
-<span class="sd">        - Start with ``morph_type=&#39;indep&#39;`` for speed. If diagnostics look poor,</span>
-<span class="sd">          try ``&#39;pair&#39;`` or ``&#39;tree&#39;`` to capture dependencies.</span>
+<span class="sd">        - Start with ``morph_type=&#39;2_group&#39;`` for speed. If diagnostics look poor,</span>
+<span class="sd">          try ``&#39;3_group&#39;``to capture dependencies.</span>
 <span class="sd">        - For bandwidths, try ``&#39;silverman&#39;`` for speed, ``&#39;cv_iso&#39;`` for tighter</span>
 <span class="sd">          fits, or ``&#39;isj&#39;`` as a robust nonparametric choice.</span>
 <span class="sd">        - Use ``n_estimations&gt;=3`` to assess stability and report mean/SE.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     
+    <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">log_posterior_values</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">log_posterior_function</span><span class="p">):</span>
+        <span class="n">log_posterior_function</span><span class="p">,</span> <span class="n">log_posterior_values</span> <span class="o">=</span> <span class="n">log_posterior_values</span><span class="p">,</span> <span class="n">log_posterior_function</span>
+
+    <span class="k">if</span> <span class="n">log_posterior_function</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;log_posterior_function must be provided for bridge sampling.&quot;</span><span class="p">)</span>
+
     <span class="n">kde_bw_name</span> <span class="o">=</span> <span class="n">kde_bw</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">post_samples</span><span class="p">[::</span><span class="n">thin</span><span class="p">,</span> <span class="p">:]</span>
-    <span class="n">log_prob</span> <span class="o">=</span> <span class="n">log_posterior_values</span><span class="p">[::</span><span class="n">thin</span><span class="p">]</span>
+    <span class="n">log_prob</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">log_posterior_values</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">log_posterior_values</span><span class="p">[::</span><span class="n">thin</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
         <span class="n">perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
         <span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span>
-        <span class="n">log_prob</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">log_prob</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log_prob</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span>
 
-    <span class="c1"># Sanity-check: callable must agree with the pre-computed log-posterior values.</span>
-    <span class="n">_n_check</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
-    <span class="n">_mismatches</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">_n_check</span><span class="p">):</span>
-        <span class="n">_lp_callable</span> <span class="o">=</span> <span class="n">log_posterior_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">_i</span><span class="p">])</span>
-        <span class="n">_lp_stored</span>   <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;sanity i=</span><span class="si">%d</span><span class="s2">  stored=</span><span class="si">%.6f</span><span class="s2">  callable=</span><span class="si">%.6f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">_i</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">_lp_callable</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">_lp_callable</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
-            <span class="n">_mismatches</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_i</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">_lp_callable</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">_mismatches</span><span class="p">:</span>
-        <span class="n">_msg</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;log_posterior_function does not match log_posterior_values for &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">_mismatches</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">_n_check</span><span class="si">}</span><span class="s2"> checked samples. &quot;</span>
-            <span class="s2">&quot;Bridge sampling results may be unreliable.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;  i=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">  stored=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  callable=</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  diff=</span><span class="si">{</span><span class="n">c</span><span class="o">-</span><span class="n">s</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">_mismatches</span>
+    <span class="k">if</span> <span class="n">log_prob</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Sanity-check: callable must agree with the pre-computed log-posterior values.</span>
+        <span class="n">_n_check</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+        <span class="n">_mismatches</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">_n_check</span><span class="p">):</span>
+            <span class="n">_lp_callable</span> <span class="o">=</span> <span class="n">log_posterior_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">_i</span><span class="p">])</span>
+            <span class="n">_lp_stored</span>   <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;sanity i=</span><span class="si">%d</span><span class="s2">  stored=</span><span class="si">%.6f</span><span class="s2">  callable=</span><span class="si">%.6f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">_i</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">_lp_callable</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">_lp_callable</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
+                <span class="n">_mismatches</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_i</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">_lp_callable</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">_mismatches</span><span class="p">:</span>
+            <span class="n">_msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;log_posterior_function does not match log_posterior_values for &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">_mismatches</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">_n_check</span><span class="si">}</span><span class="s2"> checked samples. &quot;</span>
+                <span class="s2">&quot;Bridge sampling results may be unreliable.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;  i=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">  stored=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  callable=</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  diff=</span><span class="si">{</span><span class="n">c</span><span class="o">-</span><span class="n">s</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">_mismatches</span>
+                <span class="p">)</span>
             <span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">_msg</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_msg</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">_msg</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_msg</span><span class="p">)</span>
 
     <span class="n">tot_len</span><span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
 
@@ -642,8 +658,9 @@
             <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">)]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mi_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MI file not found at </span><span class="si">%s</span><span class="s2">. Running dependency tree computation...&quot;</span><span class="p">,</span> <span class="n">mi_file</span><span class="p">)</span>
-            <span class="n">dependency_tree</span><span class="o">.</span><span class="n">compute_and_plot_mi_tree</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span> <span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;pair&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;MI file not found at </span><span class="si">{</span><span class="n">mi_file</span><span class="si">}</span><span class="s2">. Generate params_MI.json before using morph_type=&#39;pair&#39;.&quot;</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bw_is_numeric</span><span class="p">:</span>
             <span class="c1"># Direct numeric bandwidth; skip JSON computation</span>
@@ -804,11 +821,9 @@
         <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">)]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tree_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s2">&quot;Tree file not found at </span><span class="si">%s</span><span class="s2">. Running dependency tree computation... might take a while for higher dimensions. for faster results, use fewer samples per param.&quot;</span><span class="p">,</span>
-                <span class="n">tree_file</span><span class="p">,</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Tree file not found at </span><span class="si">{</span><span class="n">tree_file</span><span class="si">}</span><span class="s2">. Generate tree.json before using morph_type=&#39;tree&#39;.&quot;</span>
             <span class="p">)</span>
-            <span class="n">dependency_tree</span><span class="o">.</span><span class="n">compute_and_plot_mi_tree</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span> <span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;tree&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bw_is_numeric</span><span class="p">:</span>
             <span class="c1"># Direct numeric bandwidth; do not compute JSON bandwidths</span>
@@ -827,11 +842,26 @@
             <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Tree</span><span class="p">(</span><span class="n">kde_samples</span><span class="p">,</span> <span class="n">tree_file</span><span class="o">=</span><span class="n">tree_file</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="o">=</span><span class="n">bw_json_path</span><span class="p">)</span>
         <span class="n">log_proposal_pdf</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">logpdf</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown morph_type: </span><span class="si">{</span><span class="n">morph_type</span><span class="si">}</span><span class="s2">. Supported types are &#39;indep&#39;, &#39;pair&#39;, and &#39;tree&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown morph_type: </span><span class="si">{</span><span class="n">morph_type</span><span class="si">}</span><span class="s2">. Supported types are &#39;indep&#39;, &#39;pair&#39;, and &#39;*_group&#39;.&quot;</span><span class="p">)</span>
 
     <span class="n">bridge_start_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tot_len</span> <span class="o">*</span> <span class="n">bridge_start_fraction</span><span class="p">)</span>
     <span class="n">samples_mor</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">bridge_start_index</span><span class="p">:,</span> <span class="p">:]</span>
-    <span class="n">log_post</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">bridge_start_index</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">log_prob</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">precompute_msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;log_posterior_values was not provided; precomputing log_prob for bridge samples. &quot;</span>
+            <span class="s2">&quot;Provide log_posterior_values to save time.&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">precompute_msg</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">precompute_msg</span><span class="p">)</span>
+        <span class="n">iterator</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">samples_mor</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">show_progress</span> <span class="ow">and</span> <span class="n">trange</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">iterator</span> <span class="o">=</span> <span class="n">trange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">samples_mor</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Precomputing log_prob&quot;</span><span class="p">)</span>
+        <span class="n">log_post</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">log_posterior_function</span><span class="p">(</span><span class="n">samples_mor</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">],</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">log_post</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">bridge_start_index</span><span class="p">:]</span>
     <span class="c1"># Optional: corner-style comparison plot of posterior vs proposal</span>
         
     <span class="k">if</span> <span class="n">plot</span> <span class="p">:</span>

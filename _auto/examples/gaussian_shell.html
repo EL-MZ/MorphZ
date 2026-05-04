@@ -61,6 +61,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/gaussian_shell';</script>
+    <link rel="icon" href="../../_static/mz_final.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Peak Sampling: Evidence for a Bimodal-Scale Gaussian" href="peak_sampling.html" />
@@ -552,16 +553,13 @@ Shell widths: w1=0.1, w2=0.1
 Running dynesty Nested Sampling on Gaussian shell...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0it [00:00, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5566it [00:13, 426.47it/s, +100 | bound: 393 | nc: 1 | ncall: 263818 | eff(%):  2.149 | loglstar:   -inf &lt;  1.384 &lt;    inf | logz: -49.391 +/-  0.704 | dlogz:  0.000 &gt;  0.010]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5605it [00:12, 441.92it/s, +100 | bound: 403 | nc: 1 | ncall: 266989 | eff(%):  2.138 | loglstar:   -inf &lt;  1.384 &lt;    inf | logz: -49.772 +/-  0.706 | dlogz:  0.000 &gt;  0.010]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RESULTS ====
-dynesty estimated logZ = -49.391 ± 0.717
+dynesty estimated logZ = -49.772 ± 0.719
 True logZ (literature) = -60.130
-Error = 10.739
+Error = 10.358
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -582,7 +580,7 @@ Error = 10.739
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
     <span class="n">log_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lp_fn</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
 
-<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="n">log_prob</span><span class="p">,</span><span class="n">lp_fn</span><span class="p">,</span>
+<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="n">lp_fn</span><span class="p">,</span><span class="n">log_prob</span><span class="p">,</span>
 <span class="n">n_resamples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
 <span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./gaussian_shell/&#39;</span><span class="p">,</span><span class="n">overwrite_path</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1"># print(&#39;True:&#39;, true_logz)</span>
@@ -603,41 +601,40 @@ INFO:morphZ.morph:Computing TC with 8 workers.
 INFO:morphZ.Nth_TC:Auto-thinning samples to 300 for faster TC computation (n_dims=30, n_order=2).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 2833 Dimensions: 30
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 2853 Dimensions: 30
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "797f959bca414f78ac2f7b7ce7ec5996", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.Nth_TC:Top 10 MI pairs:
-INFO:morphZ.Nth_TC:  param_12 — param_19 : 0.129846
-INFO:morphZ.Nth_TC:  param_14 — param_22 : 0.126762
-INFO:morphZ.Nth_TC:  param_12 — param_20 : 0.119918
-INFO:morphZ.Nth_TC:  param_15 — param_26 : 0.118049
-INFO:morphZ.Nth_TC:  param_24 — param_26 : 0.116317
-INFO:morphZ.Nth_TC:  param_23 — param_29 : 0.113851
-INFO:morphZ.Nth_TC:  param_17 — param_21 : 0.113628
-INFO:morphZ.Nth_TC:  param_17 — param_22 : 0.112689
-INFO:morphZ.Nth_TC:  param_10 — param_14 : 0.112161
-INFO:morphZ.Nth_TC:  param_8 — param_19 : 0.112160
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5921405dfca044449d62555209e6f520", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.Nth_TC:Top 10 MI pairs:
+INFO:morphZ.Nth_TC:  param_1 — param_4 : 0.121277
+INFO:morphZ.Nth_TC:  param_12 — param_23 : 0.116044
+INFO:morphZ.Nth_TC:  param_3 — param_21 : 0.109586
+INFO:morphZ.Nth_TC:  param_12 — param_22 : 0.106913
+INFO:morphZ.Nth_TC:  param_3 — param_12 : 0.105520
+INFO:morphZ.Nth_TC:  param_5 — param_29 : 0.104488
+INFO:morphZ.Nth_TC:  param_7 — param_19 : 0.103079
+INFO:morphZ.Nth_TC:  param_18 — param_29 : 0.102791
+INFO:morphZ.Nth_TC:  param_1 — param_3 : 0.100580
+INFO:morphZ.Nth_TC:  param_15 — param_19 : 0.100395
 INFO:morphZ.Nth_TC:All MI pairs saved to gaussian_shell/params_2-order_TC.json
 INFO:morphZ.morph:BW file not found at ./gaussian_shell//bw_silverman_2D.json. Running Bw with silverman...
 INFO:morphZ.bw_method:Bandwidths saved to ./gaussian_shell/bw_silverman_2D.json
 INFO:morphZ.bw_method:Processed 15 groups and 0 single parameters
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "69ee1b1ff52243b6b1c637dea7d01117", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge:Filtered proposal samples: 4971 valid samples out of 5000 total samples.
-INFO:morphZ.bridge:iteration: 1 log(z) old: -60.18599163078373 log(z) New: -61.13660818942294
-INFO:morphZ.bridge:iteration: 2 log(z) old: -61.13660818942294 log(z) New: -61.454766747985076
-INFO:morphZ.bridge:iteration: 3 log(z) old: -61.454766747985076 log(z) New: -61.56580696841596
-INFO:morphZ.bridge:iteration: 4 log(z) old: -61.56580696841596 log(z) New: -61.60479846089654
-INFO:morphZ.bridge:iteration: 5 log(z) old: -61.60479846089654 log(z) New: -61.61850576723884
-INFO:morphZ.bridge:iteration: 6 log(z) old: -61.61850576723884 log(z) New: -61.623325837006654
-INFO:morphZ.bridge:Converged in 6 iterations. log(z): -61.6185 +/-: 0.0237
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4cdb815cd0d24cafa80be8ecd1d0ab38", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge:Filtered proposal samples: 5000 valid samples out of 5000 total samples.
+INFO:morphZ.bridge:iteration: 1 log(z) old: -60.2888435848692 log(z) New: -61.186854998650155
+INFO:morphZ.bridge:iteration: 2 log(z) old: -61.186854998650155 log(z) New: -61.4448073620327
+INFO:morphZ.bridge:iteration: 3 log(z) old: -61.4448073620327 log(z) New: -61.521566690857924
+INFO:morphZ.bridge:iteration: 4 log(z) old: -61.521566690857924 log(z) New: -61.54453650174945
+INFO:morphZ.bridge:iteration: 5 log(z) old: -61.54453650174945 log(z) New: -61.551418723977584
+INFO:morphZ.bridge:Converged in 5 iterations. log(z): -61.5445 +/-: 0.0207
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -61.61850576723884 +/- 0.023749839532943965
-NS  mean ln(Z): -49.39073223077961 +/- 0.7174869009817111
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -61.54453650174945 +/- 0.020651312482686066
+NS  mean ln(Z): -49.771655806747845 +/- 0.7192905691184984
 True   ln(Z) D=30: -60.13
-MorphZ residual: -1.4885057672388342
-NS  residual: 10.73926776922039
+MorphZ residual: -1.4145365017494456
+NS  residual: 10.358344193252158
 </pre></div>
 </div>
 </div>

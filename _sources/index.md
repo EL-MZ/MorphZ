@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="_static/mz_final.png" alt="MorphZ logo" width="360">
+</p>
+
 # MorphZ
 
 ## What MorphZ Computes

@@ -63,6 +63,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/jaxns_gaussian_shell';</script>
+    <link rel="icon" href="../../_static/mz_final.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Simple Gaussian Example: Estimating ln(Z) with NumPyro + MorphZ" href="numpyro_morphz_lnz.html" />
@@ -695,8 +696,8 @@ lp range:       -30.6 to -23.47
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">evidence</span><span class="p">(</span>
     <span class="n">post_samples</span><span class="o">=</span><span class="n">post_smp</span><span class="p">,</span>
-    <span class="n">log_posterior_values</span><span class="o">=</span><span class="n">lp</span><span class="p">,</span>
     <span class="n">log_posterior_function</span><span class="o">=</span><span class="n">lp_fn</span><span class="p">,</span>
+    <span class="n">log_posterior_values</span><span class="o">=</span><span class="n">lp</span><span class="p">,</span>
     <span class="n">n_resamples</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
     <span class="n">thin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">morph_type</span><span class="o">=</span><span class="s1">&#39;2_group&#39;</span><span class="p">,</span>

@@ -63,6 +63,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/peak_sampling';</script>
+    <link rel="icon" href="../../_static/mz_final.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Twin Gaussian Shell Evidence with NumPyro + MorphZ" href="numpyro_gaussian_shell.html" />
@@ -584,8 +585,8 @@ $<span class="math notranslate nohighlight">\(
 
 <span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span>
 <span class="n">samples</span><span class="p">,</span>
-<span class="n">log_prob</span><span class="p">,</span>
 <span class="n">lnprobfn</span><span class="p">,</span>
+<span class="n">log_prob</span><span class="p">,</span>
 <span class="n">n_resamples</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
 <span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;pair&quot;</span><span class="p">,</span><span class="n">kde_bw</span><span class="o">=</span><span class="s2">&quot;silverman&quot;</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./morphZ_peak_sampling_new&#39;</span><span class="p">)</span>
 <span class="c1">#print(&#39;True:&#39;, np.log(2))</span>
