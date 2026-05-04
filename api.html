@@ -1,0 +1,1877 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API Reference &#8212; MorphZ Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="examples.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MorphZ Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    MorphZ
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/eggbox.html">Eggbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/gaussian_shell.html">Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/peak_sampling.html">Peak sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/numpyro_gaussian_shell.html">NumPyro Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/jaxns_gaussian_shell.html">JAXNS Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_auto/examples/numpyro_morphz_lnz.html">NumPyro MorphZ ln(Z)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ApokryphaV1/MorphZ" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/api.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>API Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morph-approximations">Morph Approximations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.KDEBase"><code class="docutils literal notranslate"><span class="pre">KDEBase</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Indep"><code class="docutils literal notranslate"><span class="pre">Morph_Indep</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Indep.logpdf_kde"><code class="docutils literal notranslate"><span class="pre">Morph_Indep.logpdf_kde()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Indep.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Indep.resample()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise.logpdf"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise.logpdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise.pdf"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise.pdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise.resample()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group"><code class="docutils literal notranslate"><span class="pre">Morph_Group</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group.logpdf"><code class="docutils literal notranslate"><span class="pre">Morph_Group.logpdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group.pdf"><code class="docutils literal notranslate"><span class="pre">Morph_Group.pdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Group.resample()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Tree"><code class="docutils literal notranslate"><span class="pre">Morph_Tree</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Tree.logpdf"><code class="docutils literal notranslate"><span class="pre">Morph_Tree.logpdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Tree.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Tree.resample()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-estimation">Evidence Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.evidence"><code class="docutils literal notranslate"><span class="pre">evidence()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bridge_sampling_ln"><code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.compute_bridge_rmse"><code class="docutils literal notranslate"><span class="pre">compute_bridge_rmse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bridge_multiprocess.bridge_sampling_ln"><code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bridge_multiprocess.compute_bridge_rmse"><code class="docutils literal notranslate"><span class="pre">compute_bridge_rmse()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bandwidth-selection">Bandwidth Selection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bw_method.scott_factor"><code class="docutils literal notranslate"><span class="pre">scott_factor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bw_method.silverman_factor"><code class="docutils literal notranslate"><span class="pre">silverman_factor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.scott_rule"><code class="docutils literal notranslate"><span class="pre">scott_rule()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.silverman_rule"><code class="docutils literal notranslate"><span class="pre">silverman_rule()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.botev_isj_bandwidth"><code class="docutils literal notranslate"><span class="pre">botev_isj_bandwidth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bw_method.botev_isj_factor"><code class="docutils literal notranslate"><span class="pre">botev_isj_factor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.cross_validation_bandwidth"><code class="docutils literal notranslate"><span class="pre">cross_validation_bandwidth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.select_bandwidth"><code class="docutils literal notranslate"><span class="pre">select_bandwidth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.compute_and_save_bandwidths"><code class="docutils literal notranslate"><span class="pre">compute_and_save_bandwidths()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-analysis">Dependency Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.compute_pairwise_mi"><code class="docutils literal notranslate"><span class="pre">compute_pairwise_mi()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.plot_mi_heatmap"><code class="docutils literal notranslate"><span class="pre">plot_mi_heatmap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.plot_chow_liu_tree"><code class="docutils literal notranslate"><span class="pre">plot_chow_liu_tree()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.extract_dependency_edges"><code class="docutils literal notranslate"><span class="pre">extract_dependency_edges()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.compute_and_plot_mi_tree"><code class="docutils literal notranslate"><span class="pre">compute_and_plot_mi_tree()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-correlation">Total Correlation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.stable_seed_for_indices"><code class="docutils literal notranslate"><span class="pre">stable_seed_for_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_marginal_log_p"><code class="docutils literal notranslate"><span class="pre">compute_marginal_log_p()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_tc_for_indices"><code class="docutils literal notranslate"><span class="pre">compute_tc_for_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_total_correlation"><code class="docutils literal notranslate"><span class="pre">compute_total_correlation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.plot_tc_heatmap"><code class="docutils literal notranslate"><span class="pre">plot_tc_heatmap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_and_save_tc"><code class="docutils literal notranslate"><span class="pre">compute_and_save_tc()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities">Utilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.compute_rho_f2_0_via_statsmodels"><code class="docutils literal notranslate"><span class="pre">compute_rho_f2_0_via_statsmodels()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.compute_rho_f2_0_via_correlate"><code class="docutils literal notranslate"><span class="pre">compute_rho_f2_0_via_correlate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.log_plus"><code class="docutils literal notranslate"><span class="pre">log_plus()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.log_sum"><code class="docutils literal notranslate"><span class="pre">log_sum()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.error_bound_from_oscillation"><code class="docutils literal notranslate"><span class="pre">error_bound_from_oscillation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
+<p>This page documents the public MorphZ API. Private helpers whose names start
+with <code class="docutils literal notranslate"><span class="pre">_</span></code> are intentionally omitted.</p>
+<section id="morph-approximations">
+<h2>Morph Approximations<a class="headerlink" href="#morph-approximations" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="morphZ.KDEBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">KDEBase</span></span><a class="reference internal" href="_modules/morphZ/kde_base.html#KDEBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.KDEBase" title="Link to this definition">#</a></dt>
+<dd><p>Base class for KDE implementations with JSON bandwidth loading support.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="morphZ.Morph_Indep">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">Morph_Indep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kde_bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_json_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_indep.html#Morph_Indep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Indep" title="Link to this definition">#</a></dt>
+<dd><p>Independent KDE approximation for multivariate posterior samples.</p>
+<p>Each parameter is modeled with a one-dimensional Gaussian KDE and the joint
+density is evaluated as the product of those marginal densities. This is the
+fastest Morph approximation and assumes weak dependence between parameters.</p>
+<p>Fit one one-dimensional KDE per parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – 2D array of shape (n_samples, n_params) used to fit the KDEs.</p></li>
+<li><p><strong>kde_bw</strong> (<em>str</em><em>, </em><em>scalar</em><em>, or </em><em>dict</em><em>, </em><em>optional</em>) – The method used to estimate the bandwidth of the KDE.
+Can also be used to override specific parameter bandwidths
+when using JSON files. Defaults to ‘silverman’.</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em>, </em><em>scalar</em><em>, or </em><em>dict</em><em>, </em><em>optional</em>) – Backward‑compat alias for <code class="docutils literal notranslate"><span class="pre">kde_bw</span></code>.</p></li>
+<li><p><strong>param_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Names of the parameters. If None, parameters are named by their index.</p></li>
+<li><p><strong>bw_json_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to JSON file containing bandwidth values. If provided,
+bandwidths will be loaded from this file and kde_bw can be used
+to override specific parameters.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Print fitting details per parameter.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Suggestions:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">kde_bw</span></code> can be a number (e.g., 0.8) for slightly tighter KDEs
+or a dict mapping parameter names to custom values.</p></li>
+<li><p>Supported selectors from <code class="docutils literal notranslate"><span class="pre">bw_method.py</span></code> for SciPy‑compatible
+factors: <code class="docutils literal notranslate"><span class="pre">'scott'</span></code>, <code class="docutils literal notranslate"><span class="pre">'silverman'</span></code>, <code class="docutils literal notranslate"><span class="pre">'isj'</span></code> (Botev’s ISJ),
+<code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> (isotropic CV), <code class="docutils literal notranslate"><span class="pre">'cv_diag'</span></code> (diagonal CV → scalar
+factor via geometric mean). Choose <code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code>/<code class="docutils literal notranslate"><span class="pre">'cv_diag'</span></code> for
+higher fidelity at extra cost.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">bw_json_path</span></code> with values from
+<code class="docutils literal notranslate"><span class="pre">compute_and_save_bandwidths</span></code> to ensure consistent settings
+between different KDE approximations.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">data</span></code> is not two-dimensional, <code class="docutils literal notranslate"><span class="pre">param_names</span></code> has
+    the wrong length, or both bandwidth aliases are specified with
+    different values.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Indep.logpdf_kde">
+<span class="sig-name descname"><span class="pre">logpdf_kde</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_indep.html#Morph_Indep.logpdf_kde"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Indep.logpdf_kde" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the approximated joint log density at a point.</p>
+<p>The total log probability is the sum of the log probabilities from each 1D KDE,
+assuming independence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>array-like</em>) – The point at which to evaluate the log probability density.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The log probability density at the given point.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Indep.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_indep.html#Morph_Indep.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Indep.resample" title="Link to this definition">#</a></dt>
+<dd><p>Draw independent samples from the fitted marginal KDEs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of samples to generate. Defaults to 1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of resampled points with shape (size, n_params).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="morphZ.Morph_Pairwise">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">Morph_Pairwise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_mi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kde_bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_mi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_json_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k_greedy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_pairwise.html#Morph_Pairwise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Pairwise" title="Link to this definition">#</a></dt>
+<dd><p>Greedy pairwise KDE approximation guided by mutual information (MI).</p>
+<p>Pairs with highest MI are modeled jointly with 2D KDEs; remaining variables
+are modeled as independent 1D KDEs. This balances flexibility and speed.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">dependency_tree.compute_and_plot_mi_tree</span></code> or <code class="docutils literal notranslate"><span class="pre">Nth_TC.compute_and_save_tc</span></code>
+to generate MI pairs if you need persistent files for reuse.</p>
+<p>Initialize and fit pairwise/independent KDE components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>ndarray</em>) – Samples with shape <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_params)</span></code>.</p></li>
+<li><p><strong>param_mi</strong> (<em>str</em><em> | </em><em>list</em>) – Either a path to <code class="docutils literal notranslate"><span class="pre">params_MI.json</span></code> (as
+saved by dependency utilities) or a list of <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b,</span> <span class="pre">mi]</span></code>
+entries where <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are names or indices.</p></li>
+<li><p><strong>param_names</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Optional parameter names; if None,
+defaults to <code class="docutils literal notranslate"><span class="pre">[&quot;param_i&quot;]</span></code>.</p></li>
+<li><p><strong>kde_bw</strong> (<em>str</em><em> | </em><em>float</em><em> | </em><em>dict</em>) – Bandwidth method or numeric factor. If a
+dict, values override JSON bandwidths per parameter name.</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> | </em><em>float</em><em> | </em><em>dict</em><em> | </em><em>None</em>) – Backward‑compat alias for <code class="docutils literal notranslate"><span class="pre">kde_bw</span></code>.</p></li>
+<li><p><strong>min_mi</strong> (<em>float</em><em> | </em><em>None</em>) – Filter out pairs with MI below this value
+before selection.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Print helpful fitting logs.</p></li>
+<li><p><strong>bw_json_path</strong> (<em>str</em><em> | </em><em>None</em>) – Path to bandwidth JSON produced by
+<code class="docutils literal notranslate"><span class="pre">compute_and_save_bandwidths(...,</span> <span class="pre">n_order=2)</span></code>. When provided,
+speeds up and standardizes bandwidths. You can still override
+individual parameters via the <code class="docutils literal notranslate"><span class="pre">kde_bw</span></code> dict.</p></li>
+<li><p><strong>top_k_greedy</strong> (<em>int</em>) – Try K seeded greedy runs. Run i in [0..K-1]
+seeds the selection with the i-th highest MI pair from the
+sorted candidate list, then completes selection greedily. The
+run with the largest total MI is kept. Defaults to 1 (current
+behavior).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>When <code class="docutils literal notranslate"><span class="pre">kde_bw</span></code> is a list per pair, the geometric mean is used to
+obtain a scalar suitable for 2D <code class="docutils literal notranslate"><span class="pre">gaussian_kde</span></code>.</p></li>
+<li><p>Supported selectors from <code class="docutils literal notranslate"><span class="pre">bw_method.py</span></code> for SciPy‑compatible
+factors: <code class="docutils literal notranslate"><span class="pre">'scott'</span></code>, <code class="docutils literal notranslate"><span class="pre">'silverman'</span></code>, <code class="docutils literal notranslate"><span class="pre">'isj'</span></code> (Botev’s ISJ),
+<code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> (isotropic CV), <code class="docutils literal notranslate"><span class="pre">'cv_diag'</span></code> (diagonal CV → scalar
+factor via geometric mean). Try <code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> when pairwise
+components need tighter fits; prefer <code class="docutils literal notranslate"><span class="pre">'silverman'</span></code> for speed.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Pairwise.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_pairwise.html#Morph_Pairwise.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Pairwise.logpdf" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the joint log density under the pairwise KDE approximation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>ndarray</em><em> | </em><em>List</em><em>[</em><em>float</em><em>]</em>) – Either a single point with shape <code class="docutils literal notranslate"><span class="pre">(d,)</span></code> or a batch with
+shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">d)</span></code> (both accepted; columns are dimensions).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Log density for each point; returns a scalar for
+a single input point.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Pairwise.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_pairwise.html#Morph_Pairwise.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Pairwise.pdf" title="Link to this definition">#</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">exp(logpdf(x))</span></code> as a convenience wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>ndarray</em><em> | </em><em>List</em><em>[</em><em>float</em><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Pairwise.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_resamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_pairwise.html#Morph_Pairwise.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Pairwise.resample" title="Link to this definition">#</a></dt>
+<dd><p>Draw i.i.d. samples from the fitted approximation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_resamples</strong> (<em>int</em>) – Number of samples to generate.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em> | </em><em>None</em>) – Optional integer seed for reproducibility.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Samples with shape <code class="docutils literal notranslate"><span class="pre">(n_resamples,</span> <span class="pre">d)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="morphZ.Morph_Group">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">Morph_Group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kde_bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_tc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_json_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k_greedy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_group.html#Morph_Group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Group" title="Link to this definition">#</a></dt>
+<dd><p>Group‑based KDE approximation guided by N‑th order Total Correlation (TC).</p>
+<p>Disjoint groups with largest TC are modeled by multi‑dimensional KDEs; any
+leftovers are modeled as independent 1D KDEs. Use
+<code class="docutils literal notranslate"><span class="pre">Nth_TC.compute_and_save_tc</span></code> to generate and persist groups.</p>
+<p>Initialize and fit group/independent KDE components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>ndarray</em>) – Samples with shape <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_params)</span></code>.</p></li>
+<li><p><strong>param_tc</strong> (<em>str</em><em> | </em><em>list</em>) – Either a path to a TC JSON file with entries
+like <code class="docutils literal notranslate"><span class="pre">[[group_names],</span> <span class="pre">tc]</span></code> or an in‑memory list of such pairs.</p></li>
+<li><p><strong>param_names</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Optional names for parameters.</p></li>
+<li><p><strong>kde_bw</strong> (<em>str</em><em> | </em><em>float</em><em> | </em><em>dict</em>) – Bandwidth method/factor or per‑name overrides.</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> | </em><em>float</em><em> | </em><em>dict</em><em> | </em><em>None</em>) – Backward‑compat alias for <code class="docutils literal notranslate"><span class="pre">kde_bw</span></code>.</p></li>
+<li><p><strong>min_tc</strong> (<em>float</em><em> | </em><em>None</em>) – Discard groups with TC below this threshold.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Print helpful fitting logs.</p></li>
+<li><p><strong>bw_json_path</strong> (<em>str</em><em> | </em><em>None</em>) – Path to bandwidth JSON (e.g., produced by
+<code class="docutils literal notranslate"><span class="pre">compute_and_save_bandwidths(...,</span> <span class="pre">n_order=k,</span> <span class="pre">group_format=&quot;groups&quot;)</span></code>).</p></li>
+<li><p><strong>top_k_greedy</strong> (<em>int</em>) – Try K seeded greedy runs. Run i in [0..K-1]
+seeds the selection with the i-th highest‑TC group from the
+sorted candidate list, then completes selection greedily. The
+run with the largest total TC is kept. Defaults to 1 (current
+behavior).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>For group KDEs (dim&gt;1), a single scalar bandwidth is required by
+<code class="docutils literal notranslate"><span class="pre">gaussian_kde</span></code>; we use the geometric mean when a list is given.</p></li>
+<li><p>Supported selectors from <code class="docutils literal notranslate"><span class="pre">bw_method.py</span></code> for SciPy‑compatible
+factors: <code class="docutils literal notranslate"><span class="pre">'scott'</span></code>, <code class="docutils literal notranslate"><span class="pre">'silverman'</span></code>, <code class="docutils literal notranslate"><span class="pre">'isj'</span></code> (Botev’s ISJ),
+<code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> (isotropic CV), <code class="docutils literal notranslate"><span class="pre">'cv_diag'</span></code> (diagonal CV → scalar
+factor via geometric mean). <code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> often improves multi‑D
+group fits but is slower.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Group.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_group.html#Morph_Group.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Group.logpdf" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the joint log density under the group KDE approximation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>ndarray</em><em> | </em><em>List</em><em>[</em><em>float</em><em>]</em>) – Either a single point with shape <code class="docutils literal notranslate"><span class="pre">(d,)</span></code> or a batch with
+shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">d)</span></code> (both accepted; columns are dimensions).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Log density for each point; returns a scalar for
+a single input point.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Group.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_group.html#Morph_Group.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Group.pdf" title="Link to this definition">#</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">exp(logpdf(x))</span></code> as a convenience wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>ndarray</em><em> | </em><em>List</em><em>[</em><em>float</em><em>]</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Group.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_resamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_group.html#Morph_Group.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Group.resample" title="Link to this definition">#</a></dt>
+<dd><p>Draw i.i.d. samples from the fitted approximation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_resamples</strong> (<em>int</em>) – Number of samples to generate.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em> | </em><em>None</em>) – Optional integer seed for reproducibility.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Samples with shape <code class="docutils literal notranslate"><span class="pre">(n_resamples,</span> <span class="pre">d)</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="morphZ.Morph_Tree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">Morph_Tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kde_bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_json_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_tree.html#Morph_Tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Tree" title="Link to this definition">#</a></dt>
+<dd><p>Chow-Liu tree KDE approximation for multivariate posterior samples.</p>
+<p>The joint density is approximated as <code class="docutils literal notranslate"><span class="pre">p(root)</span></code> times conditional factors
+<code class="docutils literal notranslate"><span class="pre">p(child</span> <span class="pre">|</span> <span class="pre">parent)</span></code> along the dependency tree edges.</p>
+<p>Fit root and branch KDEs from a saved dependency tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – 2D array of shape (n_samples, n_params) used to fit the KDEs.</p></li>
+<li><p><strong>tree_file</strong> (<em>str</em>) – Path to the JSON file containing the tree structure.</p></li>
+<li><p><strong>param_names</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Names of the parameters. If None, parameters are named by their index.</p></li>
+<li><p><strong>kde_bw</strong> (<em>str</em><em>, </em><em>scalar</em><em>, or </em><em>dict</em><em>, </em><em>optional</em>) – The method used to estimate the bandwidth of the KDE.
+Can also be used to override specific parameter bandwidths
+when using JSON files. Defaults to ‘silverman’.</p></li>
+<li><p><strong>bw_json_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to JSON file containing bandwidth values. If provided,
+bandwidths will be loaded from this file and kde_bw can be used
+to override specific parameters.</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em>, </em><em>scalar</em><em>, or </em><em>dict</em><em>, </em><em>optional</em>) – Backward‑compat alias for <code class="docutils literal notranslate"><span class="pre">kde_bw</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Suggestions:</dt><dd><ul class="simple">
+<li><p>Generate <code class="docutils literal notranslate"><span class="pre">tree_file</span></code> via <code class="docutils literal notranslate"><span class="pre">dependency_tree.compute_and_plot_mi_tree</span></code>
+to ensure consistency with MI weights and labels used elsewhere.</p></li>
+<li><p>When passing a dict for <code class="docutils literal notranslate"><span class="pre">kde_bw</span></code>, keys must match <code class="docutils literal notranslate"><span class="pre">param_names</span></code>.</p></li>
+<li><p>Supported selectors from <code class="docutils literal notranslate"><span class="pre">bw_method.py</span></code> for SciPy‑compatible
+factors: <code class="docutils literal notranslate"><span class="pre">'scott'</span></code>, <code class="docutils literal notranslate"><span class="pre">'silverman'</span></code>, <code class="docutils literal notranslate"><span class="pre">'isj'</span></code> (Botev’s ISJ),
+<code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> (isotropic CV), <code class="docutils literal notranslate"><span class="pre">'cv_diag'</span></code> (diagonal CV → scalar
+factor via geometric mean). For trees, <code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> can offer a
+good accuracy/runtime trade‑off.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">data</span></code> is not two-dimensional, <code class="docutils literal notranslate"><span class="pre">param_names</span></code> has
+    the wrong length, the tree has no unique root, or both bandwidth
+    aliases are specified with different values.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Tree.logpdf">
+<span class="sig-name descname"><span class="pre">logpdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_tree.html#Morph_Tree.logpdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Tree.logpdf" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate the approximated joint log density at a point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>point</strong> (<em>array-like</em>) – The point at which to evaluate the log probability density.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The log probability density at the given point.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="morphZ.Morph_Tree.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_resamples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nwalkers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph_tree.html#Morph_Tree.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Morph_Tree.resample" title="Link to this definition">#</a></dt>
+<dd><p>Draw samples from the fitted tree approximation using <code class="docutils literal notranslate"><span class="pre">emcee</span></code>.</p>
+<p>The number of MCMC steps and thinning are adapted to generate the
+requested number of output samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_resamples</strong> (<em>int</em>) – The desired number of resamples.</p></li>
+<li><p><strong>nwalkers</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of walkers. Defaults to 2 * ndim.</p></li>
+<li><p><strong>progress</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display an <code class="docutils literal notranslate"><span class="pre">emcee</span></code> progress bar.
+Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of resampled points with shape (n_resamples, n_dims).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the chain produces no post-thinning samples.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Tips:</dt><dd><ul class="simple">
+<li><p>If too few independent samples are produced, increase <code class="docutils literal notranslate"><span class="pre">n_steps</span></code> by
+raising <code class="docutils literal notranslate"><span class="pre">n_resamples</span></code> or override the initial autocorrelation guess.</p></li>
+<li><p>For speed, consider using <code class="docutils literal notranslate"><span class="pre">PairwiseKDE</span></code>/<code class="docutils literal notranslate"><span class="pre">GroupKDE</span></code> resampling
+when the tree structure is not essential.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="evidence-estimation">
+<h2>Evidence Estimation<a class="headerlink" href="#evidence-estimation" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.evidence">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">post_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_posterior_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_posterior_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_resamples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kde_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bridge_start_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">morph_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2_group'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_estimations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kde_bw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k_greedy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefer_corner</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/morph.html#evidence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.evidence" title="Link to this definition">#</a></dt>
+<dd><p>Compute log evidence using morphological bridge sampling with KDE proposals.</p>
+<p>This orchestrates proposal construction (independent, pairwise, grouped, or
+tree‑structured KDE), draws proposal samples, and performs bridge sampling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>post_samples</strong> (<em>ndarray</em>) – Posterior samples of shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">d)</span></code>.</p></li>
+<li><p><strong>log_posterior_values</strong> (<em>ndarray</em>) – Log posterior values for <code class="docutils literal notranslate"><span class="pre">post_samples</span></code>;
+shape <code class="docutils literal notranslate"><span class="pre">(N,)</span></code>. Used to avoid re‑evaluating expensive log posteriors.</p></li>
+<li><p><strong>log_posterior_function</strong> (<em>callable</em>) – Callable taking a single vector
+<code class="docutils literal notranslate"><span class="pre">theta</span></code> with shape <code class="docutils literal notranslate"><span class="pre">(d,)</span></code> and returning the log target density.</p></li>
+<li><p><strong>n_resamples</strong> (<em>int</em>) – Number of proposal samples per estimation. Typical
+range 500–5000 depending on dimensionality.</p></li>
+<li><p><strong>thin</strong> (<em>int</em>) – Thinning stride applied to both <code class="docutils literal notranslate"><span class="pre">post_samples</span></code> and
+<code class="docutils literal notranslate"><span class="pre">log_posterior_values</span></code> to reduce autocorrelation. Use <code class="docutils literal notranslate"><span class="pre">thin&gt;1</span></code> if
+your MCMC is highly autocorrelated.</p></li>
+<li><p><strong>kde_fraction</strong> (<em>float</em>) – Fraction of the (thinned) chain used to fit the
+proposal KDE(s). Remaining samples are reserved for the bridge.
+Values between 0.3 and 0.7 are common.</p></li>
+<li><p><strong>bridge_start_fraction</strong> (<em>float</em>) – Fraction of (thinned) chain index from
+which the bridge uses the posterior samples. E.g., <code class="docutils literal notranslate"><span class="pre">0.5</span></code> starts at
+the latter half to reduce dependence with KDE fitting.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em>) – Max bridge iterations.</p></li>
+<li><p><strong>tol</strong> (<em>float</em>) – Convergence tolerance for the bridge fixed‑point update.</p></li>
+<li><p><strong>morph_type</strong> (<em>MorphType</em>) – Proposal family. Use <code class="docutils literal notranslate"><span class="pre">&quot;indep&quot;</span></code> for a product
+of 1D KDEs, <code class="docutils literal notranslate"><span class="pre">&quot;pair&quot;</span></code> for greedy pairwise KDEs using MI ranking,
+<code class="docutils literal notranslate"><span class="pre">&quot;tree&quot;</span></code> for a Chow-Liu tree KDE, or <code class="docutils literal notranslate"><span class="pre">&quot;{k}_group&quot;</span></code> for group
+KDEs using k-order total correlation groups from <code class="docutils literal notranslate"><span class="pre">Nth_TC</span></code>. Common
+grouped values are <code class="docutils literal notranslate"><span class="pre">&quot;2_group&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;3_group&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;4_group&quot;</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">&quot;5_group&quot;</span></code>.</p></li>
+<li><p><strong>param_names</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Optional names for parameters; used for
+bandwidth JSONs and reporting. Defaults to <code class="docutils literal notranslate"><span class="pre">[&quot;param_i&quot;]</span></code>.</p></li>
+<li><p><strong>output_path</strong> (<em>str</em><em> | </em><em>None</em>) – Directory for artifacts (bandwidth JSONs,
+dependency files, and results). Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;log_MorphZ&quot;</span></code>.</p></li>
+<li><p><strong>n_estimations</strong> (<em>int</em>) – Number of independent bridge estimates to run. Use
+&gt;1 to gauge variability; results are saved as a 2‑column text file
+with <code class="docutils literal notranslate"><span class="pre">logz</span></code> and <code class="docutils literal notranslate"><span class="pre">err</span></code> per row.</p></li>
+<li><p><strong>kde_bw</strong> (<em>BandwidthMethod</em><em> | </em><em>float</em><em> | </em><em>dict</em><em> | </em><em>silverman</em>) – Bandwidth selector/factor.
+Supported selectors from <code class="docutils literal notranslate"><span class="pre">bw_method.py</span></code>: <code class="docutils literal notranslate"><span class="pre">'scott'</span></code>, <code class="docutils literal notranslate"><span class="pre">'silverman'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'isj'</span></code> (Botev’s ISJ), <code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> (isotropic CV), <code class="docutils literal notranslate"><span class="pre">'cv_diag'</span></code>
+(diagonal CV → scalar factor). You can also pass a number (e.g., 0.9)
+or a <code class="docutils literal notranslate"><span class="pre">{name:</span> <span class="pre">value}</span></code> dict to override specific parameters when
+using <code class="docutils literal notranslate"><span class="pre">bw_json_path</span></code>.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Print fitting details for KDE components.</p></li>
+<li><p><strong>top_k_greedy</strong> (<em>int</em>) – For <code class="docutils literal notranslate"><span class="pre">pair</span></code> and <code class="docutils literal notranslate"><span class="pre">*_group</span></code> morph types, run K
+seeded greedy selections starting from each of the top‑K candidates
+(by MI or TC), and keep the selection with the highest total score.
+Default is 1 (single greedy pass as before).</p></li>
+<li><p><strong>plot</strong> (<em>bool</em>) – If True, saves a corner plot comparing posterior samples
+(black) and proposal samples (red) as a PNG in <code class="docutils literal notranslate"><span class="pre">output_path</span></code>.
+The plot is not displayed.</p></li>
+<li><p><strong>prefer_corner</strong> (<em>bool</em>) – If True, attempts to render the corner plot using
+the <code class="docutils literal notranslate"><span class="pre">corner</span></code> package with filled contours and the following style:
+<code class="docutils literal notranslate"><span class="pre">bins=50</span></code>, <code class="docutils literal notranslate"><span class="pre">quantiles=(0.05,0.5,0.95)</span></code>, <code class="docutils literal notranslate"><span class="pre">show_titles=True</span></code>,
+<code class="docutils literal notranslate"><span class="pre">title_fmt='.2f'</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_datapoints=True</span></code>, <code class="docutils literal notranslate"><span class="pre">fill_contours=True</span></code>,
+<code class="docutils literal notranslate"><span class="pre">levels=(0.5,0.8,0.95)</span></code>, <code class="docutils literal notranslate"><span class="pre">smooth=0.9</span></code>. If <code class="docutils literal notranslate"><span class="pre">corner</span></code> is not
+installed, a warning is emitted and the plot is skipped.</p></li>
+<li><p><strong>pool</strong> (<em>int</em><em> | </em><em>&quot;max&quot;</em><em> | </em><em>None</em>) – Worker processes for evaluating proposal
+samples during bridge sampling. Use <code class="docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code> to match
+<code class="docutils literal notranslate"><span class="pre">os.cpu_count()</span></code>. When <code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;=1</span></code> evaluations run
+serially.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em>) – If True and tqdm is available, show a progress bar
+while evaluating proposal samples (expensive likelihood calls).</p></li>
+<li><p><strong>shuffle</strong> (<em>bool</em>) – If True (default), randomly permute the thinned posterior
+samples and their corresponding log-posterior values before KDE fitting
+and bridge sampling. The same permutation is applied to both arrays so
+sample–log-prob correspondence is preserved.</p></li>
+<li><p><strong>overwrite_path</strong> (<em>bool</em>) – If True, recompute and overwrite all cached files
+(bandwidth JSONs, MI/TC/tree dependency files) even if they already
+exist on disk. Default is False (skip recomputation when files exist).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of <code class="docutils literal notranslate"><span class="pre">[logz,</span> <span class="pre">err]</span></code> for each estimation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[[float, float]]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Suggestions:</dt><dd><ul class="simple">
+<li><p>Start with <code class="docutils literal notranslate"><span class="pre">morph_type='indep'</span></code> for speed. If diagnostics look poor,
+try <code class="docutils literal notranslate"><span class="pre">'pair'</span></code> or <code class="docutils literal notranslate"><span class="pre">'tree'</span></code> to capture dependencies.</p></li>
+<li><p>For bandwidths, try <code class="docutils literal notranslate"><span class="pre">'silverman'</span></code> for speed, <code class="docutils literal notranslate"><span class="pre">'cv_iso'</span></code> for tighter
+fits, or <code class="docutils literal notranslate"><span class="pre">'isj'</span></code> as a robust nonparametric choice.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">n_estimations&gt;=3</span></code> to assess stability and report mean/SE.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.bridge_sampling_ln">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">bridge_sampling_ln</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimation_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bridge.html#bridge_sampling_ln"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.bridge_sampling_ln" title="Link to this definition">#</a></dt>
+<dd><p>Estimate log marginal likelihood log p(y) using bridge sampling in log space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> – Callable that returns the log of the unnormalized target density
+for a single parameter vector, i.e. <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">p(y,</span> <span class="pre">theta)</span> <span class="pre">=</span> <span class="pre">log</span> <span class="pre">p(y|theta)</span> <span class="pre">+</span> <span class="pre">log</span> <span class="pre">p(theta)</span></code>.
+Called as <code class="docutils literal notranslate"><span class="pre">f(theta)</span></code> with <code class="docutils literal notranslate"><span class="pre">theta</span></code> shaped <code class="docutils literal notranslate"><span class="pre">(d,)</span></code>.</p></li>
+<li><p><strong>g</strong> – Callable that returns the log proposal density. Called as
+<code class="docutils literal notranslate"><span class="pre">g(theta_T)</span></code> where <code class="docutils literal notranslate"><span class="pre">theta_T</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(d,</span> <span class="pre">n)</span></code> (samples in columns).</p></li>
+<li><p><strong>samples_post</strong> (<em>ndarray</em>) – Posterior samples of shape <code class="docutils literal notranslate"><span class="pre">(N1,</span> <span class="pre">d)</span></code> used on the
+target side of the bridge.</p></li>
+<li><p><strong>log_post</strong> (<em>ndarray</em>) – Precomputed log target values for <code class="docutils literal notranslate"><span class="pre">samples_post</span></code> of
+shape <code class="docutils literal notranslate"><span class="pre">(N1,)</span></code>. This saves recomputation of expensive likelihoods.</p></li>
+<li><p><strong>samples_prop</strong> (<em>ndarray</em>) – Proposal samples of shape <code class="docutils literal notranslate"><span class="pre">(N2,</span> <span class="pre">d)</span></code> used on the
+proposal side of the bridge. These are typically drawn from a KDE.</p></li>
+<li><p><strong>tol</strong> (<em>float</em>) – Convergence tolerance on successive log‑evidence updates.
+Smaller values increase accuracy but may require more iterations.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em>) – Maximum number of bridge iterations.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em>) – If True and tqdm is available, show a progress bar
+while evaluating proposal samples (expensive likelihood calls).</p></li>
+<li><p><strong>estimation_label</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">[log_evidence,</span> <span class="pre">rmse_estimate]</span></code> where the second
+element is an approximate RMSE estimate computed via <code class="docutils literal notranslate"><span class="pre">compute_bridge_rmse</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float, float]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Suggestions:</dt><dd><ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">f</span></code> occasionally fails (e.g., numerical domain errors), this
+function automatically skips those proposal samples and continues.</p></li>
+<li><p>Use a moderate <code class="docutils literal notranslate"><span class="pre">tol</span></code> (1e‑4 to 1e‑3) and cap <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> to prevent
+long runs on difficult posteriors.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.compute_bridge_rmse">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">compute_bridge_rmse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_p_final</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_f_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_g_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_f_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_g_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">posterior_acf_func=&lt;function</span> <span class="pre">compute_rho_f2_0_via_correlate&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bridge.html#compute_bridge_rmse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.compute_bridge_rmse" title="Link to this definition">#</a></dt>
+<dd><p>Estimate the root mean square error (RMSE) for the bridge sampling result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_p_final</strong> (<em>float</em>) – Final bridge estimate of log evidence.</p></li>
+<li><p><strong>f</strong> (<em>callable</em>) – Same target/proposal log‑density callables as used in
+<code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln</span></code>.</p></li>
+<li><p><strong>g</strong> (<em>callable</em>) – Same target/proposal log‑density callables as used in
+<code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln</span></code>.</p></li>
+<li><p><strong>samples_prop</strong> (<em>ndarray</em>) – Proposal samples <code class="docutils literal notranslate"><span class="pre">(N2,</span> <span class="pre">d)</span></code>.</p></li>
+<li><p><strong>samples_post</strong> (<em>ndarray</em>) – Posterior samples <code class="docutils literal notranslate"><span class="pre">(N1,</span> <span class="pre">d)</span></code>.</p></li>
+<li><p><strong>log_f_prop</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>log_g_prop</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>log_f_post</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>log_g_post</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>s1</strong> (<em>float</em>) – Mixing coefficients N1/(N1+N2) and N2/(N1+N2).</p></li>
+<li><p><strong>s2</strong> (<em>float</em>) – Mixing coefficients N1/(N1+N2) and N2/(N1+N2).</p></li>
+<li><p><strong>posterior_acf_func</strong> (<em>callable</em>) – Function estimating the integrated
+autocorrelation time of <code class="docutils literal notranslate"><span class="pre">f2</span></code> terms from the posterior side. By
+default a fast correlate‑based estimator is used; if you have
+statsmodels available, consider <code class="docutils literal notranslate"><span class="pre">utils.compute_rho_f2_0_via_statsmodels</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approximate RMSE of the log‑evidence estimate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a heuristic approximation following common practice for bridge
+sampling diagnostics; it is useful for relative comparisons across runs.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.bridge_multiprocess.bridge_sampling_ln">
+<span class="sig-prename descclassname"><span class="pre">morphZ.bridge_multiprocess.</span></span><span class="sig-name descname"><span class="pre">bridge_sampling_ln</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimation_label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bridge_multiprocess.html#bridge_sampling_ln"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.bridge_multiprocess.bridge_sampling_ln" title="Link to this definition">#</a></dt>
+<dd><p>Estimate log marginal likelihood log p(y) using bridge sampling in log space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> – Callable that returns the log of the unnormalized target density
+for a single parameter vector, i.e. <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">p(y,</span> <span class="pre">theta)</span> <span class="pre">=</span> <span class="pre">log</span> <span class="pre">p(y|theta)</span> <span class="pre">+</span> <span class="pre">log</span> <span class="pre">p(theta)</span></code>.
+Called as <code class="docutils literal notranslate"><span class="pre">f(theta)</span></code> with <code class="docutils literal notranslate"><span class="pre">theta</span></code> shaped <code class="docutils literal notranslate"><span class="pre">(d,)</span></code>.</p></li>
+<li><p><strong>g</strong> – Callable that returns the log proposal density. Called as
+<code class="docutils literal notranslate"><span class="pre">g(theta_T)</span></code> where <code class="docutils literal notranslate"><span class="pre">theta_T</span></code> has shape <code class="docutils literal notranslate"><span class="pre">(d,</span> <span class="pre">n)</span></code> (samples in columns).</p></li>
+<li><p><strong>samples_post</strong> (<em>ndarray</em>) – Posterior samples of shape <code class="docutils literal notranslate"><span class="pre">(N1,</span> <span class="pre">d)</span></code> used on the
+target side of the bridge.</p></li>
+<li><p><strong>log_post</strong> (<em>ndarray</em>) – Precomputed log target values for <code class="docutils literal notranslate"><span class="pre">samples_post</span></code> of
+shape <code class="docutils literal notranslate"><span class="pre">(N1,)</span></code>. This saves recomputation of expensive likelihoods.</p></li>
+<li><p><strong>samples_prop</strong> (<em>ndarray</em>) – Proposal samples of shape <code class="docutils literal notranslate"><span class="pre">(N2,</span> <span class="pre">d)</span></code> used on the
+proposal side of the bridge. These are typically drawn from a KDE.</p></li>
+<li><p><strong>tol</strong> (<em>float</em>) – Convergence tolerance on successive log‑evidence updates.
+Smaller values increase accuracy but may require more iterations.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em>) – Maximum number of bridge iterations.</p></li>
+<li><p><strong>pool</strong> – Optional parallel pool. Accepts:
+- None: run serially.
+- int: create an internal multiprocessing pool with that many workers.
+- any object with a <code class="docutils literal notranslate"><span class="pre">map</span></code> method: treated as an external pool.</p></li>
+<li><p><strong>num_workers</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Deprecated alias for <code class="docutils literal notranslate"><span class="pre">pool</span></code> kept for
+backward compatibility.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em>) – If True and tqdm is available, show a progress bar
+while evaluating proposal samples (expensive likelihood calls).</p></li>
+<li><p><strong>estimation_label</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">[log_evidence,</span> <span class="pre">rmse_estimate]</span></code> where the second
+element is an approximate RMSE estimate computed via <code class="docutils literal notranslate"><span class="pre">compute_bridge_rmse</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float, float]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Suggestions:</dt><dd><ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">f</span></code> occasionally fails (e.g., numerical domain errors), this
+function automatically skips those proposal samples and continues.</p></li>
+<li><p>Use a moderate <code class="docutils literal notranslate"><span class="pre">tol</span></code> (1e‑4 to 1e‑3) and cap <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> to prevent
+long runs on difficult posteriors.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.bridge_multiprocess.compute_bridge_rmse">
+<span class="sig-prename descclassname"><span class="pre">morphZ.bridge_multiprocess.</span></span><span class="sig-name descname"><span class="pre">compute_bridge_rmse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_p_final</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_f_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_g_prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_f_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_g_post</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">posterior_acf_func=&lt;function</span> <span class="pre">compute_rho_f2_0_via_correlate&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bridge_multiprocess.html#compute_bridge_rmse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.bridge_multiprocess.compute_bridge_rmse" title="Link to this definition">#</a></dt>
+<dd><p>Estimate the root mean square error (RMSE) for the bridge sampling result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_p_final</strong> (<em>float</em>) – Final bridge estimate of log evidence.</p></li>
+<li><p><strong>f</strong> (<em>callable</em>) – Same target/proposal log‑density callables as used in
+<code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln</span></code>.</p></li>
+<li><p><strong>g</strong> (<em>callable</em>) – Same target/proposal log‑density callables as used in
+<code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln</span></code>.</p></li>
+<li><p><strong>samples_prop</strong> (<em>ndarray</em>) – Proposal samples <code class="docutils literal notranslate"><span class="pre">(N2,</span> <span class="pre">d)</span></code>.</p></li>
+<li><p><strong>samples_post</strong> (<em>ndarray</em>) – Posterior samples <code class="docutils literal notranslate"><span class="pre">(N1,</span> <span class="pre">d)</span></code>.</p></li>
+<li><p><strong>log_f_prop</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>log_g_prop</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>log_f_post</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>log_g_post</strong> (<em>ndarray</em>) – Cached log
+densities evaluated on corresponding samples.</p></li>
+<li><p><strong>s1</strong> (<em>float</em>) – Mixing coefficients N1/(N1+N2) and N2/(N1+N2).</p></li>
+<li><p><strong>s2</strong> (<em>float</em>) – Mixing coefficients N1/(N1+N2) and N2/(N1+N2).</p></li>
+<li><p><strong>posterior_acf_func</strong> (<em>callable</em>) – Function estimating the integrated
+autocorrelation time of <code class="docutils literal notranslate"><span class="pre">f2</span></code> terms from the posterior side. By
+default a fast correlate‑based estimator is used; if you have
+statsmodels available, consider <code class="docutils literal notranslate"><span class="pre">utils.compute_rho_f2_0_via_statsmodels</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Approximate RMSE of the log‑evidence estimate.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a heuristic approximation following common practice for bridge
+sampling diagnostics; it is useful for relative comparisons across runs.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="bandwidth-selection">
+<h2>Bandwidth Selection<a class="headerlink" href="#bandwidth-selection" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.bw_method.scott_factor">
+<span class="sig-prename descclassname"><span class="pre">morphZ.bw_method.</span></span><span class="sig-name descname"><span class="pre">scott_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#scott_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.bw_method.scott_factor" title="Link to this definition">#</a></dt>
+<dd><p>Return the exact factor used by SciPy’s gaussian_kde with bw_method=’scott’.</p>
+<p>This delegates to gaussian_kde(…).factor to ensure identical behavior
+to the installed SciPy version. No fallback is provided; gaussian_kde is
+required for this project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.bw_method.silverman_factor">
+<span class="sig-prename descclassname"><span class="pre">morphZ.bw_method.</span></span><span class="sig-name descname"><span class="pre">silverman_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#silverman_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.bw_method.silverman_factor" title="Link to this definition">#</a></dt>
+<dd><p>Return the exact factor used by SciPy’s gaussian_kde with bw_method=’silverman’.</p>
+<p>This delegates to gaussian_kde(…).factor to ensure identical behavior
+to the installed SciPy version. No fallback is provided; gaussian_kde is
+required for this project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.scott_rule">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">scott_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#scott_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.scott_rule" title="Link to this definition">#</a></dt>
+<dd><p>Legacy Scott rule: returns per-dimension numeric bandwidth(s) h_j in data
+units such that h_j = factor * sigma_j where factor = scott_factor and
+sigma_j = std(X[:, j]) (population std).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float | <em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.silverman_rule">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">silverman_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#silverman_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.silverman_rule" title="Link to this definition">#</a></dt>
+<dd><p>Legacy Silverman rule (robust): per-dimension bandwidths in data units.</p>
+<p>For 1D uses: h = 0.9 * min(std, IQR/1.34) * n**(-1/5)
+For ND uses robust per-dim scales with the multivariate constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float | <em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.botev_isj_bandwidth">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">botev_isj_bandwidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#botev_isj_bandwidth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.botev_isj_bandwidth" title="Link to this definition">#</a></dt>
+<dd><p>ISJ bandwidth(s) in data units. For ND returns per-dimension h_j.
+Use <cite>botev_isj_factor</cite> to convert to a SciPy-compatible scalar factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em>)</p></li>
+<li><p><strong>n_bins</strong> (<em>int</em>)</p></li>
+<li><p><strong>limits</strong> (<em>Tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>] </em><em>| </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float | <em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.bw_method.botev_isj_factor">
+<span class="sig-prename descclassname"><span class="pre">morphZ.bw_method.</span></span><span class="sig-name descname"><span class="pre">botev_isj_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#botev_isj_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.bw_method.botev_isj_factor" title="Link to this definition">#</a></dt>
+<dd><p>Convert ISJ per-dimension bandwidths to a SciPy <cite>factor</cite>.</p>
+<p>factor = exp(mean(log(h_j / s_j))) where s_j is sample std (ddof=1).
+For 1D this is simply h / s.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em>)</p></li>
+<li><p><strong>n_bins</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.cross_validation_bandwidth">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">cross_validation_bandwidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isotropic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_diag_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#cross_validation_bandwidth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.cross_validation_bandwidth" title="Link to this definition">#</a></dt>
+<dd><p>Cross-validation bandwidth selection that returns a SciPy-compatible
+scalar <cite>factor</cite> by optimizing the summed log-likelihood using
+<cite>scipy.stats.gaussian_kde</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>)</p></li>
+<li><p><strong>kind</strong> (<em>'isotropic'</em><em> or </em><em>'diagonal'</em>) – <ul>
+<li><p>‘isotropic’: searches scalar factors directly (best match for SciPy).</p></li>
+<li><p>’diagonal’: performs coordinate-descent search for per-dimension
+bandwidths <cite>h_j</cite> (in data units) by scoring with <cite>gaussian_kde</cite> on
+scaled data; returns the equivalent SciPy scalar factor via geometric mean.</p></li>
+</ul>
+</p></li>
+<li><p><strong>factor_grid</strong> (optional grid of candidate <em>factors</em> for isotropic search.)</p></li>
+<li><p><strong>cv</strong> (<em>number</em><em> of </em><em>folds</em>)</p></li>
+<li><p><strong>random_state</strong> (<em>RNG seed</em>)</p></li>
+<li><p><strong>return_diag_h</strong> (<em>if True and kind=='diagonal'</em><em>, </em><em>also return the per-dim h vector</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float (best SciPy factor) or (factor, h_vector) when return_diag_h=True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.select_bandwidth">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">select_bandwidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#select_bandwidth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.select_bandwidth" title="Link to this definition">#</a></dt>
+<dd><p>Unified bandwidth selector returning SciPy-compatible <em>scalar factors</em>.</p>
+<ul class="simple">
+<li><p>‘scott’: returns scott_factor</p></li>
+<li><p>‘silverman’: returns silverman_factor</p></li>
+<li><p>‘isj’: returns botev_isj_factor</p></li>
+<li><p>‘cv_iso’: cross-validated isotropic factor (optimizes SciPy log-lik)</p></li>
+<li><p>‘cv_diag’: diagonal CV -&gt; returns SciPy factor (geometric mean); use
+<cite>select_bandwidth(…);</cite> with <cite>method=’cv_diag’</cite> to get scalar factor, or
+call <cite>cross_validation_bandwidth(…, kind=’diagonal’, return_diag_h=True)</cite>
+to also get per-dimension h_j.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>ndarray</em><em> | </em><em>list</em><em> | </em><em>tuple</em>)</p></li>
+<li><p><strong>method</strong> (<em>Literal</em><em>[</em><em>'scott'</em><em>, </em><em>'silverman'</em><em>, </em><em>'isj'</em><em>, </em><em>'cv_iso'</em><em>, </em><em>'cv_diag'</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float | <em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.compute_and_save_bandwidths">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">compute_and_save_bandwidths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pairs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k_greedy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/bw_method.html#compute_and_save_bandwidths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.compute_and_save_bandwidths" title="Link to this definition">#</a></dt>
+<dd><p>Compute SciPy-compatible scalar factors for each parameter or group and
+save a simplified JSON file. Each entry is [param1, …, factor].</p>
+<p>Note: for group-level joint estimation we produce a single scalar <cite>factor</cite>
+that can be passed to <cite>gaussian_kde.set_bandwidth(factor)</cite> for subsequent
+evaluations. For diagonal/group-per-dimension exact control consider
+returning per-dim h_j and applying them with a custom KDE wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>)</p></li>
+<li><p><strong>method</strong> (<em>{'scott'</em><em>,</em><em>'silverman'</em><em>,</em><em>'isj'</em><em>,</em><em>'cv_iso'</em><em>,</em><em>'cv_diag'}</em>)</p></li>
+<li><p><strong>param_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>output_path</strong> (<em>str</em>)</p></li>
+<li><p><strong>n_order</strong> (<em>int</em>) – Group order (2 for pairs, k for k-groups) used only for output filename.</p></li>
+<li><p><strong>in_path</strong> (<em>str</em><em> | </em><em>None</em>) – Optional path to MI/TC JSON (pairs or groups). When provided, groups
+are selected greedily from this candidate list.</p></li>
+<li><p><strong>group_format</strong> (<em>{'pairs'</em><em>,</em><em>'groups'}</em>) – Format of <cite>in_path</cite> entries.</p></li>
+<li><p><strong>top_k_greedy</strong> (<em>int</em>) – Run K seeded greedy selections starting from each of the top-K
+candidates (by MI or TC), then keep the selection with the largest
+total score. Default 1 (single greedy pass).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[list[str | float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="dependency-analysis">
+<h2>Dependency Analysis<a class="headerlink" href="#dependency-analysis" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.dependency_tree.compute_pairwise_mi">
+<span class="sig-prename descclassname"><span class="pre">morphZ.dependency_tree.</span></span><span class="sig-name descname"><span class="pre">compute_pairwise_mi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/dependency_tree.html#compute_pairwise_mi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.dependency_tree.compute_pairwise_mi" title="Link to this definition">#</a></dt>
+<dd><p>Compute a symmetric matrix of pairwise mutual informations using KDE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samples</strong> (<em>np.ndarray</em>) – 2D array of shape (n_samples, n_dims).</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Bandwidth for KDE. Use a SciPy
+method name like “silverman” or “scott”, or a positive scalar
+factor. Defaults to “silverman”.</p></li>
+<li><p><strong>loo</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, use leave-one-out correction. Defaults to True.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed. Defaults to 0.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>optional</em>) – Small value to clip PDF values to avoid log(0). Defaults to 1e-300.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A symmetric matrix of pairwise mutual informations.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.dependency_tree.plot_mi_heatmap">
+<span class="sig-prename descclassname"><span class="pre">morphZ.dependency_tree.</span></span><span class="sig-name descname"><span class="pre">plot_mi_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mi_heatmap.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'inferno'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/dependency_tree.html#plot_mi_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.dependency_tree.plot_mi_heatmap" title="Link to this definition">#</a></dt>
+<dd><p>Save a heat-map of the MI matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mi</strong> (<em>np.ndarray</em>) – The mutual information matrix.</p></li>
+<li><p><strong>labels</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) – The labels for the axes.</p></li>
+<li><p><strong>outfile</strong> (<em>str</em><em>, </em><em>optional</em>) – Path where the image is saved. Defaults to “mi_heatmap.png”.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em><em>, </em><em>optional</em>) – Matplotlib colormap name. Nice options: “magma”,
+“inferno”, “viridis”. Defaults to “inferno”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.dependency_tree.plot_chow_liu_tree">
+<span class="sig-prename descclassname"><span class="pre">morphZ.dependency_tree.</span></span><span class="sig-name descname"><span class="pre">plot_chow_liu_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chow_liu_tree.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/dependency_tree.html#plot_chow_liu_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.dependency_tree.plot_chow_liu_tree" title="Link to this definition">#</a></dt>
+<dd><p>Draw the Chow–Liu tree using a spring layout for better aesthetics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tree</strong> (<em>nx.Graph</em>) – The Chow–Liu maximum spanning tree over variables.</p></li>
+<li><p><strong>labels</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) – Labels per node index.</p></li>
+<li><p><strong>outfile</strong> (<em>str</em><em>, </em><em>optional</em>) – Path where the image is saved. Defaults to “chow_liu_tree.png”.</p></li>
+<li><p><strong>root</strong> (<em>int</em><em>, </em><em>optional</em>) – Root index used by the BFS orientation and for
+hierarchical layout when Graphviz is available. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Tips:</dt><dd><ul class="simple">
+<li><p>For clean hierarchical layouts, install <code class="docutils literal notranslate"><span class="pre">pygraphviz</span></code>.</p></li>
+<li><p>Edge labels show MI weights; consider post‑processing or thresholding
+very small weights if the figure is cluttered.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.dependency_tree.extract_dependency_edges">
+<span class="sig-prename descclassname"><span class="pre">morphZ.dependency_tree.</span></span><span class="sig-name descname"><span class="pre">extract_dependency_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/dependency_tree.html#extract_dependency_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.dependency_tree.extract_dependency_edges" title="Link to this definition">#</a></dt>
+<dd><p>Return a (parent, child) edge list in BFS order with string labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tree</strong> (<em>Graph</em>) – Undirected Chow–Liu tree over indices.</p></li>
+<li><p><strong>labels</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) – Human‑readable names for nodes (<code class="docutils literal notranslate"><span class="pre">labels[i]</span></code> for node i).</p></li>
+<li><p><strong>root</strong> (<em>int</em>) – Index to use as BFS root when orienting edges.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of pairs of strings representing parent -&gt; child relationships.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>List</em>[<em>Tuple</em>[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.dependency_tree.compute_and_plot_mi_tree">
+<span class="sig-prename descclassname"><span class="pre">morphZ.dependency_tree.</span></span><span class="sig-name descname"><span class="pre">compute_and_plot_mi_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">morph_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/dependency_tree.html#compute_and_plot_mi_tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.dependency_tree.compute_and_plot_mi_tree" title="Link to this definition">#</a></dt>
+<dd><p>Compute MI, visualise, and return tree plus <em>(parent, child)</em> edge list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samples</strong> (<em>np.ndarray</em>) – Array of shape (n_samples, n_dims).</p></li>
+<li><p><strong>names</strong> (<em>Iterable</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – Optional names for each dimension. If None,
+names default to <code class="docutils literal notranslate"><span class="pre">[&quot;x0&quot;,</span> <span class="pre">&quot;x1&quot;,</span> <span class="pre">...]</span></code>.</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> | </em><em>float</em><em>, </em><em>optional</em>) – KDE bandwidth. Use a SciPy method name
+(“silverman”, “scott”) or a numeric factor. Defaults to “silverman”.</p></li>
+<li><p><strong>loo</strong> (<em>bool</em><em>, </em><em>optional</em>) – Apply leave‑one‑out correction in KDE evaluations. Defaults to True.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – RNG seed used for robust KDE fitting. Defaults to 0.</p></li>
+<li><p><strong>root</strong> (<em>int</em><em>, </em><em>optional</em>) – Root index when orienting the tree. Defaults to 0.</p></li>
+<li><p><strong>out_path</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Directory to save visualisations and
+JSON outputs. If None, images are saved to CWD and JSON is skipped.</p></li>
+<li><p><strong>morph_type</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – If provided, controls which artifacts
+are saved. <code class="docutils literal notranslate"><span class="pre">chow_liu_tree.png</span></code> and <code class="docutils literal notranslate"><span class="pre">tree.json</span></code> are saved only
+when <code class="docutils literal notranslate"><span class="pre">morph_type</span> <span class="pre">==</span> <span class="pre">'tree'</span></code>. When <code class="docutils literal notranslate"><span class="pre">None</span></code> (backward compatible),
+tree artifacts are saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The MI matrix, the
+maximum spanning tree, and the list of (parent, child) edges.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, nx.Graph, List[Tuple[str, str]]]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Suggestions:</dt><dd><ul class="simple">
+<li><p>If you plan to use <code class="docutils literal notranslate"><span class="pre">TreeKDE</span></code> later, pass <code class="docutils literal notranslate"><span class="pre">out_path</span></code> so that the
+generated <code class="docutils literal notranslate"><span class="pre">tree.json</span></code> is available without recomputation.</p></li>
+<li><p>For very high dimensions, reduce the number of samples used to speed
+up the MI estimates and plotting.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="total-correlation">
+<h2>Total Correlation<a class="headerlink" href="#total-correlation" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.Nth_TC.stable_seed_for_indices">
+<span class="sig-prename descclassname"><span class="pre">morphZ.Nth_TC.</span></span><span class="sig-name descname"><span class="pre">stable_seed_for_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/Nth_TC.html#stable_seed_for_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Nth_TC.stable_seed_for_indices" title="Link to this definition">#</a></dt>
+<dd><p>Derive a deterministic 32‑bit seed from a base seed and an index tuple.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_seed</strong> (<em>int</em>)</p></li>
+<li><p><strong>indices</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>...</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.Nth_TC.compute_marginal_log_p">
+<span class="sig-prename descclassname"><span class="pre">morphZ.Nth_TC.</span></span><span class="sig-name descname"><span class="pre">compute_marginal_log_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/Nth_TC.html#compute_marginal_log_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Nth_TC.compute_marginal_log_p" title="Link to this definition">#</a></dt>
+<dd><p>Compute 1‑D marginal log‑densities at the provided sample points.</p>
+<p>Returns the log densities (shape <code class="docutils literal notranslate"><span class="pre">(n_dims,</span> <span class="pre">n_samples)</span></code>) and the RNG used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samples</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> | </em><em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>loo</strong> (<em>bool</em>)</p></li>
+<li><p><strong>seed</strong> (<em>int</em>)</p></li>
+<li><p><strong>eps</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[<em>ndarray</em>, <em>Generator</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.Nth_TC.compute_tc_for_indices">
+<span class="sig-prename descclassname"><span class="pre">morphZ.Nth_TC.</span></span><span class="sig-name descname"><span class="pre">compute_tc_for_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/Nth_TC.html#compute_tc_for_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Nth_TC.compute_tc_for_indices" title="Link to this definition">#</a></dt>
+<dd><p>Compute TC/MI for a single index group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indices</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>...</em><em>]</em>)</p></li>
+<li><p><strong>samples_T</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>log_p</strong> (<em>ndarray</em>)</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> | </em><em>float</em>)</p></li>
+<li><p><strong>loo</strong> (<em>bool</em>)</p></li>
+<li><p><strong>eps</strong> (<em>float</em>)</p></li>
+<li><p><strong>rng</strong> (<em>Generator</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.Nth_TC.compute_total_correlation">
+<span class="sig-prename descclassname"><span class="pre">morphZ.Nth_TC.</span></span><span class="sig-name descname"><span class="pre">compute_total_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_thin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/Nth_TC.html#compute_total_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Nth_TC.compute_total_correlation" title="Link to this definition">#</a></dt>
+<dd><p>Compute a symmetric matrix of pairwise mutual informations (n_order=2)
+or a list of n-order total correlations using KDE.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samples</strong> (<em>np.ndarray</em>) – 2D array of shape (n_samples, n_dims).</p></li>
+<li><p><strong>n_order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of total correlation. Defaults to 2 (pairwise MI).</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Bandwidth method for KDE. Defaults to “silverman”.</p></li>
+<li><p><strong>loo</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, use leave-one-out correction. Defaults to True.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed. Defaults to 0.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>optional</em>) – Small value to clip PDF values to avoid log(0). Defaults to 1e-300.</p></li>
+<li><p><strong>n_workers</strong> (<em>int</em><em>, </em><em>optional</em>) – &gt;1 enables threaded parallelism; 0/1 uses serial path.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True and tqdm is available, show progress over groups. Defaults to True.</p></li>
+<li><p><strong>auto_thin</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, downsample large, high-order problems for speed. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>For n_order=2, a symmetric matrix of pairwise MIs.</dt><dd><p>For n_order&gt;2, a list of (indices, tc_value) tuples.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.Nth_TC.plot_tc_heatmap">
+<span class="sig-prename descclassname"><span class="pre">morphZ.Nth_TC.</span></span><span class="sig-name descname"><span class="pre">plot_tc_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mi_heatmap.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'magma'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/Nth_TC.html#plot_tc_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Nth_TC.plot_tc_heatmap" title="Link to this definition">#</a></dt>
+<dd><p>Save a heat-map of the MI matrix (only for n_order=2).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mi</strong> (<em>np.ndarray</em>) – The mutual information matrix.</p></li>
+<li><p><strong>labels</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) – The labels for the axes.</p></li>
+<li><p><strong>outfile</strong> (<em>str</em><em>, </em><em>optional</em>) – The output file path. Defaults to “mi_heatmap.png”.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em><em>, </em><em>optional</em>) – The colormap to use. Defaults to “magma”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.Nth_TC.compute_and_save_tc">
+<span class="sig-prename descclassname"><span class="pre">morphZ.Nth_TC.</span></span><span class="sig-name descname"><span class="pre">compute_and_save_tc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bw_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'silverman'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_thin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/Nth_TC.html#compute_and_save_tc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.Nth_TC.compute_and_save_tc" title="Link to this definition">#</a></dt>
+<dd><p>Compute TC, visualise (for n=2), and save all TC values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samples</strong> (<em>np.ndarray</em>) – 2D array of shape (n_samples, n_dims).</p></li>
+<li><p><strong>names</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – Names of the parameters. Defaults to None.</p></li>
+<li><p><strong>n_order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of total correlation. Defaults to 2.</p></li>
+<li><p><strong>bw_method</strong> (<em>str</em><em> | </em><em>float</em><em>, </em><em>optional</em>) – Bandwidth method for KDE. Defaults to “silverman”.</p></li>
+<li><p><strong>loo</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, use leave-one-out correction. Defaults to True.</p></li>
+<li><p><strong>seed</strong> (<em>int</em><em>, </em><em>optional</em>) – Random seed. Defaults to 0.</p></li>
+<li><p><strong>out_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – The output directory path. Defaults to None.</p></li>
+<li><p><strong>n_workers</strong> (<em>int</em><em>, </em><em>optional</em>) – &gt;1 enables threaded parallelism; 0/1 uses serial path.</p></li>
+<li><p><strong>show_progress</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True and tqdm is available, show progress over groups. Defaults to True.</p></li>
+<li><p><strong>auto_thin</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, downsample large, high-order problems for speed. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total correlation results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.setup_logging">
+<span class="sig-prename descclassname"><span class="pre">morphZ.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ.html#setup_logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.setup_logging" title="Link to this definition">#</a></dt>
+<dd><p>Configure root logging for morphZ consumers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> (<em>int</em>) – Logging level passed to <code class="xref py py-func docutils literal notranslate"><span class="pre">logging.basicConfig()</span></code>.</p></li>
+<li><p><strong>stream</strong> – Optional stream override (<code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code> by default).</p></li>
+<li><p><strong>fmt</strong> (<em>str</em><em> | </em><em>None</em>) – Optional logging format string. Defaults to a concise pattern.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.utils.compute_rho_f2_0_via_statsmodels">
+<span class="sig-prename descclassname"><span class="pre">morphZ.utils.</span></span><span class="sig-name descname"><span class="pre">compute_rho_f2_0_via_statsmodels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f2_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/utils.html#compute_rho_f2_0_via_statsmodels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.utils.compute_rho_f2_0_via_statsmodels" title="Link to this definition">#</a></dt>
+<dd><p>Estimate integrated autocorrelation time using <code class="docutils literal notranslate"><span class="pre">statsmodels.acf</span></code>.</p>
+<dl class="simple">
+<dt>The integrated autocorrelation time is defined as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">tau</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">sum_{lag&gt;=1}</span> <span class="pre">acf(lag)</span></code></p>
+</dd>
+</dl>
+<p>where the sum stops at the first negative value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f2_values</strong> – One-dimensional values computed from posterior samples.</p></li>
+<li><p><strong>nlags</strong> – Maximum number of lags to compute. If None, uses
+<code class="docutils literal notranslate"><span class="pre">len(f2_values)</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estimated integrated autocorrelation time.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.utils.compute_rho_f2_0_via_correlate">
+<span class="sig-prename descclassname"><span class="pre">morphZ.utils.</span></span><span class="sig-name descname"><span class="pre">compute_rho_f2_0_via_correlate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f2_values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/utils.html#compute_rho_f2_0_via_correlate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.utils.compute_rho_f2_0_via_correlate" title="Link to this definition">#</a></dt>
+<dd><p>Estimate integrated autocorrelation time using <code class="docutils literal notranslate"><span class="pre">scipy.signal.correlate</span></code>.</p>
+<dl class="simple">
+<dt>The integrated autocorrelation time is defined as:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">tau</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">sum_{lag&gt;=1}</span> <span class="pre">acf(lag)</span></code></p>
+</dd>
+</dl>
+<p>where the sum stops at the first negative value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>f2_values</strong> – One-dimensional values computed from posterior samples.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estimated integrated autocorrelation time.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.utils.log_plus">
+<span class="sig-prename descclassname"><span class="pre">morphZ.utils.</span></span><span class="sig-name descname"><span class="pre">log_plus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/utils.html#log_plus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.utils.log_plus" title="Link to this definition">#</a></dt>
+<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">log(exp(x)</span> <span class="pre">+</span> <span class="pre">exp(y))</span></code> in a numerically stable way.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – First log-space scalar.</p></li>
+<li><p><strong>y</strong> – Second log-space scalar.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Log-space sum of the two inputs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.utils.log_sum">
+<span class="sig-prename descclassname"><span class="pre">morphZ.utils.</span></span><span class="sig-name descname"><span class="pre">log_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/utils.html#log_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.utils.log_sum" title="Link to this definition">#</a></dt>
+<dd><p>Compute <code class="docutils literal notranslate"><span class="pre">log(sum(exp(vec)))</span></code> for a vector of log-space values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vec</strong> – Sequence of log-space scalar values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Stable log-space sum.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="morphZ.utils.error_bound_from_oscillation">
+<span class="sig-prename descclassname"><span class="pre">morphZ.utils.</span></span><span class="sig-name descname"><span class="pre">error_bound_from_oscillation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/morphZ/utils.html#error_bound_from_oscillation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#morphZ.utils.error_bound_from_oscillation" title="Link to this definition">#</a></dt>
+<dd><p>Estimate a fixed-point error bound from oscillatory iterates.</p>
+<p>The first 20 percent of values are discarded as transient behavior, then
+the bound is the remaining range <code class="docutils literal notranslate"><span class="pre">max(x)</span> <span class="pre">-</span> <span class="pre">min(x)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – Sequence of fixed-point iterates.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Oscillation range after discarding the initial transient.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If fewer than two post-transient iterates remain.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="getting_started.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Getting Started</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="examples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Examples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#morph-approximations">Morph Approximations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.KDEBase"><code class="docutils literal notranslate"><span class="pre">KDEBase</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Indep"><code class="docutils literal notranslate"><span class="pre">Morph_Indep</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Indep.logpdf_kde"><code class="docutils literal notranslate"><span class="pre">Morph_Indep.logpdf_kde()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Indep.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Indep.resample()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise.logpdf"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise.logpdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise.pdf"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise.pdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Pairwise.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Pairwise.resample()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group"><code class="docutils literal notranslate"><span class="pre">Morph_Group</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group.logpdf"><code class="docutils literal notranslate"><span class="pre">Morph_Group.logpdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group.pdf"><code class="docutils literal notranslate"><span class="pre">Morph_Group.pdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Group.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Group.resample()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Tree"><code class="docutils literal notranslate"><span class="pre">Morph_Tree</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Tree.logpdf"><code class="docutils literal notranslate"><span class="pre">Morph_Tree.logpdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Morph_Tree.resample"><code class="docutils literal notranslate"><span class="pre">Morph_Tree.resample()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-estimation">Evidence Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.evidence"><code class="docutils literal notranslate"><span class="pre">evidence()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bridge_sampling_ln"><code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.compute_bridge_rmse"><code class="docutils literal notranslate"><span class="pre">compute_bridge_rmse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bridge_multiprocess.bridge_sampling_ln"><code class="docutils literal notranslate"><span class="pre">bridge_sampling_ln()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bridge_multiprocess.compute_bridge_rmse"><code class="docutils literal notranslate"><span class="pre">compute_bridge_rmse()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bandwidth-selection">Bandwidth Selection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bw_method.scott_factor"><code class="docutils literal notranslate"><span class="pre">scott_factor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bw_method.silverman_factor"><code class="docutils literal notranslate"><span class="pre">silverman_factor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.scott_rule"><code class="docutils literal notranslate"><span class="pre">scott_rule()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.silverman_rule"><code class="docutils literal notranslate"><span class="pre">silverman_rule()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.botev_isj_bandwidth"><code class="docutils literal notranslate"><span class="pre">botev_isj_bandwidth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.bw_method.botev_isj_factor"><code class="docutils literal notranslate"><span class="pre">botev_isj_factor()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.cross_validation_bandwidth"><code class="docutils literal notranslate"><span class="pre">cross_validation_bandwidth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.select_bandwidth"><code class="docutils literal notranslate"><span class="pre">select_bandwidth()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.compute_and_save_bandwidths"><code class="docutils literal notranslate"><span class="pre">compute_and_save_bandwidths()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-analysis">Dependency Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.compute_pairwise_mi"><code class="docutils literal notranslate"><span class="pre">compute_pairwise_mi()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.plot_mi_heatmap"><code class="docutils literal notranslate"><span class="pre">plot_mi_heatmap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.plot_chow_liu_tree"><code class="docutils literal notranslate"><span class="pre">plot_chow_liu_tree()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.extract_dependency_edges"><code class="docutils literal notranslate"><span class="pre">extract_dependency_edges()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.dependency_tree.compute_and_plot_mi_tree"><code class="docutils literal notranslate"><span class="pre">compute_and_plot_mi_tree()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-correlation">Total Correlation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.stable_seed_for_indices"><code class="docutils literal notranslate"><span class="pre">stable_seed_for_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_marginal_log_p"><code class="docutils literal notranslate"><span class="pre">compute_marginal_log_p()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_tc_for_indices"><code class="docutils literal notranslate"><span class="pre">compute_tc_for_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_total_correlation"><code class="docutils literal notranslate"><span class="pre">compute_total_correlation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.plot_tc_heatmap"><code class="docutils literal notranslate"><span class="pre">plot_tc_heatmap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.Nth_TC.compute_and_save_tc"><code class="docutils literal notranslate"><span class="pre">compute_and_save_tc()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities">Utilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.compute_rho_f2_0_via_statsmodels"><code class="docutils literal notranslate"><span class="pre">compute_rho_f2_0_via_statsmodels()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.compute_rho_f2_0_via_correlate"><code class="docutils literal notranslate"><span class="pre">compute_rho_f2_0_via_correlate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.log_plus"><code class="docutils literal notranslate"><span class="pre">log_plus()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.log_sum"><code class="docutils literal notranslate"><span class="pre">log_sum()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#morphZ.utils.error_bound_from_oscillation"><code class="docutils literal notranslate"><span class="pre">error_bound_from_oscillation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MorphZ Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

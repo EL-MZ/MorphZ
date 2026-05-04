@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>morphZ.morph &#8212; MorphZ Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/morphZ/morph';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MorphZ Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    MorphZ
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/eggbox.html">Eggbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/gaussian_shell.html">Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/peak_sampling.html">Peak sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/numpyro_gaussian_shell.html">NumPyro Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/jaxns_gaussian_shell.html">JAXNS Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/numpyro_morphz_lnz.html">NumPyro MorphZ ln(Z)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ApokryphaV1/MorphZ" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for morphZ.morph</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Literal is available in Python 3.11+</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">Literal</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># type: ignore</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sksparse.cholmod</span><span class="w"> </span><span class="kn">import</span> <span class="n">CholmodNotPositiveDefiniteError</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="c1"># Define a dummy exception if sksparse is not available,</span>
+    <span class="c1"># so the code doesn&#39;t crash if the dependency is missing.</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">CholmodNotPositiveDefiniteError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.morph_indep</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Indep</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.morph_tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.morph_pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Pairwise</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">dependency_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.morph_group</span><span class="w"> </span><span class="kn">import</span> <span class="n">Morph_Group</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">Nth_TC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.bw_method</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_and_save_bandwidths</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">bridge</span> <span class="k">as</span> <span class="n">bridge_serial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">bridge_multiprocess</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_save_corner_plot</span><span class="p">(</span>
+    <span class="n">posterior_samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">proposal_samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">param_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">morph_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">prefer_corner</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Render and save a corner plot comparing posterior and proposal samples.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">prefer_corner</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Skipping corner plot because prefer_corner=False&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;Agg&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.lines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Line2D</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Matplotlib is required to save corner plots: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">corner</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">corner_lib</span>  <span class="c1"># type: ignore</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;corner package is not installed; skipping corner plot.&quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> (morph type: </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">morph_type</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_downsample</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">max_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_points</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">arr</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">max_points</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1"># post_plot = _downsample(posterior_samples)</span>
+    <span class="c1"># prop_plot = _downsample(proposal_samples)</span>
+    <span class="c1"># names = param_names if param_names is not None else [f&quot;param_{j}&quot; for j in range(post_plot.shape[1])]</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">corner_lib</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+        <span class="n">posterior_samples</span><span class="p">[::</span><span class="mi">2</span><span class="p">,:],</span>
+        <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+        <span class="n">label_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span>
+        <span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+        <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+        <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>
+        <span class="n">smooth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+        <span class="n">pcolor_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.06</span><span class="p">),</span>
+        <span class="n">contour_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">]),</span>
+    <span class="p">)</span>
+    <span class="n">corner_lib</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span>
+        <span class="n">proposal_samples</span><span class="p">[::</span><span class="mi">2</span><span class="p">,:],</span>
+        <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+        <span class="n">label_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span>
+        <span class="n">hist_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="n">quantiles</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span>
+        <span class="n">show_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">title_fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span>
+        <span class="n">plot_datapoints</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">fill_contours</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">levels</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">),</span>
+        <span class="n">smooth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+        <span class="n">pcolor_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.04</span><span class="p">),</span>
+        <span class="n">contour_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">]),</span>
+        <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">legend_elems</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Posterior samples&quot;</span><span class="p">),</span>
+        <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Morph samples&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elems</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.96</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">corner_fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;corner_</span><span class="si">{</span><span class="n">morph_type</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">corner_fname</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Saved corner plot via &#39;corner&#39; to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">corner_fname</span><span class="p">)</span>
+
+<span class="c1"># ----- Typing helpers for better IDE hovers -----</span>
+<span class="c1"># Bandwidth methods supported by bw_method.py</span>
+<span class="n">BandwidthMethod</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;scott&quot;</span><span class="p">,</span> <span class="s2">&quot;silverman&quot;</span><span class="p">,</span> <span class="s2">&quot;isj&quot;</span><span class="p">,</span> <span class="s2">&quot;cv_iso&quot;</span><span class="p">,</span> <span class="s2">&quot;cv_diag&quot;</span><span class="p">]</span>
+
+<span class="c1"># Common proposal types</span>
+<span class="n">MorphTypeBase</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;indep&quot;</span><span class="p">,</span> <span class="s2">&quot;pair&quot;</span><span class="p">,</span> <span class="s2">&quot;tree&quot;</span><span class="p">]</span>
+<span class="c1"># Frequently used grouped variants (extend if you use others regularly)</span>
+<span class="n">MorphTypeGroup</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span> <span class="s2">&quot;3_group&quot;</span><span class="p">,</span> <span class="s2">&quot;4_group&quot;</span><span class="p">,</span> <span class="s2">&quot;5_group&quot;</span><span class="p">]</span>
+<span class="c1"># Final type shown to users in hovers; still accept arbitrary strings at runtime</span>
+<span class="n">MorphType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">MorphTypeBase</span><span class="p">,</span> <span class="n">MorphTypeGroup</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="evidence">
+<a class="viewcode-back" href="../../api.html#morphZ.evidence">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">evidence</span><span class="p">(</span>
+    <span class="n">post_samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">log_posterior_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">log_posterior_function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">n_resamples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">thin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">kde_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">bridge_start_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">max_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-2</span><span class="p">,</span>
+    <span class="n">morph_type</span><span class="p">:</span> <span class="n">MorphType</span> <span class="o">=</span> <span class="s2">&quot;2_group&quot;</span><span class="p">,</span>
+    <span class="n">param_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_estimations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">kde_bw</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">BandwidthMethod</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="s2">&quot;silverman&quot;</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">top_k_greedy</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">plot</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">prefer_corner</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">pool</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">overwrite_path</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute log evidence using morphological bridge sampling with KDE proposals.</span>
+
+<span class="sd">    This orchestrates proposal construction (independent, pairwise, grouped, or</span>
+<span class="sd">    tree‑structured KDE), draws proposal samples, and performs bridge sampling.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        post_samples (ndarray): Posterior samples of shape ``(N, d)``.</span>
+<span class="sd">        log_posterior_values (ndarray): Log posterior values for ``post_samples``;</span>
+<span class="sd">            shape ``(N,)``. Used to avoid re‑evaluating expensive log posteriors.</span>
+<span class="sd">        log_posterior_function (callable): Callable taking a single vector</span>
+<span class="sd">            ``theta`` with shape ``(d,)`` and returning the log target density.</span>
+<span class="sd">        n_resamples (int): Number of proposal samples per estimation. Typical</span>
+<span class="sd">            range 500–5000 depending on dimensionality.</span>
+<span class="sd">        thin (int): Thinning stride applied to both ``post_samples`` and</span>
+<span class="sd">            ``log_posterior_values`` to reduce autocorrelation. Use ``thin&gt;1`` if</span>
+<span class="sd">            your MCMC is highly autocorrelated.</span>
+<span class="sd">        kde_fraction (float): Fraction of the (thinned) chain used to fit the</span>
+<span class="sd">            proposal KDE(s). Remaining samples are reserved for the bridge.</span>
+<span class="sd">            Values between 0.3 and 0.7 are common.</span>
+<span class="sd">        bridge_start_fraction (float): Fraction of (thinned) chain index from</span>
+<span class="sd">            which the bridge uses the posterior samples. E.g., ``0.5`` starts at</span>
+<span class="sd">            the latter half to reduce dependence with KDE fitting.</span>
+<span class="sd">        max_iter (int): Max bridge iterations.</span>
+<span class="sd">        tol (float): Convergence tolerance for the bridge fixed‑point update.</span>
+<span class="sd">        morph_type (MorphType): Proposal family. Use ``&quot;indep&quot;`` for a product</span>
+<span class="sd">            of 1D KDEs, ``&quot;pair&quot;`` for greedy pairwise KDEs using MI ranking,</span>
+<span class="sd">            ``&quot;tree&quot;`` for a Chow-Liu tree KDE, or ``&quot;{k}_group&quot;`` for group</span>
+<span class="sd">            KDEs using k-order total correlation groups from ``Nth_TC``. Common</span>
+<span class="sd">            grouped values are ``&quot;2_group&quot;``, ``&quot;3_group&quot;``, ``&quot;4_group&quot;``,</span>
+<span class="sd">            and ``&quot;5_group&quot;``.</span>
+<span class="sd">        param_names (list[str] | None): Optional names for parameters; used for</span>
+<span class="sd">            bandwidth JSONs and reporting. Defaults to ``[&quot;param_i&quot;]``.</span>
+<span class="sd">        output_path (str | None): Directory for artifacts (bandwidth JSONs,</span>
+<span class="sd">            dependency files, and results). Defaults to ``&quot;log_MorphZ&quot;``.</span>
+<span class="sd">        n_estimations (int): Number of independent bridge estimates to run. Use</span>
+<span class="sd">            &gt;1 to gauge variability; results are saved as a 2‑column text file</span>
+<span class="sd">            with ``logz`` and ``err`` per row.</span>
+<span class="sd">        kde_bw (BandwidthMethod | float | dict | silverman): Bandwidth selector/factor.</span>
+<span class="sd">            Supported selectors from ``bw_method.py``: ``&#39;scott&#39;``, ``&#39;silverman&#39;``,</span>
+<span class="sd">            ``&#39;isj&#39;`` (Botev’s ISJ), ``&#39;cv_iso&#39;`` (isotropic CV), ``&#39;cv_diag&#39;``</span>
+<span class="sd">            (diagonal CV → scalar factor). You can also pass a number (e.g., 0.9)</span>
+<span class="sd">            or a ``{name: value}`` dict to override specific parameters when</span>
+<span class="sd">            using ``bw_json_path``.</span>
+<span class="sd">        verbose (bool): Print fitting details for KDE components.</span>
+<span class="sd">        top_k_greedy (int): For ``pair`` and ``*_group`` morph types, run K</span>
+<span class="sd">            seeded greedy selections starting from each of the top‑K candidates</span>
+<span class="sd">            (by MI or TC), and keep the selection with the highest total score.</span>
+<span class="sd">            Default is 1 (single greedy pass as before).</span>
+<span class="sd">        plot (bool): If True, saves a corner plot comparing posterior samples</span>
+<span class="sd">            (black) and proposal samples (red) as a PNG in ``output_path``.</span>
+<span class="sd">            The plot is not displayed.</span>
+<span class="sd">        prefer_corner (bool): If True, attempts to render the corner plot using</span>
+<span class="sd">            the ``corner`` package with filled contours and the following style:</span>
+<span class="sd">            ``bins=50``, ``quantiles=(0.05,0.5,0.95)``, ``show_titles=True``,</span>
+<span class="sd">            ``title_fmt=&#39;.2f&#39;``, ``plot_datapoints=True``, ``fill_contours=True``,</span>
+<span class="sd">            ``levels=(0.5,0.8,0.95)``, ``smooth=0.9``. If ``corner`` is not</span>
+<span class="sd">            installed, a warning is emitted and the plot is skipped.</span>
+<span class="sd">        pool (int | &quot;max&quot; | None): Worker processes for evaluating proposal</span>
+<span class="sd">            samples during bridge sampling. Use ``&quot;max&quot;`` to match</span>
+<span class="sd">            ``os.cpu_count()``. When ``None`` or ``&lt;=1`` evaluations run</span>
+<span class="sd">            serially.</span>
+<span class="sd">        show_progress (bool): If True and tqdm is available, show a progress bar</span>
+<span class="sd">            while evaluating proposal samples (expensive likelihood calls).</span>
+<span class="sd">        shuffle (bool): If True (default), randomly permute the thinned posterior</span>
+<span class="sd">            samples and their corresponding log-posterior values before KDE fitting</span>
+<span class="sd">            and bridge sampling. The same permutation is applied to both arrays so</span>
+<span class="sd">            sample–log-prob correspondence is preserved.</span>
+<span class="sd">        overwrite_path (bool): If True, recompute and overwrite all cached files</span>
+<span class="sd">            (bandwidth JSONs, MI/TC/tree dependency files) even if they already</span>
+<span class="sd">            exist on disk. Default is False (skip recomputation when files exist).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list[[float, float]]: A list of ``[logz, err]`` for each estimation.</span>
+
+<span class="sd">    Suggestions:</span>
+<span class="sd">        - Start with ``morph_type=&#39;indep&#39;`` for speed. If diagnostics look poor,</span>
+<span class="sd">          try ``&#39;pair&#39;`` or ``&#39;tree&#39;`` to capture dependencies.</span>
+<span class="sd">        - For bandwidths, try ``&#39;silverman&#39;`` for speed, ``&#39;cv_iso&#39;`` for tighter</span>
+<span class="sd">          fits, or ``&#39;isj&#39;`` as a robust nonparametric choice.</span>
+<span class="sd">        - Use ``n_estimations&gt;=3`` to assess stability and report mean/SE.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    
+    <span class="n">kde_bw_name</span> <span class="o">=</span> <span class="n">kde_bw</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">post_samples</span><span class="p">[::</span><span class="n">thin</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">log_prob</span> <span class="o">=</span> <span class="n">log_posterior_values</span><span class="p">[::</span><span class="n">thin</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+        <span class="n">perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span>
+        <span class="n">log_prob</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span>
+
+    <span class="c1"># Sanity-check: callable must agree with the pre-computed log-posterior values.</span>
+    <span class="n">_n_check</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+    <span class="n">_mismatches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">_n_check</span><span class="p">):</span>
+        <span class="n">_lp_callable</span> <span class="o">=</span> <span class="n">log_posterior_function</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">_i</span><span class="p">])</span>
+        <span class="n">_lp_stored</span>   <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;sanity i=</span><span class="si">%d</span><span class="s2">  stored=</span><span class="si">%.6f</span><span class="s2">  callable=</span><span class="si">%.6f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">_i</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">_lp_callable</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">_lp_callable</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
+            <span class="n">_mismatches</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_i</span><span class="p">,</span> <span class="n">_lp_stored</span><span class="p">,</span> <span class="n">_lp_callable</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">_mismatches</span><span class="p">:</span>
+        <span class="n">_msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;log_posterior_function does not match log_posterior_values for &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">_mismatches</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">_n_check</span><span class="si">}</span><span class="s2"> checked samples. &quot;</span>
+            <span class="s2">&quot;Bridge sampling results may be unreliable.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;  i=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">  stored=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  callable=</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  diff=</span><span class="si">{</span><span class="n">c</span><span class="o">-</span><span class="n">s</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">_mismatches</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">_msg</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_msg</span><span class="p">)</span>
+
+    <span class="n">tot_len</span><span class="p">,</span> <span class="n">ndim</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">if</span> <span class="n">output_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;log_MorphZ&quot;</span>
+    
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="n">kde_samples</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="n">tot_len</span> <span class="o">*</span> <span class="n">kde_fraction</span><span class="p">),</span> <span class="p">:]</span>
+
+    <span class="c1"># Use user-provided kde_bw or default to &quot;silverman&quot;</span>
+    <span class="k">if</span> <span class="n">kde_bw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">kde_bw</span> <span class="o">=</span> <span class="s2">&quot;silverman&quot;</span>
+    
+    <span class="c1"># Detect numeric bandwidths; if numeric, skip bw_method/JSON logic and pass directly</span>
+    <span class="n">bw_is_numeric</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kde_bw</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">top_k_greedy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">comb</span>
+        <span class="k">if</span> <span class="n">morph_type</span> <span class="o">==</span> <span class="s2">&quot;pair&quot;</span><span class="p">:</span>
+            <span class="n">top_k_greedy</span> <span class="o">=</span> <span class="n">comb</span><span class="p">(</span><span class="n">ndim</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Setting top_k_greedy to </span><span class="si">%s</span><span class="s2"> for pairs selection.&quot;</span><span class="p">,</span> <span class="n">top_k_greedy</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;group&quot;</span> <span class="ow">in</span> <span class="n">morph_type</span><span class="p">:</span>
+            <span class="n">n_order</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">morph_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">top_k_greedy</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">comb</span><span class="p">(</span><span class="n">ndim</span><span class="p">,</span> <span class="n">n_order</span><span class="p">)))</span> <span class="c1"># sqrt of number of possible groups</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Setting top_k_greedy to </span><span class="si">%s</span><span class="s2"> for </span><span class="si">%s</span><span class="s2">-groups selection.&quot;</span><span class="p">,</span> <span class="n">top_k_greedy</span><span class="p">,</span> <span class="n">n_order</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">morph_type</span> <span class="o">==</span> <span class="s2">&quot;indep&quot;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using independent KDE for proposal distribution.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bw_is_numeric</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;KDE bandwidth method: </span><span class="si">%s</span><span class="s2"> (numeric: </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">kde_bw</span><span class="p">,</span> <span class="n">bw_is_numeric</span><span class="p">)</span>
+            <span class="c1"># Pass numeric bandwidth directly; do not compute or load JSON</span>
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Indep</span><span class="p">(</span><span class="n">kde_samples</span><span class="p">,</span> <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">method_name</span> <span class="o">=</span> <span class="n">kde_bw</span>  <span class="c1"># Store original method name</span>
+            <span class="n">bw_json_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/bw_</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">_1D.json&quot;</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">bw_json_path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;BW file not found at </span><span class="si">%s</span><span class="s2">. Running Bw with </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)</span>
+
+                <span class="n">kde_bw</span> <span class="o">=</span> <span class="n">compute_and_save_bandwidths</span><span class="p">(</span>
+                    <span class="n">kde_samples</span><span class="p">,</span>
+                    <span class="n">method</span><span class="o">=</span><span class="n">method_name</span><span class="p">,</span>
+                    <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                    <span class="n">n_order</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Indep</span><span class="p">(</span>
+                <span class="n">kde_samples</span><span class="p">,</span>
+                <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span>
+                <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+                <span class="n">bw_json_path</span><span class="o">=</span><span class="n">bw_json_path</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">log_proposal_pdf</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">logpdf_kde</span>
+
+    <span class="k">elif</span> <span class="n">morph_type</span> <span class="o">==</span> <span class="s2">&quot;pair&quot;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using Morph_Pairwise for proposal distribution.&quot;</span><span class="p">)</span>
+        <span class="n">mi_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/params_MI.json&quot;</span>
+        <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">)]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mi_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MI file not found at </span><span class="si">%s</span><span class="s2">. Running dependency tree computation...&quot;</span><span class="p">,</span> <span class="n">mi_file</span><span class="p">)</span>
+            <span class="n">dependency_tree</span><span class="o">.</span><span class="n">compute_and_plot_mi_tree</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span> <span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;pair&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bw_is_numeric</span><span class="p">:</span>
+            <span class="c1"># Direct numeric bandwidth; skip JSON computation</span>
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Pairwise</span><span class="p">(</span>
+                <span class="n">kde_samples</span><span class="p">,</span>
+                <span class="n">param_mi</span><span class="o">=</span><span class="n">mi_file</span><span class="p">,</span>
+                <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+                <span class="n">bw_json_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">top_k_greedy</span><span class="o">=</span><span class="n">top_k_greedy</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Save selected pairs/singles</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">selected_pairs_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;selected_pairs.json&quot;</span><span class="p">)</span>
+                <span class="n">sel</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;pairs&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="s2">&quot;mi&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">mi</span><span class="p">)}</span> <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">mi</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;pairs&quot;</span><span class="p">,</span> <span class="p">[])],</span>
+                    <span class="s2">&quot;singles&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;singles&quot;</span><span class="p">,</span> <span class="p">[])),</span>
+                <span class="p">}</span>
+                <span class="c1"># Build JSON string first to avoid truncating file on failure</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">selected_pairs_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to write selected_pairs.json: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">method_name</span> <span class="o">=</span> <span class="n">kde_bw</span>  <span class="c1"># Store original method name</span>
+
+            <span class="n">bw_json_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/bw_</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">_2D.json&quot;</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">bw_json_path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;BW file not found at </span><span class="si">%s</span><span class="s2">. Running Bw with </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)</span>
+                <span class="n">kde_bw</span> <span class="o">=</span> <span class="n">compute_and_save_bandwidths</span><span class="p">(</span>
+                    <span class="n">kde_samples</span><span class="p">,</span>
+                    <span class="n">method</span><span class="o">=</span><span class="n">method_name</span><span class="p">,</span>
+                    <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                    <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                    <span class="n">n_order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">in_path</span><span class="o">=</span><span class="n">mi_file</span><span class="p">,</span>
+                    <span class="n">group_format</span><span class="o">=</span><span class="s2">&quot;pairs&quot;</span><span class="p">,</span>
+                    <span class="n">top_k_greedy</span><span class="o">=</span><span class="n">top_k_greedy</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="c1"># Pass the JSON path to KDE class for automatic bandwidth loading</span>
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Pairwise</span><span class="p">(</span>
+                <span class="n">kde_samples</span><span class="p">,</span>
+                <span class="n">param_mi</span><span class="o">=</span><span class="n">mi_file</span><span class="p">,</span>
+                <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+                <span class="n">bw_json_path</span><span class="o">=</span><span class="n">bw_json_path</span><span class="p">,</span>
+                <span class="n">top_k_greedy</span><span class="o">=</span><span class="n">top_k_greedy</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Save selected pairs/singles</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">selected_pairs_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;selected_pairs.json&quot;</span><span class="p">)</span>
+                <span class="n">sel</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;pairs&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="s2">&quot;mi&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">mi</span><span class="p">)}</span> <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">mi</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;pairs&quot;</span><span class="p">,</span> <span class="p">[])],</span>
+                    <span class="s2">&quot;singles&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;singles&quot;</span><span class="p">,</span> <span class="p">[])),</span>
+                <span class="p">}</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">selected_pairs_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to write selected_pairs.json: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="n">log_proposal_pdf</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">logpdf</span>
+
+    <span class="k">elif</span> <span class="s2">&quot;group&quot;</span> <span class="ow">in</span> <span class="n">morph_type</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using Morph_Group for proposal distribution.&quot;</span><span class="p">)</span>
+        <span class="n">n_order</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">morph_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">group_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/params_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">-order_TC.json&quot;</span>
+        <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">)]</span>
+        <span class="n">tc_workers</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span> <span class="ow">or</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">group_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Group file not found at </span><span class="si">%s</span><span class="s2">. Running total correlation computation...&quot;</span><span class="p">,</span> <span class="n">group_file</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Computing TC with </span><span class="si">%s</span><span class="s2"> worker</span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">tc_workers</span><span class="p">,</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">tc_workers</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span>
+            <span class="n">Nth_TC</span><span class="o">.</span><span class="n">compute_and_save_tc</span><span class="p">(</span>
+                <span class="n">samples</span><span class="p">,</span>
+                <span class="n">names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                <span class="n">n_order</span><span class="o">=</span><span class="n">n_order</span><span class="p">,</span>
+                <span class="n">out_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                <span class="n">n_workers</span><span class="o">=</span><span class="n">tc_workers</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bw_is_numeric</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;KDE bandwidth method: </span><span class="si">%s</span><span class="s2"> (numeric: </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">kde_bw</span><span class="p">,</span> <span class="n">bw_is_numeric</span><span class="p">)</span>
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Group</span><span class="p">(</span>
+                <span class="n">kde_samples</span><span class="p">,</span>
+                <span class="n">group_file</span><span class="p">,</span>
+                <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+                <span class="n">bw_json_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">top_k_greedy</span><span class="o">=</span><span class="n">top_k_greedy</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Save selected groups/singles</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">selected_group_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;selected_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">-order_group.json&quot;</span><span class="p">)</span>
+                <span class="n">sel</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="p">())),</span> <span class="s2">&quot;tc&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tc&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))}</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">[])],</span>
+                    <span class="s2">&quot;singles&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;singles&quot;</span><span class="p">,</span> <span class="p">[])),</span>
+                    <span class="s2">&quot;n_order&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_order</span><span class="p">),</span>
+                <span class="p">}</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">selected_group_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to write selected_</span><span class="si">%s</span><span class="s2">-order_group.json: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">n_order</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">method_name</span> <span class="o">=</span> <span class="n">kde_bw</span>  <span class="c1"># Store original method name</span>
+            <span class="n">bw_json_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/bw_</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">D.json&quot;</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">bw_json_path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;BW file not found at </span><span class="si">%s</span><span class="s2">. Running Bw with </span><span class="si">%s</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)</span>
+                <span class="n">kde_bw</span> <span class="o">=</span> <span class="n">compute_and_save_bandwidths</span><span class="p">(</span>
+                    <span class="n">kde_samples</span><span class="p">,</span>
+                    <span class="n">method</span><span class="o">=</span><span class="n">method_name</span><span class="p">,</span>
+                    <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                    <span class="n">n_order</span><span class="o">=</span><span class="n">n_order</span><span class="p">,</span>
+                    <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+                    <span class="n">in_path</span><span class="o">=</span><span class="n">group_file</span><span class="p">,</span>
+                    <span class="n">group_format</span><span class="o">=</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span>
+                    <span class="n">top_k_greedy</span><span class="o">=</span><span class="n">top_k_greedy</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Group</span><span class="p">(</span>
+                <span class="n">kde_samples</span><span class="p">,</span>
+                <span class="n">group_file</span><span class="p">,</span>
+                <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+                <span class="n">bw_json_path</span><span class="o">=</span><span class="n">bw_json_path</span><span class="p">,</span>
+                <span class="n">top_k_greedy</span><span class="o">=</span><span class="n">top_k_greedy</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Save selected groups/singles</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">selected_group_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;selected_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">-order_group.json&quot;</span><span class="p">)</span>
+                <span class="n">sel</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="p">())),</span> <span class="s2">&quot;tc&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tc&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))}</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">[])],</span>
+                    <span class="s2">&quot;singles&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">target_kde</span><span class="p">,</span> <span class="s2">&quot;singles&quot;</span><span class="p">,</span> <span class="p">[])),</span>
+                    <span class="s2">&quot;n_order&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_order</span><span class="p">),</span>
+                <span class="p">}</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">selected_group_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to write selected_</span><span class="si">%s</span><span class="s2">-order_group.json: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">n_order</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="n">log_proposal_pdf</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">logpdf</span>
+
+    <span class="k">elif</span> <span class="n">morph_type</span> <span class="o">==</span> <span class="s2">&quot;tree&quot;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using Morph_Tree for proposal distribution.&quot;</span><span class="p">)</span>
+        <span class="n">tree_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/tree.json&quot;</span>
+        <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tree_file</span><span class="p">)</span> <span class="ow">or</span> <span class="n">overwrite_path</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Tree file not found at </span><span class="si">%s</span><span class="s2">. Running dependency tree computation... might take a while for higher dimensions. for faster results, use fewer samples per param.&quot;</span><span class="p">,</span>
+                <span class="n">tree_file</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">dependency_tree</span><span class="o">.</span><span class="n">compute_and_plot_mi_tree</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">out_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span> <span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;tree&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">bw_is_numeric</span><span class="p">:</span>
+            <span class="c1"># Direct numeric bandwidth; do not compute JSON bandwidths</span>
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Tree</span><span class="p">(</span><span class="n">kde_samples</span><span class="p">,</span> <span class="n">tree_file</span><span class="o">=</span><span class="n">tree_file</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">method_name</span> <span class="o">=</span> <span class="n">kde_bw</span>  <span class="c1"># Store original method name</span>
+            <span class="n">kde_bw</span> <span class="o">=</span> <span class="n">compute_and_save_bandwidths</span><span class="p">(</span>
+                <span class="n">kde_samples</span><span class="p">,</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">method_name</span><span class="p">,</span>
+                <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span>
+                <span class="n">n_order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Pass the JSON path to KDE class for automatic bandwidth loading</span>
+            <span class="n">bw_json_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/bw_</span><span class="si">{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">_2D.json&quot;</span>
+            <span class="n">target_kde</span> <span class="o">=</span> <span class="n">Morph_Tree</span><span class="p">(</span><span class="n">kde_samples</span><span class="p">,</span> <span class="n">tree_file</span><span class="o">=</span><span class="n">tree_file</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="n">param_names</span><span class="p">,</span> <span class="n">kde_bw</span><span class="o">=</span><span class="n">kde_bw</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="o">=</span><span class="n">bw_json_path</span><span class="p">)</span>
+        <span class="n">log_proposal_pdf</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">logpdf</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown morph_type: </span><span class="si">{</span><span class="n">morph_type</span><span class="si">}</span><span class="s2">. Supported types are &#39;indep&#39;, &#39;pair&#39;, and &#39;tree&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="n">bridge_start_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tot_len</span> <span class="o">*</span> <span class="n">bridge_start_fraction</span><span class="p">)</span>
+    <span class="n">samples_mor</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">bridge_start_index</span><span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">log_post</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">[</span><span class="n">bridge_start_index</span><span class="p">:]</span>
+    <span class="c1"># Optional: corner-style comparison plot of posterior vs proposal</span>
+        
+    <span class="k">if</span> <span class="n">plot</span> <span class="p">:</span>
+        <span class="n">samples_prop</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">n_resamples</span><span class="p">)</span>
+
+        <span class="n">_save_corner_plot</span><span class="p">(</span>
+            <span class="n">samples</span><span class="p">,</span>
+            <span class="n">samples_prop</span><span class="p">,</span>
+            <span class="n">param_names</span><span class="p">,</span>
+            <span class="n">output_path</span><span class="p">,</span>
+            <span class="n">morph_type</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="p">,</span>
+            <span class="n">prefer_corner</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">resolved_pool</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">pool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pool</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">pool</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
+                <span class="n">resolved_pool</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span> <span class="ow">or</span> <span class="mi">1</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Resolving pool=&#39;max&#39; to </span><span class="si">%s</span><span class="s2"> workers via os.cpu_count().&quot;</span><span class="p">,</span> <span class="n">resolved_pool</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pool expects an int, None, an object with a map method, or the string &#39;max&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pool</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">resolved_pool</span> <span class="o">=</span> <span class="n">pool</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">pool</span><span class="p">,</span> <span class="s2">&quot;map&quot;</span><span class="p">):</span>
+            <span class="n">resolved_pool</span> <span class="o">=</span> <span class="n">pool</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pool expects an int, None, an object with a map method, or the string &#39;max&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="n">use_pool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resolved_pool</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">use_pool</span> <span class="o">=</span> <span class="n">resolved_pool</span> <span class="o">&gt;</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">resolved_pool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">use_pool</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">bridge_impl</span> <span class="o">=</span> <span class="n">bridge_multiprocess</span><span class="o">.</span><span class="n">bridge_sampling_ln</span> <span class="k">if</span> <span class="n">use_pool</span> <span class="k">else</span> <span class="n">bridge_serial</span><span class="o">.</span><span class="n">bridge_sampling_ln</span>
+    <span class="n">bridge_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;pool&quot;</span><span class="p">:</span> <span class="n">resolved_pool</span><span class="p">}</span> <span class="k">if</span> <span class="n">use_pool</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">resolved_pool</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resolved_pool</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">use_pool</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using multiprocessing with </span><span class="si">%s</span><span class="s2"> workers for bridge sampling.&quot;</span><span class="p">,</span> <span class="n">resolved_pool</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Multiprocessing requested with pool size </span><span class="si">%s</span><span class="s2">; running serial evaluation.&quot;</span><span class="p">,</span> <span class="n">resolved_pool</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using external pool (</span><span class="si">%s</span><span class="s2">) for bridge sampling.&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">resolved_pool</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+    <span class="n">logz_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">/logz_morph_z_</span><span class="si">{</span><span class="n">morph_type</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">kde_bw_name</span><span class="si">}</span><span class="s2">.txt&quot;</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;logz err&quot;</span>
+    <span class="n">all_log_z_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_estimations</span><span class="p">):</span>
+
+        <span class="n">samples_prop</span> <span class="o">=</span> <span class="n">target_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">n_resamples</span><span class="p">)</span>
+        <span class="n">estimation_label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Estimation </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_estimations</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">estimation_label</span><span class="p">)</span>
+        <span class="n">log_z_results</span> <span class="o">=</span> <span class="n">bridge_impl</span><span class="p">(</span>
+            <span class="n">log_posterior_function</span><span class="p">,</span>
+            <span class="n">log_proposal_pdf</span><span class="p">,</span>
+            <span class="n">samples_mor</span><span class="p">,</span>
+            <span class="n">log_post</span><span class="p">,</span>
+            <span class="n">samples_prop</span><span class="p">,</span>
+            <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span>
+            <span class="n">max_iter</span><span class="o">=</span><span class="n">max_iter</span><span class="p">,</span>
+            <span class="n">estimation_label</span><span class="o">=</span><span class="n">estimation_label</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+            <span class="n">show_progress</span><span class="o">=</span><span class="n">show_progress</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">bridge_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">log_z_results</span><span class="p">)):</span>
+            <span class="n">_nan_msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Estimation </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_estimations</span><span class="si">}</span><span class="s2">: log(z) estimate contains NaN &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(logz=</span><span class="si">{</span><span class="n">log_z_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, err=</span><span class="si">{</span><span class="n">log_z_results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">). &quot;</span>
+                <span class="s2">&quot;This may indicate numerical issues in the provided samples (e.g., poor proposal overlap, &quot;</span>
+                <span class="s2">&quot;extreme log-posterior values, or degenerate KDE). &quot;</span>
+                <span class="s2">&quot;Consider adjusting checking your samples or the log-proposal PDF.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">_nan_msg</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_nan_msg</span><span class="p">)</span>
+
+        <span class="n">all_log_z_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log_z_results</span><span class="p">)</span>
+
+        <span class="c1"># Persist partial results every iteration so progress survives interruptions.</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">log_z_results</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;w&quot;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;a&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">logz_path</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">header</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+    <span class="n">final_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Saved log(z) to </span><span class="si">{</span><span class="n">logz_path</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">final_msg</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">final_msg</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">all_log_z_results</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MorphZ Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

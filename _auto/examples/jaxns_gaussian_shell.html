@@ -166,6 +166,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="eggbox.html">Eggbox</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gaussian_shell.html">Gaussian shell</a></li>
@@ -425,7 +426,7 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 
 <span class="c1"># -- geometry -----------------------------------------------------------------</span>
 <span class="n">L</span>    <span class="o">=</span> <span class="mf">6.0</span>
-<span class="n">ndim</span> <span class="o">=</span> <span class="mi">10</span>   <span class="c1"># change to 30 for the high-dimensional benchmark</span>
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># change to 30 for the high-dimensional benchmark</span>
 <span class="n">r</span>    <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">w</span>    <span class="o">=</span> <span class="mf">0.1</span>
 
@@ -445,6 +446,14 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jax: 0.10.0
+jaxns: 2.6.9
+ndim = 30,  L = 6.0,  r = 2.0,  w = 0.1
+c1[0] = -3.5,  c2[0] = 3.5
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="jaxns-model">
@@ -461,6 +470,12 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">prior_model</span><span class="o">=</span><span class="n">prior_model</span><span class="p">,</span> <span class="n">log_likelihood</span><span class="o">=</span><span class="n">jax_loglikelihood</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">sanity_check</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">S</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:jaxns:Sanity check...
+INFO:jaxns:Sanity check passed
 </pre></div>
 </div>
 </div>
@@ -485,8 +500,9 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">c</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">U_ndims</span> <span class="o">*</span> <span class="mi">20</span><span class="p">),</span>
     <span class="n">difficult_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">gradient_guided</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">parameter_estimation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">term_cond</span> <span class="o">=</span> <span class="n">TerminationCondition</span><span class="p">(</span><span class="n">dlogZ</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">))</span>
@@ -495,6 +511,13 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 
 <span class="n">ns</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">ns_results</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;JAXNS ln(Z): </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_mean</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_uncert</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:jaxns:Number of Markov-chains set to: 3000
+/home/apokrypha/Local NT/git_26/MorphZ/.venv-jaxns/lib/python3.12/site-packages/jaxns/samplers/uni_slice_sampler.py:325: UserWarning: Gradient guided slice sampler is experimental and will likely change.
+  warnings.warn(&quot;Gradient guided slice sampler is experimental and will likely change.&quot;)
 </pre></div>
 </div>
 </div>
@@ -518,6 +541,13 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;theta_all shape:&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;theta_1 range across resampled posterior:&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Samples near c1 (theta_1 &lt; 0):&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s1">&#39;  near c2 (theta_1 &gt; 0):&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">theta_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta_all shape: (8000, 10)
+theta_1 range across resampled posterior: -5.27 to 5.17
+Samples near c1 (theta_1 &lt; 0): 2455   near c2 (theta_1 &gt; 0): 5545
 </pre></div>
 </div>
 </div>
@@ -556,6 +586,13 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;post_smp shape:&#39;</span><span class="p">,</span> <span class="n">post_smp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lp shape:      &#39;</span><span class="p">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lp range:      &#39;</span><span class="p">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>post_smp shape: (8000, 10)
+lp shape:       (8000,)
+lp range:       -30.6 to -23.47
 </pre></div>
 </div>
 </div>
@@ -644,6 +681,12 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/09cd31c068c488d2bfd3b9c95742b3864d76a75f6c63b8a86b3cfb44dca0e1ae.png" src="../../_images/09cd31c068c488d2bfd3b9c95742b3864d76a75f6c63b8a86b3cfb44dca0e1ae.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shell 1 samples: 2455  |  Shell 2 samples: 5545
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="estimate-ln-z-with-morphz">
@@ -654,8 +697,8 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="n">post_samples</span><span class="o">=</span><span class="n">post_smp</span><span class="p">,</span>
     <span class="n">log_posterior_values</span><span class="o">=</span><span class="n">lp</span><span class="p">,</span>
     <span class="n">log_posterior_function</span><span class="o">=</span><span class="n">lp_fn</span><span class="p">,</span>
-    <span class="n">n_resamples</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
-    <span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">n_resamples</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+    <span class="n">thin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">morph_type</span><span class="o">=</span><span class="s1">&#39;2_group&#39;</span><span class="p">,</span>
     <span class="n">kde_bw</span><span class="o">=</span><span class="s1">&#39;silverman&#39;</span><span class="p">,</span>
     <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;jaxns_gaussian_shell&#39;</span><span class="p">,</span>
@@ -663,7 +706,7 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">show_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">overwrite_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">overwrite_path</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -678,6 +721,40 @@ Z = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;True   ln(Z) D=</span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">true_lnZ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ residual: </span><span class="si">{</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">:</span><span class="s1">+.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;JAXNS  residual: </span><span class="si">{</span><span class="nb">float</span><span class="p">(</span><span class="n">ns_results</span><span class="o">.</span><span class="n">log_Z_mean</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">:</span><span class="s1">+.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.morph:Using Morph_Group for proposal distribution.
+INFO:morphZ.morph:Group file not found at jaxns_gaussian_shell/params_2-order_TC.json. Running total correlation computation...
+INFO:morphZ.morph:Computing TC with 8 workers.
+INFO:morphZ.Nth_TC:Top 10 MI pairs:
+INFO:morphZ.Nth_TC:  param_5 — param_8 : 0.040009
+INFO:morphZ.Nth_TC:  param_4 — param_9 : 0.038357
+INFO:morphZ.Nth_TC:  param_8 — param_9 : 0.036314
+INFO:morphZ.Nth_TC:  param_1 — param_4 : 0.035402
+INFO:morphZ.Nth_TC:  param_4 — param_6 : 0.034934
+INFO:morphZ.Nth_TC:  param_5 — param_9 : 0.034812
+INFO:morphZ.Nth_TC:  param_1 — param_5 : 0.033579
+INFO:morphZ.Nth_TC:  param_1 — param_6 : 0.033233
+INFO:morphZ.Nth_TC:  param_5 — param_7 : 0.032996
+INFO:morphZ.Nth_TC:  param_4 — param_7 : 0.032842
+INFO:morphZ.Nth_TC:All MI pairs saved to jaxns_gaussian_shell/params_2-order_TC.json
+INFO:morphZ.morph:BW file not found at jaxns_gaussian_shell/bw_silverman_2D.json. Running Bw with silverman...
+INFO:morphZ.bw_method:Bandwidths saved to jaxns_gaussian_shell/bw_silverman_2D.json
+INFO:morphZ.bw_method:Processed 5 groups and 0 single parameters
+Number of evaluated proposed samples: 4000/4000
+INFO:morphZ.bridge:Filtered proposal samples: 3959 valid samples out of 4000 total samples.
+INFO:morphZ.bridge:iteration: 1 log(z) old: -14.581705900253546 log(z) New: -14.720986062849693
+INFO:morphZ.bridge:iteration: 2 log(z) old: -14.720986062849693 log(z) New: -14.725796179162032
+INFO:morphZ.bridge:Converged in 2 iterations. log(z): -14.7210 +/-: 0.0248
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -14.7210 +/- 0.0248
+JAXNS  mean ln(Z): -13.2119 +/- 0.1423
+True   ln(Z) D=10: -14.59
+MorphZ residual: -0.1310
+JAXNS  residual: +1.3781
 </pre></div>
 </div>
 </div>

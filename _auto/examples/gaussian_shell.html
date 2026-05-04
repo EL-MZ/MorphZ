@@ -164,6 +164,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../../examples.html">Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="eggbox.html">Eggbox</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Gaussian shell</a></li>
@@ -348,6 +349,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">dynesty</span><span class="w"> </span><span class="kn">import</span> <span class="n">DynamicNestedSampler</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">g_shell</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gs</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">morphZ</span>
+<span class="c1"># import logging</span>
+<span class="c1"># from morphZ import setup_logging ; setup_logging(level=logging.INFO)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
 </pre></div>
 </div>
 </div>
@@ -355,11 +359,10 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> 
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
 
 <span class="c1"># Prior cube: [-L, L]^D </span>
 <span class="n">L</span> <span class="o">=</span> <span class="mf">6.0</span>
-<span class="n">ndim</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">ndim</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">prior_volume</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="n">ndim</span>
 
 <span class="c1"># Parameters of the twin shells (from paper)</span>
@@ -506,7 +509,7 @@
         <span class="n">loglikelihood</span><span class="p">,</span>
         <span class="n">prior_transform</span><span class="p">,</span>
         <span class="n">ndim</span><span class="p">,</span>
-        <span class="n">nlive</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>      <span class="c1"># number of live points; increase for accuracy</span>
+        <span class="n">nlive</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>      <span class="c1"># number of live points; increase for accuracy</span>
         <span class="n">sample</span><span class="o">=</span><span class="s2">&quot;rwalk&quot;</span><span class="p">,</span>  <span class="c1"># random-walk proposals; can try &quot;unif&quot;, &quot;slice&quot;</span>
         <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;multi&quot;</span><span class="p">,</span>   <span class="c1"># bounding method (&quot;multi&quot; good for multimodal)</span>
     <span class="p">)</span>
@@ -518,7 +521,7 @@
     <span class="c1">#     )</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running dynesty Nested Sampling on Gaussian shell...&quot;</span><span class="p">)</span>
-    <span class="n">sampler</span><span class="o">.</span><span class="n">run_nested</span><span class="p">(</span><span class="n">dlogz</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">print_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sampler</span><span class="o">.</span><span class="n">run_nested</span><span class="p">(</span><span class="n">dlogz</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">print_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1"># sampler.run_nested(dlogz_init=0.1,print_progress=True)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">results</span>
     <span class="n">samples</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">logwt</span> <span class="o">-</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -528,42 +531,40 @@
     <span class="c1"># -------------------------------</span>
     <span class="n">log_z_NS</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">logz</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">log_z_NS_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">logzerr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">true_logz</span> <span class="o">=</span> <span class="o">-</span><span class="mf">36.09</span>
+<span class="n">true_lnZ</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">:</span> <span class="o">-</span><span class="mf">14.59</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span> <span class="o">-</span><span class="mf">60.13</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ndim</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">==== RESULTS ====&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dynesty estimated logZ = </span><span class="si">{</span><span class="n">log_z_NS</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">log_z_NS_err</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True logZ (literature) = </span><span class="si">{</span><span class="n">true_logz</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error = </span><span class="si">{</span><span class="n">log_z_NS</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="w"> </span><span class="n">true_logz</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True logZ (literature) = </span><span class="si">{</span><span class="n">true_lnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error = </span><span class="si">{</span><span class="n">log_z_NS</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Twin Gaussian Shell Problem Setup:
-Dimensions: 10
-Prior bounds: [-6.0, 6.0]^10
-Shell centers: c1=[-3.5  0.   0.   0.   0.   0.   0.   0.   0.   0. ], c2=[3.5 0.  0.  0.  0.  0.  0.  0.  0.  0. ]
+Dimensions: 30
+Prior bounds: [-6.0, 6.0]^30
+Shell centers: c1=[-3.5  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
+  0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.
+  0.   0. ], c2=[3.5 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.
+ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. ]
 Shell radii: r1=2.0, r2=2.0
 Shell widths: w1=0.1, w2=0.1
 Running dynesty Nested Sampling on Gaussian shell...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3638it [00:05, 704.52it/s, +200 | bound: 98 | nc: 1 | ncall: 94713 | eff(%):  4.061 | loglstar:   -inf &lt;  1.384 &lt;    inf | logz: -14.405 +/-  0.274 | dlogz:  0.000 &gt;  0.100]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0it [00:00, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5566it [00:13, 426.47it/s, +100 | bound: 393 | nc: 1 | ncall: 263818 | eff(%):  2.149 | loglstar:   -inf &lt;  1.384 &lt;    inf | logz: -49.391 +/-  0.704 | dlogz:  0.000 &gt;  0.010]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RESULTS ====
-dynesty estimated logZ = -14.405 ± 0.329
-True logZ (literature) = -36.090
-Error = 21.685
+dynesty estimated logZ = -49.391 ± 0.717
+True logZ (literature) = -60.130
+Error = 10.739
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">morphZ</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_logging</span> <span class="p">;</span> <span class="n">setup_logging</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -575,16 +576,23 @@ Error = 21.685
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total samples:&#39;</span><span class="p">,</span> <span class="n">tot_len</span><span class="p">,</span> <span class="s1">&#39;Dimensions:&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
 <span class="n">log_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tot_len</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
-    <span class="n">log_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">lnprobfn</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lp_fn</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">loglikelihood</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">+</span><span class="n">logprior</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 
-<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span>
-<span class="n">samples</span><span class="p">,</span>
-<span class="n">log_prob</span><span class="p">,</span>
-<span class="n">gs</span><span class="o">.</span><span class="n">lnprobfn</span><span class="p">,</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">log_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lp_fn</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+
+<span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="n">log_prob</span><span class="p">,</span><span class="n">lp_fn</span><span class="p">,</span>
 <span class="n">n_resamples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span><span class="n">kde_bw</span><span class="o">=</span><span class="s2">&quot;silverman&quot;</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./gaussian_shell/&#39;</span><span class="p">,</span><span class="n">pool</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;True:&#39;</span><span class="p">,</span> <span class="n">true_logz</span><span class="p">)</span>
+<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./gaussian_shell/&#39;</span><span class="p">,</span><span class="n">overwrite_path</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># print(&#39;True:&#39;, true_logz)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ mean ln(Z): </span><span class="si">{</span><span class="n">log_p_estimate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">log_p_estimate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NS  mean ln(Z): </span><span class="si">{</span><span class="n">log_z_NS</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">log_z_NS_err</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">true_lnZ</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;True   ln(Z) D=</span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">true_lnZ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ residual: </span><span class="si">{</span><span class="n">log_p_estimate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NS  residual: </span><span class="si">{</span><span class="n">log_z_NS</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">true_lnZ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -592,38 +600,44 @@ Error = 21.685
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.morph:Using Morph_Group for proposal distribution.
 INFO:morphZ.morph:Group file not found at ./gaussian_shell//params_2-order_TC.json. Running total correlation computation...
 INFO:morphZ.morph:Computing TC with 8 workers.
+INFO:morphZ.Nth_TC:Auto-thinning samples to 300 for faster TC computation (n_dims=30, n_order=2).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 1919 Dimensions: 10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 2833 Dimensions: 30
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "dd769b21a99d42e9bd9b67e0cef28d2c", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.Nth_TC:Top 10 MI pairs:
-INFO:morphZ.Nth_TC:  param_7 — param_8 : 0.094584
-INFO:morphZ.Nth_TC:  param_2 — param_6 : 0.083794
-INFO:morphZ.Nth_TC:  param_5 — param_9 : 0.082079
-INFO:morphZ.Nth_TC:  param_3 — param_7 : 0.081312
-INFO:morphZ.Nth_TC:  param_2 — param_9 : 0.080687
-INFO:morphZ.Nth_TC:  param_3 — param_8 : 0.079253
-INFO:morphZ.Nth_TC:  param_4 — param_9 : 0.078523
-INFO:morphZ.Nth_TC:  param_2 — param_3 : 0.077651
-INFO:morphZ.Nth_TC:  param_4 — param_6 : 0.075109
-INFO:morphZ.Nth_TC:  param_4 — param_5 : 0.074659
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "797f959bca414f78ac2f7b7ce7ec5996", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.Nth_TC:Top 10 MI pairs:
+INFO:morphZ.Nth_TC:  param_12 — param_19 : 0.129846
+INFO:morphZ.Nth_TC:  param_14 — param_22 : 0.126762
+INFO:morphZ.Nth_TC:  param_12 — param_20 : 0.119918
+INFO:morphZ.Nth_TC:  param_15 — param_26 : 0.118049
+INFO:morphZ.Nth_TC:  param_24 — param_26 : 0.116317
+INFO:morphZ.Nth_TC:  param_23 — param_29 : 0.113851
+INFO:morphZ.Nth_TC:  param_17 — param_21 : 0.113628
+INFO:morphZ.Nth_TC:  param_17 — param_22 : 0.112689
+INFO:morphZ.Nth_TC:  param_10 — param_14 : 0.112161
+INFO:morphZ.Nth_TC:  param_8 — param_19 : 0.112160
 INFO:morphZ.Nth_TC:All MI pairs saved to gaussian_shell/params_2-order_TC.json
 INFO:morphZ.morph:BW file not found at ./gaussian_shell//bw_silverman_2D.json. Running Bw with silverman...
 INFO:morphZ.bw_method:Bandwidths saved to ./gaussian_shell/bw_silverman_2D.json
-INFO:morphZ.bw_method:Processed 5 groups and 0 single parameters
-INFO:morphZ.morph:Using multiprocessing with 6 workers for bridge sampling.
-INFO:morphZ.bridge_multiprocess:Using internal multiprocessing pool with 6 workers for bridge sampling.
+INFO:morphZ.bw_method:Processed 15 groups and 0 single parameters
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ee01f2d757d74e2fa93fde7947d829c7", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge_multiprocess:Filtered proposal samples: 4868 valid samples out of 5000 total samples.
-INFO:morphZ.bridge_multiprocess:iteration: 1 log(z) old: -14.577876276985178 log(z) New: -14.834599844699483
-INFO:morphZ.bridge_multiprocess:iteration: 2 log(z) old: -14.834599844699483 log(z) New: -14.86174551075276
-INFO:morphZ.bridge_multiprocess:iteration: 3 log(z) old: -14.86174551075276 log(z) New: -14.864598702285418
-INFO:morphZ.bridge_multiprocess:Converged in 3 iterations. log(z): -14.8617 +/-: 0.0264
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "69ee1b1ff52243b6b1c637dea7d01117", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge:Filtered proposal samples: 4971 valid samples out of 5000 total samples.
+INFO:morphZ.bridge:iteration: 1 log(z) old: -60.18599163078373 log(z) New: -61.13660818942294
+INFO:morphZ.bridge:iteration: 2 log(z) old: -61.13660818942294 log(z) New: -61.454766747985076
+INFO:morphZ.bridge:iteration: 3 log(z) old: -61.454766747985076 log(z) New: -61.56580696841596
+INFO:morphZ.bridge:iteration: 4 log(z) old: -61.56580696841596 log(z) New: -61.60479846089654
+INFO:morphZ.bridge:iteration: 5 log(z) old: -61.60479846089654 log(z) New: -61.61850576723884
+INFO:morphZ.bridge:iteration: 6 log(z) old: -61.61850576723884 log(z) New: -61.623325837006654
+INFO:morphZ.bridge:Converged in 6 iterations. log(z): -61.6185 +/-: 0.0237
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True: -36.09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -61.61850576723884 +/- 0.023749839532943965
+NS  mean ln(Z): -49.39073223077961 +/- 0.7174869009817111
+True   ln(Z) D=30: -60.13
+MorphZ residual: -1.4885057672388342
+NS  residual: 10.73926776922039
 </pre></div>
 </div>
 </div>
@@ -663,12 +677,12 @@ INFO:morphZ.bridge_multiprocess:Converged in 3 iterations. log(z): -14.8617 +/-:
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.morph_pairwise:Selected pair: param_0, param_1 (MI=0.1183)
 INFO:morphZ.morph_pairwise:Pairs selected (1): [(&#39;param_0&#39;, &#39;param_1&#39;, 0.11825338311479032)]
-INFO:morphZ.morph_pairwise:Singles (8): [&#39;param_2&#39;, &#39;param_3&#39;, &#39;param_4&#39;, &#39;param_5&#39;, &#39;param_6&#39;, &#39;param_7&#39;, &#39;param_8&#39;, &#39;param_9&#39;]
+INFO:morphZ.morph_pairwise:Singles (28): [&#39;param_10&#39;, &#39;param_11&#39;, &#39;param_12&#39;, &#39;param_13&#39;, &#39;param_14&#39;, &#39;param_15&#39;, &#39;param_16&#39;, &#39;param_17&#39;, &#39;param_18&#39;, &#39;param_19&#39;, &#39;param_2&#39;, &#39;param_20&#39;, &#39;param_21&#39;, &#39;param_22&#39;, &#39;param_23&#39;, &#39;param_24&#39;, &#39;param_25&#39;, &#39;param_26&#39;, &#39;param_27&#39;, &#39;param_28&#39;, &#39;param_29&#39;, &#39;param_3&#39;, &#39;param_4&#39;, &#39;param_5&#39;, &#39;param_6&#39;, &#39;param_7&#39;, &#39;param_8&#39;, &#39;param_9&#39;]
 INFO:morphZ.morph_pairwise:Saved selection to /home/apokrypha/Local NT/paper_tests_morph/morphZ_gaussian_shell/selected_pairs.json
 INFO:morphZ.morph_pairwise:approx kde for pair[&#39;param_0&#39;, &#39;param_1&#39;] with bw: 0.02
 </pre></div>
 </div>
-<img alt="../../_images/c37a75c6dcf50d689a3d266d98e76302dcc74a05ee21194dde8c73be64d86ee7.png" src="../../_images/c37a75c6dcf50d689a3d266d98e76302dcc74a05ee21194dde8c73be64d86ee7.png" />
+<img alt="../../_images/6f97d0c8549a6f0512808217e6219fa181193d582107bde12d76620a49add563.png" src="../../_images/6f97d0c8549a6f0512808217e6219fa181193d582107bde12d76620a49add563.png" />
 </div>
 </div>
 </section>

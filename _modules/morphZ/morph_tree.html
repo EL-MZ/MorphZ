@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>morphZ.morph_tree &#8212; MorphZ Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/morphZ/morph_tree';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MorphZ Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    MorphZ
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/eggbox.html">Eggbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/gaussian_shell.html">Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/peak_sampling.html">Peak sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/numpyro_gaussian_shell.html">NumPyro Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/jaxns_gaussian_shell.html">JAXNS Gaussian shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_auto/examples/numpyro_morphz_lnz.html">NumPyro MorphZ ln(Z)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ApokryphaV1/MorphZ" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for morphZ.morph_tree</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">emcee</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.kde_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">KDEBase</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Morph_Tree">
+<a class="viewcode-back" href="../../api.html#morphZ.Morph_Tree">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Morph_Tree</span><span class="p">(</span><span class="n">KDEBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Chow-Liu tree KDE approximation for multivariate posterior samples.</span>
+
+<span class="sd">    The joint density is approximated as ``p(root)`` times conditional factors</span>
+<span class="sd">    ``p(child | parent)`` along the dependency tree edges.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">tree_file</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kde_bw</span><span class="o">=</span><span class="s1">&#39;silverman&#39;</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bw_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit root and branch KDEs from a saved dependency tree.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data (array-like): 2D array of shape (n_samples, n_params) used to fit the KDEs.</span>
+<span class="sd">            tree_file (str): Path to the JSON file containing the tree structure.</span>
+<span class="sd">            param_names (list of str, optional): Names of the parameters. If None, parameters are named by their index.</span>
+<span class="sd">            kde_bw (str, scalar, or dict, optional): The method used to estimate the bandwidth of the KDE.</span>
+<span class="sd">                                                     Can also be used to override specific parameter bandwidths</span>
+<span class="sd">                                                     when using JSON files. Defaults to &#39;silverman&#39;.</span>
+<span class="sd">            bw_json_path (str, optional): Path to JSON file containing bandwidth values. If provided,</span>
+<span class="sd">                                         bandwidths will be loaded from this file and kde_bw can be used</span>
+<span class="sd">                                         to override specific parameters.</span>
+<span class="sd">            bw_method (str, scalar, or dict, optional): Backward‑compat alias for ``kde_bw``.</span>
+<span class="sd">        </span>
+<span class="sd">        Suggestions:</span>
+<span class="sd">            - Generate ``tree_file`` via ``dependency_tree.compute_and_plot_mi_tree``</span>
+<span class="sd">              to ensure consistency with MI weights and labels used elsewhere.</span>
+<span class="sd">            - When passing a dict for ``kde_bw``, keys must match ``param_names``.</span>
+<span class="sd">            - Supported selectors from ``bw_method.py`` for SciPy‑compatible</span>
+<span class="sd">              factors: ``&#39;scott&#39;``, ``&#39;silverman&#39;``, ``&#39;isj&#39;`` (Botev’s ISJ),</span>
+<span class="sd">              ``&#39;cv_iso&#39;`` (isotropic CV), ``&#39;cv_diag&#39;`` (diagonal CV → scalar</span>
+<span class="sd">              factor via geometric mean). For trees, ``&#39;cv_iso&#39;`` can offer a</span>
+<span class="sd">              good accuracy/runtime trade‑off.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If ``data`` is not two-dimensional, ``param_names`` has</span>
+<span class="sd">                the wrong length, the tree has no unique root, or both bandwidth</span>
+<span class="sd">                aliases are specified with different values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data must be a 2D array-like object with shape (n_samples, n_params)&quot;</span><span class="p">)</span>
+
+        <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_params</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Morph_Tree initialized with </span><span class="si">%s</span><span class="s2"> dimensional data shape.&quot;</span><span class="p">,</span> <span class="n">n_params</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;param_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_params</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_params</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Length of param_names must equal the number of parameters (columns) in data&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_names</span> <span class="o">=</span> <span class="n">param_names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">param_names</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bw_json_path</span> <span class="o">=</span> <span class="n">bw_json_path</span>
+
+        <span class="c1"># Backward compatibility: allow bw_method alias</span>
+        <span class="k">if</span> <span class="n">bw_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">kde_bw</span> <span class="o">==</span> <span class="s1">&#39;silverman&#39;</span><span class="p">:</span>
+            <span class="n">kde_bw</span> <span class="o">=</span> <span class="n">bw_method</span>
+        <span class="k">elif</span> <span class="n">bw_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">bw_method</span> <span class="o">!=</span> <span class="n">kde_bw</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify only one of &#39;kde_bw&#39; or &#39;bw_method&#39;, not both.&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tree_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># Prepare bandwidth dictionary from JSON and user overrides</span>
+        <span class="n">bandwidth_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_bandwidth_dict</span><span class="p">(</span><span class="n">kde_bw</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="p">,</span> <span class="n">param_names</span><span class="p">)</span>
+
+        <span class="c1"># after loading self.tree = json.load(f)</span>
+        <span class="n">all_parents</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">}</span>
+        <span class="n">all_children</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">}</span>
+        <span class="n">roots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_parents</span> <span class="o">-</span> <span class="n">all_children</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Tree JSON must have exactly one root&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">roots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Create 1D KDE for the root</span>
+        <span class="n">root_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">]</span>
+        <span class="n">root_bw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bandwidth_for_params</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">],</span> <span class="n">bandwidth_dict</span><span class="p">,</span> <span class="n">kde_bw</span><span class="p">)</span>
+        <span class="c1"># Ensure bw is a scalar or valid method string for 1D KDE</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">root_bw</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">root_bw</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">root_bw_scalar</span> <span class="o">=</span> <span class="n">root_bw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">root_bw</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">root_bw_scalar</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">root_bw</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">root_bw_scalar</span> <span class="o">=</span> <span class="n">root_bw</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="n">root_idx</span><span class="p">],</span> <span class="n">bw_method</span><span class="o">=</span><span class="n">root_bw_scalar</span><span class="p">)</span>
+
+        <span class="c1"># Create 2D KDEs for the branches</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch_kdes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">:</span>
+            <span class="n">parent_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+            <span class="n">child_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="n">child</span><span class="p">]</span>
+
+            <span class="c1"># Determine bandwidth for the joint distribution using improved logic</span>
+            <span class="n">joint_bw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bandwidth_for_params</span><span class="p">([</span><span class="n">child</span><span class="p">,</span> <span class="n">parent</span><span class="p">],</span> <span class="n">bandwidth_dict</span><span class="p">,</span> <span class="n">kde_bw</span><span class="p">)</span>
+            <span class="n">parent_bw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bandwidth_for_params</span><span class="p">([</span><span class="n">parent</span><span class="p">],</span> <span class="n">bandwidth_dict</span><span class="p">,</span> <span class="n">kde_bw</span><span class="p">)</span>
+
+            <span class="c1"># Convert joint bandwidth to a scalar/method acceptable by gaussian_kde</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">joint_bw</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">joint_bw</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c1"># Geometric mean of per-dimension factors (mirrors PairwiseKDE)</span>
+                <span class="n">joint_bw_scalar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">joint_bw</span><span class="p">)))</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">joint_bw</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                <span class="n">joint_bw_scalar</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">joint_bw</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">joint_bw_scalar</span> <span class="o">=</span> <span class="n">joint_bw</span>  <span class="c1"># e.g., &#39;silverman&#39; or &#39;scott&#39;</span>
+
+            <span class="c1"># 2D KDE for the joint distribution p(child, parent)</span>
+            <span class="n">joint_kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="p">[</span><span class="n">child_idx</span><span class="p">,</span> <span class="n">parent_idx</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">bw_method</span><span class="o">=</span><span class="n">joint_bw_scalar</span><span class="p">)</span>
+
+            <span class="c1"># 1D KDE for the parent p(parent) — ensure scalar/method</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parent_bw</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">parent_bw</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">parent_bw_scalar</span> <span class="o">=</span> <span class="n">parent_bw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parent_bw</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                <span class="n">parent_bw_scalar</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parent_bw</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">parent_bw_scalar</span> <span class="o">=</span> <span class="n">parent_bw</span>
+            <span class="n">parent_kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="n">parent_idx</span><span class="p">],</span> <span class="n">bw_method</span><span class="o">=</span><span class="n">parent_bw_scalar</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">branch_kdes</span><span class="p">[(</span><span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">joint_kde</span><span class="p">,</span> <span class="n">parent_kde</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Morph_Tree.logpdf">
+<a class="viewcode-back" href="../../api.html#morphZ.Morph_Tree.logpdf">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate the approximated joint log density at a point.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            point (array-like): The point at which to evaluate the log probability density.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The log probability density at the given point.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logpdf</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="c1"># Add the logpdf of the root</span>
+        <span class="n">root_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">]</span>
+        <span class="n">logpdf</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_kde</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="n">root_idx</span><span class="p">])</span>
+         
+
+        <span class="c1"># Add the logpdf of the conditional distributions</span>
+        <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">:</span>
+            <span class="n">parent_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+            <span class="n">child_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="n">child</span><span class="p">]</span>
+            
+            <span class="n">joint_kde</span><span class="p">,</span> <span class="n">parent_kde</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch_kdes</span><span class="p">[(</span><span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="p">)]</span>
+            
+            <span class="c1"># log p(child|parent) = log p(child, parent) - log p(parent)</span>
+            <span class="n">log_p_conditional</span> <span class="o">=</span> <span class="n">joint_kde</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">point</span><span class="p">[[</span><span class="n">child_idx</span><span class="p">,</span> <span class="n">parent_idx</span><span class="p">]])</span> <span class="o">-</span> <span class="n">parent_kde</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="n">parent_idx</span><span class="p">])</span>
+            <span class="n">logpdf</span> <span class="o">+=</span> <span class="n">log_p_conditional</span>
+
+        <span class="k">return</span> <span class="n">logpdf</span></div>
+
+
+<div class="viewcode-block" id="Morph_Tree.resample">
+<a class="viewcode-back" href="../../api.html#morphZ.Morph_Tree.resample">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_resamples</span><span class="p">,</span> <span class="n">nwalkers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw samples from the fitted tree approximation using ``emcee``.</span>
+
+<span class="sd">        The number of MCMC steps and thinning are adapted to generate the</span>
+<span class="sd">        requested number of output samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_resamples (int): The desired number of resamples.</span>
+<span class="sd">            nwalkers (int, optional): The number of walkers. Defaults to 2 * ndim.</span>
+<span class="sd">            progress (bool, optional): Whether to display an ``emcee`` progress bar.</span>
+<span class="sd">                Defaults to True.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: An array of resampled points with shape (n_resamples, n_dims).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the chain produces no post-thinning samples.</span>
+<span class="sd">        </span>
+<span class="sd">        Tips:</span>
+<span class="sd">            - If too few independent samples are produced, increase ``n_steps`` by</span>
+<span class="sd">              raising ``n_resamples`` or override the initial autocorrelation guess.</span>
+<span class="sd">            - For speed, consider using ``PairwiseKDE``/``GroupKDE`` resampling</span>
+<span class="sd">              when the tree structure is not essential.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param_names</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nwalkers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ndim</span>
+
+        <span class="c1"># initial guess for autocorrelation time</span>
+        <span class="n">initial_autocorr_time</span> <span class="o">=</span> <span class="mi">5</span>
+        
+        <span class="c1"># Calculate the number of steps needed</span>
+        <span class="c1">#n_steps = (n_resamples * initial_autocorr_time) // nwalkers</span>
+        <span class="n">n_steps</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">n_resamples</span> <span class="o">*</span> <span class="n">initial_autocorr_time</span> <span class="o">+</span> <span class="n">nwalkers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">nwalkers</span><span class="p">)</span>
+        <span class="n">burn_in</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.3</span> <span class="o">*</span> <span class="n">n_steps</span><span class="p">)</span>
+        
+        <span class="n">initial_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initial_resample</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">logpdf</span><span class="p">)</span>
+        <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">)</span>
+
+        <span class="c1"># Discard burn-in</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">get_chain</span><span class="p">(</span><span class="n">discard</span><span class="o">=</span><span class="n">burn_in</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Estimate autocorrelation time</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">autocorr_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">get_autocorr_time</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">autocorr_time</span><span class="p">):</span>
+                <span class="n">autocorr_time</span> <span class="o">=</span> <span class="n">initial_autocorr_time</span>
+                <span class="c1">#print(f&quot;Warning: Autocorrelation time is NaN. Using initial guess: {autocorr_time}&quot;)</span>
+        <span class="k">except</span> <span class="n">emcee</span><span class="o">.</span><span class="n">autocorr</span><span class="o">.</span><span class="n">AutocorrError</span><span class="p">:</span>
+            <span class="n">autocorr_time</span> <span class="o">=</span> <span class="n">initial_autocorr_time</span>
+            <span class="c1">#print(f&quot;Warning: Autocorrelation time could not be estimated. Using initial guess: {autocorr_time}&quot;)</span>
+
+        <span class="c1"># Thin the chain</span>
+        <span class="n">thin_factor</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">autocorr_time</span><span class="p">)))</span>
+        <span class="n">thinned_samples</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[::</span><span class="n">thin_factor</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+
+        <span class="c1"># If not enough samples, warn the user and sample with replacement</span>
+        <span class="k">if</span> <span class="n">thinned_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No independent samples were generated. The MCMC chain may be too short or the autocorrelation time is severely underestimated.&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">thinned_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n_resamples</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;Not enough independent samples generated (</span><span class="si">%s</span><span class="s2">/</span><span class="si">%s</span><span class="s2">). The autocorrelation time may be underestimated. Sampling with replacement to get </span><span class="si">%s</span><span class="s2"> samples.&quot;</span><span class="p">,</span>
+                <span class="n">thinned_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">n_resamples</span><span class="p">,</span>
+                <span class="n">n_resamples</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">thinned_samples</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">thinned_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_resamples</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">thinned_samples</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">thinned_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_resamples</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_initial_resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper function to generate initial samples for the MCMC walkers.</span>
+<span class="sd">        This is the old resample method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">resampled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param_names</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resampled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param_names</span><span class="p">),</span> <span class="n">size</span><span class="p">))</span>
+
+        <span class="c1"># Resample the root</span>
+        <span class="n">root_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">]</span>
+        <span class="n">resampled</span><span class="p">[</span><span class="n">root_idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+
+        <span class="c1"># Resample the children conditioned on the parent</span>
+        <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="p">:</span>
+            <span class="n">parent_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+            <span class="n">child_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span><span class="p">[</span><span class="n">child</span><span class="p">]</span>
+            
+            <span class="n">child_kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">branch_kdes</span><span class="p">[(</span><span class="n">parent</span><span class="p">,</span> <span class="n">child</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">resampled</span><span class="p">[</span><span class="n">child_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">child_kde</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">resampled</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MorphZ Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
