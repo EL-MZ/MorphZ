@@ -4,18 +4,20 @@ from statsmodels.tsa.stattools import acf
 
 def compute_rho_f2_0_via_statsmodels(f2_values, nlags=None):
     """
-    Estimate the integrated autocorrelation time for a 1D array of f2 values using statsmodels.acf.
+    Estimate integrated autocorrelation time using ``statsmodels.acf``.
     
     The integrated autocorrelation time is defined as:
-        tau = 1 + 2 * sum_{lag>=1} acf(lag)
+        ``tau = 1 + 2 * sum_{lag>=1} acf(lag)``
+
     where the sum stops at the first negative value.
     
     Args:
-        f2_values: 1D numpy array of f2(theta) values computed from posterior samples.
-        nlags: Maximum number of lags to compute (if None, defaults to len(f2_values) - 1).
+        f2_values: One-dimensional values computed from posterior samples.
+        nlags: Maximum number of lags to compute. If None, uses
+            ``len(f2_values) - 1``.
     
     Returns:
-        tau: An estimate of the integrated autocorrelation time (rho_f2(0)).
+        float: Estimated integrated autocorrelation time.
     """
     if nlags is None:
         nlags = len(f2_values) - 1
@@ -32,17 +34,18 @@ def compute_rho_f2_0_via_statsmodels(f2_values, nlags=None):
 
 def compute_rho_f2_0_via_correlate(f2_values):
     """
-    Estimate the integrated autocorrelation time for a 1D array of f2 values using scipy.signal.correlate.
+    Estimate integrated autocorrelation time using ``scipy.signal.correlate``.
     
     The integrated autocorrelation time is defined as:
-        tau = 1 + 2 * sum_{lag>=1} acf(lag)
+        ``tau = 1 + 2 * sum_{lag>=1} acf(lag)``
+
     where the sum stops at the first negative value.
     
     Args:
-        f2_values: 1D numpy array of f2(theta) values computed from posterior samples.
+        f2_values: One-dimensional values computed from posterior samples.
     
     Returns:
-        tau: An estimate of the integrated autocorrelation time (rho_f2(0)).
+        float: Estimated integrated autocorrelation time.
     """
     x = f2_values - np.mean(f2_values)
     n = x.size
@@ -70,7 +73,14 @@ def compute_rho_f2_0_via_correlate(f2_values):
 
 def log_plus(x,y):
     """
-    Computes log(exp(x) + exp(y)) in a numerically stable way.
+    Compute ``log(exp(x) + exp(y))`` in a numerically stable way.
+
+    Args:
+        x: First log-space scalar.
+        y: Second log-space scalar.
+
+    Returns:
+        float: Log-space sum of the two inputs.
     """
     if x > y:
       summ = x + np.log(1+np.exp(y-x))
@@ -80,8 +90,13 @@ def log_plus(x,y):
 
 def log_sum(vec): 
     """
-    Computes the log of the sum of exponentials of a vector of numbers.
-    log(sum(exp(vec)))
+    Compute ``log(sum(exp(vec)))`` for a vector of log-space values.
+
+    Args:
+        vec: Sequence of log-space scalar values.
+
+    Returns:
+        float: Stable log-space sum.
     """
     r = -np.inf
     for i in range(len(vec)):
@@ -89,17 +104,19 @@ def log_sum(vec):
     return r
 def error_bound_from_oscillation(x):
     """
-    Given a sequence x of iterates (assumed to be oscillatory about the fixed point)
-    this function returns an error bound computed as half the distance between the min
-    and max of the last two iterates.
-    discard 20% of the iterates to avoid the initial transient.
-    Parameters:
-       x : list or np.array
-           A sequence of iterates.
-    
+    Estimate a fixed-point error bound from oscillatory iterates.
+
+    The first 20 percent of values are discarded as transient behavior, then
+    the bound is the remaining range ``max(x) - min(x)``.
+
+    Args:
+        x: Sequence of fixed-point iterates.
+
     Returns:
-       err_bound : float
-           An error bound estimate: (max(x) - min(x)) .
+        float: Oscillation range after discarding the initial transient.
+
+    Raises:
+        ValueError: If fewer than two post-transient iterates remain.
     """
     x = np.array(x, dtype=float)
     x = x[int(0.2*len(x)):] 

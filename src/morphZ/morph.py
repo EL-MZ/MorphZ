@@ -191,13 +191,12 @@ def evidence(
             the latter half to reduce dependence with KDE fitting.
         max_iter (int): Max bridge iterations.
         tol (float): Convergence tolerance for the bridge fixed‑point update.
-        morph_type (MorphType): Proposal family. Options shown on hover:
-            - ``"indep"``: Product of 1D KDEs (fast, robust; assumes weak deps).
-            - ``"pair"``: Greedy pairwise KDEs using MI ranking (good for moderate deps).
-            - ``"tree"``: Chow–Liu tree KDE (captures a single dependency tree).
-            - ``"{k}_group"``: Group KDE using k‑order total correlation groups
-              from ``Nth_TC`` (e.g., ``"3_group"``). Common values: ``"2_group"``,
-              ``"3_group"``, ``"4_group"``, ``"5_group"``.
+        morph_type (MorphType): Proposal family. Use ``"indep"`` for a product
+            of 1D KDEs, ``"pair"`` for greedy pairwise KDEs using MI ranking,
+            ``"tree"`` for a Chow-Liu tree KDE, or ``"{k}_group"`` for group
+            KDEs using k-order total correlation groups from ``Nth_TC``. Common
+            grouped values are ``"2_group"``, ``"3_group"``, ``"4_group"``,
+            and ``"5_group"``.
         param_names (list[str] | None): Optional names for parameters; used for
             bandwidth JSONs and reporting. Defaults to ``["param_i"]``.
         output_path (str | None): Directory for artifacts (bandwidth JSONs,

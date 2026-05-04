@@ -10,12 +10,15 @@ logger = logging.getLogger(__name__)
 
 class Morph_Indep(KDEBase):
     """
-    A class to approximate a multivariate distribution using a product of 1D Gaussian Kernel Density Estimators (KDEs).
-    This assumes independence between the parameters.
+    Independent KDE approximation for multivariate posterior samples.
+
+    Each parameter is modeled with a one-dimensional Gaussian KDE and the joint
+    density is evaluated as the product of those marginal densities. This is the
+    fastest Morph approximation and assumes weak dependence between parameters.
     """
     def __init__(self, data, kde_bw='silverman', param_names=None, bw_json_path=None, verbose=False, bw_method=None):
         """
-        Initializes the Morph_Indep object by fitting a 1D KDE to each parameter (column) in the data.
+        Fit one one-dimensional KDE per parameter.
 
         Args:
             data (array-like): 2D array of shape (n_samples, n_params) used to fit the KDEs.
@@ -40,6 +43,11 @@ class Morph_Indep(KDEBase):
             - Use ``bw_json_path`` with values from
               ``compute_and_save_bandwidths`` to ensure consistent settings
               between different KDE approximations.
+
+        Raises:
+            ValueError: If ``data`` is not two-dimensional, ``param_names`` has
+                the wrong length, or both bandwidth aliases are specified with
+                different values.
         """
         self.verbose = verbose
         # Backward compatibility: allow bw_method alias
@@ -80,7 +88,7 @@ class Morph_Indep(KDEBase):
 
     def logpdf_kde(self,point):
         """
-        Computes the log probability density of a given point.
+        Evaluate the approximated joint log density at a point.
 
         The total log probability is the sum of the log probabilities from each 1D KDE,
         assuming independence.
@@ -100,7 +108,7 @@ class Morph_Indep(KDEBase):
 
     def resample(self, size=1):
         """
-        Resamples from the approximated multivariate distribution.
+        Draw independent samples from the fitted marginal KDEs.
 
         Args:
             size (int, optional): The number of samples to generate. Defaults to 1.

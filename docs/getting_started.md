@@ -34,7 +34,7 @@ This project uses [Jupyter Book](https://jupyterbook.org) and keeps generated
 artifacts out of version control.  To build the docs locally:
 
 ```bash
-python -m pip install 'jupyter-book<2'
+python -m pip install -e ".[docs]"
 ./docs/build_docs.sh
 ```
 

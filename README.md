@@ -47,7 +47,7 @@ Jupyter Book powers the project docs. During each build the helper script copies
 always reflects the latest files without committing the generated copies.
 
 ```bash
-python -m pip install 'jupyter-book<2'
+python -m pip install -e ".[docs]"
 ./docs/build_docs.sh
 ```
 

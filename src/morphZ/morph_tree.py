@@ -12,13 +12,14 @@ logger = logging.getLogger(__name__)
 
 class Morph_Tree(KDEBase):
     """
-    A class to approximate a multivariate distribution using a Chow-Liu tree-based decomposition.
-    The joint PDF is approximated as a product of conditional probabilities based on the tree structure.
-    p(x_1, ..., x_n) ≈ p(x_root) * product_{i in children} p(x_i | x_parent(i))
+    Chow-Liu tree KDE approximation for multivariate posterior samples.
+
+    The joint density is approximated as ``p(root)`` times conditional factors
+    ``p(child | parent)`` along the dependency tree edges.
     """
     def __init__(self, data, tree_file, param_names=None, kde_bw='silverman', bw_json_path=None, bw_method=None):
         """
-        Initializes the Morph_Tree object by building the KDEs based on the provided tree structure.
+        Fit root and branch KDEs from a saved dependency tree.
 
         Args:
             data (array-like): 2D array of shape (n_samples, n_params) used to fit the KDEs.
@@ -41,6 +42,11 @@ class Morph_Tree(KDEBase):
               ``'cv_iso'`` (isotropic CV), ``'cv_diag'`` (diagonal CV → scalar
               factor via geometric mean). For trees, ``'cv_iso'`` can offer a
               good accuracy/runtime trade‑off.
+
+        Raises:
+            ValueError: If ``data`` is not two-dimensional, ``param_names`` has
+                the wrong length, the tree has no unique root, or both bandwidth
+                aliases are specified with different values.
         """
         data = np.asarray(data)
         if data.ndim != 2:
@@ -125,7 +131,7 @@ class Morph_Tree(KDEBase):
 
     def logpdf(self, point):
         """
-        Computes the log probability density of a given point using the tree-based approximation.
+        Evaluate the approximated joint log density at a point.
 
         Args:
             point (array-like): The point at which to evaluate the log probability density.
@@ -155,16 +161,22 @@ class Morph_Tree(KDEBase):
 
     def resample(self, n_resamples, nwalkers=None, progress=True):
         """
-        Resamples from the approximated multivariate distribution using emcee.
-        The number of walkers and thinning are adapted to generate n_resamples.
+        Draw samples from the fitted tree approximation using ``emcee``.
+
+        The number of MCMC steps and thinning are adapted to generate the
+        requested number of output samples.
 
         Args:
             n_resamples (int): The desired number of resamples.
             nwalkers (int, optional): The number of walkers. Defaults to 2 * ndim.
-            progress (bool, optional): Whether to display a progress bar. Defaults to False.
+            progress (bool, optional): Whether to display an ``emcee`` progress bar.
+                Defaults to True.
 
         Returns:
             np.ndarray: An array of resampled points with shape (n_resamples, n_dims).
+
+        Raises:
+            ValueError: If the chain produces no post-thinning samples.
         
         Tips:
             - If too few independent samples are produced, increase ``n_steps`` by

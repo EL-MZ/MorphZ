@@ -16,3 +16,14 @@ repository:
 html:
   favicon: ""
   use_repository_button: true
+
+sphinx:
+  extra_extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.napoleon
+    - sphinx.ext.viewcode
+  config:
+    autodoc_class_signature: mixed
+    autoclass_content: both
+    autodoc_member_order: bysource
+    autodoc_typehints: description

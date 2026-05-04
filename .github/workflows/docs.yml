@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           # Jupyter Book v2 uses a different configuration format (myst.yml).
           # This repository uses the classic v0.x Jupyter Book with _config.yml/_toc.yml.
-          python -m pip install 'jupyter-book<2'
+          python -m pip install -e ".[docs]"
 
       - name: Build documentation
         run: |
