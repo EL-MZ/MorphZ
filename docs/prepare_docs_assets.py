@@ -20,6 +20,7 @@ DOCS_DIR = ROOT / "docs"
 AUTO_DIR = DOCS_DIR / "_auto"
 SOURCE_EXAMPLES = ROOT / "examples"
 README_SRC = ROOT / "README.md"
+LOGO_SRC = ROOT / "mz_final.png"
 
 
 def _sanitize_segment(segment: str) -> str:
@@ -76,7 +77,17 @@ def main() -> None:
 
     if not README_SRC.exists():
         raise FileNotFoundError(f"Could not locate README at {README_SRC}")
-    shutil.copy2(README_SRC, AUTO_DIR / "README.md")
+    readme_text = README_SRC.read_text(encoding="utf-8")
+    readme_text = readme_text.replace(
+        '<p align="center">\n'
+        '  <img src="mz_final.png" alt="MorphZ logo" width="360">\n'
+        "</p>\n\n",
+        "",
+    )
+    (AUTO_DIR / "README.md").write_text(readme_text, encoding="utf-8")
+
+    if LOGO_SRC.exists():
+        shutil.copy2(LOGO_SRC, AUTO_DIR / "mz_final.png")
 
     if SOURCE_EXAMPLES.exists():
         _copy_examples()

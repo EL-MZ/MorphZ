@@ -14,7 +14,8 @@ repository:
   branch: main
 
 html:
-  favicon: ""
+  favicon: "_auto/mz_final.png"
+  logo: "_auto/mz_final.png"
   use_repository_button: true
 
 sphinx:

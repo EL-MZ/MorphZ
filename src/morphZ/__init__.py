@@ -30,7 +30,6 @@ from .morph import (
     evidence
 )
 from . import utils
-from . import dependency_tree
 from . import Nth_TC
 
 
@@ -82,7 +81,6 @@ __all__ = [
     "compute_bridge_rmse",
     "evidence",
     "utils",
-    "dependency_tree",
     "Nth_TC",
     "setup_logging",
 ]

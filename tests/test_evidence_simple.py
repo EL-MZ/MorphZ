@@ -12,6 +12,18 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 from morphZ import evidence
 
+
+def _assert_evidence_result_shape(results):
+    assert isinstance(results, list), "Results should be a list"
+    assert len(results) == 1, "Should have one estimation"
+    assert len(results[0]) == 2, "Each result should be [logZ, error]"
+    logz, error = results[0]
+    assert isinstance(logz, (int, float)), "logZ should be numeric"
+    assert isinstance(error, (int, float)), "Error should be numeric"
+    assert not np.isnan(logz), "logZ should not be NaN"
+    assert not np.isnan(error), "Error should not be NaN"
+
+
 def mock_log_posterior(theta):
     """Mock log posterior function for testing."""
     theta = np.asarray(theta)
@@ -95,6 +107,116 @@ def test_evidence_simple():
             import traceback
             traceback.print_exc()
             return False
+
+
+def test_evidence_precomputes_when_log_values_none(tmp_path, capsys):
+    np.random.seed(123)
+    post_samples = np.random.randn(120, 2)
+
+    results = evidence(
+        post_samples=post_samples,
+        log_posterior_values=None,
+        log_posterior_function=mock_log_posterior,
+        n_resamples=20,
+        thin=1,
+        kde_fraction=0.5,
+        bridge_start_fraction=0.5,
+        max_iter=20,
+        tol=1e-3,
+        morph_type="indep",
+        param_names=["param1", "param2"],
+        output_path=str(tmp_path),
+        n_estimations=1,
+        kde_bw=0.5,
+        verbose=False,
+        show_progress=False,
+    )
+
+    captured = capsys.readouterr()
+    assert "Provide log_posterior_values to save time" in captured.out
+    _assert_evidence_result_shape(results)
+
+
+def test_evidence_precomputes_when_log_values_omitted(tmp_path, capsys):
+    np.random.seed(456)
+    post_samples = np.random.randn(120, 2)
+
+    results = evidence(
+        post_samples=post_samples,
+        log_posterior_function=mock_log_posterior,
+        n_resamples=20,
+        thin=1,
+        kde_fraction=0.5,
+        bridge_start_fraction=0.5,
+        max_iter=20,
+        tol=1e-3,
+        morph_type="indep",
+        param_names=["param1", "param2"],
+        output_path=str(tmp_path),
+        n_estimations=1,
+        kde_bw=0.5,
+        verbose=False,
+        show_progress=False,
+    )
+
+    captured = capsys.readouterr()
+    assert "Provide log_posterior_values to save time" in captured.out
+    _assert_evidence_result_shape(results)
+
+
+def test_evidence_accepts_log_function_as_second_positional_arg(tmp_path, capsys):
+    np.random.seed(789)
+    post_samples = np.random.randn(120, 2)
+
+    results = evidence(
+        post_samples,
+        mock_log_posterior,
+        n_resamples=20,
+        thin=1,
+        kde_fraction=0.5,
+        bridge_start_fraction=0.5,
+        max_iter=20,
+        tol=1e-3,
+        morph_type="indep",
+        param_names=["param1", "param2"],
+        output_path=str(tmp_path),
+        n_estimations=1,
+        kde_bw=0.5,
+        verbose=False,
+        show_progress=False,
+    )
+
+    captured = capsys.readouterr()
+    assert "Provide log_posterior_values to save time" in captured.out
+    _assert_evidence_result_shape(results)
+
+
+def test_evidence_accepts_legacy_positional_log_values_then_function(tmp_path):
+    np.random.seed(987)
+    post_samples = np.random.randn(120, 2)
+    log_posterior_values = np.array([mock_log_posterior(sample) for sample in post_samples])
+
+    results = evidence(
+        post_samples,
+        log_posterior_values,
+        mock_log_posterior,
+        n_resamples=20,
+        thin=1,
+        kde_fraction=0.5,
+        bridge_start_fraction=0.5,
+        max_iter=20,
+        tol=1e-3,
+        morph_type="indep",
+        param_names=["param1", "param2"],
+        output_path=str(tmp_path),
+        n_estimations=1,
+        kde_bw=0.5,
+        verbose=False,
+        show_progress=False,
+    )
+
+    _assert_evidence_result_shape(results)
+
 
 if __name__ == "__main__":
     print("Simple evidence function test...")

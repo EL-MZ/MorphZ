@@ -25,7 +25,6 @@ from . import utils
 from .morph_indep import Morph_Indep
 from .morph_tree import Morph_Tree
 from .morph_pairwise import Morph_Pairwise
-from . import dependency_tree
 from .morph_group import Morph_Group
 from . import Nth_TC
 from .bw_method import compute_and_save_bandwidths
@@ -33,6 +32,11 @@ from . import bridge as bridge_serial
 from . import bridge_multiprocess
 
 logger = logging.getLogger(__name__)
+
+try:
+    from tqdm.auto import trange
+except Exception:  # pragma: no cover
+    trange = None  # type: ignore
 
 
 def _save_corner_plot(
@@ -135,7 +139,7 @@ def _save_corner_plot(
 BandwidthMethod = Literal["scott", "silverman", "isj", "cv_iso", "cv_diag"]
 
 # Common proposal types
-MorphTypeBase = Literal["indep", "pair", "tree"]
+MorphTypeBase = Literal["indep", "pair"]
 # Frequently used grouped variants (extend if you use others regularly)
 MorphTypeGroup = Literal["2_group", "3_group", "4_group", "5_group"]
 # Final type shown to users in hovers; still accept arbitrary strings at runtime
@@ -144,8 +148,8 @@ MorphType = Union[MorphTypeBase, MorphTypeGroup, str]
 
 def evidence(
     post_samples: np.ndarray,
-    log_posterior_values: np.ndarray,
-    log_posterior_function: Callable[[np.ndarray], float],
+    log_posterior_function: Optional[Callable[[np.ndarray], float]] = None,
+    log_posterior_values: Optional[np.ndarray] = None,
     n_resamples: int = 1000,
     thin: int = 1,
     kde_fraction: float = 0.5,
@@ -169,20 +173,24 @@ def evidence(
     """
     Compute log evidence using morphological bridge sampling with KDE proposals.
 
-    This orchestrates proposal construction (independent, pairwise, grouped, or
-    tree‑structured KDE), draws proposal samples, and performs bridge sampling.
+    This orchestrates proposal construction (independent, pairwise, or grouped
+    KDE), draws proposal samples, and performs bridge sampling.
 
     Args:
         post_samples (ndarray): Posterior samples of shape ``(N, d)``.
-        log_posterior_values (ndarray): Log posterior values for ``post_samples``;
-            shape ``(N,)``. Used to avoid re‑evaluating expensive log posteriors.
         log_posterior_function (callable): Callable taking a single vector
             ``theta`` with shape ``(d,)`` and returning the log target density.
+            Required even when ``log_posterior_values`` is provided because
+            proposal samples are evaluated during bridge sampling.
+        log_posterior_values (ndarray | None): Log posterior values for
+            ``post_samples``; shape ``(N,)``. Used to avoid re‑evaluating
+            expensive log posteriors. If None, values are precomputed for the
+            bridge subset before bridge sampling.
         n_resamples (int): Number of proposal samples per estimation. Typical
             range 500–5000 depending on dimensionality.
-        thin (int): Thinning stride applied to both ``post_samples`` and
-            ``log_posterior_values`` to reduce autocorrelation. Use ``thin>1`` if
-            your MCMC is highly autocorrelated.
+        thin (int): Thinning stride applied to ``post_samples`` and, when
+            provided, ``log_posterior_values`` to reduce autocorrelation. Use
+            ``thin>1`` if your MCMC is highly autocorrelated.
         kde_fraction (float): Fraction of the (thinned) chain used to fit the
             proposal KDE(s). Remaining samples are reserved for the bridge.
             Values between 0.3 and 0.7 are common.
@@ -193,14 +201,13 @@ def evidence(
         tol (float): Convergence tolerance for the bridge fixed‑point update.
         morph_type (MorphType): Proposal family. Use ``"indep"`` for a product
             of 1D KDEs, ``"pair"`` for greedy pairwise KDEs using MI ranking,
-            ``"tree"`` for a Chow-Liu tree KDE, or ``"{k}_group"`` for group
-            KDEs using k-order total correlation groups from ``Nth_TC``. Common
-            grouped values are ``"2_group"``, ``"3_group"``, ``"4_group"``,
-            and ``"5_group"``.
+            or ``"{k}_group"`` for group KDEs using k-order total correlation
+            groups from ``Nth_TC``. Common grouped values are ``"2_group"``,
+            ``"3_group"``, ``"4_group"``, and ``"5_group"``.
         param_names (list[str] | None): Optional names for parameters; used for
             bandwidth JSONs and reporting. Defaults to ``["param_i"]``.
         output_path (str | None): Directory for artifacts (bandwidth JSONs,
-            dependency files, and results). Defaults to ``"log_MorphZ"``.
+            MI/TC files, and results). Defaults to ``"log_MorphZ"``.
         n_estimations (int): Number of independent bridge estimates to run. Use
             >1 to gauge variability; results are saved as a 2‑column text file
             with ``logz`` and ``err`` per row.
@@ -235,51 +242,59 @@ def evidence(
             and bridge sampling. The same permutation is applied to both arrays so
             sample–log-prob correspondence is preserved.
         overwrite_path (bool): If True, recompute and overwrite all cached files
-            (bandwidth JSONs, MI/TC/tree dependency files) even if they already
-            exist on disk. Default is False (skip recomputation when files exist).
+            (bandwidth JSONs and MI/TC files) even if they already exist on disk.
+            Default is False (skip recomputation when files exist).
 
     Returns:
         list[[float, float]]: A list of ``[logz, err]`` for each estimation.
 
     Suggestions:
-        - Start with ``morph_type='indep'`` for speed. If diagnostics look poor,
-          try ``'pair'`` or ``'tree'`` to capture dependencies.
+        - Start with ``morph_type='2_group'`` for speed. If diagnostics look poor,
+          try ``'3_group'``to capture dependencies.
         - For bandwidths, try ``'silverman'`` for speed, ``'cv_iso'`` for tighter
           fits, or ``'isj'`` as a robust nonparametric choice.
         - Use ``n_estimations>=3`` to assess stability and report mean/SE.
     """
 
     
+    if callable(log_posterior_values) and not callable(log_posterior_function):
+        log_posterior_function, log_posterior_values = log_posterior_values, log_posterior_function
+
+    if log_posterior_function is None:
+        raise ValueError("log_posterior_function must be provided for bridge sampling.")
+
     kde_bw_name = kde_bw
     samples = post_samples[::thin, :]
-    log_prob = log_posterior_values[::thin]
+    log_prob = None if log_posterior_values is None else log_posterior_values[::thin]
 
     if shuffle:
         perm = np.random.permutation(len(samples))
         samples = samples[perm]
-        log_prob = log_prob[perm]
+        if log_prob is not None:
+            log_prob = log_prob[perm]
 
-    # Sanity-check: callable must agree with the pre-computed log-posterior values.
-    _n_check = min(3, len(samples))
-    _mismatches = []
-    for _i in range(_n_check):
-        _lp_callable = log_posterior_function(samples[_i])
-        _lp_stored   = log_prob[_i]
-        logger.debug("sanity i=%d  stored=%.6f  callable=%.6f", _i, _lp_stored, _lp_callable)
-        if not np.isclose(_lp_callable, _lp_stored, rtol=1e-3, atol=1e-3):
-            _mismatches.append((_i, _lp_stored, _lp_callable))
-    if _mismatches:
-        _msg = (
-            "log_posterior_function does not match log_posterior_values for "
-            f"{len(_mismatches)}/{_n_check} checked samples. "
-            "Bridge sampling results may be unreliable.\n"
-            + "\n".join(
-                f"  i={i}  stored={s:.6f}  callable={c:.6f}  diff={c-s:.2e}"
-                for i, s, c in _mismatches
+    if log_prob is not None:
+        # Sanity-check: callable must agree with the pre-computed log-posterior values.
+        _n_check = min(3, len(samples))
+        _mismatches = []
+        for _i in range(_n_check):
+            _lp_callable = log_posterior_function(samples[_i])
+            _lp_stored   = log_prob[_i]
+            logger.debug("sanity i=%d  stored=%.6f  callable=%.6f", _i, _lp_stored, _lp_callable)
+            if not np.isclose(_lp_callable, _lp_stored, rtol=1e-3, atol=1e-3):
+                _mismatches.append((_i, _lp_stored, _lp_callable))
+        if _mismatches:
+            _msg = (
+                "log_posterior_function does not match log_posterior_values for "
+                f"{len(_mismatches)}/{_n_check} checked samples. "
+                "Bridge sampling results may be unreliable.\n"
+                + "\n".join(
+                    f"  i={i}  stored={s:.6f}  callable={c:.6f}  diff={c-s:.2e}"
+                    for i, s, c in _mismatches
+                )
             )
-        )
-        warnings.warn(_msg, UserWarning, stacklevel=2)
-        logger.warning(_msg)
+            warnings.warn(_msg, UserWarning, stacklevel=2)
+            logger.warning(_msg)
 
     tot_len, ndim = samples.shape
 
@@ -350,8 +365,9 @@ def evidence(
             param_names = [f"param_{i}" for i in range(ndim)]
 
         if not os.path.exists(mi_file) or overwrite_path:
-            logger.info("MI file not found at %s. Running dependency tree computation...", mi_file)
-            dependency_tree.compute_and_plot_mi_tree(samples, names=param_names, out_path=output_path, morph_type="pair")
+            raise FileNotFoundError(
+                f"MI file not found at {mi_file}. Generate params_MI.json before using morph_type='pair'."
+            )
 
         if bw_is_numeric:
             # Direct numeric bandwidth; skip JSON computation
@@ -512,11 +528,9 @@ def evidence(
         if param_names is None:
             param_names = [f"param_{i}" for i in range(ndim)]
         if not os.path.exists(tree_file) or overwrite_path:
-            logger.info(
-                "Tree file not found at %s. Running dependency tree computation... might take a while for higher dimensions. for faster results, use fewer samples per param.",
-                tree_file,
+            raise FileNotFoundError(
+                f"Tree file not found at {tree_file}. Generate tree.json before using morph_type='tree'."
             )
-            dependency_tree.compute_and_plot_mi_tree(samples, names=param_names, out_path=output_path, morph_type="tree")
 
         if bw_is_numeric:
             # Direct numeric bandwidth; do not compute JSON bandwidths
@@ -535,11 +549,26 @@ def evidence(
             target_kde = Morph_Tree(kde_samples, tree_file=tree_file, param_names=param_names, kde_bw=kde_bw, bw_json_path=bw_json_path)
         log_proposal_pdf = target_kde.logpdf
     else:
-        raise ValueError(f"Unknown morph_type: {morph_type}. Supported types are 'indep', 'pair', and 'tree'.")
+        raise ValueError(f"Unknown morph_type: {morph_type}. Supported types are 'indep', 'pair', and '*_group'.")
 
     bridge_start_index = int(tot_len * bridge_start_fraction)
     samples_mor = samples[bridge_start_index:, :]
-    log_post = log_prob[bridge_start_index:]
+    if log_prob is None:
+        precompute_msg = (
+            "log_posterior_values was not provided; precomputing log_prob for bridge samples. "
+            "Provide log_posterior_values to save time."
+        )
+        print(precompute_msg)
+        logger.info(precompute_msg)
+        iterator = range(len(samples_mor))
+        if show_progress and trange is not None:
+            iterator = trange(len(samples_mor), desc="Precomputing log_prob")
+        log_post = np.array(
+            [float(log_posterior_function(samples_mor[i])) for i in iterator],
+            dtype=float,
+        )
+    else:
+        log_post = log_prob[bridge_start_index:]
     # Optional: corner-style comparison plot of posterior vs proposal
         
     if plot :
