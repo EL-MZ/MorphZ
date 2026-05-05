@@ -66,6 +66,7 @@ For each call, MorphZ produces:
 - A bridge-sampling relative mean-squared error diagnostic, computed from the
   same posterior and proposal samples.
 
+
 ## Features
 
 - Morph approximation object.
@@ -118,19 +119,26 @@ Interactive notebooks live in `examples/`:
 - `examples/jaxns_gaussian_shell.ipynb` — Gaussian shell with nested sampling via JAXNS
 - `examples/numpyro_morphz_lnz.ipynb` — log-evidence comparison across morph types (NumPyro/NUTS)
 
-## Documentation
+## Citation
 
-Jupyter Book powers the project docs. During each build the helper script copies
-`README.md` and the contents of `examples/` into `docs/_auto/` so that the book
-always reflects the latest files without committing the generated copies.
+If you use MorphZ, please cite:
 
-```bash
-python -m pip install -e ".[docs]"
-./docs/build_docs.sh
+```bibtex
+@article{1554-y6ns,
+  title   = {Enhancing evidence estimation through informed probability density approximation},
+  author  = {Zahraoui, El Mehdi and Maturana-Russel, Patricio and Vajpeyi, Avi
+             and van Straten, Willem and Meyer, Renate and Gulyaev, Sergei},
+  journal = {Phys. Rev. D},
+  volume  = {113},
+  issue   = {8},
+  pages   = {083014},
+  year    = {2026},
+  month   = {Apr},
+  publisher = {American Physical Society},
+  doi     = {10.1103/1554-y6ns},
+  url     = {https://link.aps.org/doi/10.1103/1554-y6ns}
+}
 ```
-
-HTML output is written to `docs/_build/html`, and GitHub Actions publishes it to
-GitHub Pages automatically on pushes to `main`.
 
 ## API Highlights
 
@@ -163,26 +171,6 @@ Versioning is derived from git tags via `setuptools_scm`.
 - CI: publishes to TestPyPI on pushes to `main`/`master`; to PyPI on `v*` tags.
 - Uses PyPI/TestPyPI Trusted Publishing (OIDC). You can also use API tokens if preferred.
 
-## Citation
-
-If you use MorphZ, please cite:
-
-```bibtex
-@article{1554-y6ns,
-  title   = {Enhancing evidence estimation through informed probability density approximation},
-  author  = {Zahraoui, El Mehdi and Maturana-Russel, Patricio and Vajpeyi, Avi
-             and van Straten, Willem and Meyer, Renate and Gulyaev, Sergei},
-  journal = {Phys. Rev. D},
-  volume  = {113},
-  issue   = {8},
-  pages   = {083014},
-  year    = {2026},
-  month   = {Apr},
-  publisher = {American Physical Society},
-  doi     = {10.1103/1554-y6ns},
-  url     = {https://link.aps.org/doi/10.1103/1554-y6ns}
-}
-```
 
 ## License
 
