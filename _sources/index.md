@@ -1,8 +1,6 @@
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="_static/mz_dark.png">
-    <img src="_static/mz_final.png" alt="MorphZ logo" width="260">
-  </picture>
+<p class="morphz-logo-wrap" align="center">
+  <img class="morphz-logo morphz-logo-light" src="_static/mz_final.png" alt="MorphZ logo" width="290">
+  <img class="morphz-logo morphz-logo-dark" src="_static/mz_dark.png" alt="MorphZ logo" width="290">
 </p>
 
 # MorphZ
