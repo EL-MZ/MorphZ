@@ -10,7 +10,10 @@
 [![Published paper](https://img.shields.io/badge/paper-Phys._Rev._D_113%2C_083014-006eb6.svg)](https://doi.org/10.1103/1554-y6ns)
 
 <p align="center">
-  <img src="mz_final.png" alt="MorphZ logo" width="230">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="mz_dark.png">
+    <img src="mz_final.png" alt="MorphZ logo" width="200">
+  </picture>
 </p>
 
 MorphZ estimates the Bayesian marginal likelihood, or evidence, from posterior

@@ -18,9 +18,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
 AUTO_DIR = DOCS_DIR / "_auto"
+STATIC_DIR = DOCS_DIR / "_static"
 SOURCE_EXAMPLES = ROOT / "examples"
 README_SRC = ROOT / "README.md"
 LOGO_SRC = ROOT / "mz_final.png"
+DARK_LOGO_SRC = ROOT / "mz_dark.png"
 
 
 def _sanitize_segment(segment: str) -> str:
@@ -74,20 +76,25 @@ def main() -> None:
     if AUTO_DIR.exists():
         shutil.rmtree(AUTO_DIR)
     AUTO_DIR.mkdir(parents=True, exist_ok=True)
+    STATIC_DIR.mkdir(parents=True, exist_ok=True)
 
     if not README_SRC.exists():
         raise FileNotFoundError(f"Could not locate README at {README_SRC}")
     readme_text = README_SRC.read_text(encoding="utf-8")
-    readme_text = readme_text.replace(
-        '<p align="center">\n'
-        '  <img src="mz_final.png" alt="MorphZ logo" width="360">\n'
-        "</p>\n\n",
+    readme_text = re.sub(
+        r'<p align="center">\n\s*<picture>\n'
+        r'\s*<source media="\([^"]+\)" srcset="mz_dark\.png">\n'
+        r'\s*<img src="mz_final\.png" alt="MorphZ logo" width="\d+">\n'
+        r"\s*</picture>\n</p>\n\n",
         "",
+        readme_text,
     )
     (AUTO_DIR / "README.md").write_text(readme_text, encoding="utf-8")
 
     if LOGO_SRC.exists():
-        shutil.copy2(LOGO_SRC, AUTO_DIR / "mz_final.png")
+        shutil.copy2(LOGO_SRC, STATIC_DIR / "mz_final.png")
+    if DARK_LOGO_SRC.exists():
+        shutil.copy2(DARK_LOGO_SRC, STATIC_DIR / "mz_dark.png")
 
     if SOURCE_EXAMPLES.exists():
         _copy_examples()

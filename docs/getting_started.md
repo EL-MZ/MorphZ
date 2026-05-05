@@ -19,25 +19,33 @@ python -m pip install -U pip
 python -m pip install -e .
 ```
 
-## Running Tests
+## Estimate Evidence
 
-Test the installation with `pytest`:
+Use `morphZ.evidence` with posterior samples and a log-posterior function:
 
-```bash
-python -m pip install -e ".[test]"
-pytest
+```python
+import morphZ
+
+log_z = morphZ.evidence(
+    samples,
+    log_posterior_function=lp_fn,
+    log_posterior_values=log_prob,
+    n_resamples=5000,
+    n_estimations=1,
+    morph_type="2_group",
+    output_path="./example/",
+)
 ```
 
-## Building the Documentation
+## Run The Examples
 
-This project uses [Jupyter Book](https://jupyterbook.org) and keeps generated
-artifacts out of version control.  To build the docs locally:
+You can run the interactive notebooks in `examples/` to try MorphZ on the
+included example problems:
 
-```bash
-python -m pip install -e ".[docs]"
-./docs/build_docs.sh
-```
+- `examples/eggbox.ipynb`
+- `examples/gaussian shell.ipynb`
+- `examples/peak_sampling.ipynb`
+- `examples/numpyro_gaussian_shell.ipynb`
+- `examples/jaxns_gaussian_shell.ipynb`
+- `examples/numpyro_morphz_lnz.ipynb`
 
-The helper script copies the main `README.md` and the `examples/` directory into
-`docs/_auto/` (which is Git-ignored) so that the book always renders the latest
-content.  HTML output is written to `docs/_build/html`.

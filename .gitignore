@@ -22,6 +22,8 @@ coverage.xml
 # Docs build artifacts
 docs/_auto/
 docs/_build/
+docs/_static/mz_final.png
+docs/_static/mz_dark.png
 
 # OS / editor
 .DS_Store

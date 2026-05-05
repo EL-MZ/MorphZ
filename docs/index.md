@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="_static/mz_final.png" alt="MorphZ logo" width="360">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="_static/mz_dark.png">
+    <img src="_static/mz_final.png" alt="MorphZ logo" width="260">
+  </picture>
 </p>
 
 # MorphZ
