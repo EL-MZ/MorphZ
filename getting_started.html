@@ -340,8 +340,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-local-checkout">From a local checkout</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-documentation">Building the Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-evidence">Estimate Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-examples">Run The Examples</a></li>
 </ul>
             </nav>
         </div>
@@ -374,25 +374,35 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 </div>
 </section>
 </section>
-<section id="running-tests">
-<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">#</a></h2>
-<p>Test the installation with <code class="docutils literal notranslate"><span class="pre">pytest</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[test]&quot;</span>
-pytest
+<section id="estimate-evidence">
+<h2>Estimate Evidence<a class="headerlink" href="#estimate-evidence" title="Link to this heading">#</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">morphZ.evidence</span></code> with posterior samples and a log-posterior function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">morphZ</span>
+
+<span class="n">log_z</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span>
+    <span class="n">samples</span><span class="p">,</span>
+    <span class="n">log_posterior_function</span><span class="o">=</span><span class="n">lp_fn</span><span class="p">,</span>
+    <span class="n">log_posterior_values</span><span class="o">=</span><span class="n">log_prob</span><span class="p">,</span>
+    <span class="n">n_resamples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s2">&quot;./example/&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="building-the-documentation">
-<h2>Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Link to this heading">#</a></h2>
-<p>This project uses <a class="reference external" href="https://jupyterbook.org">Jupyter Book</a> and keeps generated
-artifacts out of version control.  To build the docs locally:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[docs]&quot;</span>
-./docs/build_docs.sh
-</pre></div>
-</div>
-<p>The helper script copies the main <code class="docutils literal notranslate"><span class="pre">README.md</span></code> and the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory into
-<code class="docutils literal notranslate"><span class="pre">docs/_auto/</span></code> (which is Git-ignored) so that the book always renders the latest
-content.  HTML output is written to <code class="docutils literal notranslate"><span class="pre">docs/_build/html</span></code>.</p>
+<section id="run-the-examples">
+<h2>Run The Examples<a class="headerlink" href="#run-the-examples" title="Link to this heading">#</a></h2>
+<p>You can run the interactive notebooks in <code class="docutils literal notranslate"><span class="pre">examples/</span></code> to try MorphZ on the
+included example problems:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/eggbox.ipynb</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/gaussian</span> <span class="pre">shell.ipynb</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/peak_sampling.ipynb</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/numpyro_gaussian_shell.ipynb</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/jaxns_gaussian_shell.ipynb</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examples/numpyro_morphz_lnz.ipynb</span></code></p></li>
+</ul>
 </section>
 </section>
 
@@ -467,8 +477,8 @@ content.  HTML output is written to <code class="docutils literal notranslate"><
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-local-checkout">From a local checkout</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-tests">Running Tests</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-documentation">Building the Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-evidence">Estimate Evidence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-examples">Run The Examples</a></li>
 </ul>
   </nav></div>
 

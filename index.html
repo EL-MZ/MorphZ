@@ -380,7 +380,10 @@
                 <article class="bd-article">
                   
   <p align="center">
-  <img src="_static/mz_final.png" alt="MorphZ logo" width="360">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="_static/mz_dark.png">
+    <img src="_static/mz_final.png" alt="MorphZ logo" width="260">
+  </picture>
 </p>
 <section class="tex2jax_ignore mathjax_ignore" id="morphz">
 <h1>MorphZ<a class="headerlink" href="#morphz" title="Link to this heading">#</a></h1>
@@ -514,9 +517,6 @@ likelihood evaluations are needed.</p></li>
 <a class="reference external" href="https://github.com/EL-MZ/MorphZ"><img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-EL--MZ%2FMorphZ-181717?logo=github" /></a>
 <a class="reference external" href="https://arxiv.org/abs/2512.10283"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2512.10283-B31B1B.svg" /></a>
 <a class="reference external" href="https://doi.org/10.1103/1554-y6ns"><img alt="Published paper" src="https://img.shields.io/badge/paper-Phys._Rev._D_113%2C_083014-006eb6.svg" /></a></p>
-<p align="center">
-  <img src="mz_final.png" alt="MorphZ logo" width="230">
-</p>
 <p>MorphZ estimates the Bayesian marginal likelihood, or evidence, from posterior
 samples. It is a post-processing tool: it does not run its own sampler, and it
 places no requirements on which sampler produced the posterior draws. The same
