@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="mz_final.png" alt="MorphZ logo" width="360">
+  <img src="mz_final.png" alt="MorphZ logo" width="160">
 </p>
 
 # MorphZ
