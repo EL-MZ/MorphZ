@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="mz_final.png" alt="MorphZ logo" width="160">
-</p>
 
 # MorphZ
 
@@ -11,6 +8,10 @@
 [![GitHub Repo](https://img.shields.io/badge/GitHub-EL--MZ%2FMorphZ-181717?logo=github)](https://github.com/EL-MZ/MorphZ)
 [![arXiv](https://img.shields.io/badge/arXiv-2512.10283-B31B1B.svg)](https://arxiv.org/abs/2512.10283)
 [![Published paper](https://img.shields.io/badge/paper-Phys._Rev._D_113%2C_083014-006eb6.svg)](https://doi.org/10.1103/1554-y6ns)
+
+<p align="center">
+  <img src="mz_final.png" alt="MorphZ logo" width="230">
+</p>
 
 MorphZ estimates the Bayesian marginal likelihood, or evidence, from posterior
 samples. It is a post-processing tool: it does not run its own sampler, and it
