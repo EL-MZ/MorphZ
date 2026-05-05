@@ -1,0 +1,32 @@
+.morphz-logo-wrap {
+  text-align: center;
+}
+
+.bd-content img.morphz-logo {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.morphz-logo-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .morphz-logo-light {
+  display: none;
+}
+
+html[data-theme="dark"] .morphz-logo-dark {
+  display: inline-block;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .morphz-logo-light {
+    display: none;
+  }
+
+  html:not([data-theme="light"]) .morphz-logo-dark {
+    display: inline-block;
+  }
+}

@@ -28,3 +28,5 @@ sphinx:
     autoclass_content: both
     autodoc_member_order: bysource
     autodoc_typehints: description
+    html_css_files:
+      - morphz.css

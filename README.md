@@ -12,7 +12,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="mz_dark.png">
-    <img src="mz_final.png" alt="MorphZ logo" width="200">
+    <img src="mz_final.png" alt="MorphZ logo" width="250">
   </picture>
 </p>
 
