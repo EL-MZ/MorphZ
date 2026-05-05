@@ -359,12 +359,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage">Core Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-examples">Run The Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Citation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-highlights">API Highlights</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning-release">Versioning &amp; Release</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Citation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
 </li>
@@ -615,17 +614,25 @@ you already have log-posterior values for those same samples, pass them as
 <li><p><code class="docutils literal notranslate"><span class="pre">examples/numpyro_morphz_lnz.ipynb</span></code> — log-evidence comparison across morph types (NumPyro/NUTS)</p></li>
 </ul>
 </section>
-<section id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
-<p>Jupyter Book powers the project docs. During each build the helper script copies
-<code class="docutils literal notranslate"><span class="pre">README.md</span></code> and the contents of <code class="docutils literal notranslate"><span class="pre">examples/</span></code> into <code class="docutils literal notranslate"><span class="pre">docs/_auto/</span></code> so that the book
-always reflects the latest files without committing the generated copies.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[docs]&quot;</span>
-./docs/build_docs.sh
+<section id="id4">
+<h2>Citation<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>If you use MorphZ, please cite:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">1554-y6ns</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Enhancing evidence estimation through informed probability density approximation}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Zahraoui, El Mehdi and Maturana-Russel, Patricio and Vajpeyi, Avi</span>
+<span class="s">             and van Straten, Willem and Meyer, Renate and Gulyaev, Sergei}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Phys. Rev. D}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{113}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">issue</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{8}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{083014}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">month</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Apr}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{American Physical Society}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1103/1554-y6ns}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{https://link.aps.org/doi/10.1103/1554-y6ns}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>HTML output is written to <code class="docutils literal notranslate"><span class="pre">docs/_build/html</span></code>, and GitHub Actions publishes it to
-GitHub Pages automatically on pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
 </section>
 <section id="api-highlights">
 <h2>API Highlights<a class="headerlink" href="#api-highlights" title="Link to this heading">#</a></h2>
@@ -664,26 +671,6 @@ GitHub Pages automatically on pushes to <code class="docutils literal notranslat
 <li><p>CI: publishes to TestPyPI on pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code>/<code class="docutils literal notranslate"><span class="pre">master</span></code>; to PyPI on <code class="docutils literal notranslate"><span class="pre">v*</span></code> tags.</p></li>
 <li><p>Uses PyPI/TestPyPI Trusted Publishing (OIDC). You can also use API tokens if preferred.</p></li>
 </ul>
-</section>
-<section id="id4">
-<h2>Citation<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
-<p>If you use MorphZ, please cite:</p>
-<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">1554-y6ns</span><span class="p">,</span>
-<span class="w">  </span><span class="na">title</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Enhancing evidence estimation through informed probability density approximation}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">author</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{Zahraoui, El Mehdi and Maturana-Russel, Patricio and Vajpeyi, Avi</span>
-<span class="s">             and van Straten, Willem and Meyer, Renate and Gulyaev, Sergei}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Phys. Rev. D}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">volume</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="s">{113}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">issue</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{8}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">pages</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{083014}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">year</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">month</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="s">{Apr}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{American Physical Society}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">doi</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1103/1554-y6ns}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">url</span><span class="w">     </span><span class="p">=</span><span class="w"> </span><span class="s">{https://link.aps.org/doi/10.1103/1554-y6ns}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
@@ -777,12 +764,11 @@ time the documentation is built.  To refresh it locally, run
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-usage">Core Usage</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-examples">Run The Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Citation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-highlights">API Highlights</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning-release">Versioning &amp; Release</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Citation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
 </ul>
 </li>
