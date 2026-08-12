@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
@@ -40,10 +40,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/morphz.css?v=750021a2" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -62,6 +62,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/eggbox';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../../_static/mz_final.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -70,20 +71,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -109,7 +116,47 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
     </header>
   
 
@@ -395,7 +442,7 @@
     <span class="n">loglikelihood</span><span class="p">,</span>
     <span class="n">prior_transform</span><span class="p">,</span>
     <span class="n">ndim</span><span class="p">,</span>
-    <span class="n">nlive</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>       <span class="c1"># number of live points; increase for accuracy</span>
+    <span class="n">nlive</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>       <span class="c1"># number of live points; increase for accuracy</span>
     <span class="n">sample</span><span class="o">=</span><span class="s2">&quot;rwalk&quot;</span><span class="p">,</span>  <span class="c1"># random-walk proposals; can try &quot;unif&quot;, &quot;slice&quot;</span>
     <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;multi&quot;</span><span class="p">,</span>   <span class="c1"># bounding method (&quot;multi&quot; good for multimodal)</span>
 <span class="p">)</span>
@@ -421,16 +468,13 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running dynesty Nested Sampling on Eggbox...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0it [00:00, ?it/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4081it [00:03, 1236.54it/s, +500 | bound: 31 | nc: 1 | ncall: 68437 | eff(%):  6.743 | loglstar:   -inf &lt; 242.999 &lt;    inf | logz: 235.689 +/-  0.113 | dlogz:  0.001 &gt;  0.509]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7529it [00:05, 1505.01it/s, +1000 | bound: 27 | nc: 1 | ncall: 123311 | eff(%):  6.973 | loglstar:   -inf &lt; 243.000 &lt;    inf | logz: 235.703 +/-  0.080 | dlogz:  0.001 &gt;  1.009]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RESULTS ====
-dynesty estimated logZ = 235.689 ± 0.210
+dynesty estimated logZ = 235.703 ± 0.196
 True logZ (literature) = 235.856
-Error = -0.167
+Error = -0.153
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -470,7 +514,7 @@ Error = -0.167
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4581, 2)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8529, 2)
 </pre></div>
 </div>
 </div>
@@ -489,17 +533,20 @@ Error = -0.167
 <span class="n">samples</span><span class="p">,</span>
 <span class="n">lnprobfn</span><span class="p">,</span>
 <span class="n">n_resamples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;pair&quot;</span><span class="p">,</span><span class="n">kde_bw</span><span class="o">=</span><span class="s2">&quot;silverman&quot;</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./eggbox/&#39;</span><span class="p">)</span>
+<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span><span class="n">kde_bw</span><span class="o">=</span><span class="s2">&quot;silverman&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ estimated log(Z): </span><span class="si">{</span><span class="n">log_p_estimate</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;True:&#39;</span><span class="p">,</span> <span class="n">true_logz</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 2291 Dimensions: 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 4265 Dimensions: 2
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e27befb17c954ef8b00209be6148ed7c", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ estimated log(Z): [[236.22140291604856, 0.18547579741768344]]
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "aa24517902d042d19315c3d5b588bfcb", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log_posterior_values was not provided; precomputing log_prob for bridge samples. Provide log_posterior_values to save time.
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "905d48b4dea5427789bb5799e44806f2", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "028f622755ba412d96515d5ad4acb2dd", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ estimated log(Z): [[236.01388503082907, 0.17119426349245534]]
 True: 235.856
 </pre></div>
 </div>
@@ -631,8 +678,8 @@ By MorphZ Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>

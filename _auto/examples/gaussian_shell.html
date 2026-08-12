@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
@@ -40,10 +40,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/morphz.css?v=750021a2" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -62,6 +62,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_auto/examples/gaussian_shell';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../../_static/mz_final.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -70,20 +71,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -109,7 +116,47 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
     </header>
   
 
@@ -511,7 +558,7 @@
         <span class="n">loglikelihood</span><span class="p">,</span>
         <span class="n">prior_transform</span><span class="p">,</span>
         <span class="n">ndim</span><span class="p">,</span>
-        <span class="n">nlive</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>      <span class="c1"># number of live points; increase for accuracy</span>
+        <span class="n">nlive</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>      <span class="c1"># number of live points; increase for accuracy</span>
         <span class="n">sample</span><span class="o">=</span><span class="s2">&quot;rwalk&quot;</span><span class="p">,</span>  <span class="c1"># random-walk proposals; can try &quot;unif&quot;, &quot;slice&quot;</span>
         <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;multi&quot;</span><span class="p">,</span>   <span class="c1"># bounding method (&quot;multi&quot; good for multimodal)</span>
     <span class="p">)</span>
@@ -554,16 +601,16 @@ Shell widths: w1=0.1, w2=0.1
 Running dynesty Nested Sampling on Gaussian shell...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5605it [00:12, 441.92it/s, +100 | bound: 403 | nc: 1 | ncall: 266989 | eff(%):  2.138 | loglstar:   -inf &lt;  1.384 &lt;    inf | logz: -49.772 +/-  0.706 | dlogz:  0.000 &gt;  0.010]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0it [00:00, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25621it [00:55, 464.26it/s, +400 | bound: 411 | nc: 1 | ncall: 1222394 | eff(%):  2.129 | loglstar:   -inf &lt;  1.384 &lt;    inf | logz: -57.978 +/-  0.381 | dlogz:  0.000 &gt;  0.010]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==== RESULTS ====
-dynesty estimated logZ = -49.772 ± 0.719
+dynesty estimated logZ = -57.978 ± 0.390
 True logZ (literature) = -60.130
-Error = 10.358
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+Error = 2.152
 </pre></div>
 </div>
 </div>
@@ -583,7 +630,7 @@ Error = 10.358
 
 <span class="n">log_p_estimate</span> <span class="o">=</span> <span class="n">morphZ</span><span class="o">.</span><span class="n">evidence</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span><span class="n">lp_fn</span><span class="p">,</span><span class="n">log_prob</span><span class="p">,</span>
 <span class="n">n_resamples</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">,</span><span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;./gaussian_shell/&#39;</span><span class="p">,</span><span class="n">overwrite_path</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">thin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_estimations</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">morph_type</span><span class="o">=</span><span class="s2">&quot;2_group&quot;</span><span class="p">)</span>
 <span class="c1"># print(&#39;True:&#39;, true_logz)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ mean ln(Z): </span><span class="si">{</span><span class="n">log_p_estimate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> +/- </span><span class="si">{</span><span class="n">log_p_estimate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -596,46 +643,45 @@ Error = 10.358
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 13011 Dimensions: 30
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.morph:Using Morph_Group for proposal distribution.
-INFO:morphZ.morph:Group file not found at ./gaussian_shell//params_2-order_TC.json. Running total correlation computation...
+INFO:morphZ.morph:Group file not found at /tmp/morphz-6t1qioby/params_2-order_TC.json. Running total correlation computation...
 INFO:morphZ.morph:Computing TC with 8 workers.
 INFO:morphZ.Nth_TC:Auto-thinning samples to 300 for faster TC computation (n_dims=30, n_order=2).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total samples: 2853 Dimensions: 30
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5921405dfca044449d62555209e6f520", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.Nth_TC:Top 10 MI pairs:
-INFO:morphZ.Nth_TC:  param_1 — param_4 : 0.121277
-INFO:morphZ.Nth_TC:  param_12 — param_23 : 0.116044
-INFO:morphZ.Nth_TC:  param_3 — param_21 : 0.109586
-INFO:morphZ.Nth_TC:  param_12 — param_22 : 0.106913
-INFO:morphZ.Nth_TC:  param_3 — param_12 : 0.105520
-INFO:morphZ.Nth_TC:  param_5 — param_29 : 0.104488
-INFO:morphZ.Nth_TC:  param_7 — param_19 : 0.103079
-INFO:morphZ.Nth_TC:  param_18 — param_29 : 0.102791
-INFO:morphZ.Nth_TC:  param_1 — param_3 : 0.100580
-INFO:morphZ.Nth_TC:  param_15 — param_19 : 0.100395
-INFO:morphZ.Nth_TC:All MI pairs saved to gaussian_shell/params_2-order_TC.json
-INFO:morphZ.morph:BW file not found at ./gaussian_shell//bw_silverman_2D.json. Running Bw with silverman...
-INFO:morphZ.bw_method:Bandwidths saved to ./gaussian_shell/bw_silverman_2D.json
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "04a1e7db50ef4e3b8d8673f12d84efae", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.Nth_TC:Top 10 MI pairs:
+INFO:morphZ.Nth_TC:  param_3 — param_7 : 0.076256
+INFO:morphZ.Nth_TC:  param_19 — param_28 : 0.075509
+INFO:morphZ.Nth_TC:  param_8 — param_9 : 0.071733
+INFO:morphZ.Nth_TC:  param_3 — param_23 : 0.071688
+INFO:morphZ.Nth_TC:  param_16 — param_29 : 0.067751
+INFO:morphZ.Nth_TC:  param_16 — param_17 : 0.067722
+INFO:morphZ.Nth_TC:  param_3 — param_6 : 0.067688
+INFO:morphZ.Nth_TC:  param_16 — param_26 : 0.065716
+INFO:morphZ.Nth_TC:  param_6 — param_22 : 0.064952
+INFO:morphZ.Nth_TC:  param_22 — param_24 : 0.064463
+INFO:morphZ.Nth_TC:All MI pairs saved to /tmp/morphz-6t1qioby/params_2-order_TC.json
+INFO:morphZ.morph:BW file not found at /tmp/morphz-6t1qioby/bw_silverman_2D.json. Running Bw with silverman...
+INFO:morphZ.bw_method:Bandwidths saved to /tmp/morphz-6t1qioby/bw_silverman_2D.json
 INFO:morphZ.bw_method:Processed 15 groups and 0 single parameters
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4cdb815cd0d24cafa80be8ecd1d0ab38", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge:Filtered proposal samples: 5000 valid samples out of 5000 total samples.
-INFO:morphZ.bridge:iteration: 1 log(z) old: -60.2888435848692 log(z) New: -61.186854998650155
-INFO:morphZ.bridge:iteration: 2 log(z) old: -61.186854998650155 log(z) New: -61.4448073620327
-INFO:morphZ.bridge:iteration: 3 log(z) old: -61.4448073620327 log(z) New: -61.521566690857924
-INFO:morphZ.bridge:iteration: 4 log(z) old: -61.521566690857924 log(z) New: -61.54453650174945
-INFO:morphZ.bridge:iteration: 5 log(z) old: -61.54453650174945 log(z) New: -61.551418723977584
-INFO:morphZ.bridge:Converged in 5 iterations. log(z): -61.5445 +/-: 0.0207
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4375d9e08d464d2c952b4d2f700c4457", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:morphZ.bridge:Filtered proposal samples: 4995 valid samples out of 5000 total samples.
+INFO:morphZ.bridge:iteration: 1 log(z) old: -60.07942833613235 log(z) New: -60.83874093476251
+INFO:morphZ.bridge:iteration: 2 log(z) old: -60.83874093476251 log(z) New: -60.94761259232691
+INFO:morphZ.bridge:iteration: 3 log(z) old: -60.94761259232691 log(z) New: -60.96127233002003
+INFO:morphZ.bridge:iteration: 4 log(z) old: -60.96127233002003 log(z) New: -60.96294892487062
+INFO:morphZ.bridge:Converged in 4 iterations. log(z): -60.9613 +/-: 0.0169
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -61.54453650174945 +/- 0.020651312482686066
-NS  mean ln(Z): -49.771655806747845 +/- 0.7192905691184984
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MorphZ mean ln(Z): -60.96127233002003 +/- 0.016856485956372222
+NS  mean ln(Z): -57.97771144223177 +/- 0.3902208082069454
 True   ln(Z) D=30: -60.13
-MorphZ residual: -1.4145365017494456
-NS  residual: 10.358344193252158
+MorphZ residual: -0.8312723300200275
+NS  residual: 2.1522885577682302
 </pre></div>
 </div>
 </div>
@@ -776,8 +822,8 @@ By MorphZ Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>
