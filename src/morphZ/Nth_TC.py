@@ -173,9 +173,12 @@ def compute_total_correlation(
     samples = np.ascontiguousarray(np.asarray(samples), dtype=float)
     if samples.ndim != 2:
         raise ValueError("`samples` must be a 2‑D array (n_samples, n_dims).")
+    
     n_samples, n_dims = samples.shape
-
-    if auto_thin and n_order >= 2 and n_dims >= 20:
+    if n_samples > 1000:
+        target_n = 1000
+        
+    if auto_thin and n_order >= 1 and n_dims >= 15:
         target_n = 300
         if n_dims >= 75:
             target_n = 200
@@ -188,8 +191,8 @@ def compute_total_correlation(
             n_samples = target_n
             logger.info("Auto-thinning samples to %s for faster TC computation (n_dims=%s, n_order=%s).", target_n, n_dims, n_order)
 
-    if not 2 <= n_order <= n_dims:
-        raise ValueError(f"`n_order` must be between 2 and {n_dims}.")
+    if not 1 <= n_order <= n_dims:
+        raise ValueError(f"`n_order` must be between 1 and {n_dims}.")
 
     samples_T = samples.T
     log_p, rng = compute_marginal_log_p(samples, bw_method, loo, seed, eps)
