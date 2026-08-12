@@ -11,6 +11,7 @@ import tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 from morphZ import evidence
+from morphZ import morph as morph_module
 
 
 def _assert_evidence_result_shape(results):
@@ -216,6 +217,40 @@ def test_evidence_accepts_legacy_positional_log_values_then_function(tmp_path):
     )
 
     _assert_evidence_result_shape(results)
+
+
+def test_evidence_uses_temporary_directory_when_output_path_is_omitted(
+    tmp_path, monkeypatch
+):
+    np.random.seed(654)
+    post_samples = np.random.randn(120, 2)
+    created_paths = []
+    original_temporary_directory = tempfile.TemporaryDirectory
+
+    def tracked_temporary_directory(*args, **kwargs):
+        kwargs["dir"] = tmp_path
+        temporary_directory = original_temporary_directory(*args, **kwargs)
+        created_paths.append(temporary_directory.name)
+        return temporary_directory
+
+    monkeypatch.setattr(
+        morph_module.tempfile, "TemporaryDirectory", tracked_temporary_directory
+    )
+
+    results = evidence(
+        post_samples=post_samples,
+        log_posterior_function=mock_log_posterior,
+        n_resamples=20,
+        morph_type="indep",
+        param_names=["param1", "param2"],
+        kde_bw=0.5,
+        max_iter=20,
+        show_progress=False,
+    )
+
+    _assert_evidence_result_shape(results)
+    assert len(created_paths) == 1
+    assert not os.path.exists(created_paths[0])
 
 
 if __name__ == "__main__":

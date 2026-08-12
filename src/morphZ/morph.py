@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import tempfile
 import warnings
 from typing import Callable, Dict, List, Optional, Union
 
@@ -207,7 +208,8 @@ def evidence(
         param_names (list[str] | None): Optional names for parameters; used for
             bandwidth JSONs and reporting. Defaults to ``["param_i"]``.
         output_path (str | None): Directory for artifacts (bandwidth JSONs,
-            MI/TC files, and results). Defaults to ``"log_MorphZ"``.
+            MI/TC files, and results). When omitted, a temporary directory is
+            created for the duration of the run and removed afterward.
         n_estimations (int): Number of independent bridge estimates to run. Use
             >1 to gauge variability; results are saved as a 2‑column text file
             with ``logz`` and ``err`` per row.
@@ -256,6 +258,33 @@ def evidence(
         - Use ``n_estimations>=3`` to assess stability and report mean/SE.
     """
 
+    if output_path is None:
+        with tempfile.TemporaryDirectory(prefix="morphz-") as temporary_output_path:
+            return evidence(
+                post_samples=post_samples,
+                log_posterior_function=log_posterior_function,
+                log_posterior_values=log_posterior_values,
+                n_resamples=n_resamples,
+                thin=thin,
+                kde_fraction=kde_fraction,
+                bridge_start_fraction=bridge_start_fraction,
+                max_iter=max_iter,
+                tol=tol,
+                morph_type=morph_type,
+                param_names=param_names,
+                output_path=temporary_output_path,
+                n_estimations=n_estimations,
+                kde_bw=kde_bw,
+                verbose=verbose,
+                top_k_greedy=top_k_greedy,
+                plot=plot,
+                prefer_corner=prefer_corner,
+                pool=pool,
+                show_progress=show_progress,
+                shuffle=shuffle,
+                overwrite_path=overwrite_path,
+            )
+
     
     if callable(log_posterior_values) and not callable(log_posterior_function):
         log_posterior_function, log_posterior_values = log_posterior_values, log_posterior_function
@@ -298,9 +327,6 @@ def evidence(
 
     tot_len, ndim = samples.shape
 
-    if output_path is None:
-        output_path = "log_MorphZ"
-    
     os.makedirs(output_path, exist_ok=True)
 
 

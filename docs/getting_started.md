@@ -37,6 +37,10 @@ log_z = morphZ.evidence(
 )
 ```
 
+If `output_path` is omitted, MorphZ uses a temporary directory for intermediate
+artifacts and removes it when the run finishes. Pass an explicit directory when
+you want to keep the bandwidth, MI/TC, plot, or result files.
+
 ## Run The Examples
 
 You can run the interactive notebooks in `examples/` to try MorphZ on the
@@ -48,4 +52,3 @@ included example problems:
 - `examples/numpyro_gaussian_shell.ipynb`
 - `examples/jaxns_gaussian_shell.ipynb`
 - `examples/numpyro_morphz_lnz.ipynb`
-
