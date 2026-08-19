@@ -337,9 +337,9 @@
                 <article class="bd-article">
                   
   <h1>Source code for morphZ</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">morphZ - KDE-based density estimation and approximation package.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
@@ -375,21 +375,21 @@
 <div class="viewcode-block" id="setup_logging">
 <a class="viewcode-back" href="../api.html#morphZ.setup_logging">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setup_logging</span><span class="p">(</span><span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Configure root logging for morphZ consumers.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        level: Logging level passed to :func:`logging.basicConfig`.</span>
 <span class="sd">        stream: Optional stream override (``sys.stdout`` by default).</span>
 <span class="sd">        fmt: Optional logging format string. Defaults to a concise pattern.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
         <span class="k">return</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
         <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span>
-        <span class="nb">format</span><span class="o">=</span><span class="n">fmt</span> <span class="ow">or</span> <span class="s2">&quot;</span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(name)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="n">fmt</span> <span class="ow">or</span> <span class="s2">"</span><span class="si">%(levelname)s</span><span class="s2">:</span><span class="si">%(name)s</span><span class="s2">:</span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -400,31 +400,31 @@
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span> <span class="k">as</span> <span class="n">_pkg_version</span>  <span class="c1"># Python 3.11+</span>
-        <span class="n">__version__</span> <span class="o">=</span> <span class="n">_pkg_version</span><span class="p">(</span><span class="s2">&quot;morphZ&quot;</span><span class="p">)</span>
+        <span class="n">__version__</span> <span class="o">=</span> <span class="n">_pkg_version</span><span class="p">(</span><span class="s2">"morphZ"</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># fallback for source tree without tags/metadata</span>
-        <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.0.0&quot;</span>
+        <span class="n">__version__</span> <span class="o">=</span> <span class="s2">"0.0.0"</span>
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;KDEBase&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Morph_Indep&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;KDE_approx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Morph_Pairwise&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;PairwiseKDE&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Morph_Group&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GroupKDE&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Morph_Tree&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TreeKDE&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;select_bandwidth&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_and_save_bandwidths&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;scott_rule&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;silverman_rule&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;botev_isj_bandwidth&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cross_validation_bandwidth&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bridge_sampling_ln&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_bridge_rmse&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;evidence&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;utils&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Nth_TC&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;setup_logging&quot;</span><span class="p">,</span>
+    <span class="s2">"KDEBase"</span><span class="p">,</span>
+    <span class="s2">"Morph_Indep"</span><span class="p">,</span>
+    <span class="s2">"KDE_approx"</span><span class="p">,</span>
+    <span class="s2">"Morph_Pairwise"</span><span class="p">,</span>
+    <span class="s2">"PairwiseKDE"</span><span class="p">,</span>
+    <span class="s2">"Morph_Group"</span><span class="p">,</span>
+    <span class="s2">"GroupKDE"</span><span class="p">,</span>
+    <span class="s2">"Morph_Tree"</span><span class="p">,</span>
+    <span class="s2">"TreeKDE"</span><span class="p">,</span>
+    <span class="s2">"select_bandwidth"</span><span class="p">,</span>
+    <span class="s2">"compute_and_save_bandwidths"</span><span class="p">,</span>
+    <span class="s2">"scott_rule"</span><span class="p">,</span>
+    <span class="s2">"silverman_rule"</span><span class="p">,</span>
+    <span class="s2">"botev_isj_bandwidth"</span><span class="p">,</span>
+    <span class="s2">"cross_validation_bandwidth"</span><span class="p">,</span>
+    <span class="s2">"bridge_sampling_ln"</span><span class="p">,</span>
+    <span class="s2">"compute_bridge_rmse"</span><span class="p">,</span>
+    <span class="s2">"evidence"</span><span class="p">,</span>
+    <span class="s2">"utils"</span><span class="p">,</span>
+    <span class="s2">"Nth_TC"</span><span class="p">,</span>
+    <span class="s2">"setup_logging"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 

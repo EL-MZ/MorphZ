@@ -434,7 +434,7 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <h2>2. Colab Setup<a class="headerlink" href="#colab-setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="o">-</span><span class="n">q</span> <span class="n">install</span> <span class="s2">&quot;jax[cpu]&quot;</span> <span class="n">numpyro</span> <span class="n">morphz</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="o">-</span><span class="n">q</span> <span class="n">install</span> <span class="s2">"jax[cpu]"</span> <span class="n">numpyro</span> <span class="n">morphz</span>
 </pre></div>
 </div>
 </div>
@@ -451,8 +451,8 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <span class="kn">from</span><span class="w"> </span><span class="nn">numpyro.infer.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">log_density</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">morphZ</span><span class="w"> </span><span class="kn">import</span> <span class="n">evidence</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;jax:&#39;</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpyro:&#39;</span><span class="p">,</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'jax:'</span><span class="p">,</span> <span class="n">jax</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'numpyro:'</span><span class="p">,</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -476,8 +476,8 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <span class="n">tau0</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_true</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_obs</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n_obs =&#39;</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sample mean =&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'n_obs ='</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'sample mean ='</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -485,8 +485,8 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gaussian_mean_model</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">tau0</span><span class="p">):</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tau0</span><span class="p">))</span>
-    <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span> <span class="n">obs</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s1">'mu'</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tau0</span><span class="p">))</span>
+    <span class="n">numpyro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="s1">'obs'</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span> <span class="n">obs</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -509,8 +509,8 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <span class="n">mcmc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">rng_key</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">tau0</span><span class="o">=</span><span class="n">tau0</span><span class="p">)</span>
 <span class="n">samples</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">group_by_chain</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;posterior keys:&#39;</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mu sample shape:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'posterior keys:'</span><span class="p">,</span> <span class="n">samples</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'mu sample shape:'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">'mu'</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -531,9 +531,9 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">_logpost</span><span class="p">)</span>
 
 <span class="n">model_kwargs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
-    <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">sigma</span><span class="p">,</span>
-    <span class="s1">&#39;tau0&#39;</span><span class="p">:</span> <span class="n">tau0</span><span class="p">,</span>
+    <span class="s1">'y'</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+    <span class="s1">'sigma'</span><span class="p">:</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="s1">'tau0'</span><span class="p">:</span> <span class="n">tau0</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">logpost_fn</span> <span class="o">=</span> <span class="n">build_log_density_fn</span><span class="p">(</span><span class="n">gaussian_mean_model</span><span class="p">,</span> <span class="n">model_kwargs</span><span class="p">)</span>
@@ -547,17 +547,17 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <p>MorphZ expects <code class="docutils literal notranslate"><span class="pre">shape</span> <span class="pre">=</span> <span class="pre">(n_draws,</span> <span class="pre">n_parameters)</span></code>. Here we have one parameter (<code class="docutils literal notranslate"><span class="pre">mu</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mu_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mu_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s1">'mu'</span><span class="p">])</span>
 <span class="n">post_smp</span> <span class="o">=</span> <span class="n">mu_samples</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># (n_draws, 1)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">lp_fn</span><span class="p">(</span><span class="n">sample_vec</span><span class="p">):</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mu&#39;</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sample_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'mu'</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sample_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">])}</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">logpost_fn</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
 
 <span class="n">lp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lp_fn</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">post_smp</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;post_smp shape:&#39;</span><span class="p">,</span> <span class="n">post_smp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lp shape:&#39;</span><span class="p">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'post_smp shape:'</span><span class="p">,</span> <span class="n">post_smp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'lp shape:'</span><span class="p">,</span> <span class="n">lp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -568,7 +568,7 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;i=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">  precomputed=</span><span class="si">{</span><span class="n">lp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1"> .6f</span><span class="si">}</span><span class="s1">  callable=</span><span class="si">{</span><span class="n">lp_fn</span><span class="p">(</span><span class="n">post_smp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s1"> .6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'i=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">  precomputed=</span><span class="si">{</span><span class="n">lp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1"> .6f</span><span class="si">}</span><span class="s1">  callable=</span><span class="si">{</span><span class="n">lp_fn</span><span class="p">(</span><span class="n">post_smp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s1"> .6f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -588,10 +588,10 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="n">bridge_start_fraction</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
-    <span class="n">morph_type</span><span class="o">=</span><span class="s1">&#39;indep&#39;</span><span class="p">,</span>
-    <span class="n">kde_bw</span><span class="o">=</span><span class="s1">&#39;silverman&#39;</span><span class="p">,</span>
-    <span class="n">param_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">],</span>
-    <span class="n">output_path</span><span class="o">=</span><span class="s1">&#39;simple_gaussian_example&#39;</span><span class="p">,</span>
+    <span class="n">morph_type</span><span class="o">=</span><span class="s1">'indep'</span><span class="p">,</span>
+    <span class="n">kde_bw</span><span class="o">=</span><span class="s1">'silverman'</span><span class="p">,</span>
+    <span class="n">param_names</span><span class="o">=</span><span class="p">[</span><span class="s1">'mu'</span><span class="p">],</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s1">'simple_gaussian_example'</span><span class="p">,</span>
     <span class="n">n_estimations</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -615,7 +615,7 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
     <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">tau0</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
     <span class="n">sign</span><span class="p">,</span> <span class="n">logdet</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">slogdet</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">sign</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Covariance matrix is not positive definite.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">'Covariance matrix is not positive definite.'</span><span class="p">)</span>
     <span class="n">quad</span> <span class="o">=</span> <span class="n">y</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> <span class="n">logdet</span> <span class="o">+</span> <span class="n">quad</span><span class="p">)</span>
 
@@ -623,11 +623,11 @@ Z = p(y) = \int p(y \mid \theta)\, p(\theta)\, d\theta
 <span class="n">lnz_est</span> <span class="o">=</span> <span class="n">results</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">lnz_err</span> <span class="o">=</span> <span class="n">results</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MorphZ ln(Z) per run:&#39;</span><span class="p">,</span> <span class="n">lnz_est</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MorphZ reported errors:&#39;</span><span class="p">,</span> <span class="n">lnz_err</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MorphZ mean ln(Z): </span><span class="si">{</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Analytic ln(Z):     </span><span class="si">{</span><span class="n">lnz_true</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Absolute difference: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lnz_true</span><span class="p">)</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'MorphZ ln(Z) per run:'</span><span class="p">,</span> <span class="n">lnz_est</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'MorphZ reported errors:'</span><span class="p">,</span> <span class="n">lnz_err</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'MorphZ mean ln(Z): </span><span class="si">{</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Analytic ln(Z):     </span><span class="si">{</span><span class="n">lnz_true</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Absolute difference: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">lnz_est</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lnz_true</span><span class="p">)</span><span class="si">:</span><span class="s1">.6f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

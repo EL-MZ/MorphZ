@@ -344,7 +344,7 @@
 <div class="viewcode-block" id="compute_rho_f2_0_via_statsmodels">
 <a class="viewcode-back" href="../../api.html#morphZ.utils.compute_rho_f2_0_via_statsmodels">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_rho_f2_0_via_statsmodels</span><span class="p">(</span><span class="n">f2_values</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Estimate integrated autocorrelation time using ``statsmodels.acf``.</span>
 <span class="sd">    </span>
 <span class="sd">    The integrated autocorrelation time is defined as:</span>
@@ -359,7 +359,7 @@
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        float: Estimated integrated autocorrelation time.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">nlags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">nlags</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f2_values</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="c1"># Compute the autocorrelation function using fft for speed.</span>
@@ -377,7 +377,7 @@
 <div class="viewcode-block" id="compute_rho_f2_0_via_correlate">
 <a class="viewcode-back" href="../../api.html#morphZ.utils.compute_rho_f2_0_via_correlate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_rho_f2_0_via_correlate</span><span class="p">(</span><span class="n">f2_values</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Estimate integrated autocorrelation time using ``scipy.signal.correlate``.</span>
 <span class="sd">    </span>
 <span class="sd">    The integrated autocorrelation time is defined as:</span>
@@ -390,12 +390,12 @@
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        float: Estimated integrated autocorrelation time.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">f2_values</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">f2_values</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
     <span class="c1"># Full correlation has length 2*n - 1</span>
-    <span class="n">corr</span> <span class="o">=</span> <span class="n">correlate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
-    <span class="c1"># The &#39;center&#39; index for lag=0:</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">correlate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'full'</span><span class="p">)</span>
+    <span class="c1"># The 'center' index for lag=0:</span>
     <span class="n">mid</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="c1"># Keep only nonnegative lags: corr[mid:] =&gt; lags 0,1,...,n-1</span>
     <span class="n">corr</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="n">mid</span><span class="p">:]</span>
@@ -405,7 +405,7 @@
     <span class="c1"># Sum the positive portion of corr</span>
     <span class="c1"># (some strategies sum all lags until correlation first becomes negative).</span>
     <span class="n">sum_pos</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">corr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>  <span class="c1"># skip lag0 because it&#39;s 1</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">corr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>  <span class="c1"># skip lag0 because it's 1</span>
         <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">sum_pos</span> <span class="o">+=</span> <span class="n">val</span>
         <span class="k">else</span><span class="p">:</span>
@@ -419,7 +419,7 @@
 <div class="viewcode-block" id="log_plus">
 <a class="viewcode-back" href="../../api.html#morphZ.utils.log_plus">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">log_plus</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute ``log(exp(x) + exp(y))`` in a numerically stable way.</span>
 
 <span class="sd">    Args:</span>
@@ -428,7 +428,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: Log-space sum of the two inputs.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">:</span>
       <span class="n">summ</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
@@ -439,7 +439,7 @@
 <div class="viewcode-block" id="log_sum">
 <a class="viewcode-back" href="../../api.html#morphZ.utils.log_sum">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">log_sum</span><span class="p">(</span><span class="n">vec</span><span class="p">):</span> 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute ``log(sum(exp(vec)))`` for a vector of log-space values.</span>
 
 <span class="sd">    Args:</span>
@@ -447,7 +447,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: Stable log-space sum.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">r</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vec</span><span class="p">)):</span>
        <span class="n">r</span> <span class="o">=</span><span class="n">log_plus</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
@@ -456,7 +456,7 @@
 <div class="viewcode-block" id="error_bound_from_oscillation">
 <a class="viewcode-back" href="../../api.html#morphZ.utils.error_bound_from_oscillation">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">error_bound_from_oscillation</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Estimate a fixed-point error bound from oscillatory iterates.</span>
 
 <span class="sd">    The first 20 percent of values are discarded as transient behavior, then</span>
@@ -470,11 +470,11 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: If fewer than two post-transient iterates remain.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):]</span> 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Need at least two iterates to compute oscillation bounds.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Need at least two iterates to compute oscillation bounds."</span><span class="p">)</span>
     <span class="n">lower</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">upper</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">lower</span><span class="p">)</span></div>

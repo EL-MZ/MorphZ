@@ -350,22 +350,22 @@
 <div class="viewcode-block" id="Morph_Indep">
 <a class="viewcode-back" href="../../api.html#morphZ.Morph_Indep">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Morph_Indep</span><span class="p">(</span><span class="n">KDEBase</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Independent KDE approximation for multivariate posterior samples.</span>
 
 <span class="sd">    Each parameter is modeled with a one-dimensional Gaussian KDE and the joint</span>
 <span class="sd">    density is evaluated as the product of those marginal densities. This is the</span>
 <span class="sd">    fastest Morph approximation and assumes weak dependence between parameters.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">kde_bw</span><span class="o">=</span><span class="s1">&#39;silverman&#39;</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bw_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    """</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">kde_bw</span><span class="o">=</span><span class="s1">'silverman'</span><span class="p">,</span> <span class="n">param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bw_json_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bw_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Fit one one-dimensional KDE per parameter.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            data (array-like): 2D array of shape (n_samples, n_params) used to fit the KDEs.</span>
 <span class="sd">            kde_bw (str, scalar, or dict, optional): The method used to estimate the bandwidth of the KDE.</span>
 <span class="sd">                                                     Can also be used to override specific parameter bandwidths</span>
-<span class="sd">                                                     when using JSON files. Defaults to &#39;silverman&#39;.</span>
+<span class="sd">                                                     when using JSON files. Defaults to 'silverman'.</span>
 <span class="sd">            bw_method (str, scalar, or dict, optional): Backward‑compat alias for ``kde_bw``.</span>
 <span class="sd">            param_names (list of str, optional): Names of the parameters. If None, parameters are named by their index.</span>
 <span class="sd">            bw_json_path (str, optional): Path to JSON file containing bandwidth values. If provided,</span>
@@ -377,9 +377,9 @@
 <span class="sd">            - ``kde_bw`` can be a number (e.g., 0.8) for slightly tighter KDEs</span>
 <span class="sd">              or a dict mapping parameter names to custom values.</span>
 <span class="sd">            - Supported selectors from ``bw_method.py`` for SciPy‑compatible</span>
-<span class="sd">              factors: ``&#39;scott&#39;``, ``&#39;silverman&#39;``, ``&#39;isj&#39;`` (Botev’s ISJ),</span>
-<span class="sd">              ``&#39;cv_iso&#39;`` (isotropic CV), ``&#39;cv_diag&#39;`` (diagonal CV → scalar</span>
-<span class="sd">              factor via geometric mean). Choose ``&#39;cv_iso&#39;``/``&#39;cv_diag&#39;`` for</span>
+<span class="sd">              factors: ``'scott'``, ``'silverman'``, ``'isj'`` (Botev’s ISJ),</span>
+<span class="sd">              ``'cv_iso'`` (isotropic CV), ``'cv_diag'`` (diagonal CV → scalar</span>
+<span class="sd">              factor via geometric mean). Choose ``'cv_iso'``/``'cv_diag'`` for</span>
 <span class="sd">              higher fidelity at extra cost.</span>
 <span class="sd">            - Use ``bw_json_path`` with values from</span>
 <span class="sd">              ``compute_and_save_bandwidths`` to ensure consistent settings</span>
@@ -389,23 +389,23 @@
 <span class="sd">            ValueError: If ``data`` is not two-dimensional, ``param_names`` has</span>
 <span class="sd">                the wrong length, or both bandwidth aliases are specified with</span>
 <span class="sd">                different values.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
         <span class="c1"># Backward compatibility: allow bw_method alias</span>
-        <span class="k">if</span> <span class="n">bw_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">kde_bw</span> <span class="o">==</span> <span class="s1">&#39;silverman&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">bw_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">kde_bw</span> <span class="o">==</span> <span class="s1">'silverman'</span><span class="p">:</span>
             <span class="n">kde_bw</span> <span class="o">=</span> <span class="n">bw_method</span>
         <span class="k">elif</span> <span class="n">bw_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">bw_method</span> <span class="o">!=</span> <span class="n">kde_bw</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Specify only one of &#39;kde_bw&#39; or &#39;bw_method&#39;, not both.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Specify only one of 'kde_bw' or 'bw_method', not both."</span><span class="p">)</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;data must be a 2D array-like object with shape (n_samples, n_params)&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"data must be a 2D array-like object with shape (n_samples, n_params)"</span><span class="p">)</span>
 
         <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_params</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 
         <span class="k">if</span> <span class="n">param_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_params</span><span class="p">)]</span>
+            <span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_params</span><span class="p">)]</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_params</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Length of param_names must equal the number of parameters (columns) in data&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Length of param_names must equal the number of parameters (columns) in data"</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">param_names</span> <span class="o">=</span> <span class="n">param_names</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">param_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">param_names</span><span class="p">)}</span>
@@ -421,7 +421,7 @@
             <span class="c1"># Determine the bandwidth for the current parameter using improved logic</span>
             <span class="n">bw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bandwidth_for_params</span><span class="p">([</span><span class="n">name</span><span class="p">],</span> <span class="n">bandwidth_dict</span><span class="p">,</span> <span class="n">kde_bw</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;morph_indep for </span><span class="si">%s</span><span class="s2"> with bw: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bw</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"morph_indep for </span><span class="si">%s</span><span class="s2"> with bw: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bw</span><span class="p">)</span>
             <span class="c1"># Fit a Gaussian KDE</span>
             <span class="n">kde_obj</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">param_data</span><span class="p">,</span> <span class="n">bw_method</span><span class="o">=</span><span class="n">bw</span><span class="p">)</span>
             <span class="c1"># Save the callable KDE object in the dictionary</span>
@@ -430,7 +430,7 @@
 <div class="viewcode-block" id="Morph_Indep.logpdf_kde">
 <a class="viewcode-back" href="../../api.html#morphZ.Morph_Indep.logpdf_kde">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">logpdf_kde</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">point</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the approximated joint log density at a point.</span>
 
 <span class="sd">        The total log probability is the sum of the log probabilities from each 1D KDE,</span>
@@ -441,7 +441,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            float: The log probability density at the given point.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">logpdf</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">kde_obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">kde_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="c1"># Use the parameter index from param_map to access the correct coordinate</span>
@@ -453,7 +453,7 @@
 <div class="viewcode-block" id="Morph_Indep.resample">
 <a class="viewcode-back" href="../../api.html#morphZ.Morph_Indep.resample">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Draw independent samples from the fitted marginal KDEs.</span>
 
 <span class="sd">        Args:</span>
@@ -461,7 +461,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            np.ndarray: An array of resampled points with shape (size, n_params).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">n_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">param_names</span><span class="p">)</span>
         <span class="n">resampled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">size</span><span class="p">,</span> <span class="n">n_params</span><span class="p">))</span>
 

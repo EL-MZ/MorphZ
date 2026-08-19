@@ -337,9 +337,9 @@
                 <article class="bd-article">
                   
   <h1>Source code for morphZ.kde_base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">kde_base.py -- Shared base class for KDE implementations with JSON bandwidth loading support.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
@@ -348,16 +348,16 @@
 <div class="viewcode-block" id="KDEBase">
 <a class="viewcode-back" href="../../api.html#morphZ.KDEBase">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KDEBase</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Base class for KDE implementations with JSON bandwidth loading support.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_load_bandwidths_from_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load bandwidth values from a JSON file created by compute_and_save_bandwidths.</span>
 
 <span class="sd">        The function now returns the same grouped format that gets saved to JSON:</span>
-<span class="sd">        [[&quot;param1&quot;, &quot;param2&quot;, 0.1], [&quot;param3&quot;, 0.2]]</span>
+<span class="sd">        [["param1", "param2", 0.1], ["param3", 0.2]]</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -368,20 +368,20 @@
 <span class="sd">        -------</span>
 <span class="sd">        Dict[str, float]</span>
 <span class="sd">            Dictionary mapping parameter names to bandwidth values</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">json_path</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bandwidth JSON file not found: </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Bandwidth JSON file not found: </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
         <span class="c1"># The JSON file may be one of the following formats:</span>
         <span class="c1"># 1) Grouped list format (legacy from earlier versions):</span>
-        <span class="c1">#    [[&quot;p1&quot;,&quot;p2&quot;, factor], [&quot;p3&quot;, factor], ...]</span>
+        <span class="c1">#    [["p1","p2", factor], ["p3", factor], ...]</span>
         <span class="c1"># 2) Structured dict format mirroring selected_pairs/groups files:</span>
-        <span class="c1">#    {&quot;pairs&quot;|&quot;groups&quot;: [{&quot;names&quot;:[...], &quot;factor&quot;: f}],</span>
-        <span class="c1">#     &quot;singles&quot;: [{&quot;name&quot;: &quot;p&quot;, &quot;factor&quot;: f}]}</span>
-        <span class="c1"># 3) Legacy dict mapping param-&gt;factor or {&quot;bandwidths&quot;: {...}}</span>
+        <span class="c1">#    {"pairs"|"groups": [{"names":[...], "factor": f}],</span>
+        <span class="c1">#     "singles": [{"name": "p", "factor": f}]}</span>
+        <span class="c1"># 3) Legacy dict mapping param-&gt;factor or {"bandwidths": {...}}</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">bandwidths</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
@@ -397,42 +397,42 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="c1"># Structured dict with pairs/groups and singles</span>
             <span class="n">out</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">if</span> <span class="s2">&quot;pairs&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">or</span> <span class="s2">&quot;groups&quot;</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-                <span class="n">items</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pairs&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="o">+</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">if</span> <span class="s2">"pairs"</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">or</span> <span class="s2">"groups"</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">items</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"pairs"</span><span class="p">,</span> <span class="p">[])</span> <span class="o">+</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"groups"</span><span class="p">,</span> <span class="p">[])</span>
                 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
-                    <span class="n">names</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="n">names</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"names"</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
                     <span class="n">fac</span> <span class="o">=</span> <span class="kc">None</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                        <span class="c1"># prefer &#39;bw&#39;; fallback to &#39;factor&#39; for backward compatibility</span>
-                        <span class="n">fac</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bw&quot;</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;factor&quot;</span><span class="p">))</span>
+                        <span class="c1"># prefer 'bw'; fallback to 'factor' for backward compatibility</span>
+                        <span class="n">fac</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bw"</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"factor"</span><span class="p">))</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">fac</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
                             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                                 <span class="n">out</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fac</span><span class="p">)</span>
-                <span class="n">singles</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;singles&quot;</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="n">singles</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"singles"</span><span class="p">,</span> <span class="p">[])</span>
                 <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">singles</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                        <span class="n">name</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-                        <span class="n">fac</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bw&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;factor&quot;</span><span class="p">))</span>
+                        <span class="n">name</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
+                        <span class="n">fac</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"bw"</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"factor"</span><span class="p">))</span>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">fac</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                             <span class="n">out</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">fac</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">out</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">out</span>
             <span class="c1"># Legacy dictionary formats</span>
-            <span class="k">if</span> <span class="s2">&quot;bandwidths&quot;</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;bandwidths&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">return</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;bandwidths&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="k">if</span> <span class="s2">"bandwidths"</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"bandwidths"</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">"bandwidths"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
             <span class="c1"># Assume direct param-&gt;factor mapping</span>
             <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
                 <span class="k">return</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON structure in </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2">. Unsupported dict layout.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid JSON structure in </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2">. Unsupported dict layout."</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON structure in </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2">. Expected list or dict format.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid JSON structure in </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2">. Expected list or dict format."</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_prepare_bandwidth_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kde_bw</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
                               <span class="n">bw_json_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
                               <span class="n">param_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Prepare bandwidth dictionary, combining JSON values with user overrides.</span>
 
 <span class="sd">        Parameters</span>
@@ -448,7 +448,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        Dict[str, float]</span>
 <span class="sd">            Dictionary mapping parameter names to bandwidth values</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Start with JSON bandwidths if provided</span>
         <span class="n">bandwidths</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">bw_json_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -465,8 +465,8 @@
         <span class="k">return</span> <span class="n">bandwidths</span> <span class="k">if</span> <span class="n">bandwidths</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_bandwidth_for_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">bandwidth_dict</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
-                                <span class="n">default_bw</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,]</span><span class="o">=</span> <span class="s2">&quot;silverman&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+                                <span class="n">default_bw</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,]</span><span class="o">=</span> <span class="s2">"silverman"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Get bandwidth for a group of parameters, using available values from bandwidth_dict</span>
 <span class="sd">        and default_bw for missing parameters.</span>
 
@@ -483,7 +483,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        Union[str, float, list]</span>
 <span class="sd">            Bandwidth specification for the parameters</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">bandwidth_dict</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">bandwidth_dict</span><span class="p">:</span>
             <span class="c1"># No bandwidth dict or empty dict - use default for all parameters</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">param_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>

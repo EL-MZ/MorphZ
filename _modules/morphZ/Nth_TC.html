@@ -338,13 +338,13 @@
                   
   <h1>Source code for morphZ.Nth_TC</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Compute n-order Total Correlation (TC) from continuous posterior samples via Gaussian KDE.</span>
 <span class="sd">For n=2, this is equivalent to pairwise Mutual Information (MI).</span>
 <span class="sd">Plots an MI heatmap for n=2, and saves the TC values for n&gt;=2.</span>
 
 <span class="sd">Dependencies: numpy, scipy, matplotlib, pandas (optional).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
@@ -384,7 +384,7 @@
     <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">,</span>
     <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gaussian_kde</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fit ``gaussian_kde`` robustly, adding jitter if covariance is singular.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Fit ``gaussian_kde`` robustly, adding jitter if covariance is singular."""</span>
     <span class="n">attempt</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">jitter_scale</span> <span class="o">=</span> <span class="mf">1e-9</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -395,7 +395,7 @@
             <span class="k">if</span> <span class="n">attempt</span> <span class="o">&gt;</span> <span class="n">max_retries</span><span class="p">:</span>
                 <span class="k">raise</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Singular covariance detected (attempt </span><span class="si">{</span><span class="n">attempt</span><span class="si">}</span><span class="s2">). Adding jitter and retrying.&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Singular covariance detected (attempt </span><span class="si">{</span><span class="n">attempt</span><span class="si">}</span><span class="s2">). Adding jitter and retrying."</span><span class="p">,</span>
                 <span class="ne">RuntimeWarning</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">jitter_scale</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -408,7 +408,7 @@
     <span class="n">loo</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-300</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate log‑pdf at training samples with optional leave‑one‑out correction.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Evaluate log‑pdf at training samples with optional leave‑one‑out correction."""</span>
     <span class="n">pdf_vals</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">samples_T</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">loo</span><span class="p">:</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">samples_T</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -426,10 +426,10 @@
 <div class="viewcode-block" id="stable_seed_for_indices">
 <a class="viewcode-back" href="../../api.html#morphZ.Nth_TC.stable_seed_for_indices">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">stable_seed_for_indices</span><span class="p">(</span><span class="n">base_seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Derive a deterministic 32‑bit seed from a base seed and an index tuple.&quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_seed</span><span class="si">}</span><span class="s2">|&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">indices</span><span class="p">))</span>
-    <span class="n">digest</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
-    <span class="k">return</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">digest</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="s2">&quot;little&quot;</span><span class="p">)</span></div>
+<span class="w">    </span><span class="sd">"""Derive a deterministic 32‑bit seed from a base seed and an index tuple."""</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_seed</span><span class="si">}</span><span class="s2">|"</span> <span class="o">+</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">indices</span><span class="p">))</span>
+    <span class="n">digest</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">digest</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="s2">"little"</span><span class="p">)</span></div>
 
 
 
@@ -442,11 +442,11 @@
     <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute 1‑D marginal log‑densities at the provided sample points.</span>
 
 <span class="sd">    Returns the log densities (shape ``(n_dims, n_samples)``) and the RNG used.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">samples_T</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">T</span>
     <span class="n">n_dims</span><span class="p">,</span> <span class="n">n_samples</span> <span class="o">=</span> <span class="n">samples_T</span><span class="o">.</span><span class="n">shape</span>
@@ -472,7 +472,7 @@
     <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">rng</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">Generator</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute TC/MI for a single index group.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Compute TC/MI for a single index group."""</span>
     <span class="n">subset_samples</span> <span class="o">=</span> <span class="n">samples_T</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">indices</span><span class="p">),</span> <span class="p">:]</span>
     <span class="n">kde_n</span> <span class="o">=</span> <span class="n">_safe_gaussian_kde</span><span class="p">(</span><span class="n">subset_samples</span><span class="p">,</span> <span class="n">bw_method</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
     <span class="n">log_p_joint</span> <span class="o">=</span> <span class="n">_eval_log_pdf_at_samples</span><span class="p">(</span><span class="n">kde_n</span><span class="p">,</span> <span class="n">subset_samples</span><span class="p">,</span> <span class="n">loo</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
@@ -493,7 +493,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_total_correlation</span><span class="p">(</span>
     <span class="n">samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">n_order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="n">bw_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">=</span> <span class="s2">&quot;silverman&quot;</span><span class="p">,</span>
+    <span class="n">bw_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">=</span> <span class="s2">"silverman"</span><span class="p">,</span>
     <span class="n">loo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-300</span><span class="p">,</span>
@@ -501,14 +501,14 @@
     <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">auto_thin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute a symmetric matrix of pairwise mutual informations (n_order=2)</span>
 <span class="sd">    or a list of n-order total correlations using KDE.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        samples (np.ndarray): 2D array of shape (n_samples, n_dims).</span>
 <span class="sd">        n_order (int, optional): Order of total correlation. Defaults to 2 (pairwise MI).</span>
-<span class="sd">        bw_method (str or float, optional): Bandwidth method for KDE. Defaults to &quot;silverman&quot;.</span>
+<span class="sd">        bw_method (str or float, optional): Bandwidth method for KDE. Defaults to "silverman".</span>
 <span class="sd">        loo (bool, optional): If True, use leave-one-out correction. Defaults to True.</span>
 <span class="sd">        seed (int, optional): Random seed. Defaults to 0.</span>
 <span class="sd">        eps (float, optional): Small value to clip PDF values to avoid log(0). Defaults to 1e-300.</span>
@@ -519,10 +519,10 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        np.ndarray | list: For n_order=2, a symmetric matrix of pairwise MIs.</span>
 <span class="sd">                           For n_order&gt;2, a list of (indices, tc_value) tuples.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">samples</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`samples` must be a 2‑D array (n_samples, n_dims).&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`samples` must be a 2‑D array (n_samples, n_dims)."</span><span class="p">)</span>
     
     <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_dims</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
@@ -539,10 +539,10 @@
             <span class="n">idx</span> <span class="o">=</span> <span class="n">rng_thin</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">target_n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
             <span class="n">n_samples</span> <span class="o">=</span> <span class="n">target_n</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Auto-thinning samples to </span><span class="si">%s</span><span class="s2"> for faster TC computation (n_dims=</span><span class="si">%s</span><span class="s2">, n_order=</span><span class="si">%s</span><span class="s2">).&quot;</span><span class="p">,</span> <span class="n">target_n</span><span class="p">,</span> <span class="n">n_dims</span><span class="p">,</span> <span class="n">n_order</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Auto-thinning samples to </span><span class="si">%s</span><span class="s2"> for faster TC computation (n_dims=</span><span class="si">%s</span><span class="s2">, n_order=</span><span class="si">%s</span><span class="s2">)."</span><span class="p">,</span> <span class="n">target_n</span><span class="p">,</span> <span class="n">n_dims</span><span class="p">,</span> <span class="n">n_order</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">n_order</span> <span class="o">&lt;=</span> <span class="n">n_dims</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`n_order` must be between 1 and </span><span class="si">{</span><span class="n">n_dims</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"`n_order` must be between 1 and </span><span class="si">{</span><span class="n">n_dims</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">samples_T</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">T</span>
     <span class="n">log_p</span><span class="p">,</span> <span class="n">rng</span> <span class="o">=</span> <span class="n">compute_marginal_log_p</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">bw_method</span><span class="p">,</span> <span class="n">loo</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
@@ -554,7 +554,7 @@
 
     <span class="n">progress</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">show_progress</span> <span class="ow">and</span> <span class="n">tqdm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;TC groups&quot;</span> <span class="k">if</span> <span class="n">n_order</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;MI pairs&quot;</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="s2">"TC groups"</span> <span class="k">if</span> <span class="n">n_order</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">"MI pairs"</span>
         <span class="n">progress</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="n">desc</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -575,7 +575,7 @@
                 <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">indices</span><span class="p">,</span> <span class="n">tc_val</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">progress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">progress</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The number of estimated Total correlations: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"The number of estimated Total correlations: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">results</span>
 
         <span class="c1"># Parallel execution</span>
@@ -609,7 +609,7 @@
                 <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">indices</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">progress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">progress</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;The number of estimated Total correlations: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"The number of estimated Total correlations: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">results</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">progress</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -626,18 +626,18 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">plot_tc_heatmap</span><span class="p">(</span>
     <span class="n">mi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">labels</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-    <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mi_heatmap.png&quot;</span><span class="p">,</span>
-    <span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;magma&quot;</span><span class="p">,</span>
+    <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"mi_heatmap.png"</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"magma"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Save a heat-map of the MI matrix (only for n_order=2).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mi (np.ndarray): The mutual information matrix.</span>
 <span class="sd">        labels (Sequence[str]): The labels for the axes.</span>
-<span class="sd">        outfile (str, optional): The output file path. Defaults to &quot;mi_heatmap.png&quot;.</span>
-<span class="sd">        cmap (str, optional): The colormap to use. Defaults to &quot;magma&quot;.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        outfile (str, optional): The output file path. Defaults to "mi_heatmap.png".</span>
+<span class="sd">        cmap (str, optional): The colormap to use. Defaults to "magma".</span>
+<span class="sd">    """</span>
     <span class="n">n_labels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
     <span class="c1"># Dynamically adjust figure size and font size for readability</span>
     <span class="c1"># These factors can be tuned for better aesthetics</span>
@@ -655,16 +655,16 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 
     <span class="c1"># Rotate the tick labels and set their alignment.</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
-             <span class="n">rotation_mode</span><span class="o">=</span><span class="s2">&quot;anchor&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span>
+             <span class="n">rotation_mode</span><span class="o">=</span><span class="s2">"anchor"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">(),</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
 
     <span class="c1"># Create colorbar</span>
     <span class="n">cbar</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-    <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Mutual Information&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">)</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Mutual Information"</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=-</span><span class="mi">90</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"bottom"</span><span class="p">)</span>
 
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Pairwise Mutual Information&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="s1">&#39;box&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Pairwise Mutual Information"</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">'equal'</span><span class="p">,</span> <span class="s1">'box'</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
@@ -682,7 +682,7 @@
     <span class="n">samples</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="n">bw_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">=</span> <span class="s2">&quot;silverman&quot;</span><span class="p">,</span>
+    <span class="n">bw_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">=</span> <span class="s2">"silverman"</span><span class="p">,</span>
     <span class="n">loo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">out_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -690,14 +690,14 @@
     <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">auto_thin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute TC, visualise (for n=2), and save all TC values.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        samples (np.ndarray): 2D array of shape (n_samples, n_dims).</span>
 <span class="sd">        names (Optional[Iterable[str]], optional): Names of the parameters. Defaults to None.</span>
 <span class="sd">        n_order (int, optional): Order of total correlation. Defaults to 2.</span>
-<span class="sd">        bw_method (str | float, optional): Bandwidth method for KDE. Defaults to &quot;silverman&quot;.</span>
+<span class="sd">        bw_method (str | float, optional): Bandwidth method for KDE. Defaults to "silverman".</span>
 <span class="sd">        loo (bool, optional): If True, use leave-one-out correction. Defaults to True.</span>
 <span class="sd">        seed (int, optional): Random seed. Defaults to 0.</span>
 <span class="sd">        out_path (Optional[str], optional): The output directory path. Defaults to None.</span>
@@ -707,15 +707,15 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        np.ndarray | list: The total correlation results.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n_dims</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>  <span class="c1"># ensure JSON‑serialisable strings</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;x</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_dims</span><span class="p">)]</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"x</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_dims</span><span class="p">)]</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n_dims</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Length of `names` must match number of dimensions.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Length of `names` must match number of dimensions."</span><span class="p">)</span>
 
     <span class="n">results</span> <span class="o">=</span> <span class="n">compute_total_correlation</span><span class="p">(</span>
         <span class="n">samples</span><span class="p">,</span>
@@ -732,11 +732,11 @@
         <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">out_path</span><span class="p">)</span>
         <span class="n">p</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_order</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">mi_matrix</span> <span class="o">=</span> <span class="n">results</span>
-        <span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="s2">&quot;mi_heatmap.png&quot;</span>
+        <span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="s2">"mi_heatmap.png"</span>
         <span class="n">plot_tc_heatmap</span><span class="p">(</span><span class="n">mi_matrix</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="n">heatmap_path</span><span class="p">)</span>
 
         <span class="n">tri</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">mi_matrix</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -747,33 +747,33 @@
             <span class="n">all_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
         <span class="n">all_pairs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Top 10 MI pairs:&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Top 10 MI pairs:"</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">all_pairs</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2"> — </span><span class="si">%s</span><span class="s2"> : </span><span class="si">%.6f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"  </span><span class="si">%s</span><span class="s2"> — </span><span class="si">%s</span><span class="s2"> : </span><span class="si">%.6f</span><span class="s2">"</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
 
-        <span class="n">mi_path</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;params_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">-order_TC.json&quot;</span>
+        <span class="n">mi_path</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"params_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">-order_TC.json"</span>
         <span class="n">mi_data</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">[[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">all_pairs</span>
         <span class="p">]</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">mi_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">mi_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">mi_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;All MI pairs saved to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mi_path</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"All MI pairs saved to </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">mi_path</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Sort results for n &gt; 2</span>
         <span class="n">sorted_results</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Top 10 </span><span class="si">%s</span><span class="s2">-order Total Correlation groups:&quot;</span><span class="p">,</span> <span class="n">n_order</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Top 10 </span><span class="si">%s</span><span class="s2">-order Total Correlation groups:"</span><span class="p">,</span> <span class="n">n_order</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">indices</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">sorted_results</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
             <span class="n">group_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2"> : </span><span class="si">%.6f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group_labels</span><span class="p">),</span> <span class="n">val</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"  </span><span class="si">%s</span><span class="s2"> : </span><span class="si">%.6f</span><span class="s2">"</span><span class="p">,</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group_labels</span><span class="p">),</span> <span class="n">val</span><span class="p">)</span>
 
-        <span class="n">tc_path</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;params_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">-order_TC.json&quot;</span>
+        <span class="n">tc_path</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"params_</span><span class="si">{</span><span class="n">n_order</span><span class="si">}</span><span class="s2">-order_TC.json"</span>
         <span class="n">tc_data</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">[[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">],</span> <span class="n">val</span><span class="p">]</span> <span class="k">for</span> <span class="n">indices</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">sorted_results</span>
         <span class="p">]</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tc_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tc_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tc_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;All </span><span class="si">%s</span><span class="s2">-order TC values saved to </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">n_order</span><span class="p">,</span> <span class="n">tc_path</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"All </span><span class="si">%s</span><span class="s2">-order TC values saved to </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">n_order</span><span class="p">,</span> <span class="n">tc_path</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">results</span></div>
 
