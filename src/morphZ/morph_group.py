@@ -6,10 +6,11 @@ import json
 import logging
 import os
 import re
-from typing import List, Tuple, Union, Dict, Any
+from typing import List, Union, Dict
 import numpy as np
 from scipy.stats import gaussian_kde
 from .kde_base import KDEBase
+from .Nth_TC import compute_total_correlation
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +27,7 @@ class Morph_Group(KDEBase):
     def __init__(
         self,
         data: np.ndarray,
-        param_tc: Union[str, List],
+        param_tc: Union[str, List, None] = None,
         param_names: List[str] = None,
         kde_bw: Union[str, float, Dict[str, float]] = "silverman",
         min_tc: float = None,
@@ -34,14 +35,19 @@ class Morph_Group(KDEBase):
         bw_json_path: str = None,
         bw_method: Union[str, float, Dict[str, float], None] = None,
         top_k_greedy: int = 1,
+        shuffle_samples: bool = True,
+        random_state: Union[int, None] = None,
+        n_order: int = 2,
     ):
         """
         Initialize and fit group/independent KDE components.
 
         Args:
             data (ndarray): Samples with shape ``(n_samples, n_params)``.
-            param_tc (str | list): Either a path to a TC JSON file with entries
-                like ``[[group_names], tc]`` or an in‑memory list of such pairs.
+            param_tc (str | list | None): Either a path to a TC JSON file with
+                entries like ``[[group_names], tc]`` or an in‑memory list of
+                such pairs. When omitted, total correlations are computed
+                automatically from ``data``.
             param_names (list[str] | None): Optional names for parameters.
             kde_bw (str | float | dict): Bandwidth method/factor or per‑name overrides.
             bw_method (str | float | dict | None): Backward‑compat alias for ``kde_bw``.
@@ -54,6 +60,15 @@ class Morph_Group(KDEBase):
                 sorted candidate list, then completes selection greedily. The
                 run with the largest total TC is kept. Defaults to 1 (current
                 behavior).
+            shuffle_samples (bool): Independently shuffle the samples within
+                each parameter column before fitting. This leaves the parameter
+                (column) order unchanged and prevents jointly ordered columns
+                from producing a singular covariance in ``gaussian_kde``.
+                Defaults to True.
+            random_state (int | None): Optional seed for the per-dimension
+                sample shuffling.
+            n_order (int): Group order used when ``param_tc`` is omitted.
+                Defaults to 2.
 
         Notes:
             - For group KDEs (dim>1), a single scalar bandwidth is required by
@@ -69,7 +84,12 @@ class Morph_Group(KDEBase):
         if data.ndim != 2:
             raise ValueError("`data` must be 2D (n_samples, n_params).")
         self.n_samples, self.n_params = data.shape
-        self.data = data
+        self.data = np.array(data, copy=True)
+        if shuffle_samples:
+            rng = np.random.default_rng(random_state)
+            for dimension in range(self.n_params):
+                permutation = rng.permutation(self.n_samples)
+                self.data[:, dimension] = self.data[permutation, dimension]
         # Backward compatibility: allow bw_method alias
         if bw_method is not None and kde_bw == 'silverman':
             kde_bw = bw_method
@@ -79,12 +99,42 @@ class Morph_Group(KDEBase):
         self.min_tc = min_tc
         self.bw_json_path = bw_json_path
         self.top_k_greedy = int(top_k_greedy) if top_k_greedy is not None else 1
+        self.n_order = int(n_order)
         if param_names is None:
             param_names = [f"param_{i}" for i in range(self.n_params)]
         if len(param_names) != self.n_params:
             raise ValueError("Length of param_names must match number of columns in data.")
         self.param_names = [str(p) for p in param_names]
         self.param_map = {name: i for i, name in enumerate(self.param_names)}
+
+        if param_tc is None:
+            if self.n_params == 1:
+                param_tc = []
+            else:
+                if self.verbose:
+                    logger.info(
+                        "No param_tc supplied; computing %s-order total correlations.",
+                        self.n_order,
+                    )
+                tc_results = compute_total_correlation(
+                    data,
+                    n_order=self.n_order,
+                    bw_method="silverman",
+                    seed=0 if random_state is None else int(random_state),
+                    show_progress=self.verbose,
+                )
+                if self.n_order == 2:
+                    upper = np.triu_indices(self.n_params, k=1)
+                    param_tc = [
+                        [[self.param_names[i], self.param_names[j]], float(tc_results[i, j])]
+                        for i, j in zip(upper[0], upper[1])
+                    ]
+                else:
+                    param_tc = [
+                        [[self.param_names[i] for i in indices], float(tc)]
+                        for indices, tc in tc_results
+                    ]
+
         def _to_name(x):
             if isinstance(x, (int, np.integer)):
                 idx = int(x)

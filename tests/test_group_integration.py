@@ -13,6 +13,55 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 from morphZ import GroupKDE, compute_and_save_bandwidths
 
+
+def test_group_kde_shuffles_samples_within_each_dimension():
+    """Ordered dimensions are shuffled without moving parameter columns."""
+    n_samples = 100
+    ordered = np.arange(n_samples, dtype=float)
+    data = np.column_stack((ordered, ordered + 1_000, ordered + 2_000))
+    original = data.copy()
+
+    # The original columns are perfectly collinear, which makes a 3D
+    # gaussian_kde singular unless their samples are independently shuffled.
+    kde = GroupKDE(
+        data,
+        param_tc=[[['A', 'B', 'C'], 1.0]],
+        param_names=['A', 'B', 'C'],
+        random_state=42,
+    )
+
+    assert np.array_equal(data, original), "The caller's array must not be mutated"
+    assert kde.param_names == ['A', 'B', 'C']
+    for dimension in range(data.shape[1]):
+        assert np.array_equal(
+            np.sort(kde.data[:, dimension]),
+            original[:, dimension],
+        ), "Each parameter must retain exactly its own samples"
+        assert not np.array_equal(kde.data[:, dimension], original[:, dimension])
+
+    assert np.isfinite(kde.logpdf(np.array([50.0, 1_050.0, 2_050.0])))
+
+
+def test_group_kde_computes_param_tc_when_omitted():
+    """GroupKDE should compute pairwise TC when param_tc is not supplied."""
+    rng = np.random.default_rng(7)
+    first = rng.normal(size=80)
+    data = np.column_stack((first, first + rng.normal(scale=0.1, size=80), rng.normal(size=80)))
+
+    kde = GroupKDE(
+        data,
+        param_names=['A', 'B', 'C'],
+        random_state=42,
+    )
+
+    assert kde.n_order == 2
+    assert kde.groups
+    assert all(len(group['names']) == 2 for group in kde.groups)
+    assert len(kde.group_kdes) == 1
+    assert len(kde.single_kdes) == 1
+    assert np.isfinite(kde.logpdf(np.zeros(3)))
+
+
 def test_group_kde_3_elements():
     """Test that GroupKDE works with groups of 3 elements (3D KDEs)."""
     print("Testing GroupKDE bandwidth integration with groups of 3 elements...")
